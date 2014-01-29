@@ -1,0 +1,105 @@
+ <div class="top-nav">
+      <ul>
+        <li>
+          <a href="<%= dashboard_path %>" class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'index' %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
+            Dashboard
+          </a>
+        </li>
+		 <li>
+	       <a href="<%= activities_path %>" class="<%= 'selected' if params[:controller] == 'activities' && params[:action] == 'index' %>">
+	          <div class="fs1" aria-hidden="true" data-icon="&#xe01b;"></div>
+	           System Activity
+	       </a>
+	     </li>
+        <li>
+          <a href="<%= users_path %>" class="<%= 'selected' if params[:controller] == 'users' %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe071;"></div>
+            Users
+          </a>
+        </li>
+        <li>
+          <a href="<%= employees_path(tab: "staff")%>"  class="<%= 'selected' if params[:controller] == 'employees' %>" >
+            <div class="fs1" aria-hidden="true" data-icon="&#xe075;"></div>
+            Employees
+          </a>
+        </li>
+        <li>
+          <a href="<%= students_path %>"  class="<%= 'selected' if params[:controller] == 'students' %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
+            Students
+          </a>
+        </li>
+        <li>
+          <a href="<%= subjects_path(tab: "all")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe01f;"></div>
+            Subjects
+          </a>
+        </li>
+        <li>
+          <a href="<%= tickets_path(tab: "open") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
+            Complaints
+          </a>
+        </li>
+		<li>
+          <a href="<%= kbs_path %>" class="<%= 'selected' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+            Knowledgebase
+          </a>
+        </li>
+      </ul>
+      <div class="clearfix">
+      </div>
+    </div>
+    <div class="sub-nav">
+    <%= render 'dashboard/dashboard-sub-nav' if params[:controller] == 'dashboard'%>
+	<%= render 'users/users-sub-nav' if params[:controller] == 'users'%>
+	<%= render 'employees/employees-sub-nav' if params[:controller] == 'employees'%>
+	<%= render 'students/students-sub-nav' if params[:controller] == 'students'%>
+	<%= render 'subjects/subjects-sub-nav' if params[:controller] == 'subjects'%>
+	<%= render 'tickets/tickets-sub-nav' if params[:controller] == 'tickets'%>
+	<%= render 'activities/activities-sub-nav' if params[:controller] == 'activities'%>
+	<%= render 'kbs/kbs-sub-nav' if params[:controller] == 'kbs'%>
+  <div class="btn-group pull-right">
+        <button class="btn btn-primary">
+          Main Menu
+        </button>
+        <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+          <span class="caret">
+          </span>
+        </button>
+        <ul class="dropdown-menu pull-right">
+          <li>
+            <a href="<%= dashboard_path %>" data-original-title="">
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="<%= users_path %>" data-original-title="">
+              Users
+            </a>
+          </li>
+          <li>
+            <a href="<%= employees_path(tab: "staff")%>" data-original-title="">
+              Employees
+            </a>
+          </li>
+          <li>
+            <a href="<%= students_path %>" data-original-title="">
+              Students
+            </a>
+          </li>
+          <li>
+            <a href="<%= subjects_path %>" data-original-title="">
+              Subjects
+            </a>
+          </li>
+          <li>
+            <a href="<%= tickets_path %>" data-original-title="">
+              Complaints
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>

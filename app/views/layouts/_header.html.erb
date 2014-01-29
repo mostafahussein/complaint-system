@@ -1,0 +1,46 @@
+<header>
+  <a href="#" class="logo">
+    <img src="/assets/swe-logo.png" alt="logo" />
+  </a>
+  <div class="btn-group">
+    <button class="btn btn-primary">
+      <%= current_user.email %> (<%= current_user.user_type %>)
+    </button>
+    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+      <span class="caret">
+      </span>
+    </button>
+    <ul class="dropdown-menu pull-right">
+      <li>
+        <a href="#">
+          Edit Profile
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          Account Settings
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+ <!-- 
+  <ul class="mini-nav">
+     <li>
+          <a href="<%= activities_path %>">
+            <div class="fs1" aria-hidden="true" data-icon="&#xe04c;"></div>
+           
+			<span class="info-label badge badge-info">
+              5
+            </span>
+			
+          </a>
+        </li>
+  </ul>
+-->
+  
+</header>

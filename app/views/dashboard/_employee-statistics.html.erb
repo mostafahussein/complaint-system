@@ -1,0 +1,40 @@
+<div class="row-fluid">
+        <div class="span12">
+          <div class="widget">
+            <div class="widget-header">
+              <div class="title" id="complaints_per_employee">
+                Complaints per Advisor
+                <span class="mini-title">
+                  Employees Statistics 
+                </span>
+              </div>
+            </div>
+            <div class="widget-body">
+				 <div>
+				  <table class="table table-bordered table-hover">
+				    <thead bgcolor="#B7B7B7">
+				      <th>Advisor Name</th>
+				      <th>Total Complaints</th>
+				      <th>Open</th>
+				      <th>In Progress</th>
+				      <th>Pending</th>
+				      <th>Closed</th>
+					  <th>Solved</th>
+				    </thead>
+				    <% @advisors_complaints.each do |advisor| %>
+				    <tr>
+				      <td><%= advisor.advisor_name %></td>
+				      <td><%= advisor.total_complaints %></td>
+				      <td><%= advisor.opened_complaints %></td>
+				      <td><%= advisor.in_progress_complaints %></td>
+				      <td><%= advisor.pending_complaints %></td>
+				      <td><%= advisor.closed_complaints%></td>
+				      <td><%= advisor.solved_complaints %></td>
+				    </tr>
+				    <% end %>
+				  </table>
+				  </div>
+            </div>
+          </div>
+        </div>
+      </div>

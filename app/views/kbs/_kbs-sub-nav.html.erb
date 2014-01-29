@@ -1,0 +1,23 @@
+<ul>
+  <li><a href="#" class="heading">Knowledgebase</a></li>
+  <li>
+    <a href="<%= kbs_path %>" class="<%= 'selected' if params[:controller] == 'kbs' && params[:action] == 'index' %>">
+      FAQs
+    </a>
+  </li>
+  <li>
+    <a href="<%= responses_path %>" class="<%= 'selected' if params[:controller] == 'responses' && params[:action] == 'index' %>">
+      Canned Responses
+    </a>
+  </li>
+  <li>
+    <a href="<%= new_kb_path %>" class="<%= 'selected' if params[:controller] == 'kbs' && params[:action] == 'new' %>">
+      Add new FAQ
+    </a>
+  </li>
+  <li>
+    <a href="<%= new_response_path %>" class="<%= 'selected' if params[:controller] == 'responses' && params[:action] == 'new' %>">
+      Add new Canned Response
+    </a>
+  </li>
+</ul>

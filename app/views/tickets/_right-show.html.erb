@@ -1,0 +1,144 @@
+<div class="right-sidebar2">
+    
+    <div class="wrapper">
+      <div id="scrollbar-two">
+        <div class="scrollbar">
+          <div class="track">
+            <div class="thumb">
+              <div class="end">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="viewport">
+          <div class="overview">
+            <div class="featured-articles-container">
+              <h5 class="heading-blue">
+                Complaint Details
+              </h5>
+              <div class="articles">
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Status: <% @ticket.ticket_statuses.each do |ticket_status| %><%= ticket_status.status.ticket_status %><% end %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Priority: <%= @ticket.priority.priority_name if @ticket.priority %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Subject: <% @ticket.ticket_statuses.each do |ticket_status| %><% if ticket_status.advisor %><% ticket_status.advisor.subjects.each do |subject| %><%= subject.subject_title %><% end %><% end %><% end %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Create Date: <%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  From:
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Batch:
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Assigned To:
+                </a>
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+	<hr class="hr-stylish-1">
+	
+
+	<div class="wrapper">
+      <div id="scrollbar-two">
+        <div class="scrollbar">
+          <div class="track">
+            <div class="thumb">
+              <div class="end">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="viewport">
+          <div class="overview">
+            <div class="featured-articles-container">
+              <h5 class="heading-blue">
+                Complaint History
+              </h5>
+              <div class="articles">
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Status: <% @ticket.ticket_statuses.each do |ticket_status| %><%= ticket_status.status.ticket_status %><% end %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Priority: <%= @ticket.priority.priority_name if @ticket.priority %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Subject: <% @ticket.ticket_statuses.each do |ticket_status| %><% if ticket_status.advisor %><% ticket_status.advisor.subjects.each do |subject| %><%= subject.subject_title %><% end %><% end %><% end %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Create Date: <%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %>
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  From:
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Batch:
+                </a>
+                <a href="#">
+                  <span class="label-bullet-blue">
+                    &nbsp;
+                  </span>
+                  Assigned To:
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    
+  </div>

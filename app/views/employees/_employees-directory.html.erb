@@ -1,0 +1,49 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget">
+			<div class="widget-header">
+				<div class="title" id="complaints_per_employee">
+					Employees Directory
+					<span class="mini-title">
+						<%= 'Staff Directory' if params[:controller] == 'employees' && params[:tab] == 'staff' %>
+						<%= 'Advisors Directory' if params[:controller] == 'employees' && params[:tab] == 'advisors' %> 
+					</span>
+				</div>
+			</div>
+			<div class="widget-body">
+				<div id="dt_example" class="example_alt_pagination">
+					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="employees">
+
+						<thead>
+							<tr>
+								<th>Full Name</th>
+								<th>Position</th>
+								<th>Department</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @employees.each do |employee| %>
+							<tr>
+								<td><%= employee.full_name %></td>
+								<td><%= employee.employee_position.position_title %></td>
+								<th><%= employee.employee_department.department_name %></th>
+								<td><a href="<%= user_path(employee.user_id) if employee.user_id  %>" class="btn" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
+							</tr>
+							<% end %>
+
+						</tbody>
+					</table>
+					<div class="clearfix">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>
+$('#employees').dataTable({
+	"sPaginationType": "full_numbers"
+});
+</script>

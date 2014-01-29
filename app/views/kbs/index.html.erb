@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      SWE Complaint System - H|U
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link href="/assets/icomoon/style.css" rel="stylesheet">
+  <link href="/assets/css/charts-graphs.css" rel="stylesheet">
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet">
+  </head>
+  <body>
+    <%= render 'layouts/header'%>
+    <div class="container-fluid">
+      <div class="dashboard-container">
+	<%= render 'layouts/navbar' %>
+       <div class="dashboard-wrapper">
+    <%= render 'kbs/left-sidebar'%>
+          </div>
+      </div>
+      <!--/.fluid-container-->
+    </div>
+	<%= render 'layouts/footer'%>
+	<%= render 'dashboard/dashboard-scripts'%>
+  </body>
+</html>

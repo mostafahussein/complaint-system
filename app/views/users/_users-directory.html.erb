@@ -1,0 +1,46 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget">
+			<div class="widget-header">
+				<div class="title" id="users_directory">
+					Users Directory
+					<span class="mini-title"> 
+					</span>
+				</div>
+			</div>
+
+			<div class="widget-body">
+				<div id="dt_example" class="example_alt_pagination">
+					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="users">
+
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>E-Mail</th>
+								<th>UserType</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @users.each do |user| %>
+							<tr>
+								<td><%= user.id %></td>
+								<td><%= user.email %></td>
+								<td><%= user.user_type %></td>
+								<td><a href="<%= user_path(user) %>" class="btn" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+					<div class="clearfix">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$('#users').dataTable({
+	"sPaginationType": "full_numbers"
+});
+</script>

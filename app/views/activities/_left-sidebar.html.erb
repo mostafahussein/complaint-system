@@ -1,0 +1,33 @@
+<div class="left-sidebar">
+  <div class="row-fluid">
+      <div class="span11">
+        <div class="widget">
+          <div class="widget-header">
+            <div class="title">
+              System Activities
+            </div>
+          </div>
+          <div class="widget-body">
+			
+			<% @activities.each do |activity|%>
+            
+            <blockquote>
+              <h5>
+              	 <%= link_to activity.owner.email , activity.owner if activity.owner %>
+					has updated <%= link_to "Ticket ##{activity.trackable.id}", activity.trackable  %>
+              </h5>
+            </blockquote>
+			<% end %>
+			<div class="digg_pagination">
+			    <div class="page_info">
+			      <%= page_entries_info @activities %>
+			    </div>
+			    <%= will_paginate @activities, :container => false %>
+			  </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

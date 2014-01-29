@@ -1,0 +1,108 @@
+<div class="left-sidebar">
+
+
+
+	  <div class="row-fluid">
+        <div class="span11">
+          <div class="widget">
+            <div class="widget-header">
+              <div class="title">
+                <%= @ticket.title %>
+              </div>
+            </div>
+            <div class="widget-body">
+              
+            	
+                	<div class="hero-unit">
+                      <p>
+                        <%= @ticket.description%>
+                      </p>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+		  <div class="row-fluid">
+              <div class="span11">
+                <div class="widget">
+                  <div class="widget-header">
+                    <div class="title">
+                      Follow ups
+                    </div>
+                  </div>
+                  <div class="widget-body">
+                     <% if @ticket.follow_ups.exists? %>
+                    <blockquote>
+                      <span class="title">
+                        Article 1
+                      </span>
+                      <p>
+                       <%= render @ticket.follow_ups.select(&:persisted?) %>
+                      </p>
+                      <small>
+                        Someone famous 
+                      </small>
+                    </blockquote>
+						<% else %>
+					 <blockquote>
+	                      <p>
+							There are no follow ups yet.
+	                      </p>
+	                    </blockquote>
+						<% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+			 <div class="row-fluid">
+	              <div class="span11">
+	                <div class="widget">
+	                  <div class="widget-header" style="display:none">
+	                  </div>
+	                  <div class="widget-body">
+	                    <ul class="nav nav-tabs no-margin myTabBeauty">
+	                      <li class="active">
+	                        <a data-toggle="tab" href="#post">
+	                          Post Follow up
+	                        </a>
+	                      </li>
+	                      <li class="">
+	                        <a data-toggle="tab" href="#assign">
+	                          Assign Complaint
+	                        </a>
+	                      </li>
+	                    </ul>
+	                    <div class="tab-content" id="myTabContent">
+	                      <div id="post" class="tab-pane fade active in">
+						<%= simple_form_for(@ticket,:html => { :class => 'form-horizontal' }) do |t| %>
+							<%= t.simple_fields_for :follow_up do |f| %>
+	                        <p>
+	                        <%= f.input :text, as: :text,input_html: {rows: 5, class: "input-xxlarge"}, required: false, label: 'Response' %>
+	                        </p>
+							<button class="btn btn-primary" type="submit">Post reply</button>
+							<% end %>
+						<% end %>
+	                      </div>
+	                      <div id="assign" class="tab-pane fade">
+	                        <p>
+							  	 <%= simple_form_for(@ticket,:html => { :class => 'form-horizontal' }) do |f| %>
+							          <%= f.simple_fields_for :ticket_statuses do |e| %>
+							              <%= e.association :staff, label_method: :full_name, prompt: 'Select a Staff' %>
+							          <% end %>
+							            <button class="btn btn-primary" type="submit">Save</button>
+							      <% end %>
+	                        </p>
+	                        
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+</div>
+        
+
+
+</div>

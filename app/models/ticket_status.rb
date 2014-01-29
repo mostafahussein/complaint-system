@@ -1,0 +1,77 @@
+# == Schema Information
+#
+# Table name: ticket_statuses
+#
+#  id                :integer          not null, primary key
+#  status_id         :integer
+#  ticket_id         :integer
+#  staff_id          :integer
+#  advisor_id        :integer
+#  previous_staff_id :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+class TicketStatus < ActiveRecord::Base
+  has_paper_trail
+  
+  before_update :set_previous_staff
+  attr_accessible :status_id, :ticket_id , :staff_id, :advisor_id, :previous_advisor_id, :previous_staff_id
+  belongs_to :status
+  belongs_to :ticket
+
+  belongs_to :staff, class_name: 'Staff', foreign_key: 'staff_id'
+
+  belongs_to :previous_staff , class_name: 'Staff', foreign_key: 'previous_staff_id'
+
+  belongs_to :advisor, class_name: 'Advisor', foreign_key: 'advisor_id'
+
+  def set_previous_staff
+    self.previous_staff_id = self.staff_id_was if self.staff_id_changed?
+  end
+  
+  def self.advisor_status_details
+    self.find_by_sql("SELECT
+    em.full_name  AS advisor_name,
+    COUNT(*) AS total_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Open'        THEN 1 END) AS opened_complaints,
+    COUNT(CASE st.ticket_status WHEN 'In Progress' THEN 1 END) AS in_progress_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Pending'     THEN 1 END) AS pending_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Closed'      THEN 1 END) AS closed_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Solved'      THEN 1 END) AS solved_complaints
+    FROM
+       ticket_statuses AS ti
+       JOIN
+       employees AS em
+         ON  ti.advisor_id = em.id
+       JOIN
+       statuses AS st
+         ON ti.status_id = st.id
+    WHERE
+       em.type = 'Advisor'
+       AND
+       st.ticket_status IN ('Open', 'In Progress', 'Pending', 'Closed', 'Solved')
+    GROUP BY
+       em.id,
+       em.full_name
+    ORDER BY em.id")
+  end
+  
+  def self.ticket_status_details
+    self.find_by_sql("SELECT  COUNT(*) AS total_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Open'        THEN 1 END) AS opened_complaints,
+    COUNT(CASE st.ticket_status WHEN 'In Progress' THEN 1 END) AS in_progress_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Pending'     THEN 1 END) AS pending_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Closed'      THEN 1 END) AS closed_complaints,
+    COUNT(CASE st.ticket_status WHEN 'Solved'      THEN 1 END) AS solved_complaints
+    FROM
+       ticket_statuses AS ti
+       JOIN
+       statuses AS st
+         ON ti.status_id = st.id
+    WHERE
+       st.ticket_status IN ('Open', 'In Progress', 'Pending', 'Closed', 'Solved')
+    ORDER BY total_complaints ASC")
+  end
+
+end
