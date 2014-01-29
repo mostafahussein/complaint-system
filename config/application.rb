@@ -8,7 +8,6 @@ if defined?(Bundler)
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
-
 module SweComplaint
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -59,5 +58,6 @@ module SweComplaint
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.assets.initialize_on_precompile = false
   end
 end
