@@ -18,7 +18,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'dynamic_form'
-  gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
   gem 'jquery-ui-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -34,12 +33,14 @@ group :development do
   gem 'railroady'
   gem 'rails-erd'
   gem 'annotate', ">=2.6.0"
-  gem 'faker'
+  
 end
 
 gem 'jquery-rails'
 gem 'will_paginate', '~> 3.0'
 gem 'paper_trail', '~> 3.0.0'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'faker'
 gem 'thin'
 
 # To use ActiveModel has_secure_password

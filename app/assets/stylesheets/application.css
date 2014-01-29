@@ -13,5 +13,6 @@
  *= require jquery.ui.all
  *= require dataTables/jquery.dataTables
  *= require dataTables/jquery.dataTables.bootstrap
+ *= require icomoon/style.css
  *= require_tree .
  */

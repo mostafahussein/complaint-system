@@ -18,4 +18,7 @@
 //= require highstock/modules/exporting
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
+//= require js/bootstrap
+//= require js/jquery.scrollUp
+//= require js/tiny-scrollbar
 //= require_tree .
