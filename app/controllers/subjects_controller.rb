@@ -1,16 +1,14 @@
 class SubjectsController < ApplicationController
   def index
     if params[:tab] == "all"
-    @subjects = Subject.all
-  elsif params[:tab] == "enrolled"
-    if current_user.student
-      @subjects = current_user.student.subjects
+      @subjects = Subject.all
+    elsif params[:tab] == "enrolled"
+      if current_user.student
+        @subjects = current_user.student.subjects
+      end
     else
       render_404
     end
-  else
-    render_404
-  end
   end
 
   def show
@@ -50,9 +48,9 @@ class SubjectsController < ApplicationController
 
   def update_multiple
     @subjects = Subject.find(params[:subject_ids])
-      @subjects.each do |subject|
-        subject.update_attributes(params[:subject])
-      end
+    @subjects.each do |subject|
+      subject.update_attributes(params[:subject])
+    end
     redirect_to subjects_path
   end
 

@@ -78,7 +78,7 @@ module Modules
     
     def start_end
       @min = (Date.today.beginning_of_month).to_datetime.to_i*1000
-      @max = (Date.today.at_beginning_of_month.next_month).to_datetime.to_i*1000
+      @max = (Date.today.at_end_of_month).to_datetime.to_i*1000
     end
   end
 end

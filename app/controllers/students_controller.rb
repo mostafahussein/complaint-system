@@ -21,10 +21,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def new_multiple
-    @students = Student.find(params[:student_ids])
-  end
-
   def create_multiple
     @students = Student.find(params[:student_ids])
     @students.each do |student|

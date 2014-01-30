@@ -21,4 +21,5 @@
 //= require js/bootstrap
 //= require js/jquery.scrollUp
 //= require js/tiny-scrollbar
+//= require js/jquery.bootstrap.wizard
 //= require_tree .

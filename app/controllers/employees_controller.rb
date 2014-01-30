@@ -1,12 +1,12 @@
 class EmployeesController < ApplicationController
   def index
     if params[:tab] == "staff"
-       @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: 'Software Engineering'})
-     elsif params[:tab] == "advisors"
-       @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: 'Student Advisor'})
-     else
+      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: 'Software Engineering'})
+    elsif params[:tab] == "advisors"
+      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: 'Student Advisor'})
+    else
       render_404
-     end
+    end
   end
 
   def show
@@ -27,11 +27,7 @@ class EmployeesController < ApplicationController
       redirect_to employees_path(fiter: "staff")
     end
   end
-
-  def new_multiple
-    @employees = Employee.find(params[:employee_ids])
-  end
-
+  
   def create_multiple
     @employees = Employee.find(params[:employee_ids])
     @employees.each do |employee|

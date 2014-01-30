@@ -2,6 +2,7 @@
   <a href="#" class="logo">
     <img src="/assets/swe-logo.png" alt="logo" />
   </a>
+<% if current_user %>
   <div class="btn-group">
     <button class="btn btn-primary">
       <%= current_user.email %> (<%= current_user.user_type %>)
@@ -23,19 +24,5 @@
       </li>
     </ul>
   </div>
- <!-- 
-  <ul class="mini-nav">
-     <li>
-          <a href="<%= activities_path %>">
-            <div class="fs1" aria-hidden="true" data-icon="&#xe04c;"></div>
-           
-			<span class="info-label badge badge-info">
-              5
-            </span>
-			
-          </a>
-        </li>
-  </ul>
--->
-  
+<% end %>
 </header>

@@ -1,0 +1,161 @@
+<div class="left-sidebar">  
+	<div class="row-fluid hidden-phone">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+
+						Complaint about Subject: <%= @title.capitalize %>
+						<span class="mini-title">
+							New Complaint
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+
+					<div id="tabsleft" class="tabbable tabs-left">
+						<ul>
+							<li>
+								<a href="#tabsleft-tab1" data-toggle="tab">
+									Complaint:
+								</a>
+							</li>
+							<li>
+								<a href="#tabsleft-tab2" data-toggle="tab">
+									Thanks.
+								</a>
+							</li>
+						</ul>
+						<div class="progress progress-info">
+							<div class="bar">
+							</div>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane" id="tabsleft-tab1">
+								<%= simple_form_for(@ticket,:url => subject_tickets_path(@subject), :html => { :class => 'form-horizontal form-bordered' }) do |f| %>
+								<%= f.input :student_id , as: :hidden,input_html:{value: @student} %>
+								<%= f.input :title %>
+								<%= f.input :subject_id, as: :hidden ,input_html:{value: @subject} %>
+								<%= f.input :description, input_html: {class: 'input-xxlarge', rows: '10', maxlength: '140', onkeyup: 'countChar(this)'}  %>
+								<div id="charNum"></div>
+								
+							</div>
+							<div class="tab-pane" id="tabsleft-tab2">
+								Message before submitting goes here...
+							</div>
+							<ul class="pager wizard no-margin">
+								<li class="previous">
+									<a href="javascript:;">
+										Previous
+									</a>
+								</li>
+								<li class="next">
+									<a href="javascript:;">
+										Next
+									</a>
+								</li>
+								<li class="next finish" style="display:none;">
+									<a href="javascript:;">
+										Submit
+									</a>
+								</li>
+							</ul>
+							
+							<% end %>
+						</div>
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+$('#ticket_description').keyup(function () {
+  var max = 140;
+  var len = $(this).val().length;
+  if (len >= max) {
+    $('#charNum').text(' you have reached the limit');
+  } else {
+    var char = max - len;
+    $('#charNum').text(char + ' characters left');
+  }
+});
+
+//ScrollUp
+$(function () {
+	$.scrollUp({
+		scrollName: 'scrollUp', // Element ID
+		topDistance: '300', // Distance from top before showing element (px)
+		topSpeed: 300, // Speed back to top (ms)
+		animation: 'fade', // Fade, slide, none
+		animationInSpeed: 400, // Animation in speed (ms)
+		animationOutSpeed: 400, // Animation out speed (ms)
+		scrollText: 'Scroll to top', // Text for element
+		activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+	});
+});
+
+
+//Tabs
+$('.myTabBeauty a').click(function (e) {
+	e.preventDefault();
+	$(this).tab('show');
+})
+
+//Dropdown
+$('.dropdown-toggle').dropdown();
+
+
+//Wizard Progressbar tabs left
+
+$('#tabsleft').bootstrapWizard({
+	'tabClass': 'nav nav-tabs',
+	'debug': false,
+	onShow: function (tab, navigation, index) {
+		console.log('onShow');
+	},
+	onNext: function (tab, navigation, index) {
+		console.log('onNext');
+	},
+	onPrevious: function (tab, navigation, index) {
+		console.log('onPrevious');
+	},
+	onLast: function (tab, navigation, index) {
+		console.log('onLast');
+	},
+	onTabClick: function (tab, navigation, index) {
+		console.log('onTabClick');
+
+	},
+	onTabShow: function (tab, navigation, index) {
+		console.log('onTabShow');
+		var $total = navigation.find('li').length;
+		var $current = index + 1;
+		var $percent = ($current / $total) * 100;
+		$('#tabsleft').find('.bar').css({
+			width: $percent + '%'
+		});
+
+		// If it's the last tab then hide the last button and show the finish instead
+		if ($current >= $total) {
+			$('#tabsleft').find('.pager .next').hide();
+			$('#tabsleft').find('.pager .finish').show();
+			$('#tabsleft').find('.pager .finish').removeClass('disabled');
+		} else {
+			$('#tabsleft').find('.pager .next').show();
+			$('#tabsleft').find('.pager .finish').hide();
+		}
+
+	}
+});
+
+
+$('#tabsleft .finish').click(function () {
+	$('#new_ticket').submit();
+});
+</script>

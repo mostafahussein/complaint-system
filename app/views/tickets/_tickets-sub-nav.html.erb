@@ -25,4 +25,9 @@
       Closed Complaints
     </a>
   </li>
+<li>
+    <a href="<%= tickets_path(tab: "complained") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'complained' %>">
+      Complained Subjects
+    </a>
+  </li>
 </ul>

@@ -33,6 +33,7 @@ group :development do
   gem 'railroady'
   gem 'rails-erd'
   gem 'annotate', ">=2.6.0"
+  gem 'sextant'
   
 end
 

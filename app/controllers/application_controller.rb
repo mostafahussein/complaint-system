@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def find_priority
     @priorities = Priority.all
   end
-  
+
   def render_404
     render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
   end

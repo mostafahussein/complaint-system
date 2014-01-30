@@ -11,10 +11,12 @@
 
 			<div class="widget-body">
 				<div id="dt_example" class="example_alt_pagination">
+					<%= form_tag create_multiple_students_path, method: :post do %>
 					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="students">
 
 						<thead>
 							<tr>
+								<th></th>
 								<th>ID</th>
 								<th>Full Name</th>
 								<th></th>
@@ -23,6 +25,7 @@
 						<tbody>
 							<% @students.each do |student| %>
 							<tr>
+								<td><%= check_box_tag 'student_ids[]', student.id %></td>
 								<td><%= student.id %></td>
 								<td><%= student.full_name %></td>
 								<td><a href="<%= user_path(student.user_id) if student.user_id %>" class="btn" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
@@ -30,6 +33,8 @@
 							<% end %>
 						</tbody>
 					</table>
+					<%= submit_tag 'Create User(s)' %>
+	            <% end %>
 					<div class="clearfix">
 					</div>
 				</div>

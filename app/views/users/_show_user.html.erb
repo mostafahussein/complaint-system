@@ -1,5 +1,4 @@
 <div class="left-sidebar">
-
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="widget no-margin">
@@ -17,19 +16,27 @@
 								</div>
 							</div>
 							<div class="span9">
-								<form class="form-horizontal">
-									<h5>
-										Login Information
-									</h5>
-									<hr>
-								
-									<br />
-									<h5>
-										Personal Information
-									</h5>
-									<hr>
-
-								</form>
+								<h5>
+									Login Information
+								</h5>
+								<hr>
+								<%= simple_form_for(@user , html: { class: 'form-horizontal' }) do |f| %>
+								<%= f.input :email, disabled: true %>
+								<%= f.input :password, :autocomplete => "off",:hint => "leave it blank if you don't want to change it", :required => false %>
+								<%= f.input :password_confirmation, :required => false %>
+								<%= f.input :current_password,:hint => "we need your current password to confirm your changes", :required => true %>
+								<%= f.button :submit, 'Update Account',class: ' btn btn-primary' %>
+								<% end %>
+								<br />
+								<h5>
+									Personal Information
+								</h5>
+								<hr>
+								<% if @user.student %>
+								<%= render 'users/student_info'%>
+								<% elsif @user.employee %>
+								<%= render 'users/employee_info'%>
+								<% end %>
 							</div>
 						</div>
 					</div>
@@ -37,4 +44,3 @@
 			</div>
 		</div>
 	</div>
-</div>

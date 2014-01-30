@@ -29,19 +29,19 @@ def make_employees_and_students_as_users
     user_id = User.last.id
     employee.update_attributes(user_id: user_id)
   end
-  
+
   students = Student.all(limit: 200)
-   students.each do |student|
-     User.create! do |user|
-       user.email = "student#{student.id}@swe.com"
-       user.password = '12345678'
-       user.password_confirmation = '12345678'
-       user.user_type = 'student'
-       user.role = "Student"
-     end
-     user_id = User.last.id
-     student.update_attributes(user_id: user_id)
-   end
+  students.each do |student|
+    User.create! do |user|
+      user.email = "student#{student.id}@swe.com"
+      user.password = '12345678'
+      user.password_confirmation = '12345678'
+      user.user_type = 'student'
+      user.role = "Student"
+    end
+    user_id = User.last.id
+    student.update_attributes(user_id: user_id)
+  end
 end
 
 def attended_subjects
@@ -72,20 +72,20 @@ end
 
 def make_complaints
   puts "Making Complaints"
-   10.times do
-     studnets = Student.all(limit: 10 , order: "RANDOM()" )
-     title = Faker::Lorem.sentence(1).chomp('.')
-     description = Faker::Lorem.paragraphs(rand(2..8)).join('')
-     studnets.each do |student|
-       subjects = student.subjects if student.subjects
-       subjects.each do |subject|
-         priority = [1,2,3]
-         Ticket.create!(title: title, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample)
-         advisor_id = subject.advisor.id if subject.advisor
-         ticket_id = Ticket.last.id
-         status = [1,2,3,4,5]
-         TicketStatus.create!(status_id: status.sample,ticket_id: ticket_id, advisor_id: advisor_id )
-       end
-     end
-   end
+  10.times do
+    studnets = Student.all(limit: 10 , order: "RANDOM()" )
+    title = Faker::Lorem.sentence(1).chomp('.')
+    description = Faker::Lorem.paragraphs(rand(2..8)).join('')
+    studnets.each do |student|
+      subjects = student.subjects if student.subjects
+      subjects.each do |subject|
+        priority = [1,2,3]
+        Ticket.create!(title: title, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample)
+        advisor_id = subject.advisor.id if subject.advisor
+        ticket_id = Ticket.last.id
+        status = [1,2,3,4,5]
+        TicketStatus.create!(status_id: status.sample,ticket_id: ticket_id, advisor_id: advisor_id )
+      end
+    end
+  end
 end
