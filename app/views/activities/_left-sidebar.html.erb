@@ -14,7 +14,7 @@
             <blockquote>
               <h5>
               	 <%= link_to activity.owner.email , activity.owner if activity.owner %>
-					has updated <%= link_to "Ticket ##{activity.trackable.id}", activity.trackable  %>
+				 <%= render_activity activity %>
               </h5>
             </blockquote>
 			<% end %>

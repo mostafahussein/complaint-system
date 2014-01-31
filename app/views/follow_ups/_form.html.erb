@@ -1,0 +1,6 @@
+	<%= simple_form_for([@ticket,@follow_up],:html => { :class => 'form-horizontal' }) do |f| %>
+        <p>
+        <%= f.input :text, as: :text,input_html: {rows: 5, class: "input-xxlarge"}, required: false, label: 'Response' %>
+        </p>
+		<button class="btn btn-primary" type="submit">Post reply</button>
+	<% end %>

@@ -18,12 +18,16 @@ class Ticket < ActiveRecord::Base
   scope :opened , includes({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , 'Open')
   scope :solved , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Solved')
   scope :closed , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Closed')
+  scope :overdue, includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , 'Solved', Date.today.to_s)
+  scope :today, includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , 'Solved', Date.today.to_s)
+  scope :upcoming, includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , 'Solved', Date.today.to_s)
 
-  attr_accessible :title, :description, :ticket_state, :assign_state, :due_date, :student_id, :priority_id, :subject_id,
+  attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id,
   :ticket_statuses_attributes, :follow_ups_attributes
   belongs_to :priority
   belongs_to :student
   has_many :ticket_statuses
+  has_many :statuses , through: :ticket_statuses
   accepts_nested_attributes_for :ticket_statuses
   has_many :follow_ups
   accepts_nested_attributes_for :follow_ups

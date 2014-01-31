@@ -11,4 +11,5 @@
 class Status < ActiveRecord::Base
   attr_accessible :ticket_status
   has_many :ticket_statuses
+  has_many :tickets , through: :ticket_statuses
 end

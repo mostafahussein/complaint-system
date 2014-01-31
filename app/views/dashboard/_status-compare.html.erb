@@ -16,7 +16,7 @@
 					var seriesOptions = [],
 					yAxisOptions = [],
 					seriesCounter = 0,
-					names = ['OPEN_STATUS', 'IN_PROGRESS_STATUS', 'PENDING_STATUS', 'SOLVED_STATUS', 'CLOSED_STATUS'],
+					names = ['Open_Status', 'In_Progress_Status', 'Pending_Status', 'Solved_Status', 'Closed_Status'],
 					colors = Highcharts.getOptions().colors;
 
 					$.each(names, function(i, name) {
@@ -24,7 +24,7 @@
 						$.getJSON('/tickets/' + name.toLowerCase(),	function(data) {
 
 							seriesOptions[i] = {
-								name: name,
+								name: name.replace(/_Status$/, ''),
 								data: data
 							};
 

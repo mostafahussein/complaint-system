@@ -14,21 +14,13 @@
 
 class TicketStatus < ActiveRecord::Base
   has_paper_trail
-  
-  before_update :set_previous_staff
   attr_accessible :status_id, :ticket_id , :staff_id, :advisor_id, :previous_advisor_id, :previous_staff_id
   belongs_to :status
   belongs_to :ticket
 
   belongs_to :staff, class_name: 'Staff', foreign_key: 'staff_id'
 
-  belongs_to :previous_staff , class_name: 'Staff', foreign_key: 'previous_staff_id'
-
   belongs_to :advisor, class_name: 'Advisor', foreign_key: 'advisor_id'
-
-  def set_previous_staff
-    self.previous_staff_id = self.staff_id_was if self.staff_id_changed?
-  end
   
   def self.advisor_status_details
     self.find_by_sql("SELECT

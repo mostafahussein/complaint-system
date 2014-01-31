@@ -21,7 +21,7 @@
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Status: <% @ticket.ticket_statuses.each do |ticket_status| %><%= ticket_status.status.ticket_status %><% end %>
+                  Status: <%= @status_title.ticket_status %>
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
@@ -33,7 +33,7 @@
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Subject: <% @ticket.ticket_statuses.each do |ticket_status| %><% if ticket_status.advisor %><% ticket_status.advisor.subjects.each do |subject| %><%= subject.subject_title %><% end %><% end %><% end %>
+                  Subject: <%= @subject_title.subject_title unless @subject_title.nil? %> 
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
@@ -45,19 +45,23 @@
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  From:
+                  From: <%= @ticket.student.full_name%>
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Batch:
+                  Batch: <%= @ticket.student.batch_name %>
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Assigned To:
+                  Assigned To: <% if @assigned_staff.nil? %>
+								<%= @assigned_advisor.full_name unless @assigned_advisor.nil? %>
+								<% else %>
+								<%= @assigned_staff.full_name unless @assigned_staff.nil? %>
+								<% end %>
                 </a>
               </div>
               
@@ -93,25 +97,25 @@
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Status: <% @ticket.ticket_statuses.each do |ticket_status| %><%= ticket_status.status.ticket_status %><% end %>
+                  Status: 
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Priority: <%= @ticket.priority.priority_name if @ticket.priority %>
+                  Priority: 
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Subject: <% @ticket.ticket_statuses.each do |ticket_status| %><% if ticket_status.advisor %><% ticket_status.advisor.subjects.each do |subject| %><%= subject.subject_title %><% end %><% end %><% end %>
+                  Subject:
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">
                     &nbsp;
                   </span>
-                  Create Date: <%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %>
+                  Create Date: 
                 </a>
                 <a href="#">
                   <span class="label-bullet-blue">

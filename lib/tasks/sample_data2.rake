@@ -47,7 +47,7 @@ end
 def attended_subjects
   puts "Attended Subjects"
   students = Student.all(limit: 200)
-  subjects = Subject.all
+  subjects = Subject.all(limit: 5)
   students.each do |student|
     subjects.each do |subject|
       if Attend.where(student_id: student.id, subject_id: subject.id).exists? == false
@@ -59,9 +59,9 @@ end
 
 def assign_advisors_to_subjects
   puts "Assign Advisors to Subjects"
-  5.times do
+  10.times do
     advisor = Advisor.first(order: "RANDOM()")
-    subjects = Subject.all(limit: 4, order: "RANDOM()")
+    subjects = Subject.all(limit: 2, order: "RANDOM()")
     subjects.each do |subject|
       if subject.advisor == nil
         subject.update_attributes!(advisor_id: advisor.id)
@@ -72,15 +72,28 @@ end
 
 def make_complaints
   puts "Making Complaints"
-  10.times do
-    studnets = Student.all(limit: 10 , order: "RANDOM()" )
+  days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
+  80.times do
+    studnets = Student.all(limit: 20 , order: "RANDOM()" )
     title = Faker::Lorem.sentence(1).chomp('.')
     description = Faker::Lorem.paragraphs(rand(2..8)).join('')
     studnets.each do |student|
-      subjects = student.subjects if student.subjects
+      subjects = student.subjects.all(limit: 3) if student.subjects
       subjects.each do |subject|
         priority = [1,2,3]
-        Ticket.create!(title: title, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample)
+        time = (Time.now - 11.days) + days.sample.days
+        Ticket.create!(created_at: time, title: title, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample)
+        ticket = Ticket.last
+        if ticket.priority.priority_name == 'High'
+          due = ticket.created_at.to_date + 2.days
+          ticket.update_attributes(due: due)
+        elsif ticket.priority.priority_name == 'Normal'
+          due = ticket.created_at.to_date + 7.days
+          ticket.update_attributes(due: due)
+        elsif ticket.priority.priority_name == 'Low'
+          due = ticket.created_at.to_date + 10.days
+          ticket.update_attributes(due: due)
+        end
         advisor_id = subject.advisor.id if subject.advisor
         ticket_id = Ticket.last.id
         status = [1,2,3,4,5]

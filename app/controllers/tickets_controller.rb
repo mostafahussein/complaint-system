@@ -1,21 +1,20 @@
 class TicketsController < ApplicationController
   before_filter :set_subject, only: [:new, :create]
   before_filter :set_user, only: [:new, :create]
+  before_filter :set_to_close
   def index
     if params[:tab] == "open"
       @tickets = Ticket.opened
     elsif params[:tab] == "solved"
       @tickets = Ticket.solved
     elsif params[:tab] == "assigned"
-      render_404
+      @tickets = Ticket.joins(:ticket_statuses).where("ticket_statuses.staff_id = ?", current_user.employee.id)
     elsif params[:tab] == "overdue"
-      render_404
+      @tickets = Ticket.overdue
     elsif params[:tab] == "closed"
       @tickets = Ticket.closed
     elsif params[:tab] == "complained"
-      if current_user.student
-        @tickets = current_user.student.tickets
-      end
+      @tickets = Ticket.("student_id = ?", current_user.student.id)
     else
       render_404
     end
@@ -23,18 +22,33 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
+    @status_title = Status.joins(ticket_statuses: :ticket).where("tickets.id = ?", @ticket.id).first
+    @subject_title = Subject.joins(advisor: {ticket_statuses: :ticket}).where("tickets.subject_id = subjects.id 
+    AND subjects.id = ? AND tickets.id = ?", @ticket.subject_id , @ticket.id ).first
+    @assigned_advisor = Advisor.joins(ticket_statuses: :ticket).where("tickets.id = ? ", @ticket.id).first
+    @assigned_staff = Staff.joins(ticket_statuses: :ticket).where("tickets.id = ? ", @ticket.id).first
+    @follow_up = FollowUp.new
   end
 
 
   def new
     @ticket = Ticket.new
     @ticket.ticket_statuses.build
-    @ticket.follow_ups.build
   end
 
   def create
     @ticket = Ticket.new(params[:ticket])
     if @ticket.save
+      if @ticket.priority.priority_name == 'High'
+        due = @ticket.create_at.to_date + 2.days
+        @ticket.update_attributes(due: due)
+      elsif @ticket.priority.priority_name == 'Normal'
+        due = @ticket.create_at.to_date + 7.days
+        @ticket.update_attributes(due: due)
+      elsif @ticket.priority.priority_name == 'Low'
+        due = @ticket.create_at.to_date + 10.days
+        @ticket.update_attributes(due: due)
+      end
       subject = Subject.find(params[:subject_id])
       @advisor = subject.employee
       TicketStatus.create(status_id: 1,ticket_id: @ticket.id, advisor_id: @advisor.id )
@@ -61,11 +75,10 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
   end
 
-  def assgin_me
+  def assign
     @ticket = Ticket.find(params[:id])
-    @ticket.ticket_statuses.each do |ticket|
-      ticket.update_attributes(staff_id: current.employee.id)
-    end
+    @ticket.ticket_statuses.first.update_attributes(staff_id: current_user.employee.id)
+    redirect_to @ticket
   end
 
   private
@@ -73,10 +86,20 @@ class TicketsController < ApplicationController
     @title = Subject.find(params[:subject_id]).subject_title
     @subject = Subject.find(params[:subject_id]).id
   end
-
+  
   def set_user
     if current_user.student
       @student = current_user.student.id
+    end
+  end
+  
+  def set_to_close
+    @tickets = Ticket.overdue
+    @tickets.each do |ticket|
+      if ticket.statuses.first.ticket_status != 'Solved' && ticket.due < Date.today
+        ticket.statuses.first.update_attributes(ticket_status: "Closed")
+        ticket.ticket_statuses.first.update_attributes(staff_id: nil)
+      end
     end
   end
 end

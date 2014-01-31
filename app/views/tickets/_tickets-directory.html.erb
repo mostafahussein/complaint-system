@@ -34,6 +34,7 @@
 								<th>Status</th>
 								<th>Submitting Date</th>
 								<th>Assigned To</th>
+								<th>Due Date</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -41,21 +42,22 @@
 							<% @tickets.each do |ticket| %>
 							<tr>
 								<td><%= ticket.id %></td>
+								
 								<td><%= ticket.title %></td>
+								
 								<td><%= ticket.student.full_name %></td>
 								<td  id="priority_<%= ticket.priority.priority_name.parameterize if ticket.priority %>"><%= ticket.priority.priority_name if ticket.priority %></td>
-								<td><% ticket.ticket_statuses.each do |ticket_status| %><%= ticket_status.status.ticket_status %><% end %></td>
+								<td><%= ticket.statuses.first.ticket_status %></td>
 								<td><%= ticket.created_at.to_date %></td>
-
-								<td><% ticket.ticket_statuses.each do |ticket_employee| %>
-									<% if ticket_employee.staff %>
-									<%= ticket_employee.staff.full_name %>
-									<% elsif ticket_employee.advisor %>
-									<%= ticket_employee.advisor.full_name %>
-									<% else %>
-									<a href="<%= assign_me_tickets_path %>" class="btn">Assign to me</a>
-									<% end %>
-									<% end %></td>
+								<td><% if ticket.ticket_statuses.first.staff %>
+								<%= ticket.ticket_statuses.first.staff.full_name%>
+								<% elsif ticket.ticket_statuses.first.advisor %>
+								<%= ticket.ticket_statuses.first.advisor.full_name %>
+								<% else %>
+								<%= button_to "Assign", assign_ticket_path(ticket), method: :put %>
+								<% end %>
+								</td>
+									<td><%= ticket.due %></td>
 									<td><a href="<%= ticket_path(ticket) %>" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></a></td>
 								</tr>
 								<% end %>

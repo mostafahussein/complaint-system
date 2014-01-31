@@ -33,17 +33,7 @@
                   </div>
                   <div class="widget-body">
                      <% if @ticket.follow_ups.exists? %>
-                    <blockquote>
-                      <span class="title">
-                        Article 1
-                      </span>
-                      <p>
                        <%= render @ticket.follow_ups.select(&:persisted?) %>
-                      </p>
-                      <small>
-                        Someone famous 
-                      </small>
-                    </blockquote>
 						<% else %>
 					 <blockquote>
 	                      <p>
@@ -77,14 +67,7 @@
 	                    </ul>
 	                    <div class="tab-content" id="myTabContent">
 	                      <div id="post" class="tab-pane fade active in">
-						<%= simple_form_for(@ticket,:html => { :class => 'form-horizontal' }) do |t| %>
-							<%= t.simple_fields_for :follow_up do |f| %>
-	                        <p>
-	                        <%= f.input :text, as: :text,input_html: {rows: 5, class: "input-xxlarge"}, required: false, label: 'Response' %>
-	                        </p>
-							<button class="btn btn-primary" type="submit">Post reply</button>
-							<% end %>
-						<% end %>
+								<%= render 'follow_ups/form' %>
 	                      </div>
 	                      <div id="assign" class="tab-pane fade">
 	                        <p>

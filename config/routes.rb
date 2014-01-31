@@ -13,19 +13,19 @@ SweComplaint::Application.routes.draw do
 
    resources :students do
      collection do
-       get :new_multiple
        post :create_multiple
      end
    end
 
    resources :employees do
      collection do
-       get :new_multiple
        post :create_multiple
      end
    end
 
    resources :tickets do
+     resources :follow_ups
+     put :assign , on: :member
      collection do
        get :total_tickets
        get :open_status
@@ -36,7 +36,6 @@ SweComplaint::Application.routes.draw do
        get :high_tickets
        get :normal_tickets
        get :low_tickets
-       put :assign_me
      end
    end
 

@@ -1,0 +1,13 @@
+<%= div_for follow_up do %>
+<blockquote>
+	<span class="title">
+		<%= follow_up.user.email %> says:
+	</span>
+	<p>
+		<%= simple_format follow_up.text %>
+	</p>
+	<small>
+		<%= follow_up.created_at.strftime("%d/%m/%Y %I:%M%p")%> 
+	</small>
+</blockquote>
+<% end %>

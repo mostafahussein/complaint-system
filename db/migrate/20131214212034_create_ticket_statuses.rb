@@ -5,7 +5,6 @@ class CreateTicketStatuses < ActiveRecord::Migration
       t.integer :ticket_id
       t.integer :staff_id
       t.integer :advisor_id
-      t.integer :previous_staff_id
 
       t.timestamps
     end

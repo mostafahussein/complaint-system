@@ -6,6 +6,7 @@ class CreateTickets < ActiveRecord::Migration
       t.integer :student_id
       t.integer :subject_id
       t.integer :priority_id
+      t.date :due
 
       t.timestamps
     end

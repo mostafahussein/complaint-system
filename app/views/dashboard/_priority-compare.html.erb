@@ -17,7 +17,7 @@
 				                var seriesOptions = [],
 				                        yAxisOptions = [],
 				                        seriesCounter = 0,
-				                        names = ['HIGH_TICKETS', 'NORMAL_TICKETS', 'LOW_TICKETS'],
+				                        names = ['High_Tickets', 'Normal_Tickets', 'Low_Tickets'],
 				                        colors = Highcharts.getOptions().colors;
 
 				                $.each(names, function(i, name) {
@@ -25,7 +25,7 @@
 				                    $.getJSON('/tickets/' + name.toLowerCase(),	function(data) {
 
 				                        seriesOptions[i] = {
-				                            name: name,
+				                            name: name.replace(/_\w+[.!?]?$/g, ' '),
 				                            data: data
 				                        };
 

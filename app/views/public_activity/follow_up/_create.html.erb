@@ -1,0 +1,6 @@
+has followed up
+<% if activity.trackable %>
+ <%= link_to "Ticket ##{activity.trackable.ticket.id}", activity.trackable.ticket  %>
+<% else %>
+ which has since been removed
+<% end %>

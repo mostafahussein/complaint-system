@@ -120,9 +120,8 @@ ActiveRecord::Schema.define(:version => 20140129102336) do
     t.integer  "ticket_id"
     t.integer  "staff_id"
     t.integer  "advisor_id"
-    t.integer  "previous_staff_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "tickets", :force => true do |t|
@@ -131,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20140129102336) do
     t.integer  "student_id"
     t.integer  "subject_id"
     t.integer  "priority_id"
+    t.date     "due"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
