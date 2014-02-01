@@ -5,6 +5,7 @@ class SubjectsController < ApplicationController
     elsif params[:tab] == "assigned"
       if current_user.advisor?
         @subjects = current_user.employee.subjects
+        @total_complaints_sub = Subject.joins(advisor: {ticket_statuses: :ticket})
       end
     elsif params[:tab] == "enrolled"
       if current_user.student?

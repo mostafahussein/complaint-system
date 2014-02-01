@@ -27,13 +27,6 @@
 								<%= f.input :current_password,:hint => "we need your current password to confirm your changes", :required => true %>
 								<%= f.button :submit, 'Update Account',class: ' btn btn-primary' %>
 								<% end %>
-								<% if !current_user.admin? %>
-								<br />
-								<h5>
-									Personal Information
-								</h5>
-								<hr>
-								<% end %>
 								<% if @user.student %>
 								<%= render 'users/student_info'%>
 								<% elsif @user.employee %>

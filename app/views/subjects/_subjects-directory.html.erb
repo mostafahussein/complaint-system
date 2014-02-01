@@ -58,7 +58,7 @@
 								<tr>
 									<td><%= subject.subjectCode %></td>
 									<td><%= subject.subject_title %></td>
-									<td></td>
+									<td><%= @total_complaints_sub.where("subjects.id = tickets.subject_id AND subjects.id = ?", subject.id).count %></td>
 								</tr>
 								<% end %>
 							</tbody>
