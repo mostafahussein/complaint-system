@@ -36,12 +36,11 @@ class ApplicationController < ActionController::Base
     elsif current_user.staff?
       return tickets_path(tab: "open")
     elsif current_user.advisor?
-      
+      return subjects_path(tab: "assigned")
     elsif current_user.student?
       return subjects_path(tab: "enrolled")
     else
       render_404
-      
     end
   end
 end
