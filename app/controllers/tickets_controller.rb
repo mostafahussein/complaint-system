@@ -19,7 +19,7 @@ class TicketsController < ApplicationController
       @tickets = Ticket.closed
     elsif params[:tab] == "complained"
       if current_user.student?
-        @tickets = Ticket.("student_id = ?", current_user.student.id)
+        @tickets = Ticket.where("student_id = ?", current_user.student.id)
       end
     else
       render_404
