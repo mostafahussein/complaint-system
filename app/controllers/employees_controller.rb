@@ -38,9 +38,9 @@ class EmployeesController < ApplicationController
         user.user_type = 'employee'
         if employee.employee_position.position_title == 'Head of Department'
           user.role = 'Head of Department'
-        elsif  employee.employee_position.position_title == 'staff'
+        elsif  employee.employee_position.position_title == 'Staff'
           user.role = 'Staff'
-        elsif employee.employee_position.position_title == 'advisor'
+        elsif employee.employee_position.position_title == 'Advisor'
           user.role = 'Advisor'
         end
       end
