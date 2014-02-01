@@ -15,12 +15,12 @@
 class Ticket < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) {controller && controller.current_user}
-  scope :opened , includes({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , 'Open')
-  scope :solved , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Solved')
-  scope :closed , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Closed')
-  scope :overdue, includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , 'Solved', Date.today.to_s)
-  scope :today, includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , 'Solved', Date.today.to_s)
-  scope :upcoming, includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , 'Solved', Date.today.to_s)
+  scope :opened   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , 'Open')
+  scope :solved   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Solved')
+  scope :closed   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Closed')
+  scope :overdue  , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , 'Solved', Date.today.to_s)
+  scope :today    , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , 'Solved', Date.today.to_s)
+  scope :upcoming , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , 'Solved', Date.today.to_s)
 
   attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id,
   :ticket_statuses_attributes, :follow_ups_attributes
@@ -162,6 +162,10 @@ class Ticket < ActiveRecord::Base
     p.priority_name IN ('High', 'Normal', 'Low')
     GROUP BY s.subject_title
     ORDER BY total_complaints ASC")
+  end
+  
+  def self.recent
+    self.find_by_sql("SELECT * FROM tickets ORDER BY tickets.created_at DESC LIMIT 20")   
   end
 
 end

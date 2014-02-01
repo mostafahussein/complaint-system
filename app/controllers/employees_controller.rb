@@ -24,7 +24,7 @@ class EmployeesController < ApplicationController
       redirect_to @employee
     else
       flash[:error] = 'An error occurred please try again!'
-      redirect_to employees_path(fiter: "staff")
+      redirect_to employees_path(tab: "staff")
     end
   end
   
@@ -36,8 +36,16 @@ class EmployeesController < ApplicationController
         user.password = '12345678'
         user.password_confirmation = '12345678'
         user.user_type = 'employee'
+        if employee.employee_position.position_title == 'Head of Department'
+          user.role = 'Head of Department'
+        elsif  employee.employee_position.position_title == 'staff'
+          user.role = 'Staff'
+        elsif employee.employee_position.position_title == 'advisor'
+          user.role = 'Advisor'
+        end
       end
       employee.update_attributes(user_id: User.last.id)
+      
     end
     redirect_to users_path
   end

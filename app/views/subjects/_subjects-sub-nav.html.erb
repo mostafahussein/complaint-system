@@ -1,13 +1,24 @@
 <ul>
-  <li><a href="#" class="heading">Subjects</a></li>
-  <li>
-    <a href="<%= subjects_path(tab: "all")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'all' %>">
-      All Subjects
-    </a>
-  </li>
-  <li>
-    <a href="<%= subjects_path(tab: "enrolled")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'enrolled' %>">
-      Enrolled Subjects
-    </a>
-  </li>
+	<li><a href="#" class="heading">Subjects</a></li>
+	<% if current_user.admin? %>
+	<li>
+		<a href="<%= subjects_path(tab: "all")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'all' %>">
+			All Subjects
+		</a>
+	</li>
+	<% end %>
+	<% if current_user.advisor? %>
+	<li>
+		<a href="<%= subjects_path(tab: "assigned")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'assigned' %>">
+			Assigned Subjects
+		</a>
+	</li>
+	<% end %>
+	<% if current_user.student? %>
+	<li>
+		<a href="<%= subjects_path(tab: "enrolled")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'enrolled' %>">
+			Enrolled Subjects
+		</a>
+	</li>
+	<% end %>
 </ul>

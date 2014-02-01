@@ -1,5 +1,5 @@
 <div class="row-fluid">
-        <div class="span12">
+        <div class="span11">
           <div class="widget">
             <div class="widget-header">
               <div class="title" id="complaints_per_subject">
@@ -10,8 +10,38 @@
               </div>
             </div>
             <div class="widget-body">
-				 
+				 <div id="dt_example" class="example_alt_pagination">
+				  <table class="table table-bordered table-hover" id="subjects">
+				    <thead>
+					<tr>
+				      <th>Subject Title</th>
+				      <th>Total Complaints</th>
+				      <th>High</th>
+				      <th>Normal</th>
+				      <th>Low</th>
+					</tr>
+				    </thead>
+					<tbody>
+				    <% @subjects_details.each do |subject| %>
+				    <tr>
+				      <td><%= subject.subject_name %></td>
+				      <td><%= subject.total_complaints %></td>
+				      <td><%= subject.high_complaints %></td>
+				      <td><%= subject.normal_complaints %></td>
+				      <td><%= subject.low_complaints %></td>
+				    </tr>
+				    <% end %>
+					</tbody>
+				  </table>
+					<div class="clearfix">
+					</div>
+				  </div>
             </div>
           </div>
         </div>
       </div>
+	<script>
+	$('#subjects').dataTable({
+		"sPaginationType": "full_numbers"
+	});
+	</script>

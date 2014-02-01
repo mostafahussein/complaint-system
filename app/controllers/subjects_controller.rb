@@ -2,8 +2,12 @@ class SubjectsController < ApplicationController
   def index
     if params[:tab] == "all"
       @subjects = Subject.all
+    elsif params[:tab] == "assigned"
+      if current_user.advisor?
+        @subjects = current_user.employee.subjects
+      end
     elsif params[:tab] == "enrolled"
-      if current_user.student
+      if current_user.student?
         @subjects = current_user.student.subjects
       end
     else
@@ -42,7 +46,7 @@ class SubjectsController < ApplicationController
     end
   end
 
-  def edit_multiple
+  def assign_advisors
     @subjects = Subject.find(params[:subject_ids])
   end
 

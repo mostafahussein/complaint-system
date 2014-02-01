@@ -37,4 +37,25 @@ class User < ActiveRecord::Base
   has_one :student
   has_one :employee
   has_many :follow_ups
+
+  def admin?
+    self.role == 'Admin'
+  end
+  
+  def head_of_department?
+    self.role == 'Head of Department'
+  end
+  
+  def staff?
+    self.role == 'Staff'
+  end
+  
+  def advisor?
+    self.role == 'Advisor'
+  end
+  
+  def student?
+    self.role == 'Student'
+  end
+  
 end

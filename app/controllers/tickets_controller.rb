@@ -1,20 +1,26 @@
 class TicketsController < ApplicationController
   before_filter :set_subject, only: [:new, :create]
   before_filter :set_user, only: [:new, :create]
-  before_filter :set_to_close
+  
   def index
     if params[:tab] == "open"
       @tickets = Ticket.opened
     elsif params[:tab] == "solved"
       @tickets = Ticket.solved
     elsif params[:tab] == "assigned"
-      @tickets = Ticket.joins(:ticket_statuses).where("ticket_statuses.staff_id = ?", current_user.employee.id)
+      if current_user.staff?
+        @tickets = Ticket.joins(:ticket_statuses).where("ticket_statuses.staff_id = ?", current_user.employee.id)
+      elsif current_user.advisor?
+        @tickets = Ticket.joins(:ticket_statuses).where("ticket_statuses.advisor_id = ?", current_user.employee.id)
+      end
     elsif params[:tab] == "overdue"
       @tickets = Ticket.overdue
     elsif params[:tab] == "closed"
       @tickets = Ticket.closed
     elsif params[:tab] == "complained"
-      @tickets = Ticket.("student_id = ?", current_user.student.id)
+      if current_user.student?
+        @tickets = Ticket.("student_id = ?", current_user.student.id)
+      end
     else
       render_404
     end
@@ -93,13 +99,4 @@ class TicketsController < ApplicationController
     end
   end
   
-  def set_to_close
-    @tickets = Ticket.overdue
-    @tickets.each do |ticket|
-      if ticket.statuses.first.ticket_status != 'Solved' && ticket.due < Date.today
-        ticket.statuses.first.update_attributes(ticket_status: "Closed")
-        ticket.ticket_statuses.first.update_attributes(staff_id: nil)
-      end
-    end
-  end
 end

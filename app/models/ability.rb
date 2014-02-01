@@ -2,28 +2,31 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.role == 'Admin'
+    if user.admin?
       can :manage, User
       can :manage, Student
       can :manage, Subject
       can :manage, Attend
     end
 
-    if user.role == 'Head of Department'
+    if user.head_of_department?
       can :manage, Ticket
+      can :manage , Kb
     end
 
-    if user.role == 'Staff'
+    if user.staff?
       can :manage, Ticket
       can :manage, TicketStatus, staff_id: user.employee.id
+      can :manage, Kb
     end
 
-    if user.role == 'Advisor'
+    if user.advisor?
       can :manage, Ticket
       can :manage, TicketStatus, advisor_id: user.employee.id
+      can :read , Kb
     end
 
-    if user.role == 'Student'
+    if user.student?
       can :create, Ticket
       can :read, Ticket, student_id: user.student.id
     end

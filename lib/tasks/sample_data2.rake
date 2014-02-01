@@ -81,7 +81,7 @@ def make_complaints
       subjects = student.subjects.all(limit: 3) if student.subjects
       subjects.each do |subject|
         priority = [1,2,3]
-        time = (Time.now - 11.days) + days.sample.days
+        time = (Time.now - 1.days) + days.sample.days
         Ticket.create!(created_at: time, title: title, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample)
         ticket = Ticket.last
         if ticket.priority.priority_name == 'High'

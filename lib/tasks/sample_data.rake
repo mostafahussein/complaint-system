@@ -46,14 +46,14 @@ end
 
 def make_employees_and_students_as_users
   puts "Making Employees and Students as Users"
-  employees = Employee.all(limit: 300)
+  employees = Employee.all
   employees.each do |employee|
     User.create! do |user|
       user.email = "employee#{employee.id}@swe.com"
       user.password = '12345678'
       user.password_confirmation = '12345678'
       user.user_type = 'employee'
-      if (employee.employee_department.department_name == "Software Engineering" && employee.employee_position.position_title == "Head Department")
+      if (employee.employee_department.department_name == "Software Engineering" && employee.employee_position.position_title == "Head of Department")
         user.role = 'Head of Department'
       elsif (employee.employee_department.department_name == "Software Engineering" && employee.employee_position.position_title == "Staff")
         user.role = "Staff"
@@ -65,7 +65,7 @@ def make_employees_and_students_as_users
     employee.update_attributes(user_id: user_id)
   end
   
-  students = Student.all(limit: 200)
+  students = Student.all
    students.each do |student|
      User.create! do |user|
        user.email = "student#{student.id}@swe.com"

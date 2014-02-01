@@ -1,5 +1,5 @@
 <div class="row-fluid">
-        <div class="span12">
+        <div class="span11">
           <div class="widget">
             <div class="widget-header">
               <div class="title" id="complaints_per_employee">
@@ -10,9 +10,10 @@
               </div>
             </div>
             <div class="widget-body">
-				 <div>
-				  <table class="table table-bordered table-hover">
-				    <thead bgcolor="#B7B7B7">
+				 <div id="dt_example" class="example_alt_pagination">
+				  <table class="table table-bordered table-hover" id="advisors">
+				    <thead>
+					<tr>
 				      <th>Advisor Name</th>
 				      <th>Total Complaints</th>
 				      <th>Open</th>
@@ -20,7 +21,9 @@
 				      <th>Pending</th>
 				      <th>Closed</th>
 					  <th>Solved</th>
+					</tr>
 				    </thead>
+					<tbody>
 				    <% @advisors_complaints.each do |advisor| %>
 				    <tr>
 				      <td><%= advisor.advisor_name %></td>
@@ -32,9 +35,17 @@
 				      <td><%= advisor.solved_complaints %></td>
 				    </tr>
 				    <% end %>
+					</tbody>
 				  </table>
+					<div class="clearfix">
+					</div>
 				  </div>
             </div>
           </div>
         </div>
       </div>
+	<script>
+	$('#advisors').dataTable({
+		"sPaginationType": "full_numbers"
+	});
+	</script>

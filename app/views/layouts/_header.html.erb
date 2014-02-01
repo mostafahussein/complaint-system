@@ -5,11 +5,7 @@
 <% if current_user %>
   <div class="btn-group">
     <button class="btn btn-primary">
-	<% if current_user.employee %>
-      <%= current_user.email %> (<%= current_user.employee.type %>)
-	<% else %>
-		 <%= current_user.email %> (<%= current_user.user_type %>)
-	<% end %>
+      <%= current_user.email %> (<%= current_user.role %>)
     </button>
     <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
       <span class="caret">

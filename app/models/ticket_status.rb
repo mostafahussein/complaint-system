@@ -14,6 +14,7 @@
 
 class TicketStatus < ActiveRecord::Base
   has_paper_trail
+  before_update :set_staff
   attr_accessible :status_id, :ticket_id , :staff_id, :advisor_id, :previous_advisor_id, :previous_staff_id
   belongs_to :status
   belongs_to :ticket
@@ -21,6 +22,10 @@ class TicketStatus < ActiveRecord::Base
   belongs_to :staff, class_name: 'Staff', foreign_key: 'staff_id'
 
   belongs_to :advisor, class_name: 'Advisor', foreign_key: 'advisor_id'
+  
+  def set_staff
+     self.advisor_id = '' if self.staff_id_changed?
+   end
   
   def self.advisor_status_details
     self.find_by_sql("SELECT
@@ -46,6 +51,33 @@ class TicketStatus < ActiveRecord::Base
     GROUP BY
        em.id,
        em.full_name
+    ORDER BY em.id")
+  end
+  
+  def self.staff_status_details
+    self.find_by_sql("SELECT
+      em.full_name  AS staff_name,
+      COUNT(*) AS total_complaints,
+      COUNT(CASE st.ticket_status WHEN 'Open'        THEN 1 END) AS opened_complaints,
+      COUNT(CASE st.ticket_status WHEN 'In Progress' THEN 1 END) AS in_progress_complaints,
+      COUNT(CASE st.ticket_status WHEN 'Pending'     THEN 1 END) AS pending_complaints,
+      COUNT(CASE st.ticket_status WHEN 'Closed'      THEN 1 END) AS closed_complaints,
+      COUNT(CASE st.ticket_status WHEN 'Solved'      THEN 1 END) AS solved_complaints
+    FROM
+      ticket_statuses AS ti
+      JOIN
+      employees AS em
+        ON  ti.staff_id = em.id
+      JOIN
+      statuses AS st
+        ON ti.status_id = st.id
+    WHERE
+      em.type = 'Staff'
+      AND
+      st.ticket_status IN ('Open', 'In Progress', 'Pending', 'Closed', 'Solved')
+    GROUP BY
+      em.id,
+      em.full_name
     ORDER BY em.id")
   end
   

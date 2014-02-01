@@ -29,6 +29,7 @@ class StudentsController < ApplicationController
         user.password = '12345678'
         user.password_confirmation = '12345678'
         user.user_type = 'student'
+        user.role = 'Student'
       end
       student.update_attributes(user_id: User.last.id)
     end

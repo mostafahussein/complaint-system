@@ -85,6 +85,7 @@ GEM
       callsite
       rack-contrib
       railties
+    method_source (0.8.2)
     mime-types (1.25.1)
     multi_json (1.8.4)
     orm_adapter (0.5.0)
@@ -93,6 +94,12 @@ GEM
       activesupport (>= 3.0, < 5.0)
     pg (0.17.1)
     polyglot (0.3.3)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
     public_activity (1.4.1)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -139,11 +146,10 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    sextant (0.2.4)
-      rails (>= 3.2)
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    slop (3.4.7)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -185,13 +191,13 @@ DEPENDENCIES
   meta_request
   paper_trail (~> 3.0.0)
   pg
+  pry-rails
   public_activity (= 1.4.1)
   quiet_assets
   railroady
   rails (= 3.2.14)
   rails-erd
   sass-rails (~> 3.2.3)
-  sextant
   simple_form (= 2.1.0)
   thin
   uglifier (>= 1.0.3)

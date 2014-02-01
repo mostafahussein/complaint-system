@@ -42,7 +42,7 @@ SweComplaint::Application.routes.draw do
    resources :subjects do
      resources :tickets
      collection do
-       get :edit_multiple
+       get :assign_advisors
        put :update_multiple
      end
    end

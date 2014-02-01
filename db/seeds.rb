@@ -13,7 +13,7 @@ puts '-' * 31
 
 puts 'Creating Users'
 
-User.create([{email: 'admin@swe.com', password: '12345678', password_confirmation: '12345678', user_type: 'admin'}])
+User.create([{email: 'admin@swe.com', password: '12345678', password_confirmation: '12345678', user_type: 'admin', role: 'Admin'}])
 
 #----------------------------------------------------------------------------------------------------------------------#
 
@@ -27,7 +27,7 @@ EmployeeDepartment.create([{department_name: 'Software Engineering'},
 
 puts 'Creating Employee Positions'
 
-EmployeePosition.create([{position_title: 'Head Department'},
+EmployeePosition.create([{position_title: 'Head of Department'},
 						 {position_title: 'Staff'},
 						 {position_title: 'Advisor'}])
 

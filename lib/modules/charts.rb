@@ -65,6 +65,10 @@ module Modules
     def advisors_statistics
       @advisors_complaints = TicketStatus.advisor_status_details
     end
+    
+    def staff_statistics
+      @staff_complaints = TicketStatus.staff_status_details
+    end
 
     def complaints_statistics
       @complaint_status_details = TicketStatus.ticket_status_details
@@ -79,6 +83,10 @@ module Modules
     def start_end
       @min = (Date.today.beginning_of_month).to_datetime.to_i*1000
       @max = (Date.today.at_end_of_month).to_datetime.to_i*1000
+    end
+    
+    def mini_charts
+      @recent_tickets = Ticket.recent
     end
   end
 end
