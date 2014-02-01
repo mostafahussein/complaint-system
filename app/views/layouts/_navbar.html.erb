@@ -18,28 +18,13 @@
 		<% end %>
 		<% if current_user.admin? %>
 		<li>
-			<a href="<%= users_path %>" class="<%= 'selected' if params[:controller] == 'users' %>">
+			<a href="<%= users_path %>" class="<%= 'selected' if params[:controller] == 'users' || params[:controller] == 'employees' %>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe071;"></div>
 				Users
 			</a>
 		</li>
 		<% end %>
-		<% if current_user.admin? %>
-		<li>
-			<a href="<%= employees_path(tab: "staff")%>"  class="<%= 'selected' if params[:controller] == 'employees' %>" >
-				<div class="fs1" aria-hidden="true" data-icon="&#xe075;"></div>
-				Employees
-			</a>
-		</li>
-		<% end %>
-		<% if current_user.admin? %>
-		<li>
-			<a href="<%= students_path %>"  class="<%= 'selected' if params[:controller] == 'students' %>">
-				<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
-				Students
-			</a>
-		</li>
-		<% elsif current_user.advisor? %>
+		<% if current_user.advisor? %>
 		<li>
 			<a href="<%= subjects_path(tab: "assigned")%>" class="<%= 'selected' if params[:controller] == 'students' %>">
 								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
@@ -84,8 +69,7 @@
 </div>
 <div class="sub-nav">
 	<%= render 'dashboard/dashboard-sub-nav' if params[:controller] == 'dashboard'%>
-	<%= render 'users/users-sub-nav' if params[:controller] == 'users'%>
-	<%= render 'employees/employees-sub-nav' if params[:controller] == 'employees'%>
+	<%= render 'users/users-sub-nav' if params[:controller] == 'users' || params[:controller] == 'employees'%>
 	<%= render 'students/students-sub-nav' if params[:controller] == 'students'%>
 	<%= render 'subjects/subjects-sub-nav' if params[:controller] == 'subjects'%>
 	<%= render 'tickets/tickets-sub-nav' if params[:controller] == 'tickets'%>
