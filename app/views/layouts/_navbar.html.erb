@@ -24,21 +24,6 @@
 			</a>
 		</li>
 		<% end %>
-		<% if current_user.advisor? %>
-		<li>
-			<a href="<%= subjects_path(tab: "assigned")%>" class="<%= 'selected' if params[:controller] == 'students' %>">
-								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
-				Subjects
-			</a>
-		</li>
-		<% elsif current_user.student? %>
-		<li>
-			<a href="<%= subjects_path(tab: "enrolled")%>" class="<%= 'selected' if params[:controller] == 'students' %>">
-								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
-				Subjects
-			</a>
-		</li>
-		<% end %>
 		<% if current_user.admin? %>
 		<li>
 			<a href="<%= subjects_path(tab: "all")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
@@ -46,10 +31,38 @@
 				Subjects
 			</a>
 		</li>
+		<% elsif current_user.advisor? %>
+		<li>
+			<a href="<%= subjects_path(tab: "assigned")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
+								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
+				Subjects
+			</a>
+		</li>
+		<% elsif current_user.student? %>
+		<li>
+			<a href="<%= subjects_path(tab: "enrolled")%>" class="<%= 'selected' if params[:controller] == 'subjecets' %>">
+								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
+				Subjects
+			</a>
+		</li>
 		<% end %>
-		<% if !current_user.admin? %>
+		<% if current_user.head_of_department? %>
 		<li>
 			<a href="<%= tickets_path(tab: "open") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
+				Complaints
+			</a>
+		</li>
+		<% elsif current_user.staff? || current_user.advisor? %>
+		<li>
+			<a href="<%= tickets_path(tab: "assigned") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
+				Complaints
+			</a>
+		</li>
+		<% elsif current_user.student? %>
+		<li>
+			<a href="<%= tickets_path(tab: "complained") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
 				Complaints
 			</a>
