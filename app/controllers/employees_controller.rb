@@ -27,25 +27,28 @@ class EmployeesController < ApplicationController
       redirect_to employees_path(tab: "staff")
     end
   end
-  
+
   def create_multiple
     @employees = Employee.find(params[:employee_ids])
     @employees.each do |employee|
       User.create do |user|
-        user.email = "employee#{employee.id}@swe.com"
-        user.password = '12345678'
-        user.password_confirmation = '12345678'
-        user.user_type = 'employee'
-        if employee.employee_position.position_title == 'Head of Department'
-          user.role = 'Head of Department'
-        elsif  employee.employee_position.position_title == 'Staff'
-          user.role = 'Staff'
-        elsif employee.employee_position.position_title == 'Advisor'
-          user.role = 'Advisor'
+        if User.where(email: "employee#{employee.id}@swe.com").exists? == false
+          user.email = "employee#{employee.id}@swe.com"
+          user.password = '12345678'
+          user.password_confirmation = '12345678'
+          user.user_type = 'employee'
+          if employee.employee_position.position_title == 'Head of Department'
+            user.role = 'Head of Department'
+          elsif  employee.employee_position.position_title == 'Staff'
+            user.role = 'Staff'
+          elsif employee.employee_position.position_title == 'Advisor'
+            user.role = 'Advisor'
+          end
+          employee.update_attributes(user_id: User.last.id)
+        else
+          flash[:error] = "employee#{employee.id}@swe.com already exists"
         end
       end
-      employee.update_attributes(user_id: User.last.id)
-      
     end
     redirect_to users_path
   end
