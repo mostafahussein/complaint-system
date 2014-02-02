@@ -28,7 +28,7 @@
 								<td><%= check_box_tag 'student_ids[]', student.id %></td>
 								<td><%= student.id %></td>
 								<td><%= student.full_name %></td>
-								<td><a href="<%= user_path(student.user_id) if student.user_id %>" class="btn" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
+								<td><a href="<%= user_path(student.user_id) if student.user_id %>" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
 							</tr>
 							<% end %>
 						</tbody>

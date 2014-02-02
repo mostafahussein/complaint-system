@@ -1,0 +1,39 @@
+ <div class="left-sidebar">    
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="widget">
+              <div class="widget-header">
+                <div class="title">
+                  New FAQ
+                  <span class="mini-title">
+                   Add new FAQs
+                  </span>
+                </div>
+             </div>
+              <div class="widget-body">
+	
+				<%= simple_form_for(@faq, :html => {:class => 'form-horizontal' }) do |f| %>
+				             
+				              <%= f.input :faq_question, placeholder: 'Enter A Question' %>
+
+				              <%= f.input :faq_answer, placeholder: 'Enter An Answer' %>
+				              <%= f.input :category, collection: @subjects , include_blank: false, label_method: :to_label, prompt: 'Select A Subject' %>
+	
+                 <div class="form-actions no-margin">
+                    <button type="submit" class="btn btn-info pull-right">
+                      Create Account
+                    </button>
+                    <div class="clearfix">
+                    </div>
+                  </div>
+                  
+                </form>
+                
+              </div>
+<% end %>
+            </div>
+          </div>
+          
+        </div>
+
+</div>

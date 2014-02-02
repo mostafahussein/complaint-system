@@ -15,4 +15,8 @@ class Subject < ActiveRecord::Base
   has_many :attends
   has_many :students, :through => :attends
   belongs_to :advisor, class_name: 'Advisor'
+  
+  def to_label
+    subject_title
+  end
 end

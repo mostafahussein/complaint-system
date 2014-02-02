@@ -54,7 +54,11 @@
 								<% elsif ticket.ticket_statuses.first.advisor %>
 								<%= ticket.ticket_statuses.first.advisor.full_name %>
 								<% else %>
+								<% if current_user.staff? %>
 								<%= button_to "Assign", assign_ticket_path(ticket), method: :put %>
+								<% elsif current_user.head_of_department? %>
+								Not Assigned
+								<% end %>
 								<% end %>
 								</td>
 									<td><%= ticket.due %></td>

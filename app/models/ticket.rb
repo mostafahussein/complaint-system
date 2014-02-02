@@ -165,7 +165,7 @@ class Ticket < ActiveRecord::Base
   end
   
   def self.recent
-    self.find_by_sql("SELECT * FROM tickets ORDER BY tickets.created_at DESC LIMIT 20")   
+    self.find_by_sql("SELECT * FROM tickets ORDER BY tickets.created_at DESC LIMIT 20")
   end
 
 end

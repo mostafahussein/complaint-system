@@ -87,7 +87,7 @@
 	<%= render 'subjects/subjects-sub-nav' if params[:controller] == 'subjects'%>
 	<%= render 'tickets/tickets-sub-nav' if params[:controller] == 'tickets'%>
 	<%= render 'activities/activities-sub-nav' if params[:controller] == 'activities'%>
-	<%= render 'kbs/kbs-sub-nav' if params[:controller] == 'kbs'%>
+	<%= render 'kbs/kbs-sub-nav' if params[:controller] == 'kbs' || params[:controller] == 'responses'%>
 	<div class="btn-group pull-right">
 		<button class="btn btn-primary">
 			Main Menu

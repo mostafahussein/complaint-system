@@ -39,8 +39,6 @@ class ApplicationController < ActionController::Base
       return subjects_path(tab: "assigned")
     elsif current_user.student?
       return subjects_path(tab: "enrolled")
-    else
-      render_404
     end
   end
 end

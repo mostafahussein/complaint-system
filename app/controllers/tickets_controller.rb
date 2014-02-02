@@ -34,6 +34,8 @@ class TicketsController < ApplicationController
     @assigned_advisor = Advisor.joins(ticket_statuses: :ticket).where("tickets.id = ? ", @ticket.id).first
     @assigned_staff = Staff.joins(ticket_statuses: :ticket).where("tickets.id = ? ", @ticket.id).first
     @follow_up = FollowUp.new
+    @response = Response.new
+    @responses = Response.all
   end
 
 
