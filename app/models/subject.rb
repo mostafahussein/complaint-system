@@ -11,10 +11,12 @@
 #
 
 class Subject < ActiveRecord::Base
-  attr_accessible :subject_title, :subjectCode, :advisor_id
+  attr_accessible :subject_title, :subjectCode
   has_many :attends
   has_many :students, :through => :attends
-  belongs_to :advisor, class_name: 'Advisor'
+  has_many :subject_staffs
+  has_many :staffs, class_name: 'Staff', through: :subject_staffs
+  has_many :advisors , class_name: 'Advisor', through: :subject_staffs
   
   def to_label
     subject_title

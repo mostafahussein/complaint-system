@@ -14,13 +14,15 @@
 
 class Ticket < ActiveRecord::Base
   include PublicActivity::Model
+  include Modules::DefaultValues
   tracked owner: ->(controller, model) {controller && controller.current_user}
-  scope :opened   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , 'Open')
-  scope :solved   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Solved')
-  scope :closed   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , 'Closed')
-  scope :overdue  , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , 'Solved', Date.today.to_s)
-  scope :today    , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , 'Solved', Date.today.to_s)
-  scope :upcoming , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , 'Solved', Date.today.to_s)
+  scope :opened   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , "#{Ticket::OPEN}")
+  scope :solved   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::SOLVED}")
+  scope :closed   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::CLOSED}")
+  scope :overdue  , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
+  scope :today    , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
+  scope :upcoming , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
+  scope :recent   , find(:all, order: "created_at DESC", limit:20)
 
   attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id,
   :ticket_statuses_attributes, :follow_ups_attributes
@@ -33,123 +35,124 @@ class Ticket < ActiveRecord::Base
   accepts_nested_attributes_for :follow_ups
 
   def self.total_timeline
-    self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00'::timestamp, '2014-12-31 00:00'::timestamp, '1 day') AS date
-    LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
+    self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, COALESCE(count,0) AS count
+    FROM GENERATE_SERIES(DATE_TRUNC('year', localtimestamp) - interval '1 year', DATE_TRUNC('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
+    LEFT OUTER JOIN (SELECT DATE_TRUNC('day', tickets.created_at) AS day, COUNT(tickets.id) AS count
     FROM tickets
-    WHERE created_at >= '2013-01-01 00:00' AND created_at < '2014-12-31 00:00' GROUP BY day ORDER BY day ASC) results
+    WHERE created_at >= DATE_TRUNC('year', localtimestamp) - interval '1 year' AND created_at < DATE_TRUNC('year', localtimestamp) + interval '1 year -1 day'
+    GROUP BY day ORDER BY day ASC) results
     ON (date = results.day)")
   end
 
   def self.open_timeline
-    self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00'::timestamp, '2014-12-31 00:00'::timestamp, '1 day') AS date
-    LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
+    self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, COALESCE(count,0) AS count
+    FROM GENERATE_SERIES(DATE_TRUNC('year', localtimestamp) - interval '1 year', DATE_TRUNC('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
+    LEFT OUTER JOIN (SELECT DATE_TRUNC('day', tickets.created_at) AS day, COUNT(tickets.id) AS count
     FROM tickets, ticket_statuses,statuses
-    WHERE (tickets.created_at >= '2013-01-01 00:00' AND tickets.created_at < '2014-12-31 00:00') AND
-    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = 'Open'     
+    WHERE (tickets.created_at >= DATE_TRUNC('year', localtimestamp) - interval '1 year' AND tickets.created_at < DATE_TRUNC('year', localtimestamp) + interval '1 year -1 day') AND
+    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = '#{Ticket::OPEN}'     
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.in_progress_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00'::timestamp, '2014-12-31 00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets, ticket_statuses,statuses
-    WHERE (tickets.created_at >= '2013-01-01 00:00' AND tickets.created_at < '2014-12-31 00:00') AND
-    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = 'In Progress'     
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = '#{Ticket::PROGRESS}'     
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.pending_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00'::timestamp, '2014-12-31 00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets, ticket_statuses,statuses
-    WHERE (tickets.created_at >= '2013-01-01 00:00' AND tickets.created_at < '2014-12-31 00:00') AND
-    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = 'Pending'     
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = '#{Ticket::PENDING}'     
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.solved_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00'::timestamp, '2014-12-31 00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets, ticket_statuses,statuses
-    WHERE (tickets.created_at >= '2013-01-01 00:00' AND tickets.created_at < '2014-12-31 00:00') AND
-    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = 'Solved'     
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = '#{Ticket::SOLVED}'     
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.closed_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00'::timestamp, '2014-12-31 00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets, ticket_statuses,statuses
-    WHERE (tickets.created_at >= '2013-01-01 00:00' AND tickets.created_at < '2014-12-31 00:00') AND
-    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = 'Closed'     
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    tickets.id = ticket_statuses.ticket_id AND ticket_statuses.status_id = statuses.id AND statuses.ticket_status = '#{Ticket::CLOSED}'     
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.high_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00:00'::timestamp, '2014-12-31 00:00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets,priorities
-    WHERE (tickets.created_at >= '2013-01-01 00:00:00' AND tickets.created_at < '2014-12-31 00:00:00') AND
-    priority_id = priorities.id AND priorities.priority_name = 'High'
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    priority_id = priorities.id AND priorities.priority_name = '#{Ticket::HIGH}'
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.normal_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00:00'::timestamp, '2014-12-31 00:00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets,priorities
-    WHERE (tickets.created_at >= '2013-01-01 00:00:00' AND tickets.created_at < '2014-12-31 00:00:00') AND
-    priority_id = priorities.id AND priorities.priority_name = 'Normal'
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    priority_id = priorities.id AND priorities.priority_name = '#{Ticket::NORMAL}'
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.low_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, coalesce(count,0) AS count
-    FROM generate_series( '2013-01-01 00:00:00'::timestamp, '2014-12-31 00:00:00'::timestamp, '1 day') AS date
+    FROM generate_series(date_trunc('year', localtimestamp) - interval '1 year', date_trunc('year', localtimestamp) + interval '1 year -1 day', interval '1 day') AS date
     LEFT OUTER JOIN (SELECT date_trunc('day', tickets.created_at) as day, count(tickets.id) as count
     FROM tickets,priorities
-    WHERE (tickets.created_at >= '2013-01-01 00:00:00' AND tickets.created_at < '2014-12-31 00:00:00') AND
-    priority_id = priorities.id AND priorities.priority_name = 'Low'
+    WHERE (tickets.created_at >= date_trunc('year', localtimestamp) - interval '1 year' AND tickets.created_at < date_trunc('year', localtimestamp) + interval '1 year -1 day') AND
+    priority_id = priorities.id AND priorities.priority_name = '#{Ticket::LOW}'
     GROUP BY day
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
   def self.ticket_priority_details
     self.find_by_sql("SELECT COUNT(*) AS total_complaints,
-    COUNT(CASE p.priority_name WHEN 'High'        THEN 1 END) AS high_complaints,
-    COUNT(CASE p.priority_name WHEN 'Normal' THEN 1 END) AS normal_complaints,
-    COUNT(CASE p.priority_name WHEN 'Low'     THEN 1 END) AS low_complaints
+    COUNT(CASE p.priority_name WHEN '#{Ticket::HIGH}'        THEN 1 END) AS high_complaints,
+    COUNT(CASE p.priority_name WHEN '#{Ticket::NORMAL}' THEN 1 END) AS normal_complaints,
+    COUNT(CASE p.priority_name WHEN '#{Ticket::LOW}'     THEN 1 END) AS low_complaints
     FROM
     tickets AS t
     JOIN
     priorities AS p
     ON t.priority_id = p.id
     WHERE
-    p.priority_name IN ('High', 'Normal', 'Low')
+    p.priority_name IN ('#{Ticket::HIGH}', '#{Ticket::NORMAL}', '#{Ticket::LOW}')
     ORDER BY total_complaints ASC")
   end
 
   def self.subject_priority_details
     self.find_by_sql("SELECT s.subject_title  AS subject_name,
     COUNT(*) AS total_complaints,
-    COUNT(CASE p.priority_name WHEN 'High'        THEN 1 END) AS high_complaints,
-    COUNT(CASE p.priority_name WHEN 'Normal' THEN 1 END) AS normal_complaints,
-    COUNT(CASE p.priority_name WHEN 'Low'     THEN 1 END) AS low_complaints
+    COUNT(CASE p.priority_name WHEN '#{Ticket::HIGH}'        THEN 1 END) AS high_complaints,
+    COUNT(CASE p.priority_name WHEN '#{Ticket::NORMAL}' THEN 1 END) AS normal_complaints,
+    COUNT(CASE p.priority_name WHEN '#{Ticket::LOW}'     THEN 1 END) AS low_complaints
     FROM
     tickets AS t
     JOIN
@@ -159,13 +162,9 @@ class Ticket < ActiveRecord::Base
     priorities AS p
     ON t.priority_id = p.id
     WHERE
-    p.priority_name IN ('High', 'Normal', 'Low')
+    p.priority_name IN ('#{Ticket::HIGH}', '#{Ticket::NORMAL}', '#{Ticket::LOW}')
     GROUP BY s.subject_title
     ORDER BY total_complaints ASC")
-  end
-  
-  def self.recent
-    self.find_by_sql("SELECT * FROM tickets ORDER BY tickets.created_at DESC LIMIT 20")
   end
 
 end

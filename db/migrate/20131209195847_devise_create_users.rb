@@ -5,6 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :email,              :null => false, :default => '' , limit: 20
       t.string :user_type , limit: 10
       t.string :role , limit: 30
+      t.boolean :active , default: true
       t.string :encrypted_password, :null => false, :default => ''
 
       ## Recoverable

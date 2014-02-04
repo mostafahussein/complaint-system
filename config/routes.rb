@@ -1,7 +1,5 @@
 SweComplaint::Application.routes.draw do
 
-  get "responses/index"
-
   devise_for :users, :controllers => { :registrations => 'users' }
    resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update] do
      collection do
@@ -22,6 +20,9 @@ SweComplaint::Application.routes.draw do
        post :create_multiple
      end
    end
+   
+   resources :advisors, controller: 'employees'
+   resources :staffs, controller: 'employees'
 
    resources :tickets do
      resources :follow_ups
@@ -46,6 +47,8 @@ SweComplaint::Application.routes.draw do
        put :update_multiple
      end
    end
+   
+   resources :subject_staffs
    
    resources :kbs
    resources :responses

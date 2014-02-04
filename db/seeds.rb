@@ -13,23 +13,23 @@ puts '-' * 31
 
 puts 'Creating Users'
 
-User.create([{email: 'admin@swe.com', password: '12345678', password_confirmation: '12345678', user_type: 'admin', role: 'Admin'}])
+User.create([{email: 'admin@swe.com', password: '12345678', password_confirmation: '12345678', user_type: 'admin', role: 'admin'}])
 
 #----------------------------------------------------------------------------------------------------------------------#
 
 puts 'Creating Employee Departments'
 
-EmployeeDepartment.create([{department_name: 'Software Engineering'},
-	                       {department_name: 'Student Advisor'}
+EmployeeDepartment.create([{department_name: 'software engineering'},
+	                       {department_name: 'student advisor'}
 	                      ])
 
 #----------------------------------------------------------------------------------------------------------------------#
 
 puts 'Creating Employee Positions'
 
-EmployeePosition.create([{position_title: 'Head of Department'},
-						 {position_title: 'Staff'},
-						 {position_title: 'Advisor'}])
+EmployeePosition.create([{position_title: 'head of department'},
+						 {position_title: 'staff'},
+						 {position_title: 'advisor'}])
 
 #----------------------------------------------------------------------------------------------------------------------#
 
@@ -41,20 +41,20 @@ Staff.create([{full_name: 'Denny Kantner', gender: 'm', employee_department_id: 
 
 puts 'Creating Statuses'
 Status.create([
-    {ticket_status: 'Open'},
-    {ticket_status: 'In Progress'},
-    {ticket_status: 'Pending'},
-    {ticket_status: 'Solved'},
-    {ticket_status: 'Closed'}
+    {ticket_status: 'open'},
+    {ticket_status: 'in progress'},
+    {ticket_status: 'pending'},
+    {ticket_status: 'solved'},
+    {ticket_status: 'closed'}
               ])
 
 #----------------------------------------------------------------------------------------------------------------------#
 
 puts 'Creating Priorities'
 Priority.create([
-    {priority_name: 'High',background: '#FEE7E7',color:'black'},
-    {priority_name: 'Normal',background: '#FFFFF0',color: 'black'},
-    {priority_name: 'Low',background: '#DDFFDD',color: 'black'}
+    {priority_name: 'high',background: '#FEE7E7',color:'black'},
+    {priority_name: 'normal',background: '#FFFFF0',color: 'black'},
+    {priority_name: 'low',background: '#DDFFDD',color: 'black'}
                 ])
 
 #----------------------------------------------------------------------------------------------------------------------#

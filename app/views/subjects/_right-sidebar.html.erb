@@ -1,6 +1,3 @@
-<div class="left-sidebar">
-<%= render 'employees/employees-directory'%>
-</div>
 <div class="right-sidebar">
 	<div class="wrapper">
 		<div id="scrollbar">
@@ -16,31 +13,24 @@
 				<div class="overview">
 					<div class="featured-articles-container">
 						<h5 class="heading-blue">
-							User Management
+							Subject Management
 						</h5>
 						<div class="articles">
 
-							<a href="<%= new_user_path %>">
+							<a href="<%= new_subject_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
-								Add New User
+								Add New Subject
 							</a>
 							
-							<a href="<%= new_employee_path %>">
+							<a href="<%= new_subject_staff_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
-								Add New Employee
+								Assign Subject to Staff and Advisors
 							</a>
 							
-							<a href="<%= new_student_path %>">
-								<span class="label-bullet-blue">
-									&nbsp;
-								</span>
-								Add New Student
-							</a>
-
 						</div>
 					</div>
 

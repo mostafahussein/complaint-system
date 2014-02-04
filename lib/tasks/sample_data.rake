@@ -13,7 +13,7 @@ end
 
 def make_subjects
   puts "Making Subjects"
-    20.times do
+    30.times do
       subject_title = Faker::Lorem.word
       subjectCode = Faker::Address.zip_code
       Subject.create!([{subject_title: subject_title, subjectCode: subjectCode }])
@@ -22,25 +22,25 @@ end
 
 def make_employees_and_students
   puts "Making Employees and Students"
-   100.times do
+   120.times do
     full_name = Faker::Name.name
-    gender = ["f" , "m"]
+    gender = ["female" , "male"]
     Staff.create!([{full_name: full_name, gender: gender.sample, employee_department_id: 1, employee_position_id: 2}])
     full_name = Faker::Name.name
-    gender = ["f" , "m"]
+    gender = ["female" , "male"]
     Advisor.create!([{full_name: full_name, gender: gender.sample, employee_department_id: 2, employee_position_id: 3}])
     full_name = Faker::Name.name
-    gender = ["f" , "m"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'Batch 1', section_name: 'Section 1'}])
+    gender = ["female" , "male"]
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 1', section_name: 'section 1'}])
     full_name = Faker::Name.name
-    gender = ["f" , "m"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'Batch 2', section_name: 'Section 2'}])
+    gender = ["female" , "male"]
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 2', section_name: 'section 2'}])
     full_name = Faker::Name.name
-    gender = ["f" , "m"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'Batch 3', section_name: 'Section 3'}])
+    gender = ["female" , "male"]
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 3', section_name: 'section 3'}])
     full_name = Faker::Name.name
-    gender = ["f" , "m"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'Batch 4', section_name: 'Section 4'}])
+    gender = ["female" , "male"]
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 4', section_name: 'section 4'}])
   end
 end
 
@@ -53,12 +53,12 @@ def make_employees_and_students_as_users
       user.password = '12345678'
       user.password_confirmation = '12345678'
       user.user_type = 'employee'
-      if (employee.employee_department.department_name == "Software Engineering" && employee.employee_position.position_title == "Head of Department")
-        user.role = 'Head of Department'
-      elsif (employee.employee_department.department_name == "Software Engineering" && employee.employee_position.position_title == "Staff")
-        user.role = "Staff"
-      elsif (employee.employee_department.department_name == "Student Advisor" && employee.employee_position.position_title == "Advisor")
-        user.role = "Advisor"
+      if (employee.employee_department.department_name == "software engineering" && employee.employee_position.position_title == "head of department")
+        user.role = 'head of department'
+      elsif (employee.employee_department.department_name == "software engineering" && employee.employee_position.position_title == "staff")
+        user.role = "staff"
+      elsif (employee.employee_department.department_name == "student advisor" && employee.employee_position.position_title == "advisor")
+        user.role = "advisor"
       end
     end
     user_id = User.last.id
@@ -72,7 +72,7 @@ def make_employees_and_students_as_users
        user.password = '12345678'
        user.password_confirmation = '12345678'
        user.user_type = 'student'
-       user.role = "Student"
+       user.role = "student"
      end
      user_id = User.last.id
      student.update_attributes(user_id: user_id)

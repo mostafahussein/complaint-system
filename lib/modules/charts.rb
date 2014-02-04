@@ -87,6 +87,8 @@ module Modules
     
     def mini_charts
       @recent_tickets = Ticket.recent
+      @today_tickets = Ticket.today
+      @upcoming_tickets = Ticket.upcoming
     end
   end
 end

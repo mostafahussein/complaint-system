@@ -1,0 +1,67 @@
+<div class="right-sidebar">
+		<div class="wrapper">
+		<div id="scrollbar-two">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Today's Complaints
+						</h5>
+						<div class="articles">
+							<% @today_tickets.each do |today| %>
+							<a href="<%= ticket_path(today) %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								<%= today.title %>
+							</a>
+							<% end %>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+<hr class="hr-stylish-1">
+	<div class="wrapper">
+		<div id="scrollbar">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Upcoming Complaints
+						</h5>
+						<div class="articles">
+							<% @upcoming_tickets.each do |upcoming| %>
+							<a href="<%= ticket_path(upcoming) %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								<%= upcoming.title %>
+							</a>
+							<% end %>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

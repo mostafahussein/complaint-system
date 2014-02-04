@@ -28,7 +28,7 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(params[:subject])
     if @subject.save
-      redirect_to @subject
+      redirect_to @subjects_path
     else
       redirect_to subjects_path
     end
@@ -48,7 +48,12 @@ class SubjectsController < ApplicationController
   end
 
   def assign_advisors
-    @subjects = Subject.find(params[:subject_ids])
+    if params[:subject_ids].nil?
+      flash[:error] = 'please select a subject or more'
+      redirect_to :back
+    else
+      @subjects = Subject.find(params[:subject_ids])
+    end
   end
 
   def update_multiple

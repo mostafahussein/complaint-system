@@ -1,9 +1,9 @@
 class EmployeesController < ApplicationController
   def index
     if params[:tab] == "staff"
-      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: 'Software Engineering'})
+      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: "#{EmployeesController::SWE}"})
     elsif params[:tab] == "advisors"
-      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: 'Student Advisor'})
+      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: "#{EmployeesController::STAD}"})
     else
       render_404
     end
@@ -37,12 +37,12 @@ class EmployeesController < ApplicationController
           user.password = '12345678'
           user.password_confirmation = '12345678'
           user.user_type = 'employee'
-          if employee.employee_position.position_title == 'Head of Department'
-            user.role = 'Head of Department'
-          elsif  employee.employee_position.position_title == 'Staff'
-            user.role = 'Staff'
-          elsif employee.employee_position.position_title == 'Advisor'
-            user.role = 'Advisor'
+          if employee.employee_position.position_title == "#{EmployeesController::SWE_MANAGER}"
+            user.role = "#{EmployeesController::MANAGER}"
+          elsif  employee.employee_position.position_title == "#{EmployeesController::SWE_STAFF}"
+            user.role = "#{EmployeesController::STAFF}"
+          elsif employee.employee_position.position_title == "#{EmployeeController::STAD_ADVISOR}"
+            user.role = "#{EmployeesController::ADVISOR}"
           end
           employee.update_attributes(user_id: User.last.id)
         else
@@ -68,6 +68,8 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee = Employee.find(params[:id])
+    @employee = Employee.find(params[:id]).destroy
+        flash[:success] = "Employee deleted."
+        redirect_to :back
   end
 end

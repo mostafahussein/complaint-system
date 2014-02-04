@@ -28,8 +28,8 @@ class StudentsController < ApplicationController
         user.email = "student#{student.id}@swe.com"
         user.password = '12345678'
         user.password_confirmation = '12345678'
-        user.user_type = 'student'
-        user.role = 'Student'
+        user.user_type = "#{StudentsController::TYPEC}"
+        user.role = "#{StudentsController::STUDENT}"
       end
       student.update_attributes(user_id: User.last.id)
     end

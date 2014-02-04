@@ -2,14 +2,15 @@
 	<div class="span12">
 		<div class="widget">
 			<div class="widget-header">
-				<div class="title" id="complaints_per_employee">
+				<div class="title" id="users_directory">
 					Employees Directory
 					<span class="mini-title">
-						<%= 'Staff Directory' if params[:controller] == 'employees' && params[:tab] == 'staff' %>
-						<%= 'Advisors Directory' if params[:controller] == 'employees' && params[:tab] == 'advisors' %> 
+							<%= 'Staff Directory' if params[:controller] == 'employees' && params[:tab] == 'staff' %>
+							<%= 'Advisors Directory' if params[:controller] == 'employees' && params[:tab] == 'advisors' %>
 					</span>
 				</div>
 			</div>
+
 			<div class="widget-body">
 				<div id="dt_example" class="example_alt_pagination">
 					<%= form_tag create_multiple_employees_path, method: :post do %>
@@ -25,28 +26,28 @@
 							</tr>
 						</thead>
 						<tbody>
-						
+
 							<% @employees.each do |employee| %>
 							<tr>
 								<td><%= check_box_tag 'employee_ids[]', employee.id %></td>
 								<td><%= employee.full_name %></td>
 								<td><%= employee.employee_position.position_title %></td>
 								<th><%= employee.employee_department.department_name %></th>
-								<td><a href="<%= user_path(employee.user_id) if employee.user_id  %>" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
+								<td><a href="<%= user_path(employee.user_id) %>" rel="tooltip" title="View Profile">view</a>
+									| <a href="<%= edit_employee_path(employee) %>" rel="tooltip" title="Update Employee Details">update</a> | <%= link_to "delete", employee, method: :delete, data: { confirm: "#{employee.full_name} will be deleted, proceed?" } %></td>
 							</tr>
 							<% end %>
 						</tbody>
-						
+
 					</table>
-					<%= submit_tag 'Create User(s)' %>
-	            <% end %>
 					<div class="clearfix">
 					</div>
+					<%= submit_tag 'Create User(s)' %>
+					<% end %>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 <script>
 $('#employees').dataTable({

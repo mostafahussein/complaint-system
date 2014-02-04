@@ -16,35 +16,42 @@
 
 						<thead>
 							<tr>
-								<th></th>
 								<th>ID</th>
 								<th>Full Name</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<% @students.each do |student| %>
-							<tr>
-								<td><%= check_box_tag 'student_ids[]', student.id %></td>
-								<td><%= student.id %></td>
-								<td><%= student.full_name %></td>
-								<td><a href="<%= user_path(student.user_id) if student.user_id %>" rel="tooltip" title="View Profile"><i class="icon-search"></i></a></td>
-							</tr>
-							<% end %>
-						</tbody>
-					</table>
-					<%= submit_tag 'Create User(s)' %>
-	            <% end %>
-					<div class="clearfix">
+								<th>Batch Name</th>
+								<th>Section</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @students.each do |student| %>
+								<tr>
+									<td><%= check_box_tag 'student_ids[]', student.id %> <%= student.id %></td>
+
+									<td><%= student.full_name %></td>
+
+									<td><%= student.batch_name %></td>
+
+									<td><%= student.section_name %></td>
+
+										<td><a href="<%= user_path(student.user_id) if student.user%>" rel="tooltip" title="View Profile">view</a>
+											| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Employee Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" } %></td>
+										</tr>
+										<% end %>
+									</tbody>
+								</table>
+								<div class="clearfix">
+								</div>
+								<%= submit_tag 'Create User(s)' %>
+								<% end %>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
-
-		</div>
-	</div>
-</div>
-<script>
-$('#students').dataTable({
-	"sPaginationType": "full_numbers"
-});
-</script>
+			<script>
+			$('#students').dataTable({
+				"sPaginationType": "full_numbers"
+			});
+			</script>

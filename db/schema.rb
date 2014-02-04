@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140129102336) do
+ActiveRecord::Schema.define(:version => 20140203162720) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -107,10 +107,17 @@ ActiveRecord::Schema.define(:version => 20140129102336) do
     t.datetime "updated_at",                 :null => false
   end
 
+  create_table "subject_staffs", :force => true do |t|
+    t.integer  "staff_id"
+    t.integer  "advisor_id"
+    t.integer  "subject_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "subjects", :force => true do |t|
     t.string   "subject_title", :limit => 30
     t.string   "subjectCode",   :limit => 10
-    t.integer  "advisor_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
@@ -136,20 +143,21 @@ ActiveRecord::Schema.define(:version => 20140129102336) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :limit => 20, :default => "", :null => false
+    t.string   "email",                  :limit => 20, :default => "",   :null => false
     t.string   "user_type",              :limit => 10
     t.string   "role",                   :limit => 30
-    t.string   "encrypted_password",                   :default => "", :null => false
+    t.boolean  "active",                               :default => true
+    t.string   "encrypted_password",                   :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        :default => 0,  :null => false
+    t.integer  "sign_in_count",                        :default => 0,    :null => false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

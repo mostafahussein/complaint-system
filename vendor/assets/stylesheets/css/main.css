@@ -5129,9 +5129,9 @@ button.close {
     top: 0;
     width: 100%; }
   #scrollbar .thumb, #scrollbar-one .thumb, #scrollbar-two .thumb, #scrollbar-three .thumb {
-    background-color: #ed6d49; }
+    background-color: #0daed3; }
     #scrollbar .thumb .end, #scrollbar-one .thumb .end, #scrollbar-two .thumb .end, #scrollbar-three .thumb .end {
-      background-color: #ed6d49; }
+      background-color: #0daed3; }
   #scrollbar .scrollbar, #scrollbar-one .scrollbar, #scrollbar-two .scrollbar, #scrollbar-three .scrollbar {
     position: relative;
     float: right;
@@ -6890,7 +6890,7 @@ footer {
   z-index: 1;
   -webkit-box-shadow: 0 0 15px #1f5a80 inset;
   -moz-box-shadow: 0 0 15px #1f5a80 inset;
-  box-shadow: 0 0 15px #1f5a80 inset; }
+  box-shadow: 0 0 15px #1f5a80 inset;}
 
 @media (min-width: 768px) and (max-width: 979px) {
   .hidden-desktop {

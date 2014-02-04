@@ -14,6 +14,7 @@
 #
 
 class Advisor < Employee
-  has_many :subjects
   has_many :ticket_statuses
+  has_many :subject_staffs
+  has_many :subjects, through: :subject_staffs
 end

@@ -15,54 +15,59 @@
 			<div class="widget-body">
 				<div id="dt_example" class="example_alt_pagination">
 					<% if params[:controller] == 'subjects' && params[:tab] == 'all' %>
-					<%= form_tag assign_advisors_subjects_path, method: :get do %>
 					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="subjects">
 
 						<thead>
 							<tr>
-								<th></th>
+								<th>ID</th>
 								<th>Subject Code</th>
 								<th>Subject Title</th>
 								<th>Advisor in Charge</th>
+								<th>Staff in Charge</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 							<% @subjects.each do |subject| %>
 							<tr>
-								<td><%= check_box_tag 'subject_ids[]', subject.id %></td>
+								<td><%= subject.id%></td>
 								<td><%= subject.subjectCode %></td>
 								<td><%= subject.subject_title %></td>
-								<% if subject.advisor_id.nil? %>
+								<% if subject.subject_staffs.first.nil? %>
 								<td>no advisor assigned yet</td>
 								<% else %>
-								<td><%= subject.advisor.full_name %></td>
+								<td><%= subject.subject_staffs.first.advisor.full_name if !subject.subject_staffs.nil? %></td>
 								<% end %>
+								<% if subject.subject_staffs.first.nil? %>
+								<td>no staff assigned yet</td>
+								<% else %>
+								<td><%= subject.subject_staffs.first.staff.full_name %></td>
+								<% end %>
+								<td><a href="<%= edit_subject_path(subject) %>" rel="tooltip" title="Update Subject Details">update subject</a> | <%= link_to "delete subject", subject, method: :delete, data: { confirm: "#{subject.subject_title} will be deleted, proceed?" } %> | <a href="<%= edit_subject_staff_path(subject) %>" rel="tooltip" title="Update Subject Details">update assigned employees</a></td>
 							</tr>
 							<% end %>
 						</tbody>
 					</table>
-					<%= submit_tag 'Assign Advisor(s)' %>
-			      <% end %>
-						<% elsif params[:controller] == 'subjects' && params[:tab] == 'assigned' %>
-						<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="subjects">
+					<% elsif params[:controller] == 'subjects' && params[:tab] == 'assigned' %>
+					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="subjects">
 
-							<thead>
-								<tr>
-									<th>Subject Code</th>
-									<th>Subject Title</th>
-									<th>Total Complaints</th>
-								</tr>
-							</thead>
-							<tbody>
-								<% @subjects.each do |subject| %>
-								<tr>
-									<td><%= subject.subjectCode %></td>
-									<td><%= subject.subject_title %></td>
-									<td><%= @total_complaints_sub.where("subjects.id = tickets.subject_id AND subjects.id = ?", subject.id).count %></td>
-								</tr>
-								<% end %>
-							</tbody>
-						</table>
+						<thead>
+							<tr>
+								<th>Subject Code</th>
+								<th>Subject Title</th>
+								<th>Total Complaints</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @subjects.each do |subject| %>
+							<tr>
+								<td><%= subject.subjectCode %></td>
+								<td><%= subject.subject_title %></td>
+								<td><%= @total_complaints_sub.where("subjects.id = tickets.subject_id AND subjects.id = ?", subject.id).count %></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
 					<% elsif params[:controller] == 'subjects' && params[:tab] == 'enrolled' %>
 					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="subjects">
 
@@ -83,6 +88,38 @@
 							<% end %>
 						</tbody>
 					</table>
+					<!-- MODAL START -->
+					<div class="modal hide fade" id="myModal" data-backdrop="static" data-keyboard="false">
+					  <div class="modal-header">
+					    <a class="close" data-dismiss="modal">×</a>
+					    <h4>Subjects Evaluation and Improvement</h4>
+					  </div>
+					  <div class="modal-body">
+					    <p><h5><%="Hello #{current_user.student.full_name}, " %></h5></p>
+					  </div>
+					  <div class="modal-footer">
+					    <a class="btn" data-dismiss="modal" aria-hidden="true">No, Later</a>
+					    <a href="#" class="btn btn-primary">Make A Survey</a>
+					  </div>
+					</div>
+					
+					<script type="text/javascript">
+					            if($.cookie('msg') != null)
+					            {
+					                $(window).load(function(){
+								        $('#myModal').modal('show');
+								    });
+									var expiryDate = new Date();
+								    var hours = 1;
+								    expiryDate.setTime(expiryDate.getTime() + (hours * 3600 * 1000));
+					                $.cookie('msg', 'str',{expires: expiryDate });
+					            }
+					            else
+					            {
+					                $("div#myModal.modal").css('display','none');
+					            }
+					</script>
+					<!-- MODAL END-->
 					<% end %>
 					<div class="clearfix">
 					</div>
@@ -96,3 +133,4 @@ $('#subjects').dataTable({
 	"sPaginationType": "full_numbers"
 });
 </script>
+<%= render 'subjects/right-sidebar' %>

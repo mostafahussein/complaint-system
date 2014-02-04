@@ -19,7 +19,9 @@
 								<th>Full Name</th>
 								<th>E-Mail</th>
 								<th>User Type</th>
-								<th></th>
+								<th>User Role</th>
+								<th>User Status</th>
+								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -35,8 +37,10 @@
 								<% end %>
 								<td><%= user.email %></td>
 								<td><%= user.user_type %></td>
+								<td><%= user.role%></td>
+								<td><%= "active" if user.active? %><%= "inactive" if !user.active? %></td>
 								<td><a href="<%= user_path(user) %>" rel="tooltip" title="View Profile">view</a>
-									| <a href="<%user_path(user) %>" data-confirm='This user will be delete, proceed?' data-method="delete" rel="nofollow">delete</a></td>
+									 | <a href="<%= edit_user_path(user) %>" rel="tooltip" title="Update User Details">update</a> | <%= link_to "delete", user, method: :delete, data: { confirm: "#{user.email} will be deleted, proceed?" } %></td>
 							</tr>
 							<% end %>
 						</tbody>

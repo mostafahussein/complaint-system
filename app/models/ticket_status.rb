@@ -13,6 +13,7 @@
 #
 
 class TicketStatus < ActiveRecord::Base
+  include Modules::DefaultValues
   has_paper_trail
   before_update :set_staff
   attr_accessible :status_id, :ticket_id , :staff_id, :advisor_id, :previous_advisor_id, :previous_staff_id
@@ -31,11 +32,11 @@ class TicketStatus < ActiveRecord::Base
     self.find_by_sql("SELECT
     em.full_name  AS advisor_name,
     COUNT(*) AS total_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Open'        THEN 1 END) AS opened_complaints,
-    COUNT(CASE st.ticket_status WHEN 'In Progress' THEN 1 END) AS in_progress_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Pending'     THEN 1 END) AS pending_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Closed'      THEN 1 END) AS closed_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Solved'      THEN 1 END) AS solved_complaints
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}'        THEN 1 END) AS opened_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PENDING}'     THEN 1 END) AS pending_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::CLOSED}'      THEN 1 END) AS closed_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::SOLVED}'      THEN 1 END) AS solved_complaints
     FROM
        ticket_statuses AS ti
        JOIN
@@ -47,7 +48,7 @@ class TicketStatus < ActiveRecord::Base
     WHERE
        em.type = 'Advisor'
        AND
-       st.ticket_status IN ('Open', 'In Progress', 'Pending', 'Closed', 'Solved')
+       st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::PENDING}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
     GROUP BY
        em.id,
        em.full_name
@@ -58,11 +59,11 @@ class TicketStatus < ActiveRecord::Base
     self.find_by_sql("SELECT
       em.full_name  AS staff_name,
       COUNT(*) AS total_complaints,
-      COUNT(CASE st.ticket_status WHEN 'Open'        THEN 1 END) AS opened_complaints,
-      COUNT(CASE st.ticket_status WHEN 'In Progress' THEN 1 END) AS in_progress_complaints,
-      COUNT(CASE st.ticket_status WHEN 'Pending'     THEN 1 END) AS pending_complaints,
-      COUNT(CASE st.ticket_status WHEN 'Closed'      THEN 1 END) AS closed_complaints,
-      COUNT(CASE st.ticket_status WHEN 'Solved'      THEN 1 END) AS solved_complaints
+      COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}'        THEN 1 END) AS opened_complaints,
+      COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress_complaints,
+      COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PENDING}'     THEN 1 END) AS pending_complaints,
+      COUNT(CASE st.ticket_status WHEN '#{TicketStatus::CLOSED}'      THEN 1 END) AS closed_complaints,
+      COUNT(CASE st.ticket_status WHEN '#{TicketStatus::SOLVED}'      THEN 1 END) AS solved_complaints
     FROM
       ticket_statuses AS ti
       JOIN
@@ -74,7 +75,7 @@ class TicketStatus < ActiveRecord::Base
     WHERE
       em.type = 'Staff'
       AND
-      st.ticket_status IN ('Open', 'In Progress', 'Pending', 'Closed', 'Solved')
+      st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::PENDING}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
     GROUP BY
       em.id,
       em.full_name
@@ -83,18 +84,18 @@ class TicketStatus < ActiveRecord::Base
   
   def self.ticket_status_details
     self.find_by_sql("SELECT  COUNT(*) AS total_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Open'        THEN 1 END) AS opened_complaints,
-    COUNT(CASE st.ticket_status WHEN 'In Progress' THEN 1 END) AS in_progress_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Pending'     THEN 1 END) AS pending_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Closed'      THEN 1 END) AS closed_complaints,
-    COUNT(CASE st.ticket_status WHEN 'Solved'      THEN 1 END) AS solved_complaints
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}'        THEN 1 END) AS opened_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PENDING}'     THEN 1 END) AS pending_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::CLOSED}'      THEN 1 END) AS closed_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::SOLVED}'      THEN 1 END) AS solved_complaints
     FROM
        ticket_statuses AS ti
        JOIN
        statuses AS st
          ON ti.status_id = st.id
     WHERE
-       st.ticket_status IN ('Open', 'In Progress', 'Pending', 'Closed', 'Solved')
+       st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::PENDING}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
     ORDER BY total_complaints ASC")
   end
 

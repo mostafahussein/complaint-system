@@ -25,13 +25,14 @@
 #
 
 class User < ActiveRecord::Base
+  include Modules::DefaultValues
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_type, :role
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_type, :role, :active
   # attr_accessible :title, :body
 
   has_one :student
@@ -39,23 +40,23 @@ class User < ActiveRecord::Base
   has_many :follow_ups
 
   def admin?
-    self.role == 'Admin'
+    self.role == "#{User::ADMIN}"
   end
   
   def head_of_department?
-    self.role == 'Head of Department'
+    self.role == "#{User::MANAGER}"
   end
   
   def staff?
-    self.role == 'Staff'
+    self.role == "#{User::STAFF}"
   end
   
   def advisor?
-    self.role == 'Advisor'
+    self.role == "#{User::ADVISOR}"
   end
   
   def student?
-    self.role == 'Student'
+    self.role == "#{User::STUDENT}"
   end
-  
+
 end
