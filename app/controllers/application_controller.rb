@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Modules::DefaultValues
   protect_from_forgery
   before_filter :find_priority
-  before_filter :set_to_close
+  #before_filter :set_to_close
 
   def find_priority
     @priorities = Priority.all
