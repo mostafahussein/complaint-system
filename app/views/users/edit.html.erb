@@ -16,7 +16,13 @@
 					<%= f.input :email, placeholder: 'Enter Email Address', readonly: true %>
 					<%= f.input :password, placeholder: '8 characters or more' %>
 					<%= f.input :password_confirmation, placeholder: 'Retype password' %>
+					<% if @user.admin?%>
 					<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role'%>
+					<% elsif @user.employee%>
+					<%= f.input :role , collection: [User::MANAGER,User::STAFF,User::ADVISOR] , prompt: 'Select a Role'%>
+					<% elsif @user.student %>
+					<%= f.input :role , collection: [User::STUDENT] , prompt: 'Select a Role'%>
+					<% end%>
 					<%= f.input :active, as: :boolean, boolean_style: :inline %>
 					<div class="form-actions no-margin">
 						<button type="submit" class="btn btn-info pull-right">
