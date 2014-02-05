@@ -1,0 +1,13 @@
+	<p><%= simple_form_for(@student) do |f| %>
+		<% for subject in Subject.all %>
+		<label id=''><%= check_box_tag 'student[subject_ids][]', subject.id, @student.subjects.include?(subject) %>
+			&nbsp;&nbsp;<%= subject.subject_title %></label>
+			<% end %>
+			<%= hidden_field_tag 'student[subject_ids][]', '' %>
+		</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<%= f.button :submit, 'Save changes', :class => "btn btn-primary" %>
+		<% end %>
+	</div>

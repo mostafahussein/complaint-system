@@ -20,38 +20,39 @@
 								<th>Full Name</th>
 								<th>Batch Name</th>
 								<th>Section</th>
-									<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @students.each do |student| %>
+							<tr>
+								<td><%= check_box_tag 'student_ids[]', student.id %> <%= student.id %></td>
+
+								<td><%= student.full_name %></td>
+
+								<td><%= student.batch_name %></td>
+
+								<td><%= student.section_name %></td>
+
+								<td><a href="<%= user_path(student.user_id) if student.user%>" rel="tooltip" title="View Profile">view</a>
+									| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" } %> | <%= link_to 'attended subjects', student, remote: true %></td>
 								</tr>
-							</thead>
-							<tbody>
-								<% @students.each do |student| %>
-								<tr>
-									<td><%= check_box_tag 'student_ids[]', student.id %> <%= student.id %></td>
-
-									<td><%= student.full_name %></td>
-
-									<td><%= student.batch_name %></td>
-
-									<td><%= student.section_name %></td>
-
-										<td><a href="<%= user_path(student.user_id) if student.user%>" rel="tooltip" title="View Profile">view</a>
-											| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" } %> | <a href="<%= student_path(student) %>" rel="tooltip" title="Assigned Subjects">attended Subjects</a></td>
-										</tr>
-										<% end %>
-									</tbody>
-								</table>
-								<div class="clearfix">
-								</div>
-								<%= submit_tag 'Create User(s)' %>
 								<% end %>
-							</div>
+							</tbody>
+						</table>
+						<div class="clearfix">
 						</div>
-
+						<%= submit_tag 'Create User(s)' %>
+						<% end %>
 					</div>
 				</div>
+
 			</div>
-			<script>
-			$('#students').dataTable({
-				"sPaginationType": "full_numbers"
-			});
-			</script>
+		</div>
+	</div>
+	<script>
+	$('#students').dataTable({
+		"sPaginationType": "full_numbers"
+	});
+	</script>
+<%= render "students/modal" %>

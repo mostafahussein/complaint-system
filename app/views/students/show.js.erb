@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("<%= @student.full_name %>");
+$modalBody.html("<%= escape_javascript(render @student) %>");
+$modal.modal();

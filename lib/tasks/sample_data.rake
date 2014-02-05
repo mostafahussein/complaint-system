@@ -31,16 +31,16 @@ def make_employees_and_students
     Advisor.create!([{full_name: full_name, gender: gender.sample, employee_department_id: 2, employee_position_id: 3}])
     full_name = Faker::Name.name
     gender = ["female" , "male"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 1', section_name: 'section 1'}])
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_id: 1, section_id: 1}])
     full_name = Faker::Name.name
     gender = ["female" , "male"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 2', section_name: 'section 2'}])
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 1, section_name: 1}])
     full_name = Faker::Name.name
     gender = ["female" , "male"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 3', section_name: 'section 3'}])
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 2, section_name: 1}])
     full_name = Faker::Name.name
     gender = ["female" , "male"]
-    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 'batch 4', section_name: 'section 4'}])
+    Student.create!([{full_name: full_name, gender: gender.sample, batch_name: 2, section_name: 1}])
   end
 end
 

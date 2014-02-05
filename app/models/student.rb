@@ -14,8 +14,10 @@
 
 class Student < ActiveRecord::Base
   include Modules::DefaultValues
-  attr_accessible :full_name, :gender, :batch_name, :section_name, :user_id, :subject_ids
+  attr_accessible :full_name, :gender, :batch_id, :section_id, :user_id, :subject_ids
   belongs_to :user
+  belongs_to :batch
+  belongs_to :section
   has_many :attends
   has_many :subjects, :through => :attends
   has_many :tickets
