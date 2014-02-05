@@ -17,25 +17,18 @@
 							</div>
 							<div class="span9">
 								<h5>
-									Personal Information
+									Login Information
 								</h5>
 								<hr>
-								Full Name: <%= @user.employee.full_name %>
-								<hr>
-								Gender: <%= @user.employee.gender.capitalize %>
-								<hr>
-								Department: <%= @user.employee.employee_department.department_name %>
-								<hr>
-								Position: <%= @user.employee.employee_position.position_title %>
-							</h6>
-							<% if @user.student %>
-							<%= render 'users/student_info'%>
-
-							<% end %>
+								<% if @user.student %>
+								<%= render 'users/student_info'%>
+								<% elsif @user.employee %>
+								<%= render 'users/employee_info'%>
+								<% end %>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>

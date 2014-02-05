@@ -29,6 +29,10 @@ class EmployeesController < ApplicationController
   end
 
   def create_multiple
+    if params[:employee_ids].nil?
+      flash[:error] = 'please select an employee or more'
+      redirect_to :back
+    else
     @employees = Employee.find(params[:employee_ids])
     @employees.each do |employee|
       User.create do |user|
