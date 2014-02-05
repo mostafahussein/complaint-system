@@ -13,7 +13,9 @@
 				<div class="overview">
 					<div class="featured-articles-container">
 						<h5 class="heading-blue">
-							Manage User
+							<%= 'Manage User' if params[:controller] == 'users' %>
+							<%= 'Manage Employee' if params[:controller] == 'employees' %>
+							<%= 'Manage Student' if params[:controller] == 'students' %>
 						</h5>
 						<div class="articles">
 							<% if params[:controller] == 'users' %>
@@ -23,20 +25,20 @@
 								</span>
 								Add New User
 							</a>
-							<a href="<%= users_path(tab: 'inactive') %>">
+							<a href="<%= users_path(tab: 'active') %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
 								Active Users
 							</a>
-							<a href="<%= users_path(tab: 'active') %>">
+							<a href="<%= users_path(tab: 'inactive') %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
 								Inactive Users
 							</a>
 							<% end %>
-							<% if params[:controller] == 'employees' || params[:controller] == 'users' %>
+							<% if params[:controller] == 'employees'%>
 							<a href="<%= new_employee_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;
@@ -44,7 +46,7 @@
 								Add New Employee
 							</a>
 							<% end %>
-							<% if params[:controller] == 'students' || params[:controller] == 'users'  %>
+							<% if params[:controller] == 'students' %>
 							<a href="<%= new_student_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;

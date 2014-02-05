@@ -1,5 +1,4 @@
 <ul>
-	<li><a href="#" class="heading">Subjects</a></li>
 	<% if current_user.admin? %>
 	<li>
 		<a href="<%= subjects_path(tab: "all")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'all' %>">
