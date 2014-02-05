@@ -58,7 +58,6 @@ SweComplaint::Application.routes.draw do
    
    get '/dashboard', to: 'dashboard#index', as: :dashboard
    get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
-
    devise_scope :user do
      root to: 'devise/sessions#new'
    end

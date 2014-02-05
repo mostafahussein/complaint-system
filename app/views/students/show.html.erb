@@ -1,0 +1,32 @@
+<div class="left-sidebar">    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Attended Subjects
+						<span class="mini-title" style="display:none">
+							subjects list
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+					<%= simple_form_for(@student) do |f| %>
+					<% for subject in Subject.all %>
+					<label id=''><%= check_box_tag 'student[subject_ids][]', subject.id, @student.subjects.include?(subject) %>
+						&nbsp;&nbsp;<%= subject.subject_title %></label>
+						<% end %>
+						<%= hidden_field_tag 'student[subject_ids][]', '' %>
+						<div class="form-actions no-margin">
+							<button type="submit" class="btn btn-info pull-right">
+								Save Subjects
+							</button>
+							<div class="clearfix">
+							</div>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
