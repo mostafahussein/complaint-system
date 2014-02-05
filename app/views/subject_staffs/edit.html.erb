@@ -12,7 +12,6 @@
 				</div>
 				<div class="widget-body">
 					<%= simple_form_for(@subject_staff, :html => {:class => 'form-horizontal' }) do |f| %>
-					<%= f.input :subject_id, collection: @subject_list ,prompt: 'Select a subject', label_method: :subject_title%>
 					<%= f.association :advisor, prompt: 'Select an advisor', label_method: :full_name%>
 					<%= f.association :staff, prompt: 'Select a staff', label_method: :full_name%>
 					<div class="form-actions no-margin">

@@ -54,7 +54,7 @@ class EmployeesController < ApplicationController
         end
       end
     end
-    redirect_to users_path
+    redirect_to users_path(tab: 'all')
   end
   end
 

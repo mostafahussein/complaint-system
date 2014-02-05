@@ -2,6 +2,10 @@ class SubjectsController < ApplicationController
   def index
     if params[:tab] == "all"
       @subjects = Subject.all
+    elsif params[:tab] == 'assigned_subjects'
+      @subjects = Subject.where("subjects.id in (select subject_staffs.subject_id from subject_staffs)")
+    elsif params[:tab] == 'not_assigned_subjects'
+      @subjects = Subject.where("subjects.id not in (select subject_staffs.subject_id from subject_staffs)")
     elsif params[:tab] == "assigned"
       if current_user.advisor?
         @subjects = current_user.employee.subjects
@@ -28,9 +32,9 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(params[:subject])
     if @subject.save
-      redirect_to @subjects_path
+      redirect_to subjects_path(tab: 'not_assigned_subjects')
     else
-      redirect_to subjects_path
+      redirect_to :back
     end
   end
 
@@ -41,7 +45,7 @@ class SubjectsController < ApplicationController
   def update
     @subject = Subject.find(params[:id])
     if @subject.update_attributes(params[:subject])
-      redirect_to subjects_path
+      redirect_to :back
     else
       render 'edit'
     end
@@ -61,7 +65,7 @@ class SubjectsController < ApplicationController
     @subjects.each do |subject|
       subject.update_attributes(params[:subject])
     end
-    redirect_to subjects_path
+    redirect_to :back
   end
 
   def destroy

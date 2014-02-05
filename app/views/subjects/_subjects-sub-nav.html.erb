@@ -6,6 +6,16 @@
 			All Subjects
 		</a>
 	</li>
+	<li>
+		<a href="<%= subjects_path(tab: "assigned_subjects")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'assigned_subjects' %>">
+			Assigned Subjects
+		</a>
+	</li>
+	<li>
+		<a href="<%= subjects_path(tab: "not_assigned_subjects")%>" class="<%= 'selected' if params[:controller] == 'subjects' && params[:tab] == 'not_assigned_subjects' %>">
+			Not Assigned Subjects
+		</a>
+	</li>
 	<% end %>
 	<% if current_user.advisor? %>
 	<li>

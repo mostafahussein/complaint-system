@@ -14,7 +14,7 @@
 
 			<div class="widget-body">
 				<div id="dt_example" class="example_alt_pagination">
-					<% if params[:controller] == 'subjects' && params[:tab] == 'all' %>
+					<% if params[:controller] == 'subjects' && (params[:tab] == 'all' || params[:tab] == 'assigned_subjects' || params[:tab] == 'not_assigned_subjects' ) %>
 					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="subjects">
 
 						<thead>
@@ -43,7 +43,10 @@
 								<% else %>
 								<td><%= subject.subject_staffs.first.staff.full_name %></td>
 								<% end %>
-								<td><a href="<%= edit_subject_path(subject) %>" rel="tooltip" title="Update Subject Details">update subject</a> | <%= link_to "delete subject", subject, method: :delete, data: { confirm: "#{subject.subject_title} will be deleted, proceed?" } %> | <a href="<%= edit_subject_staff_path(subject) %>" rel="tooltip" title="Update Subject Details">update assigned employees</a></td>
+								<td><a href="<%= edit_subject_path(subject) %>" rel="tooltip" title="Update Subject Details">update subject</a> | <%= link_to "delete subject", subject, method: :delete, data: { confirm: "#{subject.subject_title} will be deleted, proceed?" } %> <% if subject.subject_staffs.length > 0 %>| 
+<a href="<%= edit_subject_staff_path(SubjectStaff.where("subject_id= ?", subject.id).first.id) %>" rel="tooltip" title="Update Subject Details">update assigned employees</a>
+<% end %>
+									</td>
 							</tr>
 							<% end %>
 						</tbody>

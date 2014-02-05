@@ -22,18 +22,23 @@ class StudentsController < ApplicationController
   end
 
   def create_multiple
-    @students = Student.find(params[:student_ids])
-    @students.each do |student|
-      User.create do |user|
-        user.email = "student#{student.id}@swe.com"
-        user.password = '12345678'
-        user.password_confirmation = '12345678'
-        user.user_type = "#{StudentsController::TYPEC}"
-        user.role = "#{StudentsController::STUDENT}"
+    if params[:student_ids].nil?
+      flash[:error] = 'please select a student or more'
+      redirect_to :back
+    else
+      @students = Student.find(params[:student_ids])
+      @students.each do |student|
+        User.create do |user|
+          user.email = "student#{student.id}@swe.com"
+          user.password = '12345678'
+          user.password_confirmation = '12345678'
+          user.user_type = "#{StudentsController::TYPEC}"
+          user.role = "#{StudentsController::STUDENT}"
+        end
+        student.update_attributes(user_id: User.last.id)
       end
-      student.update_attributes(user_id: User.last.id)
+      redirect_to users_path(tab: 'all')
     end
-    redirect_to users_path
   end
 
   def edit
