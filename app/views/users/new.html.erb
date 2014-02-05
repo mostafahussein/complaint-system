@@ -17,7 +17,7 @@
 					<%= f.input :password_confirmation, placeholder: 'Retype password' %>
 					<%= f.input :user_type, collection: [User::TYPEA], prompt: 'Select a Type' %>
 					<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role'%>
-					<%= f.input :active, as: :boolean, checked_value: true, unchecked_value: false, boolean_style: :inline %>
+					<%= f.input :active, as: :boolean, boolean_style: :inline %>
 					<div class="form-actions no-margin">
 						<button type="submit" class="btn btn-info pull-right">
 							Create Account

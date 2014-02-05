@@ -18,7 +18,6 @@
 								<th>ID</th>
 								<th>Full Name</th>
 								<th>E-Mail</th>
-								<th>User Type</th>
 								<th>User Role</th>
 								<th>User Status</th>
 								<th>Actions</th>
@@ -36,7 +35,6 @@
 								<td></td>
 								<% end %>
 								<td><%= user.email %></td>
-								<td><%= user.user_type %></td>
 								<td><%= user.role%></td>
 								<td><%= "active" if user.active? %><%= "inactive" if !user.active? %></td>
 								<td><a href="<%= user_path(user) %>" rel="tooltip" title="View Profile">view</a>

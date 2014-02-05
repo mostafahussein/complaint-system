@@ -18,7 +18,7 @@
 		<% end %>
 		<% if current_user.admin? %>
 		<li>
-			<a href="<%= users_path %>" class="<%= 'selected' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>">
+			<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe071;"></div>
 				Users
 			</a>

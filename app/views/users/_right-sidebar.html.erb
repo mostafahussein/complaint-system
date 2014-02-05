@@ -13,31 +13,33 @@
 				<div class="overview">
 					<div class="featured-articles-container">
 						<h5 class="heading-blue">
-							User Management
+							Manage User
 						</h5>
 						<div class="articles">
-
+							<% if params[:controller] == 'users' %>
 							<a href="<%= new_user_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
 								Add New User
 							</a>
-							
+							<% end %>
+							<% if params[:controller] == 'employees' || params[:controller] == 'users' %>
 							<a href="<%= new_employee_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
 								Add New Employee
 							</a>
-							
+							<% end %>
+							<% if params[:controller] == 'students' || params[:controller] == 'users'  %>
 							<a href="<%= new_student_path %>">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
 								Add New Student
 							</a>
-
+							<% end %>
 						</div>
 					</div>
 

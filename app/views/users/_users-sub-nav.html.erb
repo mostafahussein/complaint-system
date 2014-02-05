@@ -1,8 +1,18 @@
 <ul>
 	<li><a href="#" class="heading">Users</a></li>
 	<li>
-		<a href="<%= users_path %>" class="<%= 'selected' if params[:controller] == 'users' && params[:action] == 'index' %>">
-			Users Directory
+		<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'all' %>">
+			All Users
+		</a>
+	</li>
+	<li>
+		<a href="<%= users_path(tab: 'active') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'active' %>">
+			Active Users
+		</a>
+	</li>
+	<li>
+		<a href="<%= users_path(tab: 'inactive') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'inactive' %>">
+			Inactive Users
 		</a>
 	</li>
 	<li>

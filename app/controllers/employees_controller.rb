@@ -1,9 +1,9 @@
 class EmployeesController < ApplicationController
   def index
     if params[:tab] == "staff"
-      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: "#{EmployeesController::SWE}"})
+      @employees = Employee.joins(:employee_department).where(employee_departments: {department_name: "#{EmployeesController::SWE}"}, employees: {user_id: nil})
     elsif params[:tab] == "advisors"
-      @employees = Employee.includes(:employee_department).where(employee_departments: {department_name: "#{EmployeesController::STAD}"})
+      @employees = Employee.joins(:employee_department).where(employee_departments: {department_name: "#{EmployeesController::STAD}"}, employees: {user_id: nil})
     else
       render_404
     end
