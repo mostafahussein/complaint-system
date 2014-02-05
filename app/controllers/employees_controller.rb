@@ -56,6 +56,7 @@ class EmployeesController < ApplicationController
     end
     redirect_to users_path
   end
+  end
 
   def edit
     @employee = Employee.find(params[:id])
