@@ -4,21 +4,21 @@
 			<div class="widget">
 				<div class="widget-header">
 					<div class="title">
-						New Employee
+						New Student
 						<span class="mini-title">
-							Add new employee
+							Add new student
 						</span>
 					</div>
 				</div>
 				<div class="widget-body">
 					<%= simple_form_for(@student, :html => {:class => 'form-horizontal' }) do |f| %>
 					<%= f.input :full_name, placeholder: 'Enter Full Name' %>
-					<%= f.input :gender, collection: Employee::GENDER, prompt: 'Select Gender' %>
+					<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender' %>
 					<%= f.input :batch_name, placeholder: 'Enter Batch' %>
 					<%= f.input :section_name, placeholder: 'Enter Section' %>
 					<div class="form-actions no-margin">
 						<button type="submit" class="btn btn-info pull-right">
-							Create Account
+							Create Student
 						</button>
 						<div class="clearfix">
 						</div>

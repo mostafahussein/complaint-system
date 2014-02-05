@@ -13,6 +13,7 @@
 #
 
 class Student < ActiveRecord::Base
+  include Modules::DefaultValues
   attr_accessible :full_name, :gender, :batch_name, :section_name, :user_id, :subject_ids
   belongs_to :user
   has_many :attends
