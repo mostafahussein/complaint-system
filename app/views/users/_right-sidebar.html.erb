@@ -23,6 +23,18 @@
 								</span>
 								Add New User
 							</a>
+							<a href="<%= users_path(tab: 'inactive') %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Active Users
+							</a>
+							<a href="<%= users_path(tab: 'active') %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Inactive Users
+							</a>
 							<% end %>
 							<% if params[:controller] == 'employees' || params[:controller] == 'users' %>
 							<a href="<%= new_employee_path %>">
@@ -40,6 +52,7 @@
 								Add New Student
 							</a>
 							<% end %>
+							
 						</div>
 					</div>
 

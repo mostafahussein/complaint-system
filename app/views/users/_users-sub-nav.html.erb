@@ -5,16 +5,6 @@
 		</a>
 	</li>
 	<li>
-		<a href="<%= users_path(tab: 'active') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'active' %>">
-			Active Users
-		</a>
-	</li>
-	<li>
-		<a href="<%= users_path(tab: 'inactive') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'inactive' %>">
-			Inactive Users
-		</a>
-	</li>
-	<li>
 		<a href="<%= employees_path(tab: "staff")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'staff' %>">
 			Staff Directory
 		</a>
