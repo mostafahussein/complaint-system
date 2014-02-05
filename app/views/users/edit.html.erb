@@ -16,8 +16,7 @@
 					<%= f.input :email, placeholder: 'Enter Email Address', readonly: true %>
 					<%= f.input :password, placeholder: '8 characters or more' %>
 					<%= f.input :password_confirmation, placeholder: 'Retype password' %>
-					<%= f.input :user_type, collection: User::USER_TYPE, prompt: 'Select a Type' %>
-					<%= f.input :role , collection: User::ROLE , prompt: 'Select a Role'%>
+					<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role'%>
 					<%= f.input :active, as: :boolean, boolean_style: :inline %>
 					<div class="form-actions no-margin">
 						<button type="submit" class="btn btn-info pull-right">

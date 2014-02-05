@@ -3,14 +3,7 @@
 		Personal Information
 	</h5>
 	<hr>
-<h6 style="font-style: italic">Full Name: <%= @user.employee.full_name %>
-	<hr>
-	Gender: <%= @user.employee.gender.capitalize %>
-	<hr>
-	Department: <%= @user.employee.employee_department.department_name %>
-	<hr>
-	Position: <%= @user.employee.employee_position.position_title %>
-</h6>
+
 <%= simple_form_for(@user , html: { class: 'form-horizontal' }) do |f| %>
 <%= simple_fields_for :employee %>
 <%= f.input :full_name %>

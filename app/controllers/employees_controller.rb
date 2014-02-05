@@ -15,6 +15,7 @@ class EmployeesController < ApplicationController
 
   def new
     @employee = Employee.new
+    @departments = EmployeeDepartment.all
   end
 
   def create
