@@ -41,6 +41,7 @@ SweComplaint::Application.routes.draw do
    end
 
    resources :subjects do
+     resources :questionnaires
      resources :tickets
      collection do
        get :assign_advisors
@@ -52,8 +53,11 @@ SweComplaint::Application.routes.draw do
    
    resources :kbs
    resources :responses
+   resources :surveys
+   resources :survey_answers
    
    get '/dashboard', to: 'dashboard#index', as: :dashboard
+   get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
 
    devise_scope :user do
      root to: 'devise/sessions#new'

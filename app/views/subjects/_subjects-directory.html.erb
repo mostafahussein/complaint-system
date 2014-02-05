@@ -95,11 +95,15 @@
 					    <h4>Subjects Evaluation and Improvement</h4>
 					  </div>
 					  <div class="modal-body">
-					    <p><h5><%="Hello #{current_user.student.full_name}, " %></h5></p>
+					    <p>
+							<h5>
+	<%="Hello #{current_user.student.full_name}, Help us to make your next class even better!, Would you like to make a survey now?" %>
+							</h5>
+						</p>
 					  </div>
 					  <div class="modal-footer">
 					    <a class="btn" data-dismiss="modal" aria-hidden="true">No, Later</a>
-					    <a href="#" class="btn btn-primary">Make A Survey</a>
+					    <a href="<%= available_subjects_path %>" class="btn btn-primary">Make A Survey</a>
 					  </div>
 					</div>
 					
@@ -133,4 +137,6 @@ $('#subjects').dataTable({
 	"sPaginationType": "full_numbers"
 });
 </script>
+<% if current_user.admin? %>
 <%= render 'subjects/right-sidebar' %>
+<% end %>

@@ -67,4 +67,10 @@ class SubjectsController < ApplicationController
   def destroy
     @subject = Subject.find(params[:id])
   end
+  
+  def available_subjects
+    if current_user.student?
+      @subjects = current_user.student.subjects
+    end
+  end
 end

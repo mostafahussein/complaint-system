@@ -7,5 +7,8 @@ module Modules
     POSITION = [SWE_MANAGER = 'head of department', SWE_STAFF = 'staff', STAD_ADVISOR = 'advisor']
     USER_TYPE = [TYPEA = 'admin', TYPEB = 'employee', TYPEC = 'student']
     GENDER = [MALE = 'male', FEMALE = 'female']
+    REASON = [MAJOR = 'required for major', MINOR = 'required for minor', ELECTIVE = 'elective']
+    SATISFACTION = [S_VDIS = 'very dissatisfied', S_DIS = 'dissatisfied', S_NEU = 'neutral', SAT = 'satisfied', S_SAT = 'very satisfied']
+    RATE = [R_SDIS = 'strongly disagree', R_DIS = 'disagree', R_NEU = 'neutral', AG = 'agree', R_AG = 'strongly agree']
   end
 end

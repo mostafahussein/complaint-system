@@ -1,0 +1,28 @@
+<div class="left-sidebar">    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+					Surveys
+						<span class="mini-title">
+						
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+					<% @surveys.each do |survey| %>
+					  <div class="article">
+					    <h2><%= link_to survey.name, survey %></h2>
+					    <%= pluralize(survey.questions.size, "Question") %>
+					  </div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<p><%= link_to 'New Survey', new_survey_path %></p>

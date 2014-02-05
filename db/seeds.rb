@@ -56,6 +56,5 @@ Priority.create([
     {priority_name: 'normal',background: '#FFFFF0',color: 'black'},
     {priority_name: 'low',background: '#DDFFDD',color: 'black'}
                 ])
-
 #----------------------------------------------------------------------------------------------------------------------#
 puts 'All Seeds Completed.'

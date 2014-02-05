@@ -1,0 +1,126 @@
+<div class="left-sidebar">    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Subject Questionnaire
+						<span class="mini-title">
+						
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+					<%= simple_form_for(@questionnaire,:url => subject_questionnaires_path(@subject)) do |f|%>
+					<h5>1- Reason course was taken:</h5>
+					<%= f.association :subject_reason, prompt: 'Select a reason', label: false, label_method: :reason%>
+					<hr>
+					<h5>2- Please rate your overall satisfaction with the Professor/Course Instructor:</h5>
+					<%= f.association :subject_satisfaction, label: false, label_method: :satisfaction, as: :radio_buttons,  item_wrapper_class: 'inline'%>
+					<hr>
+					<h5>3- Please rate your level of agreement with the following aspects of the course:</h5>
+					<div class="table-responsive">
+					      <table class="table">
+					        <thead>
+					          <tr>
+					            <th></th>
+					            <th style="text-align: center;">Strongly Disagree</th>
+					            <th style="text-align: center;">Disagree</th>
+					            <th style="text-align: center;">Neutral</th>
+					            <th style="text-align: center;">Agree</th>
+					            <th style="text-align: center;">Strongly Agree</th>
+					          </tr>
+					        </thead>
+					        <tbody>
+					          <tr>
+					            <td>Syllabus accurately described course content and objectives</td>
+					            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+					            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+					            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+					            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+					            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+					          
+					          </tr>
+					          <tr>
+					            <td>Assignments were reasonable and appropriate</td>
+					             <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+					       
+					          </tr>
+					          <tr>
+					            <td>Course pace and difficulty were appropriate</td>
+					             <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+					        
+					          </tr>
+							<tr>
+					            <td>Exams and quizzes reflected important course aspects</td>
+					             <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+
+					          </tr>
+							<tr>
+					            <td>Fellow students were academically prepared for the course</td>
+					             <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+
+					          </tr>
+							<tr>
+					            <td>Class size was not too large for the subject and format</td>
+					             <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+
+					          </tr>
+							<tr>
+					            <td>I would recommend this course to other students</td>
+					             <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_1" name="questionnaire[subject_rate_id]" type="radio" value="1" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_2" name="questionnaire[subject_rate_id]" type="radio" value="2" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_3" name="questionnaire[subject_rate_id]" type="radio" value="3" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_4" name="questionnaire[subject_rate_id]" type="radio" value="4" /></td>
+						            <td style="text-align: center;"><input class="radio_buttons optional" id="questionnaire_subject_rate_id_5" name="questionnaire[subject_rate_id]" type="radio" value="5" /></td>
+
+					          </tr>
+					        </tbody>
+					      </table>
+					<%= f.association :subject_satisfaction, label: false, label_method: :satisfaction, as: :radio_buttons,  item_wrapper_class: 'inline'%>
+					    </div><!-- /.table-responsive -->
+					
+					<hr>
+					<h5>4- Please rate your level of agreement with the following aspects of the textbook/resources:</h5>
+					<hr>
+					<h5>5- Please rate your level of agreement with the following aspects of the benefits derived from the course:</h5>
+					<hr>
+					<h5>6- Please describe any positive and/or negative factors about the course you would like us to be aware of:</h5>
+					<hr>
+					<h5>7- Please rate your level of agreement with the following aspects of the textbook/resources:</h5>
+					<hr>
+					<h5>8- Do you have any suggestions for improving the course you would like to </h5>
+					
+					<div class="form-actions no-margin">
+						<button type="submit" class="btn btn-info pull-right">
+							Submit
+						</button>
+						<div class="clearfix">
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
