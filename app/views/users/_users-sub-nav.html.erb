@@ -5,17 +5,17 @@
 		</a>
 	</li>
 	<li>
-		<a href="<%= employees_path(tab: "staff")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'staff' %>">
+		<a href="<%= employees_path(tab: "all_staff")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'all_staff' %>">
 			Staff Directory
 		</a>
 	</li>
 	<li>
-		<a href="<%= employees_path(tab: "advisors")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'advisors' %>">
+		<a href="<%= employees_path(tab: "all_advisors")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'all_advisors' %>">
 			Advisors Directory
 		</a>
 	</li>
 	<li>
-	    <a href="<%= students_path %>" class="<%= 'selected' if params[:controller] == 'students' && params[:action] == 'index' %>">
+	    <a href="<%= students_path(tab: 'all_students') %>" class="<%= 'selected' if params[:controller] == 'students' && params[:tab] == 'all_students' %>">
 	      Students Directory
 	    </a>
 	  </li>

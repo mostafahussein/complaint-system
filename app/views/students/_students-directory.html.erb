@@ -8,7 +8,46 @@
 					</span>
 				</div>
 			</div>
+			<% if params[:tab] == 'all_students' %>
+			<div class="widget-body">
+				<div id="dt_example" class="example_alt_pagination">
+					<table class="table table-condensed table-striped table-hover table-bordered pull-left" id="students">
 
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Full Name</th>
+								<th>Batch Name</th>
+								<th>Section</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @students.each do |student| %>
+							<tr>
+								<td><%= student.id %></td>
+
+								<td><%= student.full_name %></td>
+
+								<td><%= student.batch_name %></td>
+
+								<td><%= student.section_name %></td>
+
+								<td><a href="<%= user_path(student.user_id) if student.user%>" rel="tooltip" title="View Profile">view</a>
+									| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" } %> | <%= link_to 'attended subjects', student, remote: true %></td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+						<div class="clearfix">
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<% elsif params[:tab] == 'not_users' %>
 			<div class="widget-body">
 				<div id="dt_example" class="example_alt_pagination">
 					<%= form_tag create_multiple_students_path, method: :post do %>
@@ -48,6 +87,7 @@
 				</div>
 
 			</div>
+			<% end %>
 		</div>
 	</div>
 	<script>
@@ -55,4 +95,4 @@
 		"sPaginationType": "full_numbers"
 	});
 	</script>
-<%= render "students/modal" %>
+	<%= render "students/modal" %>

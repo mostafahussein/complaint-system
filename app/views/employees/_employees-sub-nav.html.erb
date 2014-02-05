@@ -1,12 +1,12 @@
 <ul>
   <li><a href="#" class="heading">Employees</a></li>
   <li>
-    <a href="<%= employees_path(tab: "staff")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'staff' %>">
+    <a href="<%= employees_path(tab: "all_staff")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'all_staff' %>">
       Staff Directory
     </a>
   </li>
   <li>
-    <a href="<%= employees_path(tab: "advisors")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'advisors' %>">
+    <a href="<%= employees_path(tab: "all_advisors")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'all_advisors' %>">
       Advisors Directory
     </a>
   </li>

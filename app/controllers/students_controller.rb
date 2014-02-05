@@ -1,6 +1,10 @@
 class StudentsController < ApplicationController
   def index
-    @students = Student.where(user_id: nil)
+    if params[:tab] == "all_students"
+      @students = Student.all
+    elsif params[:tab] == "not_users"
+      @students = Student.where(user_id: nil)
+    end
   end
 
   def show
