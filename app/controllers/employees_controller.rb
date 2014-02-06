@@ -79,7 +79,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(params[:id])
     if @employee.update_attributes(params[:employee])
       flash[:notice] = 'Profile updated'
-      redirect_to employees_path(filter: "staff")
+      redirect_to :back
     else
       render 'edit'
     end
