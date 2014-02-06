@@ -82,7 +82,7 @@ class TicketStatus < ActiveRecord::Base
     ORDER BY em.id")
   end
   
-  def self.ticket_status_details
+  def self.total_status_details
     self.find_by_sql("SELECT  COUNT(*) AS total_complaints,
     COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}'        THEN 1 END) AS opened_complaints,
     COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress_complaints,
@@ -97,6 +97,22 @@ class TicketStatus < ActiveRecord::Base
     WHERE
        st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::PENDING}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
     ORDER BY total_complaints ASC")
+  end
+  
+  def self.t_status_details
+    self.find_by_sql("SELECT COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}'        THEN 1 END) AS opened_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PENDING}'     THEN 1 END) AS pending_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::CLOSED}'      THEN 1 END) AS closed_complaints,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::SOLVED}'      THEN 1 END) AS solved_complaints
+    FROM
+       ticket_statuses AS ti
+       JOIN
+       statuses AS st
+         ON ti.status_id = st.id
+    WHERE
+       st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::PENDING}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
+    ORDER BY opened_complaints ASC")
   end
 
 end

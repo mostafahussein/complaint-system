@@ -71,7 +71,7 @@ module Modules
     end
 
     def complaints_statistics
-      @complaint_status_details = TicketStatus.ticket_status_details
+      @complaint_status_details = TicketStatus.total_status_details
 
       @complaint_priority_details = Ticket.total_priority_details
     end
@@ -100,8 +100,10 @@ module Modules
       @low = Hash[*ticket_details.to_a.at(1)].keys.first
       @n_low = Hash[*ticket_details.to_a.at(1)].values.first.to_i
       @overdue = Ticket.overdue.count
-      pie = Ticket.t_priority_details.first.as_json
-      @pie = pie.collect {|k,v| [k.humanize.capitalize,v.to_i]}
+      pie1 = TicketStatus.t_status_details.first.as_json
+      @pie1 = pie1.collect {|k,v| [k.humanize.capitalize,v.to_i]}
+      pie2 = Ticket.t_priority_details.first.as_json
+      @pie2 = pie2.collect {|k,v| [k.humanize.capitalize,v.to_i]}
     end
   end
 end
