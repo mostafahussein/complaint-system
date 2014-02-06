@@ -16,13 +16,15 @@ class Ticket < ActiveRecord::Base
   include PublicActivity::Model
   include Modules::DefaultValues
   tracked owner: ->(controller, model) {controller && controller.current_user}
-  scope :opened   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , "#{Ticket::OPEN}")
-  scope :solved   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::SOLVED}")
-  scope :closed   , includes({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::CLOSED}")
-  scope :overdue  , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
-  scope :today    , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
-  scope :upcoming , includes({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
+  scope :opened   , joins({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , "#{Ticket::OPEN}")
+  scope :solved   , joins({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::SOLVED}")
+  scope :closed   , joins({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::CLOSED}")
+  scope :overdue  , joins({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
+  scope :today    , joins({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
+  scope :upcoming , joins({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
   scope :recent   , find(:all, order: "created_at DESC", limit:20)
+  # 
+  #scope :employee_overdue,
 
   attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id,
   :ticket_statuses_attributes, :follow_ups_attributes
@@ -146,7 +148,7 @@ class Ticket < ActiveRecord::Base
     p.priority_name IN ('#{Ticket::HIGH}', '#{Ticket::NORMAL}', '#{Ticket::LOW}')
     ORDER BY total_complaints ASC")
   end
-  
+
   def self.t_priority_details
     self.find_by_sql("SELECT COUNT(CASE p.priority_name WHEN '#{Ticket::HIGH}' THEN 1 END) AS high_complaints,
     COUNT(CASE p.priority_name WHEN '#{Ticket::NORMAL}' THEN 1 END) AS normal_complaints,
@@ -181,4 +183,35 @@ class Ticket < ActiveRecord::Base
     ORDER BY total_complaints ASC")
   end
 
+  def self.staff_total(user)
+    self.includes(:ticket_statuses).where("ticket_statuses.staff_id = ?",user.employee.id).count
+  end
+
+  def self.staff_high(user)
+    self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.staff_id = ?", "#{Ticket::HIGH}", user.employee.id).count
+  end
+
+  def self.staff_normal(user)
+    self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.staff_id = ?", "#{Ticket::NORMAL}", user.employee.id).count
+  end
+
+  def self.staff_low(user)
+    self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.staff_id = ?", "#{Ticket::LOW}", user.employee.id).count
+  end
+
+  def self.advisor_total(user)
+    self.includes(:ticket_statuses).where("ticket_statuses.advisor_id = ?",user.employee.id).count
+  end
+
+  def self.advisor_high(user)
+    self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.advisor_id = ?", "#{Ticket::HIGH}", user.employee.id).count
+  end
+
+  def self.advisor_normal(user)
+    self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.advisor_id = ?", "#{Ticket::NORMAL}", user.employee.id).count
+  end
+
+  def self.advisor_low(user)
+    self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.advisor_id = ?", "#{Ticket::LOW}", user.employee.id).count
+  end
 end

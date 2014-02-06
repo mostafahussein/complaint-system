@@ -81,7 +81,7 @@
 	</div>
 </div>
 <div class="sub-nav">
-	<%= render 'dashboard/dashboard-sub-nav' if params[:controller] == 'dashboard'%>
+	<%= render 'dashboard/dashboard-sub-nav' if params[:controller] == 'dashboard' && params[:action] == 'index'%>
 	<%= render 'users/users-sub-nav' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>
 	<%= render 'subjects/subjects-sub-nav' if params[:controller] == 'subjects' || params[:controller] == 'subject_staffs'%>
 	<%= render 'tickets/tickets-sub-nav' if params[:controller] == 'tickets'%>

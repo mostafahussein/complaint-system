@@ -46,9 +46,9 @@ class ApplicationController < ActionController::Base
     elsif current_user.head_of_department?
       return dashboard_path
     elsif current_user.staff?
-      return tickets_path(tab: "open")
+      return home_path
     elsif current_user.advisor?
-      return subjects_path(tab: "assigned")
+      return home_path
     elsif current_user.student?
       return subjects_path(tab: "enrolled")
     end

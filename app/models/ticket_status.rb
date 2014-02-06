@@ -114,5 +114,38 @@ class TicketStatus < ActiveRecord::Base
        st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::PENDING}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
     ORDER BY opened_complaints ASC")
   end
-
+  
+  def self.staff_statuses(user)
+    self.find_by_sql("SELECT COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}' THEN 1 END) AS opened,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PENDING}' THEN 1 END) AS pending,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::CLOSED}' THEN 1 END) AS closed,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::SOLVED}' THEN 1 END) AS solved
+    FROM
+    ticket_statuses AS ti
+    JOIN
+    statuses AS st
+    ON ti.status_id = st.id
+    WHERE
+    st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PENDING}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
+    AND ti.staff_id = #{user.employee.id}
+    ORDER BY opened ASC")
+  end
+  
+  def self.advisor_statuses(user)
+    self.find_by_sql("SELECT COUNT(CASE st.ticket_status WHEN '#{TicketStatus::OPEN}' THEN 1 END) AS opened,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PROGRESS}' THEN 1 END) AS in_progress,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::PENDING}' THEN 1 END) AS pending,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::CLOSED}' THEN 1 END) AS closed,
+    COUNT(CASE st.ticket_status WHEN '#{TicketStatus::SOLVED}' THEN 1 END) AS solved
+    FROM
+    ticket_statuses AS ti
+    JOIN
+    statuses AS st
+    ON ti.status_id = st.id
+    WHERE
+    st.ticket_status IN ('#{TicketStatus::OPEN}', '#{TicketStatus::PENDING}', '#{TicketStatus::PROGRESS}', '#{TicketStatus::CLOSED}', '#{TicketStatus::SOLVED}')
+    AND ti.advisor_id = #{user.employee.id}
+    ORDER BY opened ASC")
+  end
 end

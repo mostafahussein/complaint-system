@@ -105,5 +105,10 @@ module Modules
       pie2 = Ticket.t_priority_details.first.as_json
       @pie2 = pie2.collect {|k,v| [k.humanize.capitalize,v.to_i]}
     end
+    
+    def employee_state
+      @staff_state = TicketStatus.staff_statuses(current_user)
+      @advisor_state = TicketStatus.advisor_statuses(current_user)
+    end
   end
 end

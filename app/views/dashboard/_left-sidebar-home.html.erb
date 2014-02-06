@@ -1,0 +1,94 @@
+<div class="left-sidebar">
+	<% if current_user.staff? %>
+	<div class="row-fluid">
+	<div class="span11">
+		<div class="widget">
+			<div class="widget-header">
+				<div class="title" id="complaints_per_subject">
+					Your Statistics
+					<span class="mini-title">
+				
+					</span>
+				</div>
+			</div>
+			<div class="widget-body">
+					<table class="table table-bordered table-hover" id="staff_state">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Open Complaints</th>
+								<th>Pending Complaints</th>
+								<th>In Progress Complaints</th>
+								<th>Closed Complaints</th>
+								<th>Solved Complaints</th>
+								<th>Overdue Complaints</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @staff_state.each do |status| %>
+							<tr>
+								<td></td>
+								<td><%= status.opened %></td>
+								<td><%= status.pending %></td>
+								<td><%= status.in_progress %></td>
+								<td><%= status.closed %></td>
+								<td><%= status.solved %></td>
+								<td>0</td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+						<div class="clearfix">
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% elsif current_user.advisor? %>
+	<div class="row-fluid">
+	<div class="span11">
+		<div class="widget">
+			<div class="widget-header">
+				<div class="title" id="complaints_per_subject">
+					Your Statistics
+					<span class="mini-title">
+					 
+					</span>
+				</div>
+			</div>
+			<div class="widget-body">
+					<table class="table table-bordered table-hover" id="staff_state">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Open Complaints</th>
+								<th>Pending Complaints</th>
+								<th>In Progress Complaints</th>
+								<th>Closed Complaints</th>
+								<th>Solved Complaints</th>
+								<th>Overdue Complaints</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @advisor_state.each do |status| %>
+							<tr>
+								<td></td>
+								<td><%= status.opened %></td>
+								<td><%= status.pending %></td>
+								<td><%= status.in_progress %></td>
+								<td><%= status.closed %></td>
+								<td><%= status.solved %></td>
+								<td>0</td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+						<div class="clearfix">
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+
+</div>

@@ -1,0 +1,95 @@
+<div class="right-sidebar2">
+	<% if current_user.staff? %>
+	<div class="wrapper">
+		<ul class="stats">
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.staff_total(current_user) %>
+					</h4>
+					<p>
+						Total Complaints
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.staff_high(current_user) %>
+					</h4>
+					<p>
+						High 
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.staff_normal(current_user) %>
+					</h4>
+					<p>
+						Normal
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.staff_low(current_user) %>
+					</h4>
+					<p>
+						Low
+					</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<% elsif current_user.advisor? %>
+	<div class="wrapper">
+		<ul class="stats">
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.advisor_total(current_user) %>
+					</h4>
+					<p>
+						Total Complaints
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.advisor_high(current_user) %>
+					</h4>
+					<p>
+						High 
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.advisor_normal(current_user) %>
+					</h4>
+					<p>
+						Normal
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= Ticket.advisor_low(current_user) %>
+					</h4>
+					<p>
+						Low
+					</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	<% end %>
+
+</div>
