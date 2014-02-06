@@ -146,6 +146,20 @@ class Ticket < ActiveRecord::Base
     p.priority_name IN ('#{Ticket::HIGH}', '#{Ticket::NORMAL}', '#{Ticket::LOW}')
     ORDER BY total_complaints ASC")
   end
+  
+  def self.t_priority_details
+    self.find_by_sql("SELECT COUNT(CASE p.priority_name WHEN '#{Ticket::HIGH}' THEN 1 END) AS high_complaints,
+    COUNT(CASE p.priority_name WHEN '#{Ticket::NORMAL}' THEN 1 END) AS normal_complaints,
+    COUNT(CASE p.priority_name WHEN '#{Ticket::LOW}'     THEN 1 END) AS low_complaints
+    FROM
+    tickets AS t
+    JOIN
+    priorities AS p
+    ON t.priority_id = p.id
+    WHERE
+    p.priority_name IN ('#{Ticket::HIGH}', '#{Ticket::NORMAL}', '#{Ticket::LOW}')
+    ORDER BY high_complaints ASC")
+  end
 
   def self.subject_priority_details
     self.find_by_sql("SELECT s.subject_title  AS subject_name,
