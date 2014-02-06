@@ -30,7 +30,7 @@
 									<td><%= employee.id %></td>
 									<td><%= employee.full_name %></td>
 									<td><%= employee.employee_position.position_title %></td>
-									<td><a href="<%= user_path(employee.user_id) %>" rel="tooltip" title="View Profile">view</a>
+									<td><a href="<%= user_path(employee.user_id)%>" rel="tooltip" title="View Profile">view</a>
 										| <a href="<%= edit_employee_path(employee) %>" rel="tooltip" title="Update Employee Details">update</a> | <%= link_to "delete", employee, method: :delete, data: { confirm: "#{employee.full_name} will be deleted, proceed?" } %></td>
 								</tr>
 								<% end %>
@@ -53,7 +53,6 @@
 								<th></th>
 								<th>Full Name</th>
 								<th>Position</th>
-								<th>Department</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -64,9 +63,7 @@
 								<td><%= check_box_tag 'employee_ids[]', employee.id %></td>
 								<td><%= employee.full_name %></td>
 								<td><%= employee.employee_position.position_title %></td>
-								<th><%= employee.employee_department.department_name %></th>
-								<td><a href="<%= user_path(employee.user_id) %>" rel="tooltip" title="View Profile">view</a>
-									| <a href="<%= edit_employee_path(employee) %>" rel="tooltip" title="Update Employee Details">update</a> | <%= link_to "delete", employee, method: :delete, data: { confirm: "#{employee.full_name} will be deleted, proceed?" } %></td>
+								<td><a href="<%= edit_employee_path(employee) %>" rel="tooltip" title="Update Employee Details">update</a> | <%= link_to "delete", employee, method: :delete, data: { confirm: "#{employee.full_name} will be deleted, proceed?" } %></td>
 							</tr>
 							<% end %>
 						</tbody>

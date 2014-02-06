@@ -10,5 +10,6 @@ module Modules
     REASON = [MAJOR = 'required for major', MINOR = 'required for minor', ELECTIVE = 'elective']
     SATISFACTION = [S_VDIS = 'very dissatisfied', S_DIS = 'dissatisfied', S_NEU = 'neutral', SAT = 'satisfied', S_SAT = 'very satisfied']
     RATE = [R_SDIS = 'strongly disagree', R_DIS = 'disagree', R_NEU = 'neutral', AG = 'agree', R_AG = 'strongly agree']
+    COLOR = [H_COLOR = '#FEE7E7', N_COLOR = '#FFFFF0', L_COLOR = '#DDFFDD']
   end
 end
