@@ -2,6 +2,7 @@ class TicketsController < ApplicationController
   include Modules::Charts
   before_filter :set_subject, only: [:new, :create]
   before_filter :set_user, only: [:new, :create]
+  before_filter :set_to_close
   
   def index
     if params[:tab] == "open"
@@ -106,5 +107,18 @@ class TicketsController < ApplicationController
       @student = current_user.student.id
     end
   end
+  
+  def set_to_close
+      tickets = Ticket.overdue
+      tickets.each do |ticket|
+        if (ticket.statuses.first.ticket_status != "#{ApplicationController::SOLVED}") && (ticket.due < Date.today)
+            subject_id = ticket.subject_id
+            staff = SubjectStaff.where("subject_id = ?", subject_id).first
+            staff_id = staff.staff_id
+            #ticket.statuses.first.update_attributes(ticket_status: "#{ApplicationController::CLOSED}")
+            ticket.ticket_statuses.first.update_attributes(staff_id: staff_id, advisor_id: nil)
+        end
+      end
+    end
   
 end
