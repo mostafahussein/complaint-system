@@ -100,6 +100,8 @@ module Modules
       @low = Hash[*ticket_details.to_a.at(1)].keys.first
       @n_low = Hash[*ticket_details.to_a.at(1)].values.first.to_i
       @overdue = Ticket.overdue.count
+      pie = Ticket.ticket_priority_details.first.as_json
+      @pie = pie.collect {|k,v| [k.humanize.capitalize,v.to_i]}
     end
   end
 end
