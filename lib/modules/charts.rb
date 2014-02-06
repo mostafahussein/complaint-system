@@ -89,6 +89,7 @@ module Modules
       @recent_tickets = Ticket.recent
       @today_tickets = Ticket.today
       @upcoming_tickets = Ticket.upcoming
+      @overdue_tickets = Ticket.overdue
     end
   end
 end

@@ -16,6 +16,7 @@
 //= require jquery.ui.all
 //= require highstock/highstock
 //= require highstock/modules/exporting
+//= require highstock/modules/data
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
 //= require js/bootstrap

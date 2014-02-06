@@ -1,47 +1,75 @@
 <div class="row-fluid">
-        <div class="span11">
-          <div class="widget">
-            <div class="widget-header">
-              <div class="title" id="complaints_per_subject">
-                Complaints per Subject
-                <span class="mini-title">
-                  Subject Statistics 
-                </span>
-              </div>
-            </div>
-            <div class="widget-body">
-				 <div id="dt_example" class="example_alt_pagination">
-				  <table class="table table-bordered table-hover" id="subjects">
-				    <thead>
-					<tr>
-				      <th>Subject Title</th>
-				      <th>Total Complaints</th>
-				      <th>High</th>
-				      <th>Normal</th>
-				      <th>Low</th>
-					</tr>
-				    </thead>
-					<tbody>
-				    <% @subjects_details.each do |subject| %>
-				    <tr>
-				      <td><%= subject.subject_name %></td>
-				      <td><%= subject.total_complaints %></td>
-				      <td><%= subject.high_complaints %></td>
-				      <td><%= subject.normal_complaints %></td>
-				      <td><%= subject.low_complaints %></td>
-				    </tr>
-				    <% end %>
-					</tbody>
-				  </table>
+	<div class="span11">
+		<div class="widget">
+			<div class="widget-header">
+				<div class="title" id="complaints_per_subject">
+					Complaints per Subject
+					<span class="mini-title">
+						Subject Statistics 
+					</span>
+				</div>
+			</div>
+			<div class="widget-body">
+				<div id="subjects_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+				<script type="text/javascript" charset="utf-8">
+				$(function () {
+				    $('#subjects_chart').highcharts({
+				        data: {
+				            table: document.getElementById('subjects')
+				        },
+				        chart: {
+				            type: 'column'
+				        },
+				        title: {
+				            text: ''
+				        },
+				        yAxis: {
+				            allowDecimals: false,
+				            title: {
+				                text: 'Number of Complaints'
+				            }
+				        },
+				        tooltip: {
+				            formatter: function() {
+				                return '<b>'+ this.series.name +'</b><br/>'+
+				                    this.point.y +' '+ this.point.name.toLowerCase();
+				            }
+				        }
+				    });
+				});
+				</script>
+				<div id="dt_example" class="example_alt_pagination">
+					<table class="table table-bordered table-hover" id="subjects">
+						<thead>
+							<tr>
+								<th>Subject Title</th>
+								<th>Total Complaints</th>
+								<th>High</th>
+								<th>Normal</th>
+								<th>Low</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @subjects_details.each do |subject| %>
+							<tr>
+								<td><%= subject.subject_name %></td>
+								<td><%= subject.total_complaints %></td>
+								<td><%= subject.high_complaints %></td>
+								<td><%= subject.normal_complaints %></td>
+								<td><%= subject.low_complaints %></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
 					<div class="clearfix">
 					</div>
-				  </div>
-            </div>
-          </div>
-        </div>
-      </div>
-	<script>
-	$('#subjects').dataTable({
-		"sPaginationType": "full_numbers"
-	});
-	</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$('#subjects').dataTable({
+	"sPaginationType": "full_numbers"
+});
+</script>

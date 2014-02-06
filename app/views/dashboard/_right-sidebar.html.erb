@@ -121,5 +121,39 @@
 			</div>
 		</div>
 	</div>
+	<hr class= 'hr-stylish-1'>
+	<div class="wrapper">
+		<div id="scrollbar-three">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Overdue Complaints
+						</h5>
+						<div class="articles">
+							<% @overdue_tickets.each do |recent| %>
+							<a href="<%= ticket_path(recent) %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								<%= recent.title %>
+							</a>
+							<% end %>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 </div>
