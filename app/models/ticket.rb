@@ -132,7 +132,7 @@ class Ticket < ActiveRecord::Base
     ORDER BY day ASC) results ON (date = results.day)")
   end
 
-  def self.ticket_priority_details
+  def self.total_priority_details
     self.find_by_sql("SELECT COUNT(*) AS total_complaints,
     COUNT(CASE p.priority_name WHEN '#{Ticket::HIGH}'        THEN 1 END) AS high_complaints,
     COUNT(CASE p.priority_name WHEN '#{Ticket::NORMAL}' THEN 1 END) AS normal_complaints,

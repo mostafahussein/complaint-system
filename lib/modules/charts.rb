@@ -73,7 +73,7 @@ module Modules
     def complaints_statistics
       @complaint_status_details = TicketStatus.ticket_status_details
 
-      @complaint_priority_details = Ticket.ticket_priority_details
+      @complaint_priority_details = Ticket.total_priority_details
     end
 
     def subjects_statistics
@@ -90,7 +90,7 @@ module Modules
       @today_tickets = Ticket.today
       @upcoming_tickets = Ticket.upcoming
       @overdue_tickets = Ticket.overdue
-      ticket_details = Ticket.ticket_priority_details.as_json.first
+      ticket_details = Ticket.total_priority_details.as_json.first
       @total = 	Hash[*ticket_details.to_a.at(3)].keys.first
       @n_total = Hash[*ticket_details.to_a.at(3)].values.first.to_i
       @high = Hash[*ticket_details.to_a.at(0)].keys.first
