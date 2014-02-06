@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205154307) do
+ActiveRecord::Schema.define(:version => 20140205192523) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -30,16 +30,15 @@ ActiveRecord::Schema.define(:version => 20140205154307) do
   add_index "activities", ["recipient_id", "recipient_type"], :name => "index_activities_on_recipient_id_and_recipient_type"
   add_index "activities", ["trackable_id", "trackable_type"], :name => "index_activities_on_trackable_id_and_trackable_type"
 
-  create_table "answers", :force => true do |t|
-    t.integer  "question_id"
-    t.text     "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "attends", :force => true do |t|
     t.integer  "student_id"
     t.integer  "subject_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "batches", :force => true do |t|
+    t.string   "batch_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -92,29 +91,17 @@ ActiveRecord::Schema.define(:version => 20140205154307) do
     t.datetime "updated_at",                  :null => false
   end
 
-  create_table "questionnaires", :force => true do |t|
-    t.integer  "student_id"
-    t.integer  "subject_id"
-    t.integer  "survey_id"
-    t.integer  "question_id"
-    t.integer  "answer_id"
-    t.string   "describtion"
-    t.string   "comment"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "questions", :force => true do |t|
-    t.integer  "survey_id"
-    t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "responses", :force => true do |t|
     t.string   "canned_response"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "sections", :force => true do |t|
+    t.string   "section_name"
+    t.integer  "batch_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "statuses", :force => true do |t|
@@ -124,13 +111,13 @@ ActiveRecord::Schema.define(:version => 20140205154307) do
   end
 
   create_table "students", :force => true do |t|
-    t.string   "full_name",    :limit => 30
-    t.string   "batch_name",   :limit => 30
-    t.string   "section_name", :limit => 30
-    t.string   "gender",       :limit => 6
+    t.string   "full_name",  :limit => 30
+    t.string   "gender",     :limit => 6
     t.integer  "user_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "batch_id"
+    t.integer  "section_id"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "subject_staffs", :force => true do |t|
@@ -146,12 +133,6 @@ ActiveRecord::Schema.define(:version => 20140205154307) do
     t.string   "subjectCode",   :limit => 10
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-  end
-
-  create_table "surveys", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "ticket_statuses", :force => true do |t|

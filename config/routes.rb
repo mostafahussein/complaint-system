@@ -1,5 +1,4 @@
 SweComplaint::Application.routes.draw do
-
   devise_for :users, :controllers => { :registrations => 'users' }
    resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update] do
      collection do
@@ -53,8 +52,6 @@ SweComplaint::Application.routes.draw do
    
    resources :kbs
    resources :responses
-   resources :surveys
-   resources :survey_answers
    
    get '/dashboard', to: 'dashboard#index', as: :dashboard
    get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
