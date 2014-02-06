@@ -16,7 +16,7 @@
 class Employee < ActiveRecord::Base
   include Modules::DefaultValues
   attr_accessible :full_name, :gender,
-  :user_id, :employee_department_id, :employee_position_id, :subject_ids
+  :user_id, :employee_department_id, :employee_position_id, :subject_ids, :type
   belongs_to :user
   belongs_to :employee_department
   belongs_to :employee_position

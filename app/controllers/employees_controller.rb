@@ -26,13 +26,17 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(params[:employee])
     if @employee.save
       flash[:notice] = 'A new employee created successfully.'
-      if (@employee.employee_position.position_title == "#{EmployeesController::SWE_MANAGER}") || (@employee.employee_position.position_title == "#{EmployeesController::SWE_STAFF}")
+      if (@employee.employee_position.position_title == "#{EmployeesController::SWE_MANAGER}")
         department = EmployeeDepartment.where(department_name: "#{EmployeesController::SWE}").first
-        @employee.update_attributes(employee_department_id: department.id)
+        @employee.update_attributes(employee_department_id: department.id, type: 'Staff')
+        redirect_to employees_path(tab: 'staff_not_users')
+      elsif  (@employee.employee_position.position_title == "#{EmployeesController::SWE_STAFF}")
+        department = EmployeeDepartment.where(department_name: "#{EmployeesController::SWE}").first
+        @employee.update_attributes(employee_department_id: department.id, type: 'Staff')
         redirect_to employees_path(tab: 'staff_not_users')
       elsif @employee.employee_position.position_title == "#{EmployeesController::STAD_ADVISOR}"
         department = EmployeeDepartment.where(department_name: "#{EmployeesController::STAD}").first
-        @employee.update_attributes(employee_department_id: department.id)
+        @employee.update_attributes(employee_department_id: department.id, type: 'Advisor')
         redirect_to employees_path(tab: 'advisors_not_users')
       end
     else
