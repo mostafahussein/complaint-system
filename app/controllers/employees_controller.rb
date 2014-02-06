@@ -43,7 +43,7 @@ class EmployeesController < ApplicationController
 
   def create_multiple
     if params[:employee_ids].nil?
-      flash[:error] = 'please select an employee or more'
+      flash[:error] = 'Please select an employee or more'
       redirect_to :back
     else
       @employees = Employee.find(params[:employee_ids])
@@ -62,12 +62,13 @@ class EmployeesController < ApplicationController
               user.role = "#{EmployeesController::ADVISOR}"
             end
             employee.update_attributes(user_id: User.last.id)
+            redirect_to users_path(tab: 'all')
           else
             flash[:error] = "employee#{employee.id}@swe.com already exists"
+            redirect_to :back
           end
         end
       end
-      redirect_to users_path(tab: 'all')
     end
   end
 
@@ -78,7 +79,7 @@ class EmployeesController < ApplicationController
   def update
     @employee = Employee.find(params[:id])
     if @employee.update_attributes(params[:employee])
-      flash[:notice] = 'Profile updated'
+      flash[:notice] = 'Details updated'
       redirect_to :back
     else
       render 'edit'
