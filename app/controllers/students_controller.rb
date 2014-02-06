@@ -23,9 +23,9 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(params[:student])
     if @student.save
-      redirect_to students_path
+      redirect_to students_path(tab: 'not_users')
     else
-      redirect_to students_path
+      redirect_to :back
     end
   end
 
@@ -57,7 +57,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     if @student.update_attributes(params[:student])
       flash[:notice] = 'Profile updated'
-      redirect_to students_path
+      redirect_to :back
     else
       render 'edit'
     end
