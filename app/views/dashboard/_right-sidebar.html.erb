@@ -4,17 +4,17 @@
 			<li>
 				<div class="left">
 					<h4>
-						15,859
+						<%= @n_total%>
 					</h4>
 					<p>
-						Total Complaints
+						<%= @total.humanize %>
 					</p>
 				</div>
 			</li>
 			<li>
 				<div class="left">
 					<h4>
-						$47,830
+						<%= @overdue %>
 					</h4>
 					<p>
 						Overdue Complaints
@@ -24,30 +24,30 @@
 			<li>
 				<div class="left">
 					<h4>
-						$98,846
+						<%= @n_high %>
 					</h4>
 					<p>
-						High Complaints
+						<%= @high.humanize%>
 					</p>
 				</div>
 			</li>
 			<li>
 				<div class="left">
 					<h4>
-						18,846
+						<%= @n_normal %>
 					</h4>
 					<p>
-						Normal Complaints
+						<%= @normal.humanize %>
 					</p>
 				</div>
 			</li>
 			<li>
 				<div class="left">
 					<h4>
-						22,571
+						<%= @n_low %>
 					</h4>
 					<p>
-						Low Complaints
+						<%= @low.humanize %>
 					</p>
 				</div>
 			</li>

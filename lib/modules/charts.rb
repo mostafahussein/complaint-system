@@ -90,6 +90,16 @@ module Modules
       @today_tickets = Ticket.today
       @upcoming_tickets = Ticket.upcoming
       @overdue_tickets = Ticket.overdue
+      ticket_details = Ticket.ticket_priority_details.as_json.first
+      @total = 	Hash[*ticket_details.to_a.at(3)].keys.first
+      @n_total = Hash[*ticket_details.to_a.at(3)].values.first.to_i
+      @high = Hash[*ticket_details.to_a.at(0)].keys.first
+      @n_high = Hash[*ticket_details.to_a.at(0)].values.first.to_i
+      @normal = Hash[*ticket_details.to_a.at(2)].keys.first
+      @n_normal = Hash[*ticket_details.to_a.at(2)].values.first.to_i
+      @low = Hash[*ticket_details.to_a.at(1)].keys.first
+      @n_low = Hash[*ticket_details.to_a.at(1)].values.first.to_i
+      @overdue = Ticket.overdue.count
     end
   end
 end
