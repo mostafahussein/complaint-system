@@ -15,7 +15,7 @@ class KbsController < ApplicationController
   def create
      @faq = Kb.new(params[:kb])
       if @faq.save
-        flash[:notice] = 'A new user created successfully.'
+        flash[:notice] = 'A new question created successfully.'
         redirect_to @faq
       else
         flash[:error] = 'An error occurred please try again!'

@@ -1,4 +1,5 @@
 <div class="right-sidebar">
+	<% if current_user.head_of_department? %>
 		<div class="wrapper">
 		<div id="scrollbar-two">
 			<div class="scrollbar">
@@ -64,4 +65,5 @@
 			</div>
 		</div>
 	</div>
+	<% end %>
 </div>

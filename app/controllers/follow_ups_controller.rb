@@ -5,10 +5,10 @@ class FollowUpsController < ApplicationController
     @follow_up = @ticket.follow_ups.build(params[:follow_up])
     @follow_up.user = current_user
     if @follow_up.save
-      flash[:notice] = "Comment has been created."
+      flash[:notice] = "Followup has been added."
       redirect_to @ticket
     else
-      flash[:alert] = "Comment has not been created."
+      flash[:alert] = "An error occurred please try again!"
       redirect_to @ticket
     end
   end

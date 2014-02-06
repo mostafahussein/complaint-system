@@ -14,7 +14,7 @@ class ResponsesController < ApplicationController
   def create
      @response = Response.new(params[:response])
       if @response.save
-        flash[:notice] = 'A new user created successfully.'
+        flash[:notice] = 'A new response created successfully.'
         redirect_to @response
       else
         flash[:error] = 'An error occurred please try again!'

@@ -1,8 +1,9 @@
 <fieldset>
-  <%= f.input :content, "Question" %><br />
-  <%= f.input :_destroy as: :checkboxes%>
-  <%= f.input :_destroy, "Remove Question" %>
-  <%= f.simple_fields_for :answers do |builder| %>
+  <%= f.label :content, "Question" %><br />
+  <%= f.text_area :content %><br />
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Remove Question" %>
+  <%= f.fields_for :answers do |builder| %>
     <%= render 'answer_fields', f: builder %>
   <% end %>
   <%= link_to_add_fields "Add Answer", f, :answers %>
