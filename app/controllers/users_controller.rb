@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+     #UserMailer.email_confirmation(@user).deliver
       flash[:notice] = 'A new user created successfully.'
       redirect_to @user
     else

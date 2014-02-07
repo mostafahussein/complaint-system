@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20140205192523) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :limit => 20, :default => "",   :null => false
+    t.string   "email",                  :limit => 60, :default => "",   :null => false
     t.string   "user_type",              :limit => 10
     t.string   "role",                   :limit => 30
     t.boolean  "active",                               :default => true
