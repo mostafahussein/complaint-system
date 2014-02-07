@@ -214,4 +214,8 @@ class Ticket < ActiveRecord::Base
   def self.advisor_low(user)
     self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.advisor_id = ?", "#{Ticket::LOW}", user.employee.id).count
   end
+  
+  def has_history?
+    !self.ticket_statuses.first.versions.last.object.nil?
+  end
 end

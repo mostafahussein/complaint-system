@@ -1,153 +1,136 @@
 <div class="right-sidebar2">
-    
-    <div class="wrapper">
-      <div id="scrollbar-two">
-        <div class="scrollbar">
-          <div class="track">
-            <div class="thumb">
-              <div class="end">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="viewport">
-          <div class="overview">
-            <div class="featured-articles-container">
-              <h5 class="heading-blue">
-                Complaint Details
-              </h5>
-              <div class="articles">
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Status: <%= @status_title.ticket_status %>
-                </a>
-				<a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Due Date: <%= @ticket.due %>
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Priority: <%= @ticket.priority.priority_name if @ticket.priority %>
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Subject: <%= @subject_title.first.subject_title unless @subject_title.nil? %> 
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Create Date: <%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %>
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  From: <%= @ticket.student.full_name%>
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Batch: <%= @ticket.student.batch_name %>
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Assigned To: <% if @assigned_staff.nil? %>
+
+	<div class="wrapper">
+		<div id="scrollbar-two">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Complaint Details
+						</h5>
+						<div class="articles">
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Status: <%= @status_title.ticket_status %>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Due Date: <%= @ticket.due %>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Priority: <%= @ticket.priority.priority_name if @ticket.priority %>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Subject: <%= @subject_title.first.subject_title unless @subject_title.nil? %> 
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Create Date: <%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								From: <%= @ticket.student.full_name%>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Batch: <%= @ticket.student.batch.batch_name %>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Assigned To: <% if @assigned_staff.nil? %>
 								<%= @assigned_advisor.full_name unless @assigned_advisor.nil? %>
 								<% else %>
 								<%= @assigned_staff.full_name unless @assigned_staff.nil? %>
 								<% end %>
-                </a>
-              </div>
-              
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <% if current_user.head_of_department? %>
+							</a>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<% if current_user.head_of_department? && @ticket.has_history? %>
 	<hr class="hr-stylish-1">
-	
+
 
 	<div class="wrapper">
-      <div id="scrollbar-two">
-        <div class="scrollbar">
-          <div class="track">
-            <div class="thumb">
-              <div class="end">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="viewport">
-          <div class="overview">
-            <div class="featured-articles-container">
-              <h5 class="heading-blue">
-                Complaint History
-              </h5>
-              <div class="articles">
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Status: 
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Priority: 
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Subject:
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Create Date: 
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  From:
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Batch:
-                </a>
-                <a href="#">
-                  <span class="label-bullet-blue">
-                    &nbsp;
-                  </span>
-                  Assigned To:
-                </a>
-              </div>
+		<div id="scrollbar-two">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Complaint History
+						</h5>
+						<div class="articles">
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Advisor: <%= @previous_advisor %> 
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Staff: <% if @previous_staff.nil? %><%= 'There is no staff was assigned'%><% else %>
+								<%= @previous_staff %><% end %>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Updated by: <%= @updated_by%>
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Update Date: <%= @update_date %>
+							</a>
+						</div>
 
-            </div>
+					</div>
 
-          </div>
-        </div>
-      </div>
-    </div>
- <% end %>
-    
-  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+
+</div>

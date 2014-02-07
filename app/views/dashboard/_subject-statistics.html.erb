@@ -55,9 +55,9 @@
 							<tr>
 								<td><%= subject.subject_name %></td>
 								<td><%= subject.total_complaints %></td>
-								<td><%= subject.high_complaints %></td>
-								<td><%= subject.normal_complaints %></td>
-								<td><%= subject.low_complaints %></td>
+								<td id="priority_high"><%= subject.high_complaints %></td>
+								<td id="priority_normal"><%= subject.normal_complaints %></td>
+								<td id="priority_low"><%= subject.low_complaints %></td>
 							</tr>
 							<% end %>
 						</tbody>

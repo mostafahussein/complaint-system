@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   before_filter :set_subject, only: [:new, :create]
   before_filter :set_user, only: [:new, :create]
   before_filter :set_to_close
-  
+
   def index
     if params[:tab] == "open"
       @tickets = Ticket.opened
@@ -44,6 +44,25 @@ class TicketsController < ApplicationController
     @follow_up = FollowUp.new
     @response = Response.new
     @responses = Response.all
+    if !@ticket.ticket_statuses.first.versions.last.object.nil?
+      previous_advisor = @ticket.ticket_statuses.first.previous_version.advisor_id
+      previous_advisor = Advisor.where("employees.id = ?",previous_advisor).first
+      if previous_advisor.nil?
+        @previous_advisor = nil
+      else
+        @previous_advisor = previous_advisor.full_name
+      end
+      previous_staff = @ticket.ticket_statuses.first.previous_version.staff_id
+      previous_staff = Staff.where("employees.id = ?", previous_staff).first
+      if previous_staff.nil?
+        @previous_staff = nil
+      else
+        @previous_staff = previous_staff.full_name
+      end
+      updated_by = @ticket.ticket_statuses.first.versions.last.whodunnit
+      @updated_by = User.find(updated_by).employee.full_name
+      @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
+    end
   end
 
 
@@ -101,24 +120,24 @@ class TicketsController < ApplicationController
     @title = Subject.find(params[:subject_id]).subject_title
     @subject = Subject.find(params[:subject_id]).id
   end
-  
+
   def set_user
     if current_user.student
       @student = current_user.student.id
     end
   end
-  
+
   def set_to_close
-      tickets = Ticket.overdue
-      tickets.each do |ticket|
-        if (ticket.statuses.first.ticket_status != "#{ApplicationController::SOLVED}") && (ticket.due < Date.today)
-            subject_id = ticket.subject_id
-            staff = SubjectStaff.where("subject_id = ?", subject_id).first
-            staff_id = staff.staff_id
-            #ticket.statuses.first.update_attributes(ticket_status: "#{ApplicationController::CLOSED}")
-            ticket.ticket_statuses.first.update_attributes(staff_id: staff_id, advisor_id: nil)
-        end
+    tickets = Ticket.overdue
+    tickets.each do |ticket|
+      if (ticket.statuses.first.ticket_status != "#{ApplicationController::SOLVED}") && (ticket.due < Date.today)
+        subject_id = ticket.subject_id
+        staff = SubjectStaff.where("subject_id = ?", subject_id).first
+        staff_id = staff.staff_id
+        #ticket.statuses.first.update_attributes(ticket_status: "#{ApplicationController::CLOSED}")
+        ticket.ticket_statuses.first.update_attributes(staff_id: staff_id, advisor_id: nil)
       end
     end
-  
+  end
+
 end

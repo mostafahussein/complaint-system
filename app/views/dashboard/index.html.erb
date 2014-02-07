@@ -1,3 +1,11 @@
 <%= render 'dashboard/left-sidebar'%>
 <%= render 'dashboard/right-sidebar'%>
 <%= render 'dashboard/dashboard-scripts'%>
+<style>
+<% for priority in @priorities %>
+#priority_<%= priority.priority_name.parameterize %> {
+	background: <%= priority.background %>;
+	color: <%= priority.color %>;
+}
+<% end %>
+</style>
