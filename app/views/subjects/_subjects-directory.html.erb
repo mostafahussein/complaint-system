@@ -31,7 +31,7 @@
 							<% @subjects.each do |subject| %>
 							<tr>
 								<td><%= subject.id%></td>
-								<td><%= subject.subjectCode %></td>
+								<td><%= subject.subject_code %></td>
 								<td><%= subject.subject_title %></td>
 								<% if subject.subject_staffs.first.nil? %>
 								<td>no advisor assigned yet</td>
@@ -64,7 +64,7 @@
 						<tbody>
 							<% @subjects.each do |subject| %>
 							<tr>
-								<td><%= subject.subjectCode %></td>
+								<td><%= subject.subject_code %></td>
 								<td><%= subject.subject_title %></td>
 								<td><%= @total_complaints_sub.where("subjects.id = tickets.subject_id AND subjects.id = ?", subject.id).count %></td>
 							</tr>
@@ -84,7 +84,7 @@
 						<tbody>
 							<% @subjects.each do |subject| %>
 							<tr>
-								<td><%= subject.subjectCode %></td>
+								<td><%= subject.subject_code %></td>
 								<td><%= subject.subject_title %></td>
 								<td><a href="<%= new_subject_ticket_path(subject) %>">Make a Complaint</a></td>
 							</tr>

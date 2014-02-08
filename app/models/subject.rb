@@ -4,14 +4,14 @@
 #
 #  id            :integer          not null, primary key
 #  subject_title :string(30)
-#  subjectCode   :string(10)
+#  subject_code   :string(10)
 #  employee_id   :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
 class Subject < ActiveRecord::Base
-  attr_accessible :subject_title, :subjectCode
+  attr_accessible :subject_title, :subject_code
   has_many :attends
   has_many :students, :through => :attends
   has_many :subject_staffs

@@ -124,6 +124,10 @@ class TicketsController < ApplicationController
   def set_user
     if current_user.student
       @student = current_user.student.id
+      @name  = Student.find(@student)
+      @batch = @name.batch
+      @section = @name.section
+      @today = Date.today
     end
   end
 

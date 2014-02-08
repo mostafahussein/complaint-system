@@ -40,8 +40,7 @@ Staff.create([{full_name: 'Denny Kantner', gender: 'm', employee_department_id: 
 #----------------------------------------------------------------------------------------------------------------------#
 
 puts 'Creating Statuses'
-Status.create([
-{ticket_status: 'open'},
+Status.create([{ticket_status: 'open'},
 {ticket_status: 'in progress'},
 {ticket_status: 'pending'},
 {ticket_status: 'solved'},
@@ -50,20 +49,17 @@ Status.create([
 #----------------------------------------------------------------------------------------------------------------------#
 
 puts 'Creating Priorities'
-Priority.create([
-{priority_name: 'high',background: '#FEE7E7',color:'black'},
+Priority.create([{priority_name: 'high',background: '#FEE7E7',color:'black'},
 {priority_name: 'normal',background: '#FFFFF0',color: 'black'},
 {priority_name: 'low',background: '#DDFFDD',color: 'black'}])
 #----------------------------------------------------------------------------------------------------------------------#
-puts 'Batches and Sections'
-Batch.create([
-{batch_name: 'Batch 1'},
-{batch_name: 'Batch 2'},
-{batch_name: 'Batch 3'},
-{batch_name: 'Batch 4'}])
+puts 'Creating Batches and Sections'
+Batch.create([{batch_name: 'First Year'},
+{batch_name: 'Second Year'},
+{batch_name: 'Third Year'},
+{batch_name: 'Fourth Year'}])
 
-Section.create([
-{section_name: 'Section 1', batch_id: 1},
+Section.create([{section_name: 'Section 1', batch_id: 1},
 {section_name: 'Section 2', batch_id: 1},
 {section_name: 'Section 1', batch_id: 2},
 {section_name: 'Section 2', batch_id: 2},
@@ -71,4 +67,56 @@ Section.create([
 {section_name: 'Section 2', batch_id: 3},
 {section_name: 'Section 1', batch_id: 4},
 {section_name: 'Section 2', batch_id: 4}])
+
+puts 'Creating Courses'
+Subject.create([{subject_code:'CS-1109', subject_title:'Fundamental Programming Concepts'},
+  {subject_code:'CS-1110', subject_title:'Introduction to Computing Using Python'},
+  {subject_code:'CS-1112', subject_title:'Introduction to Computing Using MATLAB'},
+  {subject_code:'CS-1115', subject_title:'Introduction to Computational Science and Engineering Using Matlab Graphical User Interfaces'},
+  {subject_code:'CS-1130', subject_title:'Transition to Object-Oriented Programming'},
+  {subject_code:'CS-1300', subject_title:'Introductory Design and Programming for the Web'},
+  {subject_code:'CS-1305', subject_title:'Computation and Culture in a Digital Age'},
+  {subject_code:'CS-1330', subject_title:'FWS: How Digital Technology is Reshaping Privacy'},
+  {subject_code:'CS-1610', subject_title:'Computing in the Arts'},
+  {subject_code:'CS-1620', subject_title:'Visual Imaging in the Electronic Age'},
+  {subject_code:'CS-1710', subject_title:'Introduction to Cognitive Science'},
+  {subject_code:'CS-1810', subject_title:'Topics in the Analysis and Transmission of Knowledge and Information'},
+  {subject_code:'CS-2022', subject_title:'Introduction to C'},
+  {subject_code:'CS-2024', subject_title:'C++ Programming'},
+  {subject_code:'CS-2043', subject_title:'UNIX Tools'},
+  {subject_code:'CS-2044', subject_title:'Advanced UNIX Programming and Tools'},
+  {subject_code:'CS-2046', subject_title:'Introduction to Mobile Application Development'},
+  {subject_code:'CS-2048', subject_title:'Introduction to iPhone App Development'},
+  {subject_code:'CS-2049', subject_title:'Intermediate iPhone App Development'},
+  {subject_code:'CS-2110', subject_title:'Object-Oriented Programming and Data Structures'},
+  {subject_code:'CS-2111', subject_title:'Programming Practicum'},
+  {subject_code:'CS-2300', subject_title:'Intermediate Design and Programming for the Web'},
+  {subject_code:'CS-2770', subject_title:'Excursions in Computational Sustainability'},
+  {subject_code:'CS-2800', subject_title:'Discrete Structures'},
+  {subject_code:'CS-2850', subject_title:'Networks'},
+  {subject_code:'CS-3110', subject_title:'Data Structures and Functional Programming'},
+  {subject_code:'CS-3152', subject_title:'Introduction to Computer Game Architecture'},
+  {subject_code:'CS-3220', subject_title:'Introduction to Scientific Computation'},
+  {subject_code:'CS-3300', subject_title:'Data-Driven Web Applications'},
+  {subject_code:'CS-3410', subject_title:'Computer System Organization and Programming'},
+  {subject_code:'CS-3420', subject_title:'Embedded Systems'},
+  {subject_code:'CS-3740', subject_title:'Computational Linguistics'},
+  {subject_code:'CS-3758', subject_title:'Autonomous Mobile Robots'},
+  {subject_code:'CS-3810', subject_title:'Introduction to Theory of Computing'},
+  {subject_code:'CS-4090', subject_title:'Teaching Experience in Computer Science'},
+  {subject_code:'CS-4110', subject_title:'Programming Languages and Logics'},
+  {subject_code:'CS-4120', subject_title:'Introduction to Compilers'},
+  {subject_code:'CS-4121', subject_title:'Practicum in Compilers'},
+  {subject_code:'CS-4152', subject_title:'Advanced Topics in Computer Game Architecture'},
+  {subject_code:'CS-4210', subject_title:'Numerical Analysis and Differential Equations'},
+  {subject_code:'CS-4300', subject_title:'Information Retrieval'},
+  {subject_code:'CS-4302', subject_title:'Web Information Systems'}
+  ])
+  
+Category.create([
+  {category_name: 'exam'},
+  {category_name:"subject material"},
+  {category_name: 'classroom'},
+  {category_name: "subject instructor"}
+  ])
 puts 'All Seeds Completed.'

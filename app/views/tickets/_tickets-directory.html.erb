@@ -43,7 +43,7 @@
 							<tr>
 								<td><%= ticket.id %></td>
 								
-								<td><%= ticket.title %></td>
+								<td><%= ticket.category.category_name.capitalize %></td>
 								
 								<td><%= ticket.student.full_name %></td>
 								<td  id="priority_<%= ticket.priority.priority_name.parameterize if ticket.priority %>"><%= ticket.priority.priority_name if ticket.priority %></td>

@@ -5538,7 +5538,7 @@ header {
     .sub-nav li:last-of-type {
       border-right: none; }
     .sub-nav li:first-of-type {
-      border-right: none; }
+      border-right: 1px solid rgba(0, 0, 0, 0.2); }
     .sub-nav li .selected {
       color: black; }
     .sub-nav li .heading {

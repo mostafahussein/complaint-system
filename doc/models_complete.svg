@@ -46,7 +46,7 @@
 <polyline fill="none" stroke="black" points="793.495,-298 926.505,-298 "/>
 <text text-anchor="start" x="801.495" y="-280" font-family="Times,serif" font-size="14.00">id :integer</text>
 <text text-anchor="start" x="801.495" y="-263.2" font-family="Times,serif" font-size="14.00">subject_title :string</text>
-<text text-anchor="start" x="801.495" y="-246.4" font-family="Times,serif" font-size="14.00">subjectCode :string</text>
+<text text-anchor="start" x="801.495" y="-246.4" font-family="Times,serif" font-size="14.00">subject_code :string</text>
 <text text-anchor="start" x="801.495" y="-229.6" font-family="Times,serif" font-size="14.00">advisor_id :integer</text>
 <text text-anchor="start" x="801.495" y="-212.8" font-family="Times,serif" font-size="14.00">created_at :datetime</text>
 <text text-anchor="start" x="801.495" y="-196" font-family="Times,serif" font-size="14.00">updated_at :datetime</text>

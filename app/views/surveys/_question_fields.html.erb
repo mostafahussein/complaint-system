@@ -1,0 +1,8 @@
+<fieldset>
+  <%= f.input :content, label: 'Question', placeholder: 'Type a question', input_html: {class: 'input-xxlarge'} %>
+  <%= f.input :_destroy, as: :boolean, label: 'Remove Question' %>
+  <%= f.simple_fields_for :answers do |builder| %>
+    <%= render 'answer_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add Answer", f, :answers %>
+</fieldset>

@@ -42,6 +42,8 @@ gem 'jquery-rails'
 gem 'will_paginate', '~> 3.0'
 gem 'paper_trail', '~> 3.0.0'
 gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'faker'
 gem 'thin'
 

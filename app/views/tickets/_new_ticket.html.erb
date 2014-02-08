@@ -5,157 +5,71 @@
 				<div class="widget-header">
 					<div class="title">
 
-						Complaint about Subject: <%= @title.capitalize %>
+						Student Complaint Lodgement Form
 						<span class="mini-title">
-							New Complaint
+							New Complaint about <%= @title.capitalize %>
 						</span>
 					</div>
 				</div>
 				<div class="widget-body">
 
-					<div id="tabsleft" class="tabbable tabs-left">
-						<ul>
-							<li>
-								<a href="#tabsleft-tab1" data-toggle="tab">
-									Complaint:
-								</a>
-							</li>
-							<li>
-								<a href="#tabsleft-tab2" data-toggle="tab">
-									Thanks.
-								</a>
-							</li>
-						</ul>
-						<div class="progress progress-info">
-							<div class="bar">
+					<b>You can use this form to submit your complaint. Your written complaint should contain sufficient information for it to be investigated and all relevant information should be lodged at the time of submitting your complaint.</b>
+
+					<form class="form-horizontal no-margin">
+						<fieldset  class="scheduler-border">
+							<legend>Your Details</legend>
+							<div class="control-group">
+								<%= label_tag 'name', 'Your Name:', class: 'control-label' %>
+								<div class="controls controls-row">
+									<%= text_field(:name, :full_name, size: 20, disabled: true) %>
+								</div>
+							</div>
+							<div class="control-group">
+								<%= label_tag 'name', 'Your Batch:', class: 'control-label' %>
+								<div class="controls controls-row">
+									<%= text_field(:batch, :batch_name, size: 20, disabled: true) %>
+								</div>
+							</div>
+							<div class="control-group">
+								<%= label_tag 'name', 'Your Section:', class: 'control-label' %>
+								<div class="controls controls-row">
+									<%= text_field(:section, :section_name, size: 20, disabled: true) %>
+								</div>
+							</div>
+
+						</fieldset>
+
+						<fieldset>
+							<legend>Complaint Details</legend>
+							<%= simple_form_for(@ticket,:url => subject_tickets_path(@subject), :html => { :class => 'form-horizontal' }) do |f| %>
+							<%= f.input :student_id , as: :hidden,input_html:{value: @student} %>
+							<%= f.input :subject_id, as: :hidden ,input_html:{value: @subject} %>
+							<%= f.input :date_of_alleged_event,:as => :string, :input_html => { class: 'event'}, label: 'Date of Alleged Event:', hint: 'When did the alleged event occur which has given rise to your complaint? Procedure states that complaints lodged more than 12 months after the event giving rise to the complaint may not be investigated. If your complaint relates to an event greater than 12 months ago, <b>please provide the date and reason for the delay in submitting your complaint below:</b>' %>
+							<%= f.input :reason_of_delay, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Reason for delay:', hint: 'If date of event is greater than 12 months ago: Please provide the date and the reason for the delay in making your complaint.'%>
+							<%= f.input :category_id , collection: Ticket::CATEGORY, prompt: 'Select Category', label: 'Nature of Complaint:', hint: 'What does your complaint relate to?'%>
+							<%= f.input :description, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Written Statement:', hint: 'Please provide details of your complaint as a written statement.'  %>
+						</fieldset>
+						<fieldset>
+							<legend>Expectations</legend>
+							<b>Please provide a brief comment on what you would consider a satisfactory resolution of your complaint.</b>
+							<%= f.input :expectations, input_html: {class: 'input-xxlarge', rows: '6'}, label: false%>
+						</fieldset>
+						<div class="form-actions no-margin">
+							<button type="submit" class="btn btn-info pull-right">
+								Submit Complaint
+							</button>
+							<div class="clearfix">
 							</div>
 						</div>
-						<div class="tab-content">
-							<div class="tab-pane" id="tabsleft-tab1">
-								<%= simple_form_for(@ticket,:url => subject_tickets_path(@subject), :html => { :class => 'form-horizontal form-bordered' }) do |f| %>
-								<%= f.input :student_id , as: :hidden,input_html:{value: @student} %>
-								<%= f.input :title %>
-								<%= f.input :subject_id, as: :hidden ,input_html:{value: @subject} %>
-								<%= f.input :description, input_html: {class: 'input-xxlarge', rows: '10', maxlength: '140', onkeyup: 'countChar(this)'}  %>
-								<div id="charNum"></div>
-								
-							</div>
-							<div class="tab-pane" id="tabsleft-tab2">
-								Message before submitting goes here...
-							</div>
-							<ul class="pager wizard no-margin">
-								<li class="previous">
-									<a href="javascript:;">
-										Previous
-									</a>
-								</li>
-								<li class="next">
-									<a href="javascript:;">
-										Next
-									</a>
-								</li>
-								<li class="next finish" style="display:none;">
-									<a href="javascript:;">
-										Submit
-									</a>
-								</li>
-							</ul>
-							
-							<% end %>
-						</div>
-
-					</div>
-
-
+						<% end %>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-
-$('#ticket_description').keyup(function () {
-  var max = 140;
-  var len = $(this).val().length;
-  if (len >= max) {
-    $('#charNum').text(' you have reached the limit');
-  } else {
-    var char = max - len;
-    $('#charNum').text(char + ' characters left');
-  }
-});
-
-//ScrollUp
-$(function () {
-	$.scrollUp({
-		scrollName: 'scrollUp', // Element ID
-		topDistance: '300', // Distance from top before showing element (px)
-		topSpeed: 300, // Speed back to top (ms)
-		animation: 'fade', // Fade, slide, none
-		animationInSpeed: 400, // Animation in speed (ms)
-		animationOutSpeed: 400, // Animation out speed (ms)
-		scrollText: 'Scroll to top', // Text for element
-		activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-	});
-});
-
-
-//Tabs
-$('.myTabBeauty a').click(function (e) {
-	e.preventDefault();
-	$(this).tab('show');
-})
-
-//Dropdown
-$('.dropdown-toggle').dropdown();
-
-
-//Wizard Progressbar tabs left
-
-$('#tabsleft').bootstrapWizard({
-	'tabClass': 'nav nav-tabs',
-	'debug': false,
-	onShow: function (tab, navigation, index) {
-		console.log('onShow');
-	},
-	onNext: function (tab, navigation, index) {
-		console.log('onNext');
-	},
-	onPrevious: function (tab, navigation, index) {
-		console.log('onPrevious');
-	},
-	onLast: function (tab, navigation, index) {
-		console.log('onLast');
-	},
-	onTabClick: function (tab, navigation, index) {
-		console.log('onTabClick');
-
-	},
-	onTabShow: function (tab, navigation, index) {
-		console.log('onTabShow');
-		var $total = navigation.find('li').length;
-		var $current = index + 1;
-		var $percent = ($current / $total) * 100;
-		$('#tabsleft').find('.bar').css({
-			width: $percent + '%'
-		});
-
-		// If it's the last tab then hide the last button and show the finish instead
-		if ($current >= $total) {
-			$('#tabsleft').find('.pager .next').hide();
-			$('#tabsleft').find('.pager .finish').show();
-			$('#tabsleft').find('.pager .finish').removeClass('disabled');
-		} else {
-			$('#tabsleft').find('.pager .next').show();
-			$('#tabsleft').find('.pager .finish').hide();
-		}
-
-	}
-});
-
-
-$('#tabsleft .finish').click(function () {
-	$('#new_ticket').submit();
+<script>
+$(function() {
+	$( ".event" ).datepicker({ minDate: -365});
 });
 </script>

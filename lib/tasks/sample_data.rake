@@ -2,22 +2,12 @@ namespace :db do
   desc 'Fill database with sample data'
   task populate: :environment do
     Faker::Config.locale = :en
-    make_subjects
     make_employees_and_students
     # make_employees_and_students_as_users
     # attended_subjects
     # assign_advisors_to_subjects
     # make_complaints
   end
-end
-
-def make_subjects
-  puts "Making Subjects"
-    30.times do
-      subject_title = Faker::Lorem.word
-      subjectCode = Faker::Address.zip_code
-      Subject.create!([{subject_title: subject_title, subjectCode: subjectCode }])
-    end
 end
 
 def make_employees_and_students

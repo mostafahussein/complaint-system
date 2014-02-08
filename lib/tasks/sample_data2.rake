@@ -94,14 +94,18 @@ def make_complaints
   days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]
   40.times do
     studnets = Student.all(limit: 40 , order: "RANDOM()" )
-    title = Faker::Lorem.sentence(1).chomp('.')
     description = Faker::Lorem.paragraphs(rand(2..8)).join('')
+    reason_of_delay = Faker::Lorem.paragraphs(rand(2..8)).join('')
+    expectations = Faker::Lorem.paragraphs(rand(2..8)).join('')
+    date_of_alleged_event = Time.now - 10.days
+    category = [1,2,3,4]
     studnets.each do |student|
-      subjects = student.subjects.all(limit: 3) if student.subjects
+      subjects = student.subjects.all(limit: 4) if student.subjects
       subjects.each do |subject|
         priority = [1,2,3]
         time = (Time.now - 4.days) + days.sample.days
-        Ticket.create!(created_at: time, title: title, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample)
+        Ticket.create!(created_at: time, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample, date_of_alleged_event: date_of_alleged_event,
+        expectations: expectations, reason_of_delay: reason_of_delay, category_id: category.sample)
         ticket = Ticket.last
         if ticket.priority.priority_name == 'high'
           due = ticket.created_at.to_date + 2.days

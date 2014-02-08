@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205192523) do
+ActiveRecord::Schema.define(:version => 20140208193053) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20140205192523) do
   add_index "activities", ["recipient_id", "recipient_type"], :name => "index_activities_on_recipient_id_and_recipient_type"
   add_index "activities", ["trackable_id", "trackable_type"], :name => "index_activities_on_trackable_id_and_trackable_type"
 
+  create_table "answers", :force => true do |t|
+    t.integer  "question_id"
+    t.string   "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "attends", :force => true do |t|
     t.integer  "student_id"
     t.integer  "subject_id"
@@ -41,6 +48,12 @@ ActiveRecord::Schema.define(:version => 20140205192523) do
     t.string   "batch_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "category_name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "employee_departments", :force => true do |t|
@@ -91,6 +104,13 @@ ActiveRecord::Schema.define(:version => 20140205192523) do
     t.datetime "updated_at",                  :null => false
   end
 
+  create_table "questions", :force => true do |t|
+    t.integer  "survey_id"
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "responses", :force => true do |t|
     t.string   "canned_response"
     t.datetime "created_at",      :null => false
@@ -129,10 +149,16 @@ ActiveRecord::Schema.define(:version => 20140205192523) do
   end
 
   create_table "subjects", :force => true do |t|
-    t.string   "subject_title", :limit => 30
-    t.string   "subjectCode",   :limit => 10
+    t.string   "subject_title"
+    t.string   "subject_code",  :limit => 10
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+  end
+
+  create_table "surveys", :force => true do |t|
+    t.string   "survey_name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "ticket_statuses", :force => true do |t|
@@ -145,14 +171,17 @@ ActiveRecord::Schema.define(:version => 20140205192523) do
   end
 
   create_table "tickets", :force => true do |t|
-    t.string   "title",       :limit => 100
     t.text     "description"
     t.integer  "student_id"
     t.integer  "subject_id"
     t.integer  "priority_id"
     t.date     "due"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.integer  "category_id"
+    t.date     "date_of_alleged_event"
+    t.text     "reason_of_delay"
+    t.text     "expectations"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "users", :force => true do |t|

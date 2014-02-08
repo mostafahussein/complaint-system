@@ -44,7 +44,6 @@
 						<thead>
 							<tr>
 								<th>Subject Title</th>
-								<th>Total Complaints</th>
 								<th>High</th>
 								<th>Normal</th>
 								<th>Low</th>
@@ -54,7 +53,6 @@
 							<% @subjects_details.each do |subject| %>
 							<tr>
 								<td><%= subject.subject_name %></td>
-								<td><%= subject.total_complaints %></td>
 								<td id="priority_high"><%= subject.high_complaints %></td>
 								<td id="priority_normal"><%= subject.normal_complaints %></td>
 								<td id="priority_low"><%= subject.low_complaints %></td>

@@ -1,5 +1,5 @@
 <ul>
-  <li><a href="#" class="heading">Knowledge Base</a></li>
+ 
 <% if !current_user.admin? %>
   <li>
     <a href="<%= kbs_path %>" class="<%= 'selected' if params[:controller] == 'kbs' && params[:action] == 'index' %>">

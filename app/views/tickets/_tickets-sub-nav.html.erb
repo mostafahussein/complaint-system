@@ -1,5 +1,4 @@
 <ul>
-  <li><a href="#" class="heading">Complaints</a></li>
 <% if current_user.staff? || current_user.head_of_department? %>
   <li>
     <a href="<%= tickets_path(tab: "open") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'open' %>">

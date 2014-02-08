@@ -26,8 +26,8 @@ class Ticket < ActiveRecord::Base
   # 
   #scope :employee_overdue,
 
-  attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id,
-  :ticket_statuses_attributes, :follow_ups_attributes
+  attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id, :category_id,
+  :date_of_alleged_event, :reason_of_delay,:expectations,:ticket_statuses_attributes, :follow_ups_attributes
   belongs_to :priority
   belongs_to :student
   has_many :ticket_statuses
@@ -35,6 +35,7 @@ class Ticket < ActiveRecord::Base
   accepts_nested_attributes_for :ticket_statuses
   has_many :follow_ups
   accepts_nested_attributes_for :follow_ups
+  belongs_to :category
 
   def self.total_timeline
     self.find_by_sql("SELECT (EXTRACT(EPOCH FROM date)*1000) AS date, COALESCE(count,0) AS count
@@ -164,7 +165,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.subject_priority_details
-    self.find_by_sql("SELECT s.subject_title  AS subject_name,
+    self.find_by_sql("SELECT s.subject_title  AS subject_name,s.subject_code AS subject_code,
     COUNT(*) AS total_complaints,
     COUNT(CASE p.priority_name WHEN '#{Ticket::HIGH}'        THEN 1 END) AS high_complaints,
     COUNT(CASE p.priority_name WHEN '#{Ticket::NORMAL}' THEN 1 END) AS normal_complaints,
@@ -179,8 +180,20 @@ class Ticket < ActiveRecord::Base
     ON t.priority_id = p.id
     WHERE
     p.priority_name IN ('#{Ticket::HIGH}', '#{Ticket::NORMAL}', '#{Ticket::LOW}')
-    GROUP BY s.subject_title
+    GROUP BY s.subject_title, s.subject_code
     ORDER BY total_complaints ASC")
+  end
+
+  def self.category_details
+    self.find_by_sql("SELECT COUNT(CASE c.category_name WHEN '#{Ticket::EXAM}' THEN 1 END) AS exam_category,
+    COUNT(CASE c.category_name WHEN '#{Ticket::MATERIAL}' THEN 1 END) AS material_category,
+    COUNT(CASE c.category_name WHEN '#{Ticket::CLASSROOM}' THEN 1 END) AS classroom_category,
+    COUNT(CASE c.category_name WHEN '#{Ticket::INSTRUCTOR}' THEN 1 END) AS instructor_category
+    FROM tickets AS t
+    JOIN categories AS c
+    ON t.category_id = c.id
+    WHERE c.category_name IN ('#{Ticket::EXAM}', '#{Ticket::MATERIAL}', '#{Ticket::CLASSROOM}', '#{Ticket::INSTRUCTOR}')
+    ORDER BY exam_category ASC")
   end
 
   def self.staff_total(user)
@@ -214,7 +227,7 @@ class Ticket < ActiveRecord::Base
   def self.advisor_low(user)
     self.joins(:ticket_statuses , :priority).where("priorities.priority_name = ? AND ticket_statuses.advisor_id = ?", "#{Ticket::LOW}", user.employee.id).count
   end
-  
+
   def has_history?
     !self.ticket_statuses.first.versions.last.object.nil?
   end
