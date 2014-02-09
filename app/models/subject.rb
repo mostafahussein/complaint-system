@@ -17,7 +17,8 @@ class Subject < ActiveRecord::Base
   has_many :subject_staffs
   has_many :staffs, class_name: 'Staff', through: :subject_staffs
   has_many :advisors , class_name: 'Advisor', through: :subject_staffs
-  
+  has_many :subject_surveys
+  has_many :surveys, through: :subject_surveys
   def to_label
     subject_title
   end
