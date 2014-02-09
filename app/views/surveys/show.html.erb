@@ -1,17 +1,37 @@
-<h1><%= @survey.survey_name %></h1>
+<div class="left-sidebar">    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						<%= @survey.survey_name %>
+						<span class="mini-title">
+							Survey's Questions
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+					<% q = 0 %>
+					<% @survey.questions.each do |question| %>
+					<div id="accordion1" class="accordion no-margin">
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a href="#collapseOne" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle">
+									Q<%= q+1%>- <%= question.content %>
+								</a>
+							</div>
+							<div class="accordion-body in collapse" id="collapseOne" style="height: auto;">
+								<% question.answers.each do |answer| %>
+								<div class="accordion-inner">
 
-<ol class="questions">
-<% @survey.questions.each do |question| %>
-  <li>
-    <%= question.content %>
-    <ol class="answers">
-      <% question.answers.each do |answer| %>
-        <li><%= answer.content %></li>
-      <% end %>
-    </ol>
-  </li>
-<% end %>
-</ol>
-
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
-<%= link_to 'Back to Surveys', surveys_path %>
+									<%= answer.content %>
+								</div>
+								<% end %>
+							</div>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
