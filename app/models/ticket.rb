@@ -1,15 +1,23 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: tickets
+# Table name: `tickets`
 #
-#  id          :integer          not null, primary key
-#  title       :string(50)
-#  description :text
-#  student_id  :integer
-#  subject_id  :integer
-#  priority_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+# ### Columns
+#
+# Name                         | Type               | Attributes
+# ---------------------------- | ------------------ | ---------------------------
+# **`id`**                     | `integer`          | `not null, primary key`
+# **`description`**            | `text`             |
+# **`student_id`**             | `integer`          |
+# **`subject_id`**             | `integer`          |
+# **`priority_id`**            | `integer`          |
+# **`due`**                    | `date`             |
+# **`category_id`**            | `integer`          |
+# **`date_of_alleged_event`**  | `date`             |
+# **`reason_of_delay`**        | `text`             |
+# **`expectations`**           | `text`             |
+# **`created_at`**             | `datetime`         | `not null`
+# **`updated_at`**             | `datetime`         | `not null`
 #
 
 class Ticket < ActiveRecord::Base

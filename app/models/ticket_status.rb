@@ -1,15 +1,18 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: ticket_statuses
+# Table name: `ticket_statuses`
 #
-#  id                :integer          not null, primary key
-#  status_id         :integer
-#  ticket_id         :integer
-#  staff_id          :integer
-#  advisor_id        :integer
-#  previous_staff_id :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`status_id`**   | `integer`          |
+# **`ticket_id`**   | `integer`          |
+# **`staff_id`**    | `integer`          |
+# **`advisor_id`**  | `integer`          |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
 #
 
 class TicketStatus < ActiveRecord::Base

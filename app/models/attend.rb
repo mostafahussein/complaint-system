@@ -1,12 +1,16 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: attends
+# Table name: `attends`
 #
-#  id         :integer          not null, primary key
-#  student_id :integer
-#  subject_id :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`student_id`**  | `integer`          |
+# **`subject_id`**  | `integer`          |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
 #
 
 class Attend < ActiveRecord::Base

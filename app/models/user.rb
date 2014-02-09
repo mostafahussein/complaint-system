@@ -1,27 +1,34 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: users
+# Table name: `users`
 #
-#  id                     :integer          not null, primary key
-#  email                  :string(20)       default(""), not null
-#  user_type              :string(10)
-#  role                   :string(30)
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+# ### Columns
 #
-# Indexes
+# Name                          | Type               | Attributes
+# ----------------------------- | ------------------ | ---------------------------
+# **`id`**                      | `integer`          | `not null, primary key`
+# **`email`**                   | `string(60)`       | `default(""), not null`
+# **`user_type`**               | `string(10)`       |
+# **`role`**                    | `string(30)`       |
+# **`active`**                  | `boolean`          | `default(TRUE)`
+# **`encrypted_password`**      | `string(255)`      | `default(""), not null`
+# **`reset_password_token`**    | `string(255)`      |
+# **`reset_password_sent_at`**  | `datetime`         |
+# **`remember_created_at`**     | `datetime`         |
+# **`sign_in_count`**           | `integer`          | `default(0), not null`
+# **`current_sign_in_at`**      | `datetime`         |
+# **`last_sign_in_at`**         | `datetime`         |
+# **`current_sign_in_ip`**      | `string(255)`      |
+# **`last_sign_in_ip`**         | `string(255)`      |
+# **`created_at`**              | `datetime`         | `not null`
+# **`updated_at`**              | `datetime`         | `not null`
 #
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+# ### Indexes
+#
+# * `index_users_on_email` (_unique_):
+#     * **`email`**
+# * `index_users_on_reset_password_token` (_unique_):
+#     * **`reset_password_token`**
 #
 
 class User < ActiveRecord::Base

@@ -1,11 +1,15 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: statuses
+# Table name: `statuses`
 #
-#  id            :integer          not null, primary key
-#  ticket_status :string(10)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+# ### Columns
+#
+# Name                 | Type               | Attributes
+# -------------------- | ------------------ | ---------------------------
+# **`id`**             | `integer`          | `not null, primary key`
+# **`ticket_status`**  | `string(15)`       |
+# **`created_at`**     | `datetime`         | `not null`
+# **`updated_at`**     | `datetime`         | `not null`
 #
 
 class Status < ActiveRecord::Base

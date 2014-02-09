@@ -1,13 +1,16 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: subjects
+# Table name: `subjects`
 #
-#  id            :integer          not null, primary key
-#  subject_title :string(30)
-#  subject_code   :string(10)
-#  employee_id   :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+# ### Columns
+#
+# Name                 | Type               | Attributes
+# -------------------- | ------------------ | ---------------------------
+# **`id`**             | `integer`          | `not null, primary key`
+# **`subject_title`**  | `string(255)`      |
+# **`subject_code`**   | `string(10)`       |
+# **`created_at`**     | `datetime`         | `not null`
+# **`updated_at`**     | `datetime`         | `not null`
 #
 
 class Subject < ActiveRecord::Base

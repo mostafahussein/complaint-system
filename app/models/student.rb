@@ -1,15 +1,19 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: students
+# Table name: `students`
 #
-#  id           :integer          not null, primary key
-#  full_name    :string(30)
-#  batch_name   :string(30)
-#  section_name :string(30)
-#  gender       :string(6)
-#  user_id      :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`full_name`**   | `string(30)`       |
+# **`gender`**      | `string(6)`        |
+# **`user_id`**     | `integer`          |
+# **`batch_id`**    | `integer`          |
+# **`section_id`**  | `integer`          |
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
 #
 
 class Student < ActiveRecord::Base
