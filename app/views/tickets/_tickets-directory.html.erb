@@ -27,8 +27,8 @@
 
 						<thead>
 							<tr>
-								<th>Ticket Serial</th>
-								<th>Ticket Title</th>
+								<th>Complaint Serial</th>
+								<th>Complaint Category</th>
 								<th>From</th>
 								<th>Priority</th>
 								<th>Status</th>
@@ -76,6 +76,7 @@
 
 	<script>
 	$('#tickets').dataTable({
-		"sPaginationType": "full_numbers"
+		"sPaginationType": "full_numbers",
+		"iDisplayLength" : 11
 	});
 	</script>
