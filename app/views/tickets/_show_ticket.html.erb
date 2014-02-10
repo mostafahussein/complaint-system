@@ -12,10 +12,23 @@
 				</div>
 				<div class="widget-body">
 
+					<div class="hero-unit">
+						<p><b>Date Of Alleged Event: <%= @ticket.date_of_alleged_event%></b></p>
+						<% if @ticket.reason_of_delay.length > 0 %>
+						<p><b>Reason Of Delay:</b>
+							<%= @ticket.reason_of_delay%>
+						</p>
+						<% end %>
+					</div>
+					<div class="hero-unit">
+						<p><b>Written Statement:</b>
+							<%= @ticket.description%>
+						</p>
+					</div>
 
 					<div class="hero-unit">
-						<p>
-							<%= @ticket.description%>
+						<p><b>Expectations:</b>
+							<%= @ticket.expectations%>
 						</p>
 					</div>
 				</div>

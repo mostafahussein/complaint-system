@@ -45,6 +45,12 @@
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
+								Category: <%= @ticket.category.category_name.titleize %> 
+							</a>
+							<a href="#">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
 								Create Date: <%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %>
 							</a>
 							<a href="#">

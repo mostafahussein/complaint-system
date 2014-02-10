@@ -27,7 +27,7 @@
 
 						<thead>
 							<tr>
-								<th>Complaint Serial</th>
+								<th>Serial</th>
 								<th>Complaint Category</th>
 								<th>From</th>
 								<th>Priority</th>
@@ -41,7 +41,7 @@
 						<tbody>
 							<% @tickets.each do |ticket| %>
 							<tr>
-								<td><%= ticket.id %></td>
+								<td>Complaint #<%= ticket.id %></td>
 								
 								<td><%= ticket.category.category_name.titleize %></td>
 								
