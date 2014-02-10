@@ -5,5 +5,6 @@ class CreateStatuses < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :statuses, :ticket_status
   end
 end

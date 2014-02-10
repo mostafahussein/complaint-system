@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "updated_at",                           :null => false
   end
 
+  add_index "employees", ["full_name"], :name => "index_employees_on_full_name"
+
   create_table "follow_ups", :force => true do |t|
     t.string   "text",        :limit => 140
     t.integer  "ticket_id"
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "priorities", ["priority_name"], :name => "index_priorities_on_priority_name"
 
   create_table "questions", :force => true do |t|
     t.integer  "survey_id"
@@ -130,6 +134,8 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "updated_at",                  :null => false
   end
 
+  add_index "statuses", ["ticket_status"], :name => "index_statuses_on_ticket_status"
+
   create_table "students", :force => true do |t|
     t.string   "full_name",  :limit => 30
     t.string   "gender",     :limit => 6
@@ -139,6 +145,8 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
   end
+
+  add_index "students", ["full_name"], :name => "index_students_on_full_name"
 
   create_table "subject_staffs", :force => true do |t|
     t.integer  "staff_id"
@@ -161,6 +169,8 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
   end
+
+  add_index "subjects", ["subject_title"], :name => "index_subjects_on_subject_title"
 
   create_table "surveys", :force => true do |t|
     t.string   "survey_name"
@@ -190,6 +200,8 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
   end
+
+  add_index "tickets", ["id"], :name => "index_tickets_on_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :limit => 60, :default => "",   :null => false

@@ -7,5 +7,6 @@ class CreatePriorities < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :priorities, :priority_name
   end
 end

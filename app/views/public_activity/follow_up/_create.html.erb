@@ -1,6 +1,6 @@
 has followed up
 <% if activity.trackable %>
- <%= link_to "Ticket ##{activity.trackable.ticket.id}", activity.trackable.ticket  %>
+ <%= link_to "Complaint ##{activity.trackable.ticket.id}", activity.trackable.ticket, { style: 'color: #3693cf;'}  %>
 <% else %>
  which has since been removed
 <% end %>

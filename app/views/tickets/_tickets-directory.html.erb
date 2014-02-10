@@ -11,13 +11,13 @@
 		<div class="widget">
 			<div class="widget-header">
 				<div class="title" id="complaints_per_employee">
-					Complaints Directory
-					<span class="mini-title">
 						<%= 'Open Complaints' if params[:controller] == 'tickets' && params[:tab] == 'open' %>
 						<%= 'Solved Complaints' if params[:controller] == 'tickets' && params[:tab] == 'solved' %>
 						<%= 'My Complaints' if params[:controller] == 'tickets' && params[:tab] == 'assigned' %>
 						<%= 'Overdue Complaints' if params[:controller] == 'tickets' && params[:tab] == 'overdue' %>
 						<%= 'Closed Complaints' if params[:controller] == 'tickets' && params[:tab] == 'closed' %>
+					<span class="mini-title">
+					Complaints Directory
 					</span>
 				</div>
 			</div>
@@ -43,11 +43,11 @@
 							<tr>
 								<td><%= ticket.id %></td>
 								
-								<td><%= ticket.category.category_name.capitalize %></td>
+								<td><%= ticket.category.category_name.titleize %></td>
 								
 								<td><%= ticket.student.full_name %></td>
-								<td  id="priority_<%= ticket.priority.priority_name.parameterize if ticket.priority %>"><%= ticket.priority.priority_name if ticket.priority %></td>
-								<td><%= ticket.statuses.first.ticket_status %></td>
+								<td  id="priority_<%= ticket.priority.priority_name.parameterize if ticket.priority %>"><%= ticket.priority.priority_name.capitalize if ticket.priority %></td>
+								<td><%= ticket.statuses.first.ticket_status.capitalize %></td>
 								<td><%= ticket.created_at.to_date %></td>
 								<td><% if ticket.ticket_statuses.first.staff %>
 								<%= ticket.ticket_statuses.first.staff.full_name%>

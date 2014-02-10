@@ -15,7 +15,7 @@ class ResponsesController < ApplicationController
      @response = Response.new(params[:response])
       if @response.save
         flash[:notice] = 'A new response created successfully.'
-        redirect_to @response
+        redirect_to responses_path
       else
         flash[:error] = 'An error occurred please try again!'
         redirect_to responses_path

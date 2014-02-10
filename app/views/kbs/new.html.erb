@@ -5,7 +5,7 @@
               <div class="widget-header">
                 <div class="title">
                   New FAQ
-                  <span class="mini-title">
+                  <span class="mini-title" style= 'display:none;'>
                    Add new FAQs
                   </span>
                 </div>
@@ -14,14 +14,14 @@
 	
 				<%= simple_form_for(@faq, :html => {:class => 'form-horizontal' }) do |f| %>
 				             
-				              <%= f.input :faq_question, placeholder: 'Enter A Question' %>
+				              <%= f.input :faq_question, label: 'Question:', placeholder: 'Type a question', input_html: {class: 'input-xxlarge'} %>
 
-				              <%= f.input :faq_answer, placeholder: 'Enter An Answer' %>
-				              <%= f.input :category, collection: @subjects , include_blank: false, label_method: :to_label, prompt: 'Select A Subject' %>
+				              <%= f.input :faq_answer, as: :text, label: "Answer:", placeholder: 'Answer goes here', input_html: {class: 'input-xxlarge', rows:'6'} %>
+				              <%= f.input :category, collection: @subjects , include_blank: false, label_method: :to_label, prompt: 'Select A Subject', label: "Question's Category:",  input_html: {class: 'input-xlarge'} %>
 	
                  <div class="form-actions no-margin">
                     <button type="submit" class="btn btn-info pull-right">
-                      Create Account
+                      Add FAQ
                     </button>
                     <div class="clearfix">
                     </div>
