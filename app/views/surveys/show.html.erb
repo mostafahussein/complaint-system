@@ -13,14 +13,15 @@
 				<div class="widget-body">
 					<% q = 0 %>
 					<% @survey.questions.each do |question| %>
-					<div id="accordion1" class="accordion no-margin">
+					<% q = q + 1%>
+					<div id="accordion<%=q%>" class="accordion no-margin">
 						<div class="accordion-group">
 							<div class="accordion-heading">
-								<a href="#collapseOne" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle">
-									Q<%= q+1%>- <%= question.content %>
+								<a href="#collapse<%=q%>" data-parent="#accordion<%=q%>" data-toggle="collapse" class="accordion-toggle">
+									Q<%= q %>- <%= question.content %>
 								</a>
 							</div>
-							<div class="accordion-body in collapse" id="collapseOne" style="height: auto;">
+							<div class="accordion-body in collapse" id="collapse<%=q%>" style="height: auto;">
 								<% question.answers.each do |answer| %>
 								<div class="accordion-inner">
 
