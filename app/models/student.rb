@@ -25,5 +25,6 @@ class Student < ActiveRecord::Base
   has_many :attends
   has_many :subjects, :through => :attends
   has_many :tickets
+  has_many :subject_surveys
 
 end

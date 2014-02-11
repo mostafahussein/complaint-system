@@ -95,7 +95,13 @@
 							<p>
 								<%= simple_form_for(@ticket,:html => { :class => 'form-horizontal' }) do |f| %>
 								<%= f.simple_fields_for :ticket_statuses do |e| %>
+								<% if current_user.advisor? %>
 								<%= e.input :staff_id, collection: Staff.where("employees.id IN (SELECT staff_id FROM subject_staffs WHERE subject_staffs.subject_id = ?)",@ticket.subject_id), label_method: :full_name,prompt: 'Select a Staff' %>
+								<% elsif current_user.staff? %>
+								<%= e.input :staff_id, collection: Advisor.where("employees.id IN (SELECT advisor_id FROM subject_staffs WHERE subject_staffs.subject_id = ?)",@ticket.subject_id), label_method: :full_name,prompt: 'Select an Advisor' %>
+								<% elsif current_user.head_of_department? %>
+								<%= e.input :staff_id, collection: Staff.all , label_method: :full_name,prompt: 'Select a Staff' %>
+								<% end %>
 								<% end %>
 								<button class="btn btn-primary" type="submit">Save</button>
 								<% end %>

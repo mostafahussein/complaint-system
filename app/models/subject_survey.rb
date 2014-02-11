@@ -14,7 +14,10 @@
 #
 
 class SubjectSurvey < ActiveRecord::Base
-  attr_accessible :subject_id , :survey_id
+  attr_accessible :subject_id , :survey_id, :student_id , :question_id, :answer_id
   belongs_to :survey
   belongs_to :subject
+  belongs_to :student
+  belongs_to :question
+  belongs_to :answer
 end
