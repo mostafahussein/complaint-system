@@ -1,3 +1,4 @@
+<% if current_user.admin? %>
 <ul>
 	<li>
 		<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'all' %>">
@@ -20,3 +21,4 @@
 	    </a>
 	  </li>
 </ul>
+<% end %>

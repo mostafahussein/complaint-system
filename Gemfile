@@ -20,6 +20,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'dynamic_form'
   gem 'jquery-ui-rails'
+  gem 'therubyracer'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -35,7 +36,6 @@ group :development do
   gem 'rails-erd'
   gem 'annotate', ">=2.6.0"
   gem 'pry-rails'
-  gem 'therubyracer'
   
 end
 
@@ -46,7 +46,8 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                               :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'faker'
-gem 'thin'
+#gem 'thin'
+gem 'unicorn-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
