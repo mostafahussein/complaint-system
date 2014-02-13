@@ -12,7 +12,7 @@
 				</div>
 				<div class="widget-body">
 					<%= simple_form_for(@survey, :html => {:class => 'form-horizontal' }) do |f| %>
-					<%= f.input :survey_name, placeholder: 'Enter Survey Name' %>
+					<%= f.input :survey_name, placeholder: 'Enter Survey Name',label: 'Survey Name:' %>
 					<%= f.simple_fields_for :questions do |builder| %>
 					<%= render 'question_fields', f: builder %>
 					<% end %>

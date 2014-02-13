@@ -1,0 +1,6 @@
+<% for answer in Answer.where("question_id = ?",question.id) %>
+					<%= radio_button_tag 'sv_sub[answer_id][]', answer.id %>
+					<%=h answer.content.humanize  %>
+					<hr>
+					<% end %>
+					<%= hidden_field_tag 'sv_sub[answer_id][]', '' %>

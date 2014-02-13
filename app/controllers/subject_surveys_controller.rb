@@ -13,6 +13,7 @@ class SubjectSurveysController < ApplicationController
 
 	def create
 		@sv_sub = SubjectSurvey.new(params[:subject_survey])
+		@sv_sub.save
 	end
 
 	def edit
@@ -20,10 +21,12 @@ class SubjectSurveysController < ApplicationController
 	end
 
 	def update
-		
+		@sv_sub = SubjectSurvey.find(params[:id])
+		@sv_sub.update_attributes(params[:subject_survey])
 	end
 
 	def destroy
-		
+		@sv_sub = SubjectSurvey.find(params[:id])
+		@sv_sub.destroy
 	end
 end

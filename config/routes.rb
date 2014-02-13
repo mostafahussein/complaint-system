@@ -49,6 +49,7 @@ SweComplaint::Application.routes.draw do
    end
    
    resources :subject_staffs
+   resources :subject_surveys
    
    resources :kbs
    resources :responses

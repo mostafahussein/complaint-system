@@ -1,5 +1,4 @@
 <fieldset>
   <%= f.input :content, label: "Answer", placeholder: 'Answer goes here', input_html: {class: 'input-xlarge'} %>
-  <%= f.input :_destroy, as: :hidden %>
-  <%= link_to "remove", '#', class: "remove_fields" %>
+  <%= f.input :_destroy, as: :boolean, label: 'Remove Answer', boolean_style: :inline %>
 </fieldset>

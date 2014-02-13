@@ -14,7 +14,8 @@
 #
 
 class Question < ActiveRecord::Base
-  attr_accessible  :content, :survey_id, :answers_attributes
+	include Modules::DefaultValues
+  attr_accessible  :content, :survey_id, :answers_attributes, :question_type
   belongs_to :survey
   has_many :answers
   accepts_nested_attributes_for :answers, allow_destroy: true
