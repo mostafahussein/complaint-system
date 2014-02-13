@@ -15,7 +15,6 @@
 					<%= f.input :survey_name, placeholder: 'Enter Survey Name',label: 'Survey Name:' %>
 					<%= f.simple_fields_for :questions do |builder| %>
 					<%= render 'question_fields', f: builder %>
-					<hr style="border-top: 1px solid #000000;">
 					<% end %>
 					<%= link_to_add_fields "Add Question", f, :questions %>
 					<div class="form-actions no-margin">
