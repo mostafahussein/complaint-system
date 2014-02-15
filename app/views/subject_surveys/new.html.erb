@@ -10,51 +10,39 @@
 						</span>
 					</div>
 				</div>
-				<div class="widget-body">
-					
-
-					<%= simple_form_for(@sv_sub, :html => {:class => 'form-horizontal' }) do |f| %>
-					<% q = 0 %>
-					<% Survey.find(1).questions.each do |question| %>
-					<% q = q + 1%>
-					
-					
-					<%= hidden_field_tag 'subject_survey[survey_id]', '1' %>
-					Q<%= q %>- <%= question.content %>
-					<%= hidden_field_tag 'subject_survey[question_id]', "#{question.id}" %>
-					<hr>
-					
-					<% if question.question_type == "#{Question::CHECK}" %>
-					
-					<% for answer in Answer.where("question_id = ?",question.id) %>
-					<%= check_box_tag 'sv_sub[answer_id][]', answer.id %>
-					<%=h answer.content.humanize  %>
-					<hr>
-					<% end %>
-					<%= hidden_field_tag 'sv_sub[answer_id][]', '' %>
-
-					<% elsif question.question_type == "#{Question::RADIO}" %>
-					
-					<% for answer in Answer.where("question_id = ?",question.id) %>
-					<%= radio_button_tag 'sv_sub[answer_id][]', answer.id %>
-					<%=h answer.content.humanize  %>
-					<hr>
-					<% end %>
-					<%= hidden_field_tag 'sv_sub[answer_id][]', '' %>
-					
-					<% end %>
-					<% end %>
-					<div class="form-actions no-margin">
-						<button type="submit" class="btn btn-info pull-right">
-							Submit
-						</button>
-						<div class="clearfix">
+				<div class="widget-body">				
+					<%= form_tag('/subject_surveys', method: :post, class: 'form-horizontal' ) do %>	
+						<% q = 0 %>
+						<% Survey.find(1).questions.order("questions.id asc").each do |question| %>
+							<% q += 1%>
+							<%= hidden_field_tag 'subject_survey[student_id]', "#{current_user.student.id}" %>
+							<%= hidden_field_tag 'subject_survey[survey_id]', '1' %>
+							<h6>Q<%= q %>- <%= question.content %></h6>
+							<div class="clearfix"></div><div class="clearfix"></div>
+							<% if question.question_type == "#{Question::CHECK}" %>
+								<% question.answers.each do |answer| %>
+									<%= check_box_tag "subject_survey[questions][#{question.id}][answer_id]", "#{answer.id}" %>
+									<%= answer.content  %>
+									<div class="clearfix"></div>
+								<% end %>
+							<% elsif question.question_type == "#{Question::RADIO}" %>
+								<% question.answers.each do |answer| %>
+									<%= radio_button_tag "subject_survey[questions][#{question.id}][answer_id]", "#{answer.id}" %>
+									<%= answer.content %>
+									<div class="clearfix"></div>
+								<% end %>
+							<% end %>
+							<% if question.id == Survey.find(1).questions.order("questions.id asc").last.id %>
+								<br>
+							<% else %>
+								<hr style="border-top: 1px solid #000000;">
+							<% end %>
+						<% end %>
+						<div class="form-actions no-margin">
+						<%= submit_tag "Submit", class: "btn btn-info pull-right" %>
+							<div class="clearfix"></div>
 						</div>
-					</div>
-
 					<% end %>
-
-
 				</div>
 			</div>
 		</div>

@@ -12,8 +12,19 @@ class SubjectSurveysController < ApplicationController
 	end
 
 	def create
-		@sv_sub = SubjectSurvey.new(params[:subject_survey])
-		@sv_sub.save
+		params[:subject_survey][:questions].each do |question, answer|
+        	@sv_sub = SubjectSurvey.create(
+            student_id: params[:subject_survey][:student_id],
+            survey_id: params[:subject_survey][:survey_id],
+            question_id: question,
+            answer_id: answer[:answer_id])
+    	end
+		
+		if @sv_sub.save
+      		redirect_to surveys_path, notice: "Success."
+    	else
+      		render :new, notice: "Failed."
+    	end
 	end
 
 	def edit
