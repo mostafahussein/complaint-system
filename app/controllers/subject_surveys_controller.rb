@@ -17,7 +17,7 @@ class SubjectSurveysController < ApplicationController
             student_id: params[:subject_survey][:student_id],
             survey_id: params[:subject_survey][:survey_id],
             question_id: question,
-            answer_id: answer[:answer_id])
+            answer_id: answer)
     	end
 		
 		if @sv_sub.save

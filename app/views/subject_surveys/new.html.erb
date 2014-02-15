@@ -21,13 +21,13 @@
 							<div class="clearfix"></div><div class="clearfix"></div>
 							<% if question.question_type == "#{Question::CHECK}" %>
 								<% question.answers.each do |answer| %>
-									<%= check_box_tag "subject_survey[questions][#{question.id}][answer_id]", "#{answer.id}" %>
+									<%= check_box_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %>
 									<%= answer.content  %>
 									<div class="clearfix"></div>
 								<% end %>
 							<% elsif question.question_type == "#{Question::RADIO}" %>
 								<% question.answers.each do |answer| %>
-									<%= radio_button_tag "subject_survey[questions][#{question.id}][answer_id]", "#{answer.id}" %>
+									<%= radio_button_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %>
 									<%= answer.content %>
 									<div class="clearfix"></div>
 								<% end %>
