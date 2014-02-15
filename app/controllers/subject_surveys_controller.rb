@@ -40,4 +40,16 @@ class SubjectSurveysController < ApplicationController
 		@sv_sub = SubjectSurvey.find(params[:id])
 		@sv_sub.destroy
 	end
+
+	 private
+  def set_subject
+    @title = Subject.find(params[:subject_id]).subject_title
+    @subject = Subject.find(params[:subject_id]).id
+  end
+
+  def set_user
+    if current_user.student
+      @student = current_user.student.id
+    end
+  end
 end

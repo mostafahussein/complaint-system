@@ -25,7 +25,7 @@
 							<tr>
 								<td><%= link_to survey.survey_name, survey %></td>
 								<td><%= pluralize(survey.questions.size, "Question") %></td>
-								<td><a href="<%= edit_survey_path(survey) %>" rel="tooltip" title="Update Survey">update</a> | <%= link_to "delete", survey, method: :delete, data: { confirm: "#{survey.survey_name} will be deleted, proceed?" } %> | <a href="#" rel="tooltip" title="Assign Survey to Subjects">Related to (Assigned Subjects)</a> </td>
+								<td><a href="<%= edit_survey_path(survey) %>" rel="tooltip" title="Update Survey">update</a> | <%= link_to "delete", survey, method: :delete, data: { confirm: "#{survey.survey_name} will be deleted, proceed?" } %> | <%= link_to 'Subjects Related', survey, remote: true %></td>
 							</tr>
 							<% end %>
 						</tbody>
@@ -42,3 +42,4 @@ $('#surveys').dataTable({
 	"sPaginationType": "full_numbers"
 });
 </script>
+<%= render "surveys/modal" %>

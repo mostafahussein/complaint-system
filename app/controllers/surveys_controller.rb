@@ -5,6 +5,11 @@ class SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js # show.js.erb
+      format.json { render json: @survey }
+    end
   end
 
   def new

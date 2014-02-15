@@ -40,7 +40,7 @@ SweComplaint::Application.routes.draw do
    end
 
    resources :subjects do
-     resources :questionnaires
+     resources :subject_surveys
      resources :tickets
      collection do
        get :assign_advisors
@@ -49,7 +49,7 @@ SweComplaint::Application.routes.draw do
    end
    
    resources :subject_staffs
-   resources :subject_surveys
+   
    
    resources :kbs
    resources :responses

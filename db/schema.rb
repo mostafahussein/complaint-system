@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140213144631) do
+ActiveRecord::Schema.define(:version => 20140215200155) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20140213144631) do
     t.string   "subject_code",  :limit => 10
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+    t.integer  "survey_id"
   end
 
   add_index "subjects", ["subject_title"], :name => "index_subjects_on_subject_title"

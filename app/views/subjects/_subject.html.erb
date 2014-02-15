@@ -1,0 +1,12 @@
+	<p><%= simple_form_for(@subject) do |f| %>
+		<% for survey in Survey.all %>
+		<%= radio_button_tag "subject[survey_id]", "#{survey.id}", @subject.survey %>
+		<%= survey.survey_name %>
+			<% end %>
+		</p>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<%= f.button :submit, 'Save changes', :class => "btn btn-primary" %>
+		<% end %>
+	</div>
