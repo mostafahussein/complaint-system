@@ -10,13 +10,14 @@
 						</span>
 					</div>
 				</div>
-				<div class="widget-body">				
-					<%= form_tag('/subject_surveys', method: :post, class: 'form-horizontal' ) do %>	
+				<div class="widget-body">
+				<%= simple_form_for(@sv_sub,url: subject_subject_surveys_path(@subject), html: { class: 'form-horizontal' }) do %>					
 						<% q = 0 %>
-						<% Survey.find(1).questions.order("questions.id asc").each do |question| %>
+						<% @survey.questions.order("questions.id asc").each do |question| %>
 							<% q += 1%>
-							<%= hidden_field_tag 'subject_survey[student_id]', "#{current_user.student.id}" %>
-							<%= hidden_field_tag 'subject_survey[survey_id]', '1' %>
+							<%= hidden_field_tag 'subject_survey[student_id]', "#{@student}" %>
+							<%= hidden_field_tag 'subject_survey[subject_id]', "#{@subject}" %>
+							<%= hidden_field_tag 'subject_survey[survey_id]', "#{@survey.id}" %>
 							<h6>Q<%= q %>- <%= question.content %></h6>
 							<div class="clearfix"></div><div class="clearfix"></div>
 							<% if question.question_type == "#{Question::CHECK}" %>

@@ -86,7 +86,7 @@
 							<tr>
 								<td><%= subject.subject_code %></td>
 								<td><%= subject.subject_title %></td>
-								<td><a href="<%= new_subject_ticket_path(subject) %>">Make a Complaint</a></td>
+								<td><a href="<%= new_subject_ticket_path(subject) %>">Make a Complaint</a> | <a href="<%= new_subject_subject_survey_path(subject) %>">Take a Survey</a></td>
 							</tr>
 							<% end %>
 						</tbody>
