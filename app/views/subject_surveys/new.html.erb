@@ -4,7 +4,7 @@
 			<div class="widget">
 				<div class="widget-header">
 					<div class="title">
-						Sample Course Evaluation
+						<%= "#{@survey.survey_name.titleize} for #{@subject.subject_title.titleize}" %>
 						<span class="mini-title" style= "display:none;">
 							#
 						</span>
@@ -16,21 +16,23 @@
 						<% @survey.questions.order("questions.id asc").each do |question| %>
 							<% q += 1%>
 							<%= hidden_field_tag 'subject_survey[student_id]', "#{@student}" %>
-							<%= hidden_field_tag 'subject_survey[subject_id]', "#{@subject}" %>
+							<%= hidden_field_tag 'subject_survey[subject_id]', "#{@subject.id}" %>
 							<%= hidden_field_tag 'subject_survey[survey_id]', "#{@survey.id}" %>
-							<h6>Q<%= q %>- <%= question.content %></h6>
-							<div class="clearfix"></div><div class="clearfix"></div>
+							<%= label_tag 'question', "Q#{q}- #{question.content.capitalize}" %>
+							<div class='clearfix'></div><div class='clearfix'></div>
 							<% if question.question_type == "#{Question::CHECK}" %>
 								<% question.answers.each do |answer| %>
 									<%= check_box_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %>
-									<%= answer.content  %>
-									<div class="clearfix"></div>
+									<%= answer.content.capitalize  %>
+									<div class='clearfix'></div>
 								<% end %>
 							<% elsif question.question_type == "#{Question::RADIO}" %>
 								<% question.answers.each do |answer| %>
+								<%= content_tag_for(:div, answer) do %>
 									<%= radio_button_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %>
-									<%= answer.content %>
-									<div class="clearfix"></div>
+									<%= label_tag 'answer', "#{answer.content.capitalize}", style: 'display:inline' %>
+									<div class='clearfix'></div>
+									<% end %>
 								<% end %>
 							<% end %>
 							<% if question.id == Survey.find(1).questions.order("questions.id asc").last.id %>
@@ -41,7 +43,7 @@
 						<% end %>
 						<div class="form-actions no-margin">
 						<%= submit_tag "Submit", class: "btn btn-info pull-right" %>
-							<div class="clearfix"></div>
+							<div class='clearfix'></div>
 						</div>
 					<% end %>
 				</div>
