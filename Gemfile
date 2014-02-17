@@ -46,8 +46,8 @@ gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-ra
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                               :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'faker'
-#gem 'thin'
-gem 'unicorn-rails'
+gem 'thin'
+#gem 'unicorn-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

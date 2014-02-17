@@ -11,7 +11,7 @@ module Modules
     SATISFACTION = [S_VDIS = 'very dissatisfied', S_DIS = 'dissatisfied', S_NEU = 'neutral', SAT = 'satisfied', S_SAT = 'very satisfied']
     RATE = [R_SDIS = 'strongly disagree', R_DIS = 'disagree', R_NEU = 'neutral', AG = 'agree', R_AG = 'strongly agree']
     COLOR = [H_COLOR = '#FEE7E7', N_COLOR = '#FFFFF0', L_COLOR = '#DDFFDD']
-    CATEGORY = [EXAM = 'exam' , MATERIAL = "subject material" , CLASSROOM = 'classroom' , INSTRUCTOR = "subject instructor"]
-    QUEST_TYPE = [RADIO = 'as radiobuttons', CHECK = 'as checkboxes', BOX = 'as textbox', AREA = 'as textarea', LIST = 'as dropdown list']
+    CATEGORY = [EXAM = 'exam' , MATERIAL = "subject material" , CLASSROOM = 'classroom' , INSTRUCTOR = "subject instructor", OTHER = 'others']
+    QUEST_TYPE = [RADIO = 'multiple choice', CHECK = 'checkboxes', BOX = 'text', AREA = 'pragraph text', LIST = 'choose from a list', GRID = 'grid']
   end
 end
