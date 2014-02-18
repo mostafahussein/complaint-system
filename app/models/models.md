@@ -2,7 +2,7 @@
 #
  Table name: `employees`
 #
- ### Columns
+### Columns
 #
  Name                          | Type               | Attributes
  ----------------------------- | ------------------ | ---------------------------
@@ -16,13 +16,13 @@
  **`created_at`**              | `datetime`         | `not null`
  **`updated_at`**              | `datetime`         | `not null`
 #
- ### Indexes
+### Indexes
 #
 `index_employees_on_full_name`: **`full_name`** 
 #
  Table name: `answers`
 #
- ### Columns
+### Columns
 #
  Name               | Type               | Attributes
  ------------------ | ------------------ | ---------------------------
@@ -34,7 +34,7 @@
 #
  Table name: `attends`
 #
- ### Columns
+### Columns
 #
  Name              | Type               | Attributes
  ----------------- | ------------------ | ---------------------------
@@ -44,181 +44,178 @@
  **`created_at`**  | `datetime`         | `not null`
  **`updated_at`**  | `datetime`         | `not null`
 #
-# Table name: `batches`
+Table name: `batches`
 #
-# ### Columns
+### Columns
 #
-# Name              | Type               | Attributes
-# ----------------- | ------------------ | ---------------------------
-# **`id`**          | `integer`          | `not null, primary key`
-# **`batch_name`**  | `string(255)`      |
-# **`created_at`**  | `datetime`         | `not null`
-# **`updated_at`**  | `datetime`         | `not null`
+ Name              | Type               | Attributes
+ ----------------- | ------------------ | ---------------------------
+ **`id`**          | `integer`          | `not null, primary key`
+ **`batch_name`**  | `string(255)`      |
+ **`created_at`**  | `datetime`         | `not null`
+ **`updated_at`**  | `datetime`         | `not null`
 #
-# Table name: `categories`
+ Table name: `categories`
 #
-# ### Columns
+### Columns
 #
-# Name                 | Type               | Attributes
-# -------------------- | ------------------ | ---------------------------
-# **`id`**             | `integer`          | `not null, primary key`
-# **`category_name`**  | `string(255)`      |
-# **`created_at`**     | `datetime`         | `not null`
-# **`updated_at`**     | `datetime`         | `not null`
+ Name                 | Type               | Attributes
+ -------------------- | ------------------ | ---------------------------
+ **`id`**             | `integer`          | `not null, primary key`
+ **`category_name`**  | `string(255)`      |
+ **`created_at`**     | `datetime`         | `not null`
+ **`updated_at`**     | `datetime`         | `not null`
 #
-# Table name: `employee_departments`
+ Table name: `employee_departments`
 #
-# ### Columns
+### Columns
 #
-# Name                   | Type               | Attributes
-# ---------------------- | ------------------ | ---------------------------
-# **`id`**               | `integer`          | `not null, primary key`
-# **`department_name`**  | `string(30)`       |
-# **`created_at`**       | `datetime`         | `not null`
-# **`updated_at`**       | `datetime`         | `not null`
+ Name                   | Type               | Attributes
+ ---------------------- | ------------------ | ---------------------------
+ **`id`**               | `integer`          | `not null, primary key`
+ **`department_name`**  | `string(30)`       |
+ **`created_at`**       | `datetime`         | `not null`
+ **`updated_at`**       | `datetime`         | `not null`
 #
-# Table name: `employee_positions`
+ Table name: `employee_positions`
 #
-# ### Columns
+### Columns
 #
-# Name                  | Type               | Attributes
-# --------------------- | ------------------ | ---------------------------
-# **`id`**              | `integer`          | `not null, primary key`
-# **`position_title`**  | `string(30)`       |
-# **`created_at`**      | `datetime`         | `not null`
-# **`updated_at`**      | `datetime`         | `not null`
+ Name                  | Type               | Attributes
+ --------------------- | ------------------ | ---------------------------
+ **`id`**              | `integer`          | `not null, primary key`
+ **`position_title`**  | `string(30)`       |
+ **`created_at`**      | `datetime`         | `not null`
+ **`updated_at`**      | `datetime`         | `not null`
 #
-# Table name: `follow_ups`
+ Table name: `follow_ups`
 #
-# ### Columns
+### Columns
 #
-# Name               | Type               | Attributes
-# ------------------ | ------------------ | ---------------------------
-# **`id`**           | `integer`          | `not null, primary key`
-# **`text`**         | `string(140)`      |
-# **`ticket_id`**    | `integer`          |
-# **`user_id`**      | `integer`          |
-# **`priority_id`**  | `integer`          |
-# **`created_at`**   | `datetime`         | `not null`
-# **`updated_at`**   | `datetime`         | `not null`
+ Name               | Type               | Attributes
+ ------------------ | ------------------ | ---------------------------
+ **`id`**           | `integer`          | `not null, primary key`
+ **`text`**         | `string(140)`      |
+ **`ticket_id`**    | `integer`          |
+ **`user_id`**      | `integer`          |
+ **`priority_id`**  | `integer`          |
+ **`created_at`**   | `datetime`         | `not null`
+ **`updated_at`**   | `datetime`         | `not null`
 #
-# Table name: `kbs`
+ Table name: `kbs`
 #
-# ### Columns
+### Columns
 #
-# Name                | Type               | Attributes
-# ------------------- | ------------------ | ---------------------------
-# **`id`**            | `integer`          | `not null, primary key`
-# **`faq_question`**  | `string(255)`      |
-# **`faq_answer`**    | `string(255)`      |
-# **`category`**      | `string(255)`      |
-# **`created_at`**    | `datetime`         | `not null`
-# **`updated_at`**    | `datetime`         | `not null`
+ Name                | Type               | Attributes
+ ------------------- | ------------------ | ---------------------------
+ **`id`**            | `integer`          | `not null, primary key`
+ **`faq_question`**  | `string(255)`      |
+ **`faq_answer`**    | `string(255)`      |
+ **`category`**      | `string(255)`      |
+ **`created_at`**    | `datetime`         | `not null`
+ **`updated_at`**    | `datetime`         | `not null`
 #
-# Table name: `priorities`
+ Table name: `priorities`
 #
-# ### Columns
+### Columns
 #
-# Name                 | Type               | Attributes
-# -------------------- | ------------------ | ---------------------------
-# **`id`**             | `integer`          | `not null, primary key`
-# **`priority_name`**  | `string(15)`       |
-# **`color`**          | `string(10)`       |
-# **`background`**     | `string(10)`       |
-# **`created_at`**     | `datetime`         | `not null`
-# **`updated_at`**     | `datetime`         | `not null`
+ Name                 | Type               | Attributes
+ -------------------- | ------------------ | ---------------------------
+ **`id`**             | `integer`          | `not null, primary key`
+ **`priority_name`**  | `string(15)`       |
+ **`color`**          | `string(10)`       |
+ **`background`**     | `string(10)`       |
+ **`created_at`**     | `datetime`         | `not null`
+ **`updated_at`**     | `datetime`         | `not null`
 #
-# ### Indexes
+### Indexes
 #
-# * `index_priorities_on_priority_name`:
-#     * **`priority_name`**
+ `index_priorities_on_priority_name`: **`priority_name`**
 #
-# Table name: `questions`
+Table name: `questions`
 #
-# ### Columns
+### Columns
 #
-# Name                     | Type               | Attributes
-# ------------------------ | ------------------ | ---------------------------
-# **`id`**                 | `integer`          | `not null, primary key`
-# **`survey_id`**          | `integer`          |
-# **`content`**            | `string(255)`      |
-# **`created_at`**         | `datetime`         | `not null`
-# **`updated_at`**         | `datetime`         | `not null`
-# **`question_type`**      | `string(255)`      |
-# **`help_text`**          | `string(255)`      |
-# **`required_question`**  | `boolean`          | `default(TRUE)`
+ Name                     | Type               | Attributes
+ ------------------------ | ------------------ | ---------------------------
+ **`id`**                 | `integer`          | `not null, primary key`
+ **`survey_id`**          | `integer`          |
+ **`content`**            | `string(255)`      |
+ **`created_at`**         | `datetime`         | `not null`
+ **`updated_at`**         | `datetime`         | `not null`
+ **`question_type`**      | `string(255)`      |
+ **`help_text`**          | `string(255)`      |
+ **`required_question`**  | `boolean`          | `default(TRUE)`
 #
-# Table name: `responses`
+Table name: `responses`
 #
-# ### Columns
+### Columns
 #
-# Name                   | Type               | Attributes
-# ---------------------- | ------------------ | ---------------------------
-# **`id`**               | `integer`          | `not null, primary key`
-# **`canned_response`**  | `string(255)`      |
-# **`created_at`**       | `datetime`         | `not null`
-# **`updated_at`**       | `datetime`         | `not null`
+ Name                   | Type               | Attributes
+ ---------------------- | ------------------ | ---------------------------
+ **`id`**               | `integer`          | `not null, primary key`
+**`canned_response`**  | `string(255)`      |
+**`created_at`**       | `datetime`         | `not null`
+**`updated_at`**       | `datetime`         | `not null`
 #
-# Table name: `sections`
+Table name: `sections`
 #
-# ### Columns
+### Columns
 #
-# Name                | Type               | Attributes
-# ------------------- | ------------------ | ---------------------------
-# **`id`**            | `integer`          | `not null, primary key`
-# **`section_name`**  | `string(255)`      |
-# **`batch_id`**      | `integer`          |
-# **`created_at`**    | `datetime`         | `not null`
-# **`updated_at`**    | `datetime`         | `not null`
+ Name                | Type               | Attributes
+ ------------------- | ------------------ | ---------------------------
+ **`id`**            | `integer`          | `not null, primary key`
+ **`section_name`**  | `string(255)`      |
+ **`batch_id`**      | `integer`          |
+ **`created_at`**    | `datetime`         | `not null`
+ **`updated_at`**    | `datetime`         | `not null`
 #
-# Table name: `statuses`
+ Table name: `statuses`
 #
-# ### Columns
+### Columns
 #
-# Name                 | Type               | Attributes
-# -------------------- | ------------------ | ---------------------------
-# **`id`**             | `integer`          | `not null, primary key`
-# **`ticket_status`**  | `string(15)`       |
-# **`created_at`**     | `datetime`         | `not null`
-# **`updated_at`**     | `datetime`         | `not null`
+ Name                 | Type               | Attributes
+ -------------------- | ------------------ | ---------------------------
+ **`id`**             | `integer`          | `not null, primary key`
+ **`ticket_status`**  | `string(15)`       |
+ **`created_at`**     | `datetime`         | `not null`
+ **`updated_at`**     | `datetime`         | `not null`
 #
-# ### Indexes
+### Indexes
 #
-# * `index_statuses_on_ticket_status`:
-#     * **`ticket_status`**
+`index_statuses_on_ticket_status`:**`ticket_status`**
 #
-# Table name: `students`
+Table name: `students`
 #
-# ### Columns
+### Columns
 #
-# Name              | Type               | Attributes
-# ----------------- | ------------------ | ---------------------------
-# **`id`**          | `integer`          | `not null, primary key`
-# **`full_name`**   | `string(30)`       |
-# **`gender`**      | `string(6)`        |
-# **`user_id`**     | `integer`          |
-# **`batch_id`**    | `integer`          |
-# **`section_id`**  | `integer`          |
-# **`created_at`**  | `datetime`         | `not null`
-# **`updated_at`**  | `datetime`         | `not null`
+ Name              | Type               | Attributes
+ ----------------- | ------------------ | ---------------------------
+ **`id`**          | `integer`          | `not null, primary key`
+ **`full_name`**   | `string(30)`       |
+ **`gender`**      | `string(6)`        |
+ **`user_id`**     | `integer`          |
+ **`batch_id`**    | `integer`          |
+ **`section_id`**  | `integer`          |
+ **`created_at`**  | `datetime`         | `not null`
+ **`updated_at`**  | `datetime`         | `not null`
 #
-# ### Indexes
+### Indexes
 #
-# * `index_students_on_full_name`:
-#     * **`full_name`**
+`index_students_on_full_name`:**`full_name`**
 #
-# Table name: `subjects`
+Table name: `subjects`
 #
-# ### Columns
+### Columns
 #
-# Name                 | Type               | Attributes
-# -------------------- | ------------------ | ---------------------------
-# **`id`**             | `integer`          | `not null, primary key`
-# **`subject_title`**  | `string(255)`      |
-# **`subject_code`**   | `string(10)`       |
-# **`created_at`**     | `datetime`         | `not null`
-# **`updated_at`**     | `datetime`         | `not null`
-# **`survey_id`**      | `integer`          |
+ Name                 | Type               | Attributes
+ -------------------- | ------------------ | ---------------------------
+ **`id`**             | `integer`          | `not null, primary key`
+ **`subject_title`**  | `string(255)`      |
+ **`subject_code`**   | `string(10)`       |
+ **`created_at`**     | `datetime`         | `not null`
+ **`updated_at`**     | `datetime`         | `not null`
+ **`survey_id`**      | `integer`          |
 #
 # ### Indexes
 #
