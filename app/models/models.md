@@ -57,7 +57,7 @@
 #
 ###  Table name: `categories`
 #
-# Columns
+ Columns
 #
  Name                 | Type               | Attributes
  -------------------- | ------------------ | ---------------------------
@@ -181,7 +181,7 @@
  **`created_at`**     | `datetime`         | `not null`
  **`updated_at`**     | `datetime`         | `not null`
 #
-# Indexes
+ Indexes
 #
 `index_statuses_on_ticket_status`:**`ticket_status`**
 #
