@@ -4,13 +4,16 @@
 #
 # ### Columns
 #
-# Name              | Type               | Attributes
-# ----------------- | ------------------ | ---------------------------
-# **`id`**          | `integer`          | `not null, primary key`
-# **`survey_id`**   | `integer`          |
-# **`subject_id`**  | `integer`          |
-# **`created_at`**  | `datetime`         | `not null`
-# **`updated_at`**  | `datetime`         | `not null`
+# Name               | Type               | Attributes
+# ------------------ | ------------------ | ---------------------------
+# **`id`**           | `integer`          | `not null, primary key`
+# **`survey_id`**    | `integer`          |
+# **`subject_id`**   | `integer`          |
+# **`created_at`**   | `datetime`         | `not null`
+# **`updated_at`**   | `datetime`         | `not null`
+# **`question_id`**  | `integer`          |
+# **`answer_id`**    | `integer`          |
+# **`student_id`**   | `integer`          |
 #
 
 class SubjectSurvey < ActiveRecord::Base

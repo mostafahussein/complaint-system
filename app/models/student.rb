@@ -15,6 +15,11 @@
 # **`created_at`**  | `datetime`         | `not null`
 # **`updated_at`**  | `datetime`         | `not null`
 #
+# ### Indexes
+#
+# * `index_students_on_full_name`:
+#     * **`full_name`**
+#
 
 class Student < ActiveRecord::Base
   include Modules::DefaultValues

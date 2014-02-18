@@ -16,6 +16,11 @@
 # **`created_at`**              | `datetime`         | `not null`
 # **`updated_at`**              | `datetime`         | `not null`
 #
+# ### Indexes
+#
+# * `index_employees_on_full_name`:
+#     * **`full_name`**
+#
 
 class Employee < ActiveRecord::Base
   include Modules::DefaultValues

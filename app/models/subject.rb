@@ -11,6 +11,12 @@
 # **`subject_code`**   | `string(10)`       |
 # **`created_at`**     | `datetime`         | `not null`
 # **`updated_at`**     | `datetime`         | `not null`
+# **`survey_id`**      | `integer`          |
+#
+# ### Indexes
+#
+# * `index_subjects_on_subject_title`:
+#     * **`subject_title`**
 #
 
 class Subject < ActiveRecord::Base

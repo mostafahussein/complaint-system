@@ -7,11 +7,11 @@ module Modules
     POSITION = [SWE_MANAGER = 'head of department', SWE_STAFF = 'staff', STAD_ADVISOR = 'advisor']
     USER_TYPE = [TYPEA = 'admin', TYPEB = 'employee', TYPEC = 'student']
     GENDER = [MALE = 'male', FEMALE = 'female']
-    REASON = [MAJOR = 'required for major', MINOR = 'required for minor', ELECTIVE = 'elective']
-    SATISFACTION = [S_VDIS = 'very dissatisfied', S_DIS = 'dissatisfied', S_NEU = 'neutral', SAT = 'satisfied', S_SAT = 'very satisfied']
-    RATE = [R_SDIS = 'strongly disagree', R_DIS = 'disagree', R_NEU = 'neutral', AG = 'agree', R_AG = 'strongly agree']
+    # REASON = [MAJOR = 'Required For Major', MINOR = 'Required For Minor', ELECTIVE = 'Elective']
+    # SATISFACTION = [S_VDIS = 'very dissatisfied', S_DIS = 'dissatisfied', S_NEU = 'neutral', SAT = 'satisfied', S_SAT = 'very satisfied']
+    # RATE = [R_SDIS = 'strongly disagree', R_DIS = 'disagree', R_NEU = 'neutral', AG = 'agree', R_AG = 'strongly agree']
     COLOR = [H_COLOR = '#FEE7E7', N_COLOR = '#FFFFF0', L_COLOR = '#DDFFDD']
     CATEGORY = [EXAM = 'exam' , MATERIAL = "subject material" , CLASSROOM = 'classroom' , INSTRUCTOR = "subject instructor", OTHER = 'others']
-    QUEST_TYPE = [RADIO = 'multiple choice', CHECK = 'checkboxes', BOX = 'text', AREA = 'pragraph text', LIST = 'choose from a list', GRID = 'grid']
+    QUEST_TYPE = [RADIO = 'Multiple Choice', CHECK = 'Checkboxes', BOX = 'Text', AREA = 'Pragraph Text', LIST = 'Choose From A List', GRID = 'Grid']
   end
 end

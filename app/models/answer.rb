@@ -17,4 +17,8 @@ class Answer < ActiveRecord::Base
   attr_accessible :content, :question_id
   belongs_to :question
   has_many :subject_surveys
+
+  def answer_for_select
+  content.capitalize
+end
 end

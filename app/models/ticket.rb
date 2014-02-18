@@ -19,6 +19,11 @@
 # **`created_at`**             | `datetime`         | `not null`
 # **`updated_at`**             | `datetime`         | `not null`
 #
+# ### Indexes
+#
+# * `index_tickets_on_id`:
+#     * **`id`**
+#
 
 class Ticket < ActiveRecord::Base
   include PublicActivity::Model

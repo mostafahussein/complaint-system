@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140215200155) do
+ActiveRecord::Schema.define(:version => 20140217155732) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -111,9 +111,11 @@ ActiveRecord::Schema.define(:version => 20140215200155) do
   create_table "questions", :force => true do |t|
     t.integer  "survey_id"
     t.string   "content"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "question_type"
+    t.string   "help_text"
+    t.boolean  "required_question", :default => true
   end
 
   create_table "responses", :force => true do |t|
