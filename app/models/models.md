@@ -2,7 +2,7 @@
 #
 ###  Table name: `employees`
 #
-# Columns
+ Columns
 #
  Name                          | Type               | Attributes
  ----------------------------- | ------------------ | ---------------------------
@@ -16,13 +16,13 @@
  **`created_at`**              | `datetime`         | `not null`
  **`updated_at`**              | `datetime`         | `not null`
 #
-# Indexes
+ Indexes
 #
 `index_employees_on_full_name`: **`full_name`** 
 #
 ###  Table name: `answers`
 #
-# Columns
+ Columns
 #
  Name               | Type               | Attributes
  ------------------ | ------------------ | ---------------------------
@@ -34,7 +34,7 @@
 #
 ###  Table name: `attends`
 #
-# Columns
+ Columns
 #
  Name              | Type               | Attributes
  ----------------- | ------------------ | ---------------------------
@@ -46,7 +46,7 @@
 #
 ### Table name: `batches`
 #
-# Columns
+ Columns
 #
  Name              | Type               | Attributes
  ----------------- | ------------------ | ---------------------------
@@ -68,7 +68,7 @@
 #
 ###  Table name: `employee_departments`
 #
-# Columns
+ Columns
 #
  Name                   | Type               | Attributes
  ---------------------- | ------------------ | ---------------------------
@@ -79,7 +79,7 @@
 #
 ###  Table name: `employee_positions`
 #
-# Columns
+ Columns
 #
  Name                  | Type               | Attributes
  --------------------- | ------------------ | ---------------------------
@@ -90,7 +90,7 @@
 #
 ###  Table name: `follow_ups`
 #
-# Columns
+ Columns
 #
  Name               | Type               | Attributes
  ------------------ | ------------------ | ---------------------------
@@ -104,7 +104,7 @@
 #
 ###  Table name: `kbs`
 #
-# Columns
+ Columns
 #
  Name                | Type               | Attributes
  ------------------- | ------------------ | ---------------------------
@@ -117,7 +117,7 @@
 #
 ###  Table name: `priorities`
 #
-# Columns
+ Columns
 #
  Name                 | Type               | Attributes
  -------------------- | ------------------ | ---------------------------
@@ -128,13 +128,13 @@
  **`created_at`**     | `datetime`         | `not null`
  **`updated_at`**     | `datetime`         | `not null`
 #
-# Indexes
+ Indexes
 #
  `index_priorities_on_priority_name`: **`priority_name`**
 #
 ### Table name: `questions`
 #
-# Columns
+ Columns
 #
  Name                     | Type               | Attributes
  ------------------------ | ------------------ | ---------------------------
@@ -149,7 +149,7 @@
 #
 ### Table name: `responses`
 #
-# Columns
+ Columns
 #
  Name                   | Type               | Attributes
  ---------------------- | ------------------ | ---------------------------
@@ -160,7 +160,7 @@
 #
 ### Table name: `sections`
 #
-# Columns
+ Columns
 #
  Name                | Type               | Attributes
  ------------------- | ------------------ | ---------------------------
@@ -172,7 +172,7 @@
 #
 ###  Table name: `statuses`
 #
-# Columns
+ Columns
 #
  Name                 | Type               | Attributes
  -------------------- | ------------------ | ---------------------------
@@ -187,7 +187,7 @@
 #
 ### Table name: `students`
 #
-# Columns
+ Columns
 #
  Name              | Type               | Attributes
  ----------------- | ------------------ | ---------------------------
@@ -200,13 +200,13 @@
  **`created_at`**  | `datetime`         | `not null`
  **`updated_at`**  | `datetime`         | `not null`
 #
-# Indexes
+ Indexes
 #
 `index_students_on_full_name`:**`full_name`**
 #
 ### Table name: `subjects`
 #
-# Columns
+ Columns
 #
  Name                 | Type               | Attributes
  -------------------- | ------------------ | ---------------------------
@@ -217,13 +217,13 @@
  **`updated_at`**     | `datetime`         | `not null`
  **`survey_id`**      | `integer`          |
 #
-# Indexes
+ Indexes
 #
 `index_subjects_on_subject_title`:**`subject_title`**
 #
 ###  Table name: `subject_staffs`
 #
-# Columns
+ Columns
 #
  Name              | Type               | Attributes
  ----------------- | ------------------ | ---------------------------
@@ -236,7 +236,7 @@
 #
 ###  Table name: `subject_surveys`
 #
-# Columns
+ Columns
 #
  Name               | Type               | Attributes
  ------------------ | ------------------ | ---------------------------
@@ -250,8 +250,8 @@
  **`student_id`**   | `integer`          |
 #
 ###  Table name: `surveys`
-#
-# Columns
+
+ Columns
 #
  Name               | Type               | Attributes
  ------------------ | ------------------ | ---------------------------
@@ -260,71 +260,68 @@
  **`created_at`**   | `datetime`         | `not null`
  **`updated_at`**   | `datetime`         | `not null`
 #
-# Table name: `tickets`
+### Table name: `tickets`
 #
-# ### Columns
+ Columns
 #
-# Name                         | Type               | Attributes
-# ---------------------------- | ------------------ | ---------------------------
-# **`id`**                     | `integer`          | `not null, primary key`
-# **`description`**            | `text`             |
-# **`student_id`**             | `integer`          |
-# **`subject_id`**             | `integer`          |
-# **`priority_id`**            | `integer`          |
-# **`due`**                    | `date`             |
-# **`category_id`**            | `integer`          |
-# **`date_of_alleged_event`**  | `date`             |
-# **`reason_of_delay`**        | `text`             |
-# **`expectations`**           | `text`             |
-# **`created_at`**             | `datetime`         | `not null`
-# **`updated_at`**             | `datetime`         | `not null`
+ Name                         | Type               | Attributes
+ ---------------------------- | ------------------ | ---------------------------
+ **`id`**                     | `integer`          | `not null, primary key`
+ **`description`**            | `text`             |
+ **`student_id`**             | `integer`          |
+ **`subject_id`**             | `integer`          |
+ **`priority_id`**            | `integer`          |
+ **`due`**                    | `date`             |
+ **`category_id`**            | `integer`          |
+ **`date_of_alleged_event`**  | `date`             |
+ **`reason_of_delay`**        | `text`             |
+ **`expectations`**           | `text`             |
+ **`created_at`**             | `datetime`         | `not null`
+ **`updated_at`**             | `datetime`         | `not null`
 #
-# ### Indexes
+ Indexes
 #
-# * `index_tickets_on_id`:
-#     * **`id`**
+`index_tickets_on_id`:**`id`**
 #
-# Table name: `ticket_statuses`
+### Table name: `ticket_statuses`
 #
-# ### Columns
+ Columns
 #
-# Name              | Type               | Attributes
-# ----------------- | ------------------ | ---------------------------
-# **`id`**          | `integer`          | `not null, primary key`
-# **`status_id`**   | `integer`          |
-# **`ticket_id`**   | `integer`          |
-# **`staff_id`**    | `integer`          |
-# **`advisor_id`**  | `integer`          |
-# **`created_at`**  | `datetime`         | `not null`
-# **`updated_at`**  | `datetime`         | `not null`
+ Name              | Type               | Attributes
+ ----------------- | ------------------ | ---------------------------
+ **`id`**          | `integer`          | `not null, primary key`
+ **`status_id`**   | `integer`          |
+ **`ticket_id`**   | `integer`          |
+ **`staff_id`**    | `integer`          |
+ **`advisor_id`**  | `integer`          |
+ **`created_at`**  | `datetime`         | `not null`
+ **`updated_at`**  | `datetime`         | `not null`
 #
-# Table name: `users`
+### Table name: `users`
 #
-# ### Columns
+ Columns
 #
-# Name                          | Type               | Attributes
-# ----------------------------- | ------------------ | ---------------------------
-# **`id`**                      | `integer`          | `not null, primary key`
-# **`email`**                   | `string(60)`       | `default(""), not null`
-# **`user_type`**               | `string(10)`       |
-# **`role`**                    | `string(30)`       |
-# **`active`**                  | `boolean`          | `default(TRUE)`
-# **`encrypted_password`**      | `string(255)`      | `default(""), not null`
-# **`reset_password_token`**    | `string(255)`      |
-# **`reset_password_sent_at`**  | `datetime`         |
-# **`remember_created_at`**     | `datetime`         |
-# **`sign_in_count`**           | `integer`          | `default(0), not null`
-# **`current_sign_in_at`**      | `datetime`         |
-# **`last_sign_in_at`**         | `datetime`         |
-# **`current_sign_in_ip`**      | `string(255)`      |
-# **`last_sign_in_ip`**         | `string(255)`      |
-# **`created_at`**              | `datetime`         | `not null`
-# **`updated_at`**              | `datetime`         | `not null`
+ Name                          | Type               | Attributes
+ ----------------------------- | ------------------ | ---------------------------
+ **`id`**                      | `integer`          | `not null, primary key`
+ **`email`**                   | `string(60)`       | `default(""), not null`
+ **`user_type`**               | `string(10)`       |
+ **`role`**                    | `string(30)`       |
+ **`active`**                  | `boolean`          | `default(TRUE)`
+ **`encrypted_password`**      | `string(255)`      | `default(""), not null`
+ **`reset_password_token`**    | `string(255)`      |
+ **`reset_password_sent_at`**  | `datetime`         |
+ **`remember_created_at`**     | `datetime`         |
+ **`sign_in_count`**           | `integer`          | `default(0), not null`
+ **`current_sign_in_at`**      | `datetime`         |
+ **`last_sign_in_at`**         | `datetime`         |
+ **`current_sign_in_ip`**      | `string(255)`      |
+ **`last_sign_in_ip`**         | `string(255)`      |
+ **`created_at`**              | `datetime`         | `not null`
+ **`updated_at`**              | `datetime`         | `not null`
 #
-# ### Indexes
+ Indexes
 #
-# * `index_users_on_email` (_unique_):
-#     * **`email`**
-# * `index_users_on_reset_password_token` (_unique_):
-#     * **`reset_password_token`**
+`index_users_on_email` (_unique_):**`email`**
+`index_users_on_reset_password_token` (_unique_): **`reset_password_token`**
 #
