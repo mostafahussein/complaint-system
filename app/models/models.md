@@ -1,49 +1,49 @@
 ## Schema Information
 #
-# Table name: `employees`
+ Table name: `employees`
 #
-# ### Columns
+ ### Columns
 #
-# Name                          | Type               | Attributes
-# ----------------------------- | ------------------ | ---------------------------
-# **`id`**                      | `integer`          | `not null, primary key`
-# **`full_name`**               | `string(30)`       |
-# **`gender`**                  | `string(6)`        |
-# **`type`**                    | `string(15)`       |
-# **`user_id`**                 | `integer`          |
-# **`employee_department_id`**  | `integer`          |
-# **`employee_position_id`**    | `integer`          |
-# **`created_at`**              | `datetime`         | `not null`
-# **`updated_at`**              | `datetime`         | `not null`
+ Name                          | Type               | Attributes
+ ----------------------------- | ------------------ | ---------------------------
+ **`id`**                      | `integer`          | `not null, primary key`
+ **`full_name`**               | `string(30)`       |
+ **`gender`**                  | `string(6)`        |
+ **`type`**                    | `string(15)`       |
+ **`user_id`**                 | `integer`          |
+ **`employee_department_id`**  | `integer`          |
+ **`employee_position_id`**    | `integer`          |
+ **`created_at`**              | `datetime`         | `not null`
+ **`updated_at`**              | `datetime`         | `not null`
 #
-# ### Indexes
+ ### Indexes
 #
-# * `index_employees_on_full_name`:
-#     * **`full_name`**
+ * `index_employees_on_full_name`:
+     * **`full_name`**
 #
-# Table name: `answers`
+ Table name: `answers`
 #
-# ### Columns
+ ### Columns
 #
-# Name               | Type               | Attributes
-# ------------------ | ------------------ | ---------------------------
-# **`id`**           | `integer`          | `not null, primary key`
-# **`question_id`**  | `integer`          |
-# **`content`**      | `string(255)`      |
-# **`created_at`**   | `datetime`         | `not null`
-# **`updated_at`**   | `datetime`         | `not null`
+ Name               | Type               | Attributes
+ ------------------ | ------------------ | ---------------------------
+ **`id`**           | `integer`          | `not null, primary key`
+ **`question_id`**  | `integer`          |
+ **`content`**      | `string(255)`      |
+ **`created_at`**   | `datetime`         | `not null`
+ **`updated_at`**   | `datetime`         | `not null`
 #
-# Table name: `attends`
+ Table name: `attends`
 #
-# ### Columns
+ ### Columns
 #
-# Name              | Type               | Attributes
-# ----------------- | ------------------ | ---------------------------
-# **`id`**          | `integer`          | `not null, primary key`
-# **`student_id`**  | `integer`          |
-# **`subject_id`**  | `integer`          |
-# **`created_at`**  | `datetime`         | `not null`
-# **`updated_at`**  | `datetime`         | `not null`
+ Name              | Type               | Attributes
+ ----------------- | ------------------ | ---------------------------
+ **`id`**          | `integer`          | `not null, primary key`
+ **`student_id`**  | `integer`          |
+ **`subject_id`**  | `integer`          |
+ **`created_at`**  | `datetime`         | `not null`
+ **`updated_at`**  | `datetime`         | `not null`
 #
 # Table name: `batches`
 #
