@@ -18,8 +18,8 @@
 #
  ### Indexes
 #
- * `index_employees_on_full_name`:
-     * **`full_name`**
+# * `index_employees_on_full_name`:
+     * **`full_name`** 
 #
  Table name: `answers`
 #
