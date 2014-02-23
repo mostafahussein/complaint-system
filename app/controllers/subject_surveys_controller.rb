@@ -45,17 +45,18 @@ class SubjectSurveysController < ApplicationController
 		@sv_sub.destroy
 	end
 
-	 private
-  def set_subject
-    @subject = Subject.find(params[:subject_id])
-  end
+	private
+  	
+  	def set_subject
+    	@subject = Subject.find(params[:subject_id])
+  	end
 
-  def set_survey
-  	survey_id = Subject.find(params[:subject_id]).survey_id
-  	@survey = Survey.find(survey_id)
-  	@questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
-  	@questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
-  end
+  	def set_survey
+  		survey_id = Subject.find(params[:subject_id]).survey_id
+  		@survey = Survey.find(survey_id)
+  		@questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
+  		@questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
+  	end
 
   def set_user
     if current_user.student

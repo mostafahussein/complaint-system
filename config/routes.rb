@@ -51,10 +51,12 @@ SweComplaint::Application.routes.draw do
    resources :subject_staffs
    
    
-   resources :kbs
-   resources :responses
-   resources :surveys
-   
+  resources :kbs
+  resources :responses
+  resources :surveys do
+    resources :subjects
+  end
+
    get '/dashboard', to: 'dashboard#index', as: :dashboard
    get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
    get '/home', to: 'dashboard#home', as: :home

@@ -45,7 +45,7 @@
 								<% end %>
 								<td><a href="<%= edit_subject_path(subject) %>" rel="tooltip" title="Update Subject Details">Update subject</a> | <%= link_to "Delete subject", subject, method: :delete, data: { confirm: "#{subject.subject_title} will be deleted, proceed?" } %> <% if subject.subject_staffs.length > 0 %>| 
 <a href="<%= edit_subject_staff_path(SubjectStaff.where("subject_id= ?", subject.id).first.id) %>" rel="tooltip" title="Update Subject Details">Update assigned employees</a>
-<% end %> | <%= link_to 'Survey related', subject, remote: true %>
+<% end %> | <%= link_to 'Survey related', subject, remote: true %><%= link_to ' | Survey Result', survey_subject_path(subject.survey_id,subject.id) unless subject.survey_id.nil? %>
 									</td>
 							</tr>
 							<% end %>

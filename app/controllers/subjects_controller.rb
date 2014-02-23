@@ -1,4 +1,5 @@
 class SubjectsController < ApplicationController
+  before_filter :set_survey, only: :show
   def index
     if params[:tab] == "all"
       @subjects = Subject.all
@@ -81,4 +82,12 @@ class SubjectsController < ApplicationController
       @subjects = current_user.student.subjects
     end
   end
+
+  def set_survey
+      @subject = Subject.find(params[:id])
+      survey_id = @subject.survey_id
+      @survey = Survey.find(survey_id)
+      @questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
+      @questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
+    end
 end
