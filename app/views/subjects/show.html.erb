@@ -14,11 +14,54 @@
 							<% if question.question_type != "#{Question::GRID}" %>
 								<% q += 1%>
 								<% if question.question_type == "#{Question::LIST}" || question.question_type == "#{Question::RADIO}" %>
-								<% statistics = SubjectSurvey.question_statistics(@subject.survey_id,@subject.id,question.question_type,question.id) %>
-								<% total = SubjectSurvey.total_responses(@subject.survey_id,@subject.id,question.question_type,question.id) %>
-								<% end %>
-								<table class="table table-condensed table-striped table-hover table-bordered">
-								<thead>
+									<% statistics = SubjectSurvey.question_statistics(@subject.survey_id,@subject.id,question.question_type,question.id) %>
+									<% total = SubjectSurvey.total_responses(@subject.survey_id,@subject.id,question.question_type,question.id) %>
+
+									<% instance_variable_set("@question_chart_#{q}", SubjectSurvey.chart_statistics(@subject.survey_id,@subject.id,question.question_type,question.id).as_json.first.collect {|k,v| [k.humanize.capitalize,v.to_i]}) %>
+									
+
+
+									
+									<div id='<%= "question_details#{q}" %>' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+									<script type="text/javascript" charset="utf-8">
+
+
+									$(function () {
+										$('<%= "#question_details#{q}" %>').highcharts({
+											chart: {
+												plotBackgroundColor: null,
+												plotBorderWidth: null,
+												plotShadow: false
+											},
+											title: {
+												text: '<%=raw escape_javascript("Q#{q}- #{question.content.capitalize}") %>'
+											},
+											tooltip: {
+												pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+											},
+											plotOptions: {
+												pie: {
+													allowPointSelect: true,
+													cursor: 'pointer',
+													dataLabels: {
+														enabled: true,
+														color: '#000000',
+														connectorColor: '#000000',
+														format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+													}
+												}
+											},
+											series: [{
+												type: 'pie',
+												name: 'percentage',
+												data: <%= raw instance_variable_get("@question_chart_#{q}") %>
+											}]
+										});
+									});
+									</script>
+
+									<table class="table table-condensed table-striped table-hover table-bordered">
+									<thead>
 									<tr>
 										<th><%= label_tag 'question', "Q#{q}- #{question.content.capitalize}" %><th>
 											<label style='text-align:center;'>Total Responses: <%= total.first.total_responses %></label>
@@ -30,8 +73,8 @@
 										
 									
 									</tr>
-								</thead>
-								<tbody>
+									</thead>
+									<tbody>
 									
 									<% statistics.each do |result| %>
 										<tr>											
@@ -43,23 +86,19 @@
 										</tr>
 									<% end %>
 									
-								</tbody>
-							</table>
+									</tbody>
+									</table>
 
-								
-								<div class='clearfix'></div><div class='clearfix'></div>
-								<%# if question.question_type == "#{Question::LIST}" || question.question_type == "#{Question::RADIO}" %>
-									<%# statistics = SubjectSurvey.question_statistics(@subject.survey_id,@subject.id,question.id,question.question_type) %>
-								<%# end %>
-								<%# statistics.as_json %>
-								<% if question.equal? @questions.last %>
+									<div class='clearfix'></div><div class='clearfix'></div>
+									<% if question.equal? @questions.last %>
 									<% if @questions_grid.equal? nil %>
 										<br>
 									<% else %>
 										<hr style="border-top: 1px solid #000000;">
 									<% end %>
-								<% else %>
-									<hr style="border-top: 1px solid #000000;">
+									<% else %>
+										<hr style="border-top: 1px solid #000000;">
+									<% end %>
 								<% end %>
 							<% end %>
 						<% end %>
@@ -102,7 +141,6 @@
 								<hr style="border-top: 1px solid #000000;">
 							<% end %>
 						<% end %>
-
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_filter :set_survey, only: :show
+  #before_filter :set_chart, only: :show
   def index
     if params[:tab] == "all"
       @subjects = Subject.all
@@ -84,10 +85,21 @@ class SubjectsController < ApplicationController
   end
 
   def set_survey
-      @subject = Subject.find(params[:id])
-      survey_id = @subject.survey_id
-      @survey = Survey.find(survey_id)
-      @questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
-      @questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
+    @subject = Subject.find(params[:id])
+    survey_id = @subject.survey_id
+    @survey = Survey.find(survey_id)
+    @questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
+    @questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
+  end
+
+  def set_chart
+    @subject = Subject.find(params[:id])
+    survey_id = @subject.survey_id
+    @survey = Survey.find(survey_id)
+    @questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
+    @questions.each do |question|
+      @chart = SubjectSurvey.chart_statistics(survey_id,@subject.id,question.question_type,question.id).as_json.first.collect {|k,v| [k.humanize.capitalize,v.to_i]}
+      return @chart
     end
+  end
 end
