@@ -24,7 +24,7 @@
 						$.getJSON('/tickets/' + name.toLowerCase(),	function(data) {
 
 							seriesOptions[i] = {
-								name: name.replace(/_Status$/, ''),
+								name: name.replace(/_Status$/, '').replace(/_/g, " "),
 								data: data
 							};
 

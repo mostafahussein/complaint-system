@@ -120,6 +120,11 @@ var follow_up = document.getElementById('follow_up_text');
 var canned_response = document.getElementById('canned_response');
 
 canned_response.onchange = function () {
-	follow_up.value = canned_response.options[this.selectedIndex].text;
+	if (canned_response.options[this.selectedIndex].value > 0) {
+		follow_up.value = canned_response.options[this.selectedIndex].text;
+	}
+	else {
+		follow_up.value = '';
+	};
 };
 </script>

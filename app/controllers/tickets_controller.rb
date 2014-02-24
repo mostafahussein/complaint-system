@@ -59,9 +59,13 @@ class TicketsController < ApplicationController
       else
         @previous_staff = previous_staff.full_name
       end
-      updated_by = @ticket.ticket_statuses.first.versions.last.whodunnit
-      @updated_by = User.find(updated_by).employee.full_name
-      @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
+       updated_by = @ticket.ticket_statuses.first.versions.last.whodunnit
+       if updated_by.nil?
+          @updated_by = 'The System'
+        else
+          @updated_by = User.find(updated_by).employee.full_name
+        end
+       @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
     end
   end
 

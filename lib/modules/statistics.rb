@@ -1,9 +1,9 @@
 module Modules
 	module Statistics
 
-    def fetch_data(survey,type)
+    def fetch_data(survey,type,q_id)
       s_question = Survey.find(survey)
-      questions = s_question.questions.where("questions.question_type = ?", "#{type}").each do |question|
+      questions = s_question.questions.where("questions.question_type = ? AND questions.id = ?", "#{type}", "#{q_id}").each do |question|
         @answers_list = question.answers.collect { |answer| answer.content }
       end
       @count_list = @answers_list.each_with_index.map { |answer, index| 
@@ -13,7 +13,7 @@ module Modules
     end
     
 		def question_statistics(survey,subject,type,q_id=nil,help_text=nil)
-      fetch_data(survey,type)
+      fetch_data(survey,type,q_id)
       from_table = "FROM subject_surveys AS sv
         JOIN questions AS q ON  sv.question_id = q.id
         JOIN answers AS a ON sv.answer_id = a.id
@@ -54,12 +54,7 @@ module Modules
     end
 
     def chart_statistics(survey,subject,type,q_id)
-      s_question = Survey.find(survey)
-      questions = s_question.questions.where("questions.question_type = ? AND questions.id = ?", "#{type}", "#{q_id}").each do |question|
-        @answers_list = question.answers.collect { |answer| answer.content }
-      end
-      @count_columns = @answers_list.map { |answer| 
-        "COUNT(CASE a.content WHEN '#{answer}' THEN 1 END) AS \"#{answer.squish.downcase.tr(" ","_")}\"" }
+      fetch_data(survey,type,q_id)
       from_table = "FROM subject_surveys AS sv
         JOIN questions AS q ON  sv.question_id = q.id
         JOIN answers AS a ON sv.answer_id = a.id

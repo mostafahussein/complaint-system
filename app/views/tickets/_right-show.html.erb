@@ -21,7 +21,7 @@
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
-								Status: <%= @status_title.ticket_status %>
+								Status: <%= @status_title.ticket_status.titleize %>
 							</a>
 							<a href="#">
 								<span class="label-bullet-blue">
@@ -33,7 +33,7 @@
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
-								Priority: <%= @ticket.priority.priority_name if @ticket.priority %>
+								Priority: <%= @ticket.priority.priority_name.titleize if @ticket.priority %>
 							</a>
 							<a href="#">
 								<span class="label-bullet-blue">
@@ -57,7 +57,7 @@
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
-								From: <%= @ticket.student.full_name%>
+								From: <%= @ticket.student.full_name.titleize%>
 							</a>
 							<a href="#">
 								<span class="label-bullet-blue">
