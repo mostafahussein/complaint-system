@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140225223342) do
+ActiveRecord::Schema.define(:version => 20140209001425) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(:version => 20140225223342) do
   create_table "kbs", :force => true do |t|
     t.string   "faq_question"
     t.string   "faq_answer"
+    t.integer  "subject_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer  "subject_id"
   end
 
   create_table "priorities", :force => true do |t|
@@ -111,11 +111,11 @@ ActiveRecord::Schema.define(:version => 20140225223342) do
   create_table "questions", :force => true do |t|
     t.integer  "survey_id"
     t.string   "content"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
     t.string   "question_type"
     t.string   "help_text"
     t.boolean  "required_question", :default => true
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "responses", :force => true do |t|
@@ -162,19 +162,19 @@ ActiveRecord::Schema.define(:version => 20140225223342) do
   create_table "subject_surveys", :force => true do |t|
     t.integer  "survey_id"
     t.integer  "subject_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
     t.integer  "question_id"
     t.integer  "answer_id"
     t.integer  "student_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "subjects", :force => true do |t|
     t.string   "subject_title"
     t.string   "subject_code",  :limit => 10
+    t.integer  "survey_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-    t.integer  "survey_id"
   end
 
   add_index "subjects", ["subject_title"], :name => "index_subjects_on_subject_title"

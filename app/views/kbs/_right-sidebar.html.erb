@@ -43,7 +43,7 @@
 							<div class="articles">
 								<% if  params[:controller] == 'kbs' || params[:controller] == 'responses' %>
 								<% if !current_user.admin? %>
-								<a href="<%= kbs_path %>">
+								<a href="<%= kbs_path(tab: 'categories') %>">
 									<span class="label-bullet-blue">
 										&nbsp;
 									</span>

@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
 puts 'Start Seeding Data to Database:'
 puts '-' * 31
 
@@ -119,4 +118,132 @@ Category.create([
   {category_name: 'classroom'},
   {category_name: "subject instructor"}
   ])
+
+
+Survey.create([{survey_name: 'Course Evaluation'}])
+
+Question.create([
+
+  {survey_id: 1, required_question: true, question_type: 'Choose From A List',
+   content: 'Reason course was taken:'},
+
+{survey_id: 1, required_question: true, question_type: 'Multiple Choice',
+   content: 'Please rate your overall satisfaction with the Professor-Course Intructor:'},
+
+  {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:',
+   content: 'Syllabus accurately described course content and objectives'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:',
+   content: 'Assignments were reasonable and appropriate'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:' ,
+   content: 'Course pace and difficulty were appropriate'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:' ,
+   content: 'Exams and quizzes reflected important course aspects'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:',
+   content: 'Fellow students were academically prepared for the course'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:' ,
+   content: 'Class size was not too large for the subject and format'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your evel of agreement with the following aspects of the course:' ,
+   content: 'I would recommend this course to other students'},
+
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the textbook-resources:',
+   content: 'The required textbooks adequately covered the subject'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the textbook-resources:' ,
+   content: 'Textbooks and other instructional material were effectively used'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the textbook-resources:' ,
+   content: 'I would recommend that current textbooks continue to be used'},
+
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the benefits derived from the course:' ,
+   content: 'The course increased my interest in the subject'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the benefits derived from the course:' ,
+   content: 'Having completed the course, I feel knowledgeable in the subject'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the benefits derived from the course:' ,
+   content: 'The course contributed to the completeness of my education'},
+   {survey_id: 1, required_question: true, question_type: 'Grid',help_text:'Please rate your level of agreement with the following aspects of the benefits derived from the course:' ,
+   content: 'Overall, the course and instructor met my expectations'}
+  ])
+
+Answer.create([
+  {question_id:1 , content:'require for major'},
+  {question_id:1 , content: 'require for minor'},
+  {question_id:1 , content: 'elective'},
+
+  {question_id:2 , content: 'Very Dissatisfied'},
+  {question_id:2 , content: 'Dissatisfied'},
+  {question_id:2 , content: 'Neutral'},
+  {question_id:2 , content: 'Satisfied'},
+  {question_id:2 , content: 'Very Satisfied'},
+
+  {question_id:3 , content: 'Strongly Disagree'},
+  {question_id:3 , content: 'Disagree'},
+  {question_id:3 , content: 'Neutral'},
+  {question_id:3 , content: 'Agree'},
+  {question_id:3 , content: 'Strongly Agree'},
+
+   {question_id:4 , content: 'Strongly Disagree'},
+  {question_id:4 , content: 'Disagree'},
+  {question_id:4 , content: 'Neutral'},
+  {question_id:4 , content: 'Agree'},
+  {question_id:4 , content: 'Strongly Agree'},
+
+   {question_id:5 , content: 'Strongly Disagree'},
+  {question_id:5 , content: 'Disagree'},
+  {question_id:5 , content: 'Neutral'},
+  {question_id:5 , content: 'Agree'},
+  {question_id:5 , content: 'Strongly Agree'},
+
+   {question_id:6 , content: 'Strongly Disagree'},
+  {question_id:6 , content: 'Disagree'},
+  {question_id:6 , content: 'Neutral'},
+  {question_id:6 , content: 'Agree'},
+  {question_id:6 , content: 'Strongly Agree'},
+
+   {question_id:7 , content: 'Strongly Disagree'},
+  {question_id:7 , content: 'Disagree'},
+  {question_id:7 , content: 'Neutral'},
+  {question_id:7 , content: 'Agree'},
+  {question_id:7 , content: 'Strongly Agree'},
+
+   {question_id:8 , content: 'Strongly Disagree'},
+  {question_id:8 , content: 'Disagree'},
+  {question_id:8 , content: 'Neutral'},
+  {question_id:8 , content: 'Agree'},
+  {question_id:8 , content: 'Strongly Agree'},
+
+   {question_id:10 , content: 'Strongly Disagree'},
+  {question_id:10 , content: 'Disagree'},
+  {question_id:10 , content: 'Neutral'},
+  {question_id:10 , content: 'Agree'},
+  {question_id:10 , content: 'Strongly Agree'},
+
+   {question_id:11 , content: 'Strongly Disagree'},
+  {question_id:11 , content: 'Disagree'},
+  {question_id:11 , content: 'Neutral'},
+  {question_id:11 , content: 'Agree'},
+  {question_id:11 , content: 'Strongly Agree'},
+
+   {question_id:12 , content: 'Strongly Disagree'},
+  {question_id:12 , content: 'Disagree'},
+  {question_id:12 , content: 'Neutral'},
+  {question_id:12 , content: 'Agree'},
+  {question_id:12 , content: 'Strongly Agree'},
+
+   {question_id:13 , content: 'Strongly Disagree'},
+  {question_id:13 , content: 'Disagree'},
+  {question_id:13 , content: 'Neutral'},
+  {question_id:13 , content: 'Agree'},
+  {question_id:13 , content: 'Strongly Agree'},
+
+   {question_id:14 , content: 'Strongly Disagree'},
+  {question_id:14 , content: 'Disagree'},
+  {question_id:14 , content: 'Neutral'},
+  {question_id:14 , content: 'Agree'},
+  {question_id:14 , content: 'Strongly Agree'},
+
+   {question_id:15 , content: 'Strongly Disagree'},
+  {question_id:15 , content: 'Disagree'},
+  {question_id:15 , content: 'Neutral'},
+  {question_id:15 , content: 'Agree'},
+  {question_id:15 , content: 'Strongly Agree'}
+
+])
 puts 'All Seeds Completed.'

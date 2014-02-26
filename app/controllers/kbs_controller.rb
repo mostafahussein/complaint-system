@@ -1,7 +1,12 @@
 class KbsController < ApplicationController
   def index
-    @subjects = Subject.all
-    @faqs = Kb.all
+    if params[:tab] == 'categories'
+      @subjects = Subject.order("id asc")
+    elsif params[:tab] == 'questions'
+      @faqs = Kb.all
+    else
+      render_404
+    end
   end
   
   def show

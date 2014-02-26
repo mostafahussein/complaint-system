@@ -3,7 +3,7 @@ class CreateKbs < ActiveRecord::Migration
     create_table :kbs do |t|
       t.string :faq_question
       t.string :faq_answer
-      t.string :category
+      t.integer :subject_id
 
       t.timestamps
     end

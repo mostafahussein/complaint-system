@@ -3,6 +3,9 @@ class CreateSubjectSurveys < ActiveRecord::Migration
     create_table :subject_surveys do |t|
       t.integer :survey_id
       t.integer :subject_id
+      t.integer :question_id
+      t.integer :answer_id
+  	  t.integer :student_id
       t.timestamps
     end
   end

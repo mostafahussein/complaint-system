@@ -83,7 +83,7 @@
 		<% end %>
 		<% if !current_user.admin? %>
 		<li>
-			<a href="<%= kbs_path %>" class="<%= 'selected' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>">
+			<a href="<%= kbs_path(tab: 'categories') %>" class="<%= 'selected' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
 				Knowledge Base
 			</a>
