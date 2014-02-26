@@ -20,6 +20,11 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     @departments = EmployeeDepartment.all
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @employee }
+    end
   end
 
   def create
@@ -78,6 +83,11 @@ class EmployeesController < ApplicationController
 
   def edit
     @employee = Employee.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.js # edit.js.erb
+      format.json { render json: @employee }
+    end
   end
 
   def update
@@ -92,7 +102,10 @@ class EmployeesController < ApplicationController
 
   def destroy
     @employee = Employee.find(params[:id]).destroy
-    flash[:success] = "Employee deleted."
-    redirect_to :back
+    respond_to do |format|
+        format.html
+        format.js # destroy.js.erb
+        format.json { head :no_content }
+      end
   end
 end

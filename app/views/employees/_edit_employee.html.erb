@@ -1,0 +1,15 @@
+<div class="widget-body">
+	<%= simple_form_for(@employee, :html => {:class => 'form-horizontal' }) do |f| %>
+	<%= f.input :full_name, placeholder: 'Enter Full Name' %>
+	<%= f.input :gender, collection: Employee::GENDER, prompt: 'Select Gender' %>
+	<%= f.association :employee_department, label_method: :department_name,prompt: 'Select Department' %>
+	<%= f.association :employee_position, label_method: :position_title,prompt: 'Select Position' %>
+	<div class="form-actions no-margin">
+		<button type="submit" class="btn btn-info pull-right">
+			Update Employee
+		</button>
+		<div class="clearfix">
+		</div>
+	</div>
+	<% end %>
+</div>

@@ -20,6 +20,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @user }
+    end
   end
 
   def create
@@ -36,6 +41,11 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.js # edit.js.erb
+      format.json { render json: @user }
+    end
   end
 
   def update
@@ -55,8 +65,11 @@ class UsersController < ApplicationController
       redirect_to :back
     else
       @user.destroy
-      flash[:success] = "User deleted."
-      redirect_to :back
+      respond_to do |format|
+        format.html
+        format.js # destroy.js.erb
+        format.json { head :no_content }
+      end
     end
   end
 end

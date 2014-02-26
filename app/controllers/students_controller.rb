@@ -18,6 +18,11 @@ class StudentsController < ApplicationController
 
   def new
     @student = Student.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @student }
+    end
   end
 
   def create
@@ -51,6 +56,11 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.js # edit.js.erb
+      format.json { render json: @student }
+    end
   end
 
   def update
@@ -65,5 +75,11 @@ class StudentsController < ApplicationController
 
   def destroy
     @student = Student.find(params[:id])
+    @student.destroy
+    respond_to do |format|
+        format.html
+        format.js # destroy.js.erb
+        format.json { head :no_content }
+      end
   end
 end

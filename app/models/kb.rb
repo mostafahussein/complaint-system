@@ -15,5 +15,6 @@
 #
 
 class Kb < ActiveRecord::Base
-  attr_accessible :faq_question, :faq_answer, :category
+  attr_accessible :faq_question, :faq_answer, :subject_id
+  belongs_to :subject
 end

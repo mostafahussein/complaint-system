@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("Edit <%= @user.email.capitalize %>'s account");
+$modalBody.html("<%= escape_javascript(render 'edit_user') %>");
+$modal.modal();

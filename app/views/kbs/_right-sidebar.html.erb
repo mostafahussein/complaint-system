@@ -1,0 +1,70 @@
+<div class="right-sidebar">
+	<div class="wrapper">
+		<div id="scrollbar">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="overview">
+					<% if current_user.staff? || current_user.head_of_department? %>
+						<div class="featured-articles-container">
+							<h5 class="heading-blue">
+								<%= 'Manage Knowledge Base' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>
+							</h5>
+							<div class="articles">
+								<% if  params[:controller] == 'kbs' || params[:controller] == 'responses' %>
+								<a href="<%= new_kb_path %>", data-remote="true">
+									<span class="label-bullet-blue">
+										&nbsp;
+									</span>
+									Add New FAQ
+								</a>
+								<a href="<%= new_response_path %>", data-remote="true">
+									<span class="label-bullet-blue">
+										&nbsp;
+									</span>
+									Add New Canned Response
+								</a>
+								<% end %>
+							</div>
+						</div>
+						<hr class="hr-stylish-1">
+					<% end %>
+					<% if !current_user.admin? %>
+						<div class="featured-articles-container">
+							<h5 class="heading-blue">
+								<%= 'Knowledge Base Index' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>
+							</h5>
+							<div class="articles">
+								<% if  params[:controller] == 'kbs' || params[:controller] == 'responses' %>
+								<% if !current_user.admin? %>
+								<a href="<%= kbs_path %>">
+									<span class="label-bullet-blue">
+										&nbsp;
+									</span>
+									Frequently Asked Questions
+								</a>
+								<% end %>
+								<% if current_user.staff? || current_user.head_of_department? || current_user.advisor? %>
+								<a href="<%= responses_path %>">
+									<span class="label-bullet-blue">
+										&nbsp;
+									</span>
+									Canned Responses
+								</a>
+								<% end %>
+								<% end %>
+							</div>
+						</div>
+					<% end %>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

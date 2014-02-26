@@ -4579,15 +4579,15 @@ button.close {
 /*   Dashboard CSS Written by Srinu Baswa   */
 /*  Login  */
 .sign-in-container {
-  margin: 30px auto; }
+  margin: 200px auto; }
   .sign-in-container .login-wrapper {
     background: #fcfcfc;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    -webkit-box-shadow: 0 18px 6px -8px #999999, 0 0 2px #cccccc;
+    /*-webkit-box-shadow: 0 18px 6px -8px #999999, 0 0 2px #cccccc;
     -moz-box-shadow: 0 18px 6px -8px #999999, 0 0 2px #cccccc;
-    box-shadow: 0 18px 6px -8px #999999, 0 0 2px #cccccc;
+    box-shadow: 0 18px 6px -8px #999999, 0 0 2px #cccccc;*/
     position: relative; }
     .sign-in-container .login-wrapper .header {
       padding: 30px 20px 10px 20px;
@@ -5740,7 +5740,7 @@ header {
   -moz-border-radius: 0 0 4px 4px;
   border-radius: 0 0 4px 4px;
   min-height: 480px;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
   padding: 20px;
   /*  Left Sidebar Container Starts Here  */
   /*  Left Sidebar Container Ends Here  */
@@ -6888,6 +6888,10 @@ footer {
   font-size: 11px;
   padding: 10px;
   z-index: 1;
+  position:fixed;
+  bottom:0px;
+  display:block;
+  width:98.4%;
   -webkit-box-shadow: 0 0 15px #1f5a80 inset;
   -moz-box-shadow: 0 0 15px #1f5a80 inset;
   box-shadow: 0 0 15px #1f5a80 inset;}
@@ -7863,3 +7867,248 @@ footer {
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important; } }
+
+     .dashboard-wrapper .widget {
+      background: #fafafa;
+      border: 1px solid #e0dede;
+      clear: both;
+      margin-top: 0px;
+      margin-bottom: 30px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px; }
+      .dashboard-wrapper  .widget .widget-header {
+        background-color: #eaeaea;
+        /* Fallback Color */
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#fdfdfd), to(#eaeaea));
+        /* Saf4+, Chrome */
+        background-image: -webkit-linear-gradient(top, #fdfdfd, #eaeaea);
+        /* Chrome 10+, Saf5.1+, iOS 5+ */
+        background-image: -moz-linear-gradient(top, #fdfdfd, #eaeaea);
+        /* FF3.6 */
+        background-image: -ms-linear-gradient(top, #fdfdfd, #eaeaea);
+        /* IE10 */
+        background-image: -o-linear-gradient(top, #fdfdfd, #eaeaea);
+        /* Opera 11.10+ */
+        background-image: linear-gradient(top, #fdfdfd, #eaeaea);
+        -webkit-border-radius: 2px 2px 0 0;
+        -moz-border-radius: 2px 2px 0 0;
+        border-radius: 2px 2px 0 0;
+        border-bottom: 1px solid #e0dede;
+        height: 24px;
+        line-height: 24px;
+        padding: 10px; }
+        .dashboard-wrapper .widget .widget-header .title {
+          color: #333333;
+          float: left;
+          font-weight: bold;
+          font-size: 16px; }
+          .dashboard-wrapper  .widget .widget-header .title .attribution, .dashboard-wrapper .left-sidebar .widget .widget-header .title .mini-title {
+            font-size: 11px;
+            padding-left: 4px;
+            color: #b3b3b3;
+            font-weight: normal; }
+        .dashboard-wrapper  .widget .widget-header span.tools {
+          padding: 0;
+          float: right;
+          margin: 0; }
+          .dashboard-wrapper  .widget .widget-header span.tools > a {
+            display: inline-block;
+            margin-right: 5px;
+            color: #666666;
+            margin-top: 3px; }
+            .dashboard-wrapper  .widget .widget-header span.tools > a:hover {
+              text-decoration: none;
+              opacity: .6; }
+      .dashboard-wrapper  .widget .widget-body {
+        padding: 10px;
+        border-bottom: 1px solid #b3b3b3;
+        -webkit-border-radius: 0 0 2px 2px;
+        -moz-border-radius: 0 0 2px 2px;
+        border-radius: 0 0 2px 2px;
+        /*  INDEX Page Elements Start  */
+        /*  INDEX Page Elements End  */
+        /*  GRAPHS Page Elements Start  */
+        /*  GRAPHS Page Elements End  */
+        /*  ICONS Page Elements Start  */
+        /*  ICONS Page Elements End  */
+        /*  FORMS Page Elements Start  */
+        /*  FORMS Page Elements End  */
+        /*  TABLES Page Elements Start  */
+        /*  TABLES Page Elements End  */ }
+        .dashboard-wrapper  .widget .widget-body .todo-container {
+          width: 100%; }
+          .dashboard-wrapper  .widget .widget-body .todo-container .todo-list {
+            min-height: 180px; }
+            .dashboard-wrapper  .widget .widget-body .todo-container .todo-list li {
+              background: whitesmoke;
+              border-bottom: 1px dotted #cccccc;
+              line-height: 34px; }
+              .dashboard-wrapper  .widget .widget-body .todo-container .todo-list li:last-child {
+                border-bottom: 0; }
+              .dashboard-wrapper  .widget .widget-body .todo-container .todo-list li input[type="checkbox"] {
+                margin: 0 2px 0 10px; }
+                .dashboard-wrapper  .widget .widget-body .todo-container .todo-list li input[type="checkbox"]:checked + label {
+                  text-decoration: line-through;
+                  color: #999999; }
+              .dashboard-wrapper  .widget .widget-body .todo-container .todo-list li label {
+                display: inline-block;
+                cursor: pointer;
+                font-size: 12px; }
+                .dashboard-wrapper .widget .widget-body .todo-container .todo-list li label .date {
+                  font-size: 10px;
+                  color: #b3b3b3;
+                  padding-left: 5px; }
+              .dashboard-wrapper  .widget .widget-body .todo-container .todo-list li:hover {
+                background: #fafafa; }
+            .dashboard-wrapper  .widget .widget-body .todo-container .todo-list .new {
+              border-left: 3px solid #ed6d49;
+              margin: 1px 0; }
+            .dashboard-wrapper  .widget .widget-body .todo-container .todo-list .completed {
+              border-left: 3px solid #74b749;
+              margin: 1px 0; }
+            .dashboard-wrapper  .widget .widget-body .todo-container .todo-list .process {
+              border-left: 3px solid #ffb400;
+              margin: 1px 0; }
+          .dashboard-wrapper  .widget .widget-body .todo-container .input-append {
+            margin-top: 5px;
+            margin-bottom: 0;
+            width: 90%; }
+        .dashboard-wrapper  .widget .widget-body .message-container .message {
+          position: relative;
+          margin-bottom: 10px;
+          min-height: 84px;
+          padding: 5px;
+          background: white;
+          border: 1px solid #d9d9d9;
+          -webkit-border-radius: 2px;
+          -moz-border-radius: 2px;
+          border-radius: 2px;
+          overflow: hidden; }
+        .dashboard-wrapper  .widget .widget-body .message-container .img-container {
+          width: 10%;
+          position: absolute;
+          padding: 2px; }
+          .dashboard-wrapper  .widget .widget-body .message-container .img-container img {
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            max-height: 80px;
+            width: 100%; }
+        .dashboard-wrapper  .widget .widget-body .message-container article {
+          width: 85%;
+          position: absolute;
+          left: 13%;
+          right: 2%;
+          top: 0px;
+          padding: 5px 0;
+          border-bottom: 1px solid #e6e6e6; }
+          .dashboard-wrapper  .widget .widget-body .message-container article a {
+            color: #ed6d49; }
+        .dashboard-wrapper .widget .widget-body .message-container .icons-nav {
+          width: 85%;
+          position: absolute;
+          left: 13%;
+          top: 60px; }
+          .dashboard-wrapper .widget .widget-body .message-container .icons-nav ul li {
+            float: right;
+            display: inline-block; }
+            .dashboard-wrapper .widget .widget-body .message-container .icons-nav ul li [data-icon]:before {
+              margin: 0 4px;
+              line-height: 24px;
+              font-size: 12px;
+              color: #ed6d49; }
+          .dashboard-wrapper .widget .widget-body .message-container .icons-nav li.time {
+            float: left;
+            color: #bfbfbf; }
+        .dashboard-wrapper  .widget .widget-body .easy-pie-charts-container .pie-chart {
+          margin-right: 20px;
+          float: left; }
+          .dashboard-wrapper .widget .widget-body .easy-pie-charts-container .pie-chart .name {
+            text-align: center;
+            padding-top: 10px; }
+        .dashboard-wrapper  .widget .widget-body .icomoon-icons-container li {
+          background-color: #e6e6e6;
+          /* Fallback Color */
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e6e6e6));
+          /* Saf4+, Chrome */
+          background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
+          /* Chrome 10+, Saf5.1+, iOS 5+ */
+          background-image: -moz-linear-gradient(top, #f2f2f2, #e6e6e6);
+          /* FF3.6 */
+          background-image: -ms-linear-gradient(top, #f2f2f2, #e6e6e6);
+          /* IE10 */
+          background-image: -o-linear-gradient(top, #f2f2f2, #e6e6e6);
+          /* Opera 11.10+ */
+          background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
+          border: 1px solid #e0e0e0;
+          color: #666666;
+          -webkit-border-radius: 2px;
+          -moz-border-radius: 2px;
+          border-radius: 2px;
+          display: inline-block;
+          float: left;
+          margin-right: 5px;
+          margin-bottom: 5px;
+          font-size: 16px;
+          text-align: center;
+          vertical-align: middle;
+          width: 32px;
+          height: 32px;
+          line-height: 32px; }
+          .dashboard-wrapper  .widget .widget-body .icomoon-icons-container li:hover {
+            background: white;
+            cursor: pointer; }
+        .dashboard-wrapper .widget .widget-body #dt_example {
+          /* Sorting */ }
+          .dashboard-wrapper .widget .widget-body #dt_example .dataTables_length {
+            float: left; }
+            .dashboard-wrapper .widget .widget-body #dt_example .dataTables_length select {
+              width: 80px;
+              height: 30px;
+              margin-bottom: 0; }
+          .dashboard-wrapper  .widget .widget-body #dt_example .dataTables_filter {
+            float: right; }
+            .dashboard-wrapper .widget .widget-body #dt_example .dataTables_filter input {
+              width: 160px;
+              margin-bottom: 0; }
+          .dashboard-wrapper .widget .widget-body #dt_example .dataTables_info {
+            float: left;
+            margin-bottom: 5px; }
+          .dashboard-wrapper .widget .widget-body #dt_example .dataTables_paginate {
+            margin: 5px 0;
+            float: right; }
+            .dashboard-wrapper .widget .widget-body #dt_example .dataTables_paginate .first, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .previous, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .next, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .paginate_active, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .last, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .paginate_button {
+              background-color: #e6e6e6;
+              /* Fallback Color */
+              background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e6e6e6));
+              /* Saf4+, Chrome */
+              background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
+              /* Chrome 10+, Saf5.1+, iOS 5+ */
+              background-image: -moz-linear-gradient(top, #f2f2f2, #e6e6e6);
+              /* FF3.6 */
+              background-image: -ms-linear-gradient(top, #f2f2f2, #e6e6e6);
+              /* IE10 */
+              background-image: -o-linear-gradient(top, #f2f2f2, #e6e6e6);
+              /* Opera 11.10+ */
+              background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
+              border-left: 1px solid #d9d9d9;
+              border-top: 1px solid #d9d9d9;
+              border-bottom: 1px solid #d9d9d9;
+              padding: 7px 10px; }
+              .dashboard-wrapper .widget .widget-body #dt_example .dataTables_paginate .first:hover, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .previous:hover, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .next:hover, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .paginate_active:hover, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .last:hover, .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .paginate_button:hover {
+                background: #f9f9f9;
+                cursor: pointer; }
+            .dashboard-wrapper .widget .widget-body #dt_example .dataTables_paginate .last {
+              border-right: 1px solid #d9d9d9; }
+            .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTables_paginate .paginate_active {
+              background: #f9f9f9; }
+          .dashboard-wrapper .widget .widget-body #dt_example .dataTable .sorting {
+            cursor: pointer;
+            background: url(../img/sorting.png) no-repeat center right; }
+          .dashboard-wrapper .widget .widget-body #dt_example .dataTable .sorting_asc {
+            cursor: pointer;
+            background: url(../img/sorting_asc.png) no-repeat center right; }
+          .dashboard-wrapper .widget .widget-body #dt_example .dataTable .sorting_desc {
+            cursor: pointer;
+            background: url(../img/sorting_desc.png) no-repeat center right; }

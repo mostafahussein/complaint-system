@@ -1,0 +1,54 @@
+<div class="widget-body">
+	<table class="table table-condensed table-striped table-hover table-bordered">
+		<tbody>
+			<tr>	
+				<td>Status: </td>
+				<td><%= @status_title.ticket_status.titleize %></td>
+			</tr>
+			<tr>	
+				<td>Due Date: </td>
+				<td><%= @ticket.due %></td>
+			</tr>
+			<tr>	
+				<td>Priority: </td>
+				<td><%= @ticket.priority.priority_name.titleize if @ticket.priority %></td>
+			</tr>
+			<tr>	
+				<td>Subject: </td>
+				<td><%= @subject_title.first.subject_title unless @subject_title.nil? %></td>
+			</tr>
+			<tr>	
+				<td>Category: </td>
+				<td><%= @ticket.category.category_name.titleize %></td>
+			</tr>
+			<tr>	
+				<td>Create Date: </td>
+				<td><%= @ticket.created_at.strftime("%d/%m/%Y %I:%M%p") %></td>
+			</tr>
+			<tr>	
+				<td>From: </td>
+				<td><%= @ticket.student.full_name.titleize%></td>
+			</tr>
+			<tr>	
+				<td>Batch: </td>
+				<td><%= @ticket.student.batch.batch_name %></td>
+			</tr>
+			<tr>	
+				<td>Assigned To: </td>
+				<td>
+					<% if @assigned_staff.nil? %>
+						<%= @assigned_advisor.full_name unless @assigned_advisor.nil? %>
+					<% else %>
+						<%= @assigned_staff.full_name unless @assigned_staff.nil? %>
+					<% end %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="form-actions no-margin">
+		<a href="<%= ticket_path(@ticket) %>"  class="btn btn-info pull-right" rel="tooltip" title="View Profile">Continue</a>
+		<div class="clearfix">
+		</div>
+	</div>
+	
+</div>

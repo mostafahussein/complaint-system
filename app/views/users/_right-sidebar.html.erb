@@ -19,7 +19,7 @@
 						</h5>
 						<div class="articles">
 							<% if params[:controller] == 'users' %>
-							<a href="<%= new_user_path %>">
+							<a href="<%= new_user_path %>", data-remote="true">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
@@ -39,7 +39,7 @@
 							</a>
 							<% end %>
 							<% if params[:controller] == 'employees'%>
-							<a href="<%= new_employee_path %>">
+							<a href="<%= new_employee_path %>", data-remote="true">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>
@@ -59,7 +59,7 @@
 							</a>
 							<% end %>
 							<% if params[:controller] == 'students' %>
-							<a href="<%= new_student_path %>">
+							<a href="<%= new_student_path %>", data-remote="true">
 								<span class="label-bullet-blue">
 									&nbsp;
 								</span>

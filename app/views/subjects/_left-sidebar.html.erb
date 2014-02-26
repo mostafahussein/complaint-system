@@ -1,4 +1,4 @@
-<div class="left-sidebar">
 
+<div class="<%= 'left-sidebar' if current_user.admin? %>">
 <%= render 'subjects/subjects-directory'%>
 </div>

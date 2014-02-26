@@ -67,6 +67,11 @@ class TicketsController < ApplicationController
         end
        @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
     end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js # show.js.erb
+      format.json { render json: @ticket }
+    end
   end
 
 

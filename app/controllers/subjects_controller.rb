@@ -33,6 +33,11 @@ class SubjectsController < ApplicationController
 
   def new
     @subject = Subject.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @subject }
+    end
   end
 
   def create
@@ -46,6 +51,11 @@ class SubjectsController < ApplicationController
 
   def edit
     @subject = Subject.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.js # edit.js.erb
+      format.json { render json: @subject }
+    end
   end
 
   def update
@@ -76,6 +86,12 @@ class SubjectsController < ApplicationController
 
   def destroy
     @subject = Subject.find(params[:id])
+    @subject.destroy
+    respond_to do |format|
+        format.html
+        format.js # destroy.js.erb
+        format.json { head :no_content }
+      end
   end
   
   def available_subjects

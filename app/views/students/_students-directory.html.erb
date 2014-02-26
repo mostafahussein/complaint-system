@@ -24,7 +24,7 @@
 						</thead>
 						<tbody>
 							<% @students.each do |student| %>
-							<tr>
+							<tr id="<%= student.id %>">
 								<td><%= student.id %></td>
 
 								<td><%= student.full_name %></td>
@@ -34,7 +34,7 @@
 								<td><%= student.section.section_name %></td>
 
 								<td><a href="<%= user_path(student.user_id) if student.user%>" rel="tooltip" title="View Profile">view</a>
-									| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" } %> | <%= link_to 'attended subjects', student, remote: true %></td>
+									| <a href="<%= edit_student_path(student) %>" data-remote="true" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" }, remote: true %> | <%= link_to 'attended subjects', student, remote: true %></td>
 								</tr>
 								<% end %>
 							</tbody>
@@ -64,7 +64,7 @@
 						</thead>
 						<tbody>
 							<% @students.each do |student| %>
-							<tr>
+							<tr id="<%= student.id %>">
 								<td><%= check_box_tag 'student_ids[]', student.id %> <%= student.id %></td>
 
 								<td><%= student.full_name %></td>
@@ -74,7 +74,7 @@
 								<td><%= student.section.section_name %></td>
 
 								<td><a href="<%= user_path(student.user_id) if student.user%>" rel="tooltip" title="View Profile">view</a>
-									| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" } %> | <%= link_to 'attended subjects', student, remote: true %></td>
+									| <a href="<%= edit_student_path(student) %>" rel="tooltip" title="Update Student Details">update</a> | <%= link_to "delete", student, method: :delete, data: { confirm: "#{student.full_name} will be deleted, proceed?" }, remote: true %> | <%= link_to 'attended subjects', student, remote: true %></td>
 								</tr>
 								<% end %>
 							</tbody>
@@ -85,14 +85,12 @@
 						<% end %>
 					</div>
 				</div>
-
 			</div>
-			<% end %>
-		</div>
+		<% end %>
 	</div>
-	<script>
-	$('#students').dataTable({
-		"sPaginationType": "full_numbers"
-	});
-	</script>
-	<%= render "students/modal" %>
+</div>
+<script>
+$('#students').dataTable({
+	"sPaginationType": "full_numbers"
+});
+</script>

@@ -1,6 +1,7 @@
 class KbsController < ApplicationController
   def index
-     @faqs = Kb.all
+    @subjects = Subject.all
+    @faqs = Kb.all
   end
   
   def show
@@ -9,7 +10,11 @@ class KbsController < ApplicationController
   
   def new
     @faq = Kb.new
-    @subjects = Subject.all
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @faq }
+    end
   end
   
   def create
@@ -23,15 +28,32 @@ class KbsController < ApplicationController
       end
   end
   
-  def edit
-    
+   def edit
+    @faq = Kb.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.js # edit.js.erb
+      format.json { render json: @response }
+    end
   end
   
   def update
-    
+    @faq = Kb.find(params[:id])
+    if @faq.update_attributes(params[:user])
+      flash[:notice] = 'Question updated'
+      redirect_to :back
+    else
+      render 'edit'
+    end
   end
   
   def destroy
-    
+    @faq = Kb.find(params[:id])
+    @faq.destroy
+    respond_to do |format|
+        format.html
+        format.js # destroy.js.erb
+        format.json { head :no_content }
+    end
   end
 end

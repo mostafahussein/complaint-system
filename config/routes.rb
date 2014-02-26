@@ -1,68 +1,69 @@
 SweComplaint::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'users' }
-   resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update] do
-     collection do
-       get :users_directory
-     end
+  resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update] do
+   collection do
+     get :users_directory
    end
-   
-   resources :activities
+ end
+ 
+ resources :activities
 
-   resources :students do
-     collection do
-       post :create_multiple
-     end
+ resources :students do
+   collection do
+     post :create_multiple
    end
+ end
 
-   resources :employees do
-     collection do
-       post :create_multiple
-     end
+ resources :employees do
+   collection do
+     post :create_multiple
    end
-   
-   resources :advisors, controller: 'employees'
-   resources :staffs, controller: 'employees'
+ end
+ 
+ resources :advisors, controller: 'employees'
+ resources :staffs, controller: 'employees'
 
-   resources :tickets do
-     resources :follow_ups
-     put :assign , on: :member
-     collection do
-       get :total_tickets
-       get :open_status
-       get :in_progress_status
-       get :pending_status
-       get :solved_status
-       get :closed_status
-       get :high_tickets
-       get :normal_tickets
-       get :low_tickets
-     end
+ resources :tickets do
+   resources :follow_ups
+   put :assign , on: :member
+   collection do
+     get :total_tickets
+     get :open_status
+     get :in_progress_status
+     get :pending_status
+     get :solved_status
+     get :closed_status
+     get :high_tickets
+     get :normal_tickets
+     get :low_tickets
    end
+ end
 
-   resources :subjects do
-     resources :subject_surveys
-     resources :tickets
-     collection do
-       get :assign_advisors
-       put :update_multiple
-     end
-   end
-   
-   resources :subject_staffs
-   
-   
+ resources :subjects do
   resources :kbs
-  resources :responses
-  resources :surveys do
-    resources :subjects
-  end
+  resources :subject_surveys
+  resources :tickets
+  collection do
+   get :assign_advisors
+   put :update_multiple
+ end
+end
 
-   get '/dashboard', to: 'dashboard#index', as: :dashboard
-   get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
-   get '/home', to: 'dashboard#home', as: :home
-   devise_scope :user do
-     root to: 'devise/sessions#new'
-   end
+resources :subject_staffs
+
+
+resources :kbs
+resources :responses
+resources :surveys do
+  resources :subjects
+end
+
+get '/dashboard', to: 'dashboard#index', as: :dashboard
+get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
+get '/home', to: 'dashboard#home', as: :home
+devise_scope :user do
+ root to: 'devise/sessions#new'
+end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

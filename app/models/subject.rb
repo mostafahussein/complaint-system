@@ -28,6 +28,7 @@ class Subject < ActiveRecord::Base
   has_many :advisors , class_name: 'Advisor', through: :subject_staffs
   has_many :subject_surveys
   belongs_to :survey
+  has_many :kbs
   def to_label
     subject_title
   end

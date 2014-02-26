@@ -60,7 +60,7 @@
 								<% end %>
 								</td>
 									<td><%= ticket.due %></td>
-									<td><a href="<%= ticket_path(ticket) %>" class="btn" rel="tooltip" title="View"><i class="icon-search"></i></a></td>
+									<td><a href="<%= ticket_path(ticket) %>" class="btn" rel="tooltip" title="View" data-remote="true"><i class="icon-search"></i></a></td>
 								</tr>
 								<% end %>
 

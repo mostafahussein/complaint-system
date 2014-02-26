@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("New Subject");
+$modalBody.html("<%= escape_javascript(render 'new_subject') %>");
+$modal.modal();

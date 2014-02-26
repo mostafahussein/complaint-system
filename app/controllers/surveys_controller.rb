@@ -41,6 +41,10 @@ class SurveysController < ApplicationController
   def destroy
     @survey = Survey.find(params[:id])
     @survey.destroy
-    redirect_to surveys_url, notice: "Successfully destroyed survey."
+    respond_to do |format|
+        format.html
+        format.js # destroy.js.erb
+        format.json { head :no_content }
+      end
   end
 end
