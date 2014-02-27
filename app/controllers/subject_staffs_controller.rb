@@ -2,6 +2,11 @@ class SubjectStaffsController < ApplicationController
   def new
     @subject_staff = SubjectStaff.new
     @subject_list = Subject.find_by_sql("SELECT subject_title FROM subjects WHERE subjects.id NOT IN (SELECT DISTINCT(subject_id) subject_id FROM subject_staffs)")
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @subject_staff }
+    end
   end
 
   def create
@@ -17,6 +22,11 @@ class SubjectStaffsController < ApplicationController
   
   def edit
     @subject_staff = SubjectStaff.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.js # edit.js.erb
+      format.json { render json: @subject_staff }
+    end
   end
 
   def update

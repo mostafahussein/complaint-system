@@ -3,7 +3,7 @@ class SubjectsController < ApplicationController
   #before_filter :set_chart, only: :show
   def index
     if params[:tab] == "all"
-      @subjects = Subject.all
+      @subjects = Subject.order(:id)
     elsif params[:tab] == 'assigned_subjects'
       @subjects = Subject.where("subjects.id in (select subject_staffs.subject_id from subject_staffs)")
     elsif params[:tab] == 'not_assigned_subjects'
@@ -17,17 +17,27 @@ class SubjectsController < ApplicationController
       if current_user.student?
         @subjects = current_user.student.subjects
       end
+    elsif params[:tab] == "survey_results"
+      if current_user.head_of_department?
+        @subjects = Subject.order(:id)
+      end
     else
       render_404
     end
   end
 
   def show
-    @subject = Subject.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.js # show.js.erb
-      format.json { render json: @subject }
+     is_report_available = @subject.subject_surveys
+     if is_report_available.empty? || check_report.nil?
+      flash[:info] = 'sorry, no one answered this survey.. no reports yet'
+      redirect_to :back
+    else
+      @subject = Subject.find(params[:id])
+      respond_to do |format|
+        format.html # show.html.erb
+        format.js # show.js.erb
+        format.json { render json: @subject }
+      end
     end
   end
 

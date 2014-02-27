@@ -1,10 +1,6 @@
-<% flash.each do |key, value| %>
-	<div class="<%= flash_class(key) %>">
-		<%= value %>
-	</div>
-<% end %>
 <div class="top-nav">
 	<ul>
+		<% if current_user %>
 		<% if current_user.head_of_department? %>
 		<li>
 			<a href="<%= dashboard_path %>" class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'index' %>">
@@ -58,6 +54,13 @@
 				Subjects
 			</a>
 		</li>
+		<% elsif current_user.head_of_department? %>
+		<li>
+			<a href="<%= subjects_path(tab: "survey_results")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
+								<div class="fs1" aria-hidden="true" data-icon="&#xe0b3;"></div>
+				Survey Results
+			</a>
+		</li>
 		<% end %>
 		<% if current_user.head_of_department? %>
 		<li>
@@ -89,6 +92,7 @@
 			</a>
 		</li>
 		<% end %>
+		<% end %>
 	</ul>
 	<div class="clearfix">
 	</div>
@@ -101,83 +105,4 @@
 	<%= render 'tickets/tickets-sub-nav' if params[:controller] == 'tickets'%>
 	<%= render 'activities/activities-sub-nav' if params[:controller] == 'activities'%>
 	<%= render 'kbs/kbs-sub-nav' if params[:controller] == 'kbs' || params[:controller] == 'responses'%>
-	<div class="btn-group pull-right">
-		<button class="btn btn-primary">
-			Main Menu
-		</button>
-		<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-			<span class="caret">
-			</span>
-		</button>
-		<ul class="dropdown-menu pull-right">
-			<% if current_user.head_of_department? %>
-			<li>
-				<a href="<%= dashboard_path %>" data-original-title="">
-					Dashboard
-				</a>
-			</li>
-			<% end %>
-			<% if current_user.head_of_department? %>
-			<li>
-				<a href="<%= activities_path %>" data-original-title="">
-					System Activity
-				</a>
-			</li>
-			<% end %>
-			<% if current_user.admin? %>
-			<li>
-				<a href="<%= users_path %>" data-original-title="">
-					Users
-				</a>
-			</li>
-			<% end %>
-			<% if current_user.admin? %>
-			<li>
-				<a href="<%= employees_path(tab: "staff")%>" data-original-title="">
-					Employees
-				</a>
-			</li>
-			<% end %>
-			<% if current_user.admin? %>
-			<li>
-				<a href="<%= students_path %>" data-original-title="">
-					Students
-				</a>
-			</li>
-			<% end %>
-			<% if current_user.admin? %>
-			<li>
-				<a href="<%= subjects_path(tab: "all")%>" data-original-title="">
-					Subjects
-				</a>
-			</li>
-			<% elsif current_user.advisor? %>
-			<li>
-				<a href="<%= subjects_path(tab: "assigned")%>" data-original-title="">
-					Subjects
-				</a>
-			</li>
-			<% elsif current_user.student? %>
-			<li>
-				<a href="<%= subjects_path(tab: "enrolled")%>" data-original-title="">
-					Subjects
-				</a>
-			</li>
-			<% end %>
-			<% if !current_user.admin? %>
-			<li>
-				<a href="<%= tickets_path(tab: "open") %>" data-original-title="">
-					Complaints
-				</a>
-			</li>
-			<% end %>
-			<% if !current_user.admin? %>
-			<li>
-				<a href="<%= kbs_path %>" data-original-title="">
-					Knowledge Base
-				</a>
-			</li>
-			<% end %>
-		</ul>
-	</div>
 </div>

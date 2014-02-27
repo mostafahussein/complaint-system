@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("Assign employees to subject");
+$modalBody.html("<%= escape_javascript(render 'new_subject_staff') %>");
+$modal.modal();

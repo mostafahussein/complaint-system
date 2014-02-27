@@ -12,6 +12,7 @@ gem 'public_activity', '1.4.1'
 #gem 'sqlite3'
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'toastr-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

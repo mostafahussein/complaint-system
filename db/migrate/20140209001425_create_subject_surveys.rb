@@ -6,6 +6,7 @@ class CreateSubjectSurveys < ActiveRecord::Migration
       t.integer :question_id
       t.integer :answer_id
   	  t.integer :student_id
+      t.text :free_answer
       t.timestamps
     end
   end

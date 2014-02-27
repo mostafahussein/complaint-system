@@ -38,7 +38,7 @@
 								<td><%= user.role%></td>
 								<td><%= "active" if user.active? %><%= "inactive" if !user.active? %></td>
 								<td><a href="<%= user_path(user) %>" rel="tooltip" title="View Profile">view</a>
-									 | <a href="<%= edit_user_path(user) %>" data-remote="true" rel="tooltip" title="Update User Details">update</a> | <%= link_to "delete", user, method: :delete, remote: true, data: { confirm: "#{user.email} will be deleted, proceed?" } %></td>
+									 | <a href="<%= edit_user_path(user) %>" data-remote="true" rel="tooltip" title="Update User Details">update</a><%= link_to " | delete", user, method: :delete, remote: true, data: { confirm: "#{user.email} will be deleted, proceed?" } unless user == current_user %></td>
 							</tr>
 							<% end %>
 						</tbody>

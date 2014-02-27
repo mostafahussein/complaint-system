@@ -1,5 +1,5 @@
 <p><%= simple_form_for(@survey) do |f| %>
-	<% for subject in Subject.all %>
+	<% for subject in Subject.order(:id) %>
 	<label id=''><%= check_box_tag 'survey[subject_ids][]', subject.id, @survey.subjects.include?(subject) %>
 		&nbsp;&nbsp;<%= subject.subject_title %></label>
 		<% end %>

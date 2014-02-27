@@ -1,0 +1,6 @@
+$modal = $('.modal2'),
+$modalBody = $('.modal2 .modal-body'),
+$modalHeading = $('.modal2 .modal-heading');
+$modalHeading.html('Student Complaint Lodgement Form: New Complaint about <%= @title.titleize %>');
+$modalBody.html("<%= escape_javascript(render 'new_ticket_form') %>");
+$modal.modal();

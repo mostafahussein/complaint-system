@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.integer  "question_id"
     t.integer  "answer_id"
     t.integer  "student_id"
+    t.text     "free_answer"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

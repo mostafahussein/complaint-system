@@ -10,7 +10,8 @@ SweComplaint::Application.routes.draw do
 
  resources :students do
    collection do
-     post :create_multiple
+    get :available_sections
+    post :create_multiple
    end
  end
 

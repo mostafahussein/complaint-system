@@ -12,6 +12,11 @@ class SubjectSurveysController < ApplicationController
 
 	def new
 		@sv_sub = SubjectSurvey.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js # new.js.erb
+      format.json { render json: @sv_sub }
+    end
 	end
 
 	def create
@@ -25,7 +30,7 @@ class SubjectSurveysController < ApplicationController
     	end
 		
 		if @sv_sub.save
-      		redirect_to surveys_path, notice: "Success."
+      		redirect_to :back, notice: "Success."
     	else
       		render :new, notice: "Failed."
     	end
@@ -54,8 +59,9 @@ class SubjectSurveysController < ApplicationController
   	def set_survey
   		survey_id = Subject.find(params[:subject_id]).survey_id
   		@survey = Survey.find(survey_id)
-  		@questions = @survey.questions.where("questions.question_type != ?", "#{Question::GRID}").order("questions.id asc")
+  		@questions = @survey.questions.where("questions.question_type != ? AND questions.question_type != ? AND questions.question_type != ?", "#{Question::GRID}", "#{Question::BOX}", "#{Question::AREA}").order("questions.id asc")
   		@questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
+      @questions_free = @survey.questions.where("questions.question_type = ? OR questions.question_type = ?","#{Question::BOX}","#{Question::AREA}").order("questions.id asc")
   	end
 
   def set_user

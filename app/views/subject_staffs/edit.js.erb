@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("Edit assigned employees to <%= @subject_staff.subject.subject_title %>");
+$modalBody.html("<%= escape_javascript(render 'edit_subject_staff') %>");
+$modal.modal();

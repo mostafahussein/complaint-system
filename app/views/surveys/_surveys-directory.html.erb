@@ -26,7 +26,7 @@
 							<tr id="<%= survey.id %>">
 								<td><%= link_to survey.survey_name, survey %></td>
 								<td><%= pluralize(survey.questions.size, "Question") %></td>
-								<td><a href="<%= edit_survey_path(survey) %>" rel="tooltip" title="Update Survey">update</a> | <%= link_to "delete", survey, method: :delete, data: { confirm: "#{survey.survey_name} will be deleted, proceed?" }, remote: true %> | <%= link_to 'Set Subjects', survey, remote: true %></td>
+								<td><a href="<%= edit_survey_path(survey) %>" rel="tooltip" title="Update Survey">update</a> | <%= link_to "delete", survey, method: :delete, data: { confirm: "#{survey.survey_name} will be deleted, proceed?" }, remote: true %> | <%= link_to 'set subjects', survey, remote: true %></td>
 							</tr>
 							<% end %>
 						</tbody>

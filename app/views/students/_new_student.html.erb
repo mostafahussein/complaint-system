@@ -2,8 +2,8 @@
 	<%= simple_form_for(@student, :html => {:class => 'form-horizontal' }) do |f| %>
 	<%= f.input :full_name, placeholder: 'Enter Full Name' %>
 	<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender' %>
-	<%= f.association :batch, label_method: :batch_name, prompt: 'Select Batch'  %>
-	<%= f.association :section, label_method: :section_name , prompt: 'Select Section' %>
+	<%= f.association :batch, collection: @batches, prompt: "Select Batch", label_method: :batch_name, input_html: { id: 'student_batch'} %>
+	<%= f.input :section_id, collection: @sections, label_method: :section_name, input_html: { id: 'student_section'} %>
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
 			Create Student
@@ -13,3 +13,27 @@
 	</div>
 	<% end %>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.student_section_id').hide();
+	$('#student_batch').change(function() {
+		$.ajax({
+			url: "/students/available_sections",
+			data: {
+				batch_id : $('#student_batch').val()
+			},
+			dataType: "script",
+			success: function () {
+				if (+$('#student_batch').val() > 0)
+				{
+					$('.student_section_id').fadeIn();
+				}
+				else
+				{
+					$('.student_section_id').fadeOut();
+				}
+			} 
+		});
+	});
+});
+</script>

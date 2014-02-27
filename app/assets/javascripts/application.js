@@ -24,4 +24,5 @@
 //= require js/tiny-scrollbar
 //= require js/jquery.bootstrap.wizard
 //= require js/jquery.cookie
+//= require toastr
 //= require_tree .

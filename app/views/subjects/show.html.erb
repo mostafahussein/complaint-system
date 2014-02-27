@@ -17,7 +17,7 @@
 									<% statistics = SubjectSurvey.question_statistics(@subject.survey_id,@subject.id,question.question_type,question.id) %>
 									<% total = SubjectSurvey.total_responses(@subject.survey_id,@subject.id,question.question_type,question.id) %>
 
-									<% instance_variable_set("@question_chart_#{q}", SubjectSurvey.chart_statistics(@subject.survey_id,@subject.id,question.question_type,question.id).as_json.first.collect {|k,v| [k.humanize.capitalize,v.to_i]}) %>
+									<% instance_variable_set("@question_chart_#{q}", SubjectSurvey.chart_statistics(@subject.survey_id,@subject.id,question.question_type,question.id).as_json.first.collect {|k,v| [k.humanize.capitalize,v.to_i]}) unless SubjectSurvey.chart_statistics(@subject.survey_id,@subject.id,question.question_type,question.id).as_json.first.nil? %>
 									
 
 
@@ -62,7 +62,7 @@
 									<thead>
 									<tr>
 										<th><%= label_tag 'question', "Q#{q}- #{question.content.capitalize}" %><th>
-											<label style='text-align:center;'>Total Responses: <%= total.first.total_responses %></label>
+											<label style='text-align:center;'>Total Responses: <%= total.first.total_responses unless total.first.nil? %></label>
 									</tr>
 									<tr>
 										<th style='text-align:center;'>Answer(s)</th>
