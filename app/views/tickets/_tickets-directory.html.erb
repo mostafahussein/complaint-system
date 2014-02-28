@@ -35,6 +35,7 @@
 								<th>Submitting Date</th>
 								<th>Assigned To</th>
 								<th>Due Date</th>
+								<th>Total Follow ups</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -60,6 +61,7 @@
 								<% end %>
 								</td>
 									<td><%= ticket.due %></td>
+									<td><%= pluralize(ticket.follow_ups.size, "Follow up") %></td>
 									<td><a href="<%= ticket_path(ticket) %>" class="btn" rel="tooltip" title="View" data-remote="true"><i class="icon-search"></i></a></td>
 								</tr>
 								<% end %>

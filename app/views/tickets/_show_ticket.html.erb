@@ -72,14 +72,17 @@
 								Post Follow up
 							</a>
 						</li>
+						<% unless current_user.student? %>
 						<li class="">
 							<a data-toggle="tab" href="#assign">
 								Assign Complaint
 							</a>
 						</li>
+						<% end %>
 					</ul>
 					<div class="tab-content" id="myTabContent">
 						<div id="post" class="tab-pane fade active in">
+							<% unless current_user.student? %>
 							<form class="form-horizontal no-margin">
 							<div class="control-group">
 								<%= label_tag 'Canned Responses:',nil, class: "control-label" %>
@@ -88,6 +91,7 @@
 								</div>
 							</div>
 							</form>
+							<% end %>
 							
 							<%= render 'follow_ups/form' %>
 						</div>
