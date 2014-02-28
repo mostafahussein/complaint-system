@@ -51,7 +51,7 @@ class EmployeesController < ApplicationController
   end
 
   def create_multiple
-    if params[:employee_ids].nil?
+    if @employees.nil?
       flash[:error] = 'Please select an employee or more'
       redirect_to :back
     else
