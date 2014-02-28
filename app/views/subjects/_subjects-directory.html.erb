@@ -106,7 +106,7 @@
 							<tr>  
 								<td style='text-align:center;'><%= subject.subject_code %></td>
 								<td style='text-align:center;'><%= subject.subject_title %></td>
-								<td style='text-align:center;'><%= link_to 'view survey report', survey_subject_path(subject.survey_id,subject.id) unless subject.survey_id.nil? %><%= 'no survey assigned about this subject' unless !subject.survey_id.nil? %></td>
+								<td style='text-align:center;'><%= link_to 'view survey report', survey_subject_path(subject.survey_id,subject.id), remote: true unless subject.survey_id.nil? %><%= 'no survey assigned about this subject' unless !subject.survey_id.nil? %></td>
 							</tr>
 							<% end %>
 						</tbody>

@@ -18,7 +18,7 @@
 
 class SubjectSurvey < ActiveRecord::Base
   extend Modules::Statistics
-  attr_accessible :subject_id , :survey_id, :student_id , :question_id, :answer_id
+  attr_accessible :subject_id , :survey_id, :student_id , :question_id, :answer_id,:free_answer
   belongs_to :subject
   belongs_to :student
   belongs_to :question

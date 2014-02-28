@@ -28,9 +28,8 @@ class SubjectsController < ApplicationController
 
   def show
      is_report_available = @subject.subject_surveys
-     if is_report_available.empty? || check_report.nil?
-      flash[:info] = 'sorry, no one answered this survey.. no reports yet'
-      redirect_to :back
+     if is_report_available.empty? || is_report_available.nil?
+     
     else
       @subject = Subject.find(params[:id])
       respond_to do |format|

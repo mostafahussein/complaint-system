@@ -1,0 +1,3 @@
+<% if @subject.subject_surveys.empty? || @subject.subject_surveys.nil? %>
+toastr.error('Sorry, no one answered this survey.. no reports yet!')
+<% end %>

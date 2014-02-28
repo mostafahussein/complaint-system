@@ -26,7 +26,8 @@ class SubjectSurveysController < ApplicationController
             subject_id: params[:subject_survey][:subject_id],
             survey_id: params[:subject_survey][:survey_id],
             question_id: question,
-            answer_id: answer)
+            answer_id: answer,
+            free_answer: answer)
     	end
 		
 		if @sv_sub.save
@@ -58,10 +59,13 @@ class SubjectSurveysController < ApplicationController
 
   	def set_survey
   		survey_id = Subject.find(params[:subject_id]).survey_id
-  		@survey = Survey.find(survey_id)
-  		@questions = @survey.questions.where("questions.question_type != ? AND questions.question_type != ? AND questions.question_type != ?", "#{Question::GRID}", "#{Question::BOX}", "#{Question::AREA}").order("questions.id asc")
-  		@questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
-      @questions_free = @survey.questions.where("questions.question_type = ? OR questions.question_type = ?","#{Question::BOX}","#{Question::AREA}").order("questions.id asc")
+      if survey_id.nil?
+      else
+    		@survey = Survey.find(survey_id)
+    		@questions = @survey.questions.where("questions.question_type != ? AND questions.question_type != ? AND questions.question_type != ?", "#{Question::GRID}", "#{Question::BOX}", "#{Question::AREA}").order("questions.id asc")
+    		@questions_grid = @survey.questions.where("questions.help_text != ? AND questions.question_type = ?", '', "#{Question::GRID}").order("questions.id asc").group_by { |q| q.help_text }
+        @questions_free = @survey.questions.where("questions.question_type = ? OR questions.question_type = ?","#{Question::BOX}","#{Question::AREA}").order("questions.id asc")
+      end
   	end
 
   def set_user
