@@ -11,9 +11,17 @@
 		<% end %>
 		<% if current_user.head_of_department? %>
 		<li>
-			<a href="<%= activities_path %>" class="<%= 'selected' if params[:controller] == 'activities' && params[:action] == 'index' %>">
+			<a href="<%= activities_path(tab: 'system_activities') %>" class="<%= 'selected' if params[:controller] == 'activities' && params[:action] == 'index' %>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe01b;"></div>
 				System Activity
+			</a>
+		</li>
+		<% end %>
+		<% if current_user.student? %>
+		<li>
+			<a href="<%= activities_path(tab: 'notifications') %>" class="<%= 'selected' if params[:controller] == 'activities' && params[:action] == 'index' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe01b;"></div>
+				Notifications
 			</a>
 		</li>
 		<% end %>

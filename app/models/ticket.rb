@@ -29,6 +29,7 @@ class Ticket < ActiveRecord::Base
   include PublicActivity::Model
   include Modules::DefaultValues
   tracked owner: ->(controller, model) {controller && controller.current_user}
+  tracked recipient: ->(controller, model) { model && model.student }
   scope :opened   , joins({ticket_statuses: :status}).where('statuses.ticket_status = ? '  , "#{Ticket::OPEN}")
   scope :solved   , joins({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::SOLVED}")
   scope :closed   , joins({ticket_statuses: :status}).where('statuses.ticket_status = ?'   , "#{Ticket::CLOSED}")
