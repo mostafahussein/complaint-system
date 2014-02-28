@@ -36,9 +36,7 @@ class Ticket < ActiveRecord::Base
   scope :overdue  , joins({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due < ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
   scope :today    , joins({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due = ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
   scope :upcoming , joins({ticket_statuses: :status}).where('statuses.ticket_status != ? AND due > ?'   , "#{Ticket::SOLVED}", Date.today.to_s).limit(20)
-  scope :recent   , find(:all, order: "created_at DESC", limit:20)
-  # # 
-  # #scope :employee_overdue,
+  scope :recent   , limit(20).order("created_at DESC").all
 
   attr_accessible :title, :description, :ticket_state, :assign_state, :due, :created_at , :student_id, :priority_id, :subject_id, :category_id,
   :date_of_alleged_event, :reason_of_delay,:expectations,:ticket_statuses_attributes, :follow_ups_attributes
