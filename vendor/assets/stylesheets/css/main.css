@@ -4579,7 +4579,7 @@ button.close {
 /*   Dashboard CSS Written by Srinu Baswa   */
 /*  Login  */
 .sign-in-container {
-  margin: 30% auto; }
+  margin: 60px auto; }
   .sign-in-container .login-wrapper {
     background: #fcfcfc;
     -webkit-border-radius: 4px;

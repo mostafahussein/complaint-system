@@ -93,7 +93,7 @@
 			<% if question.question_type == "#{Question::BOX}" %>
 				<!-- in progress -->
 			<% elsif question.question_type == "#{Question::AREA}" %>
-				<%= text_area_tag "subject_survey[questions][#{question.id}]", @sv_sub.free_answer,  rows: 5, class: 'input-xxlarge' %>
+				<%= text_area_tag "subject_survey[free_answer]", @sv_sub.free_answer,  rows: 5, class: 'input-xxlarge' %>
 			<% end %>
 			<% if question.equal? @questions_free.last %>
 				<br><br>
