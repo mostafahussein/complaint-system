@@ -60,8 +60,9 @@ resources :surveys do
   resources :subjects
 end
 
-resources :suggestions
-
+resources :suggestions do
+  resources :replies
+end
 get "notifications", to: "notifications#index", as: "notifications"
 get '/dashboard', to: 'dashboard#index', as: :dashboard
 get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects

@@ -1,0 +1,13 @@
+<%= div_for reply do %>
+<blockquote>
+	<span class="title">
+		<%= reply.user.employee.full_name %> says:
+	</span>
+	<p>
+		<%= simple_format reply.text %>
+	</p>
+	<small>
+		<%= reply.created_at.strftime("%d/%m/%Y %I:%M%p")%> 
+	</small>
+</blockquote>
+<% end %>

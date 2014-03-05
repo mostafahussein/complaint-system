@@ -7,7 +7,8 @@ class SuggestionsController < ApplicationController
 	end
 
 	def show
-		
+		@suggestion = Suggestion.find(params[:id])
+    @reply = Reply.new
 	end
 
 

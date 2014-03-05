@@ -11,7 +11,7 @@
 					<% @suggestions.each do |suggestion| %>
 					<blockquote>
 						<span class="title">
-							<%= link_to suggestion.title, '#' %>
+							<%= link_to suggestion.title, suggestion_path(suggestion) %>
 						</span>
 						<p>
 							<button class="btn btn-small btn-info">Vote for this</button><a href="#" class="btn btn-small disabled"><b>6 votes</b></a>
