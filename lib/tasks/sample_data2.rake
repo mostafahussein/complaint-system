@@ -2,10 +2,13 @@ namespace :db do
   desc 'Fill database with sample data'
   task update_sample: :environment do
     Faker::Config.locale = :en
-    make_employees_and_students_as_users
-    attended_subjects
-    assigned_subjects
-    make_complaints
+     #make_employees_and_students_as_users
+     #attended_subjects
+     #assigned_subjects
+     #make_complaints
+     #canned_responses
+     #faqs
+    suggestions
   end
 end
 
@@ -105,7 +108,7 @@ def make_complaints
         priority = [1,2,3]
         time = (Time.now - 4.days) + days.sample.days
         Ticket.create!(created_at: time, description: description, student_id: student.id, subject_id: subject.id, priority_id: priority.sample, date_of_alleged_event: date_of_alleged_event,
-        expectations: expectations, reason_of_delay: reason_of_delay, category_id: category.sample)
+          expectations: expectations, reason_of_delay: reason_of_delay, category_id: category.sample)
         ticket = Ticket.last
         if ticket.priority.priority_name == 'high'
           due = ticket.created_at.to_date + 2.days
@@ -126,4 +129,41 @@ def make_complaints
       end
     end
   end
+end
+
+
+def canned_responses
+  puts 'canned_responses'
+  10.times do
+    canned_response = Faker::Lorem.sentence(1).chomp('.')
+    Response.create(canned_response: canned_response)
+  end
+end
+
+def faqs
+  puts 'faqs'
+  subjects =Subject.all
+  20.times do
+    subjects.each do |subject|
+      id = subject.id
+      q = Faker::Lorem.sentence(1).chomp('.')
+      a = Faker::Lorem.sentence(1).chomp('.')
+      Kb.create(faq_question: q , faq_answer: a, subject_id: id)
+    end
+  end
+end
+
+def suggestions
+  puts 'suggestions'
+  students = Student.all(limit: 10 , order: "RANDOM()" )
+  fields = SubjectField.all
+  students.each do |student|
+    student.subjects.all.each do |subject|
+      fields.each do |field|
+        title = Faker::Lorem.sentence(1).chomp('.')
+       content = Faker::Lorem.sentence(1).chomp('.')
+       Suggestion.create(subject_field_id:field.id, content:content, student_id:student.id, subject_id:subject.id, title:title)
+     end
+   end
+ end
 end

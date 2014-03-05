@@ -17,14 +17,6 @@
 			</a>
 		</li>
 		<% end %>
-		<% if current_user.student? %>
-		<li>
-			<a href="<%= activities_path(tab: 'notifications') %>" class="<%= 'selected' if params[:controller] == 'activities' && params[:action] == 'index' %>">
-				<div class="fs1" aria-hidden="true" data-icon="&#xe01b;"></div>
-				Notifications
-			</a>
-		</li>
-		<% end %>
 		<% if current_user.admin? %>
 		<li>
 			<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>">
@@ -97,6 +89,14 @@
 			<a href="<%= kbs_path(tab: 'categories') %>" class="<%= 'selected' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
 				Knowledge Base
+			</a>
+		</li>
+		<% end %>
+		<% if !current_user.admin? %>
+		<li>
+			<a href="<%= suggestions_path %>" class="<%= 'selected' if params[:controller] == 'suggestions'%>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe06e;"></div>
+				Suggestions
 			</a>
 		</li>
 		<% end %>

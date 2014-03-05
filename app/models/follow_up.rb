@@ -16,8 +16,9 @@
 #
 
 class FollowUp < ActiveRecord::Base
-  include PublicActivity::Model
-  tracked owner: ->(controller, model) {controller && controller.current_user}
+  include PublicActivity::Common
+  # tracked owner: ->(controller, model) {controller && controller.current_user}
+  # tracked recipient: ->(controller, model) { model && model.ticket.student.user }
   attr_accessible :text, :ticket_id, :priority_id, :user_id
   belongs_to :ticket
   belongs_to :user

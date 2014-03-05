@@ -4,11 +4,10 @@
         <div class="widget-header">
           <div class="title">
             <%= 'System Activities' if current_user.head_of_department? && params[:tab] == 'system_activities' %>
-            <%= 'Notifications' if current_user.student? && params[:tab] == 'notifications'%>
           </div>
         </div>
         <div class="widget-body">
-          <% if params[:tab] == 'system_activities' || params[:tab] == 'notifications' %>
+          <% if params[:tab] == 'system_activities'%>
          <% @activities.each do |activity|%>
 
          <blockquote>

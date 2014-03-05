@@ -29,6 +29,8 @@ class Subject < ActiveRecord::Base
   has_many :subject_surveys
   belongs_to :survey
   has_many :kbs
+  has_many :suggestions
+
   def to_label
     subject_title
   end

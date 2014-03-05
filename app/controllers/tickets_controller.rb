@@ -38,7 +38,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @status_title = Status.joins(ticket_statuses: :ticket).where("tickets.id = ?", @ticket.id).first
     @subject_title = Subject.find_by_sql("SELECT subject_title FROM subjects, tickets
-    WHERE subjects.id = tickets.subject_id AND tickets.id = #{@ticket.id}") 
+      WHERE subjects.id = tickets.subject_id AND tickets.id = #{@ticket.id}") 
     @assigned_advisor = Advisor.joins(ticket_statuses: :ticket).where("tickets.id = ? ", @ticket.id).first
     @assigned_staff = Staff.joins(ticket_statuses: :ticket).where("tickets.id = ? ", @ticket.id).first
     @follow_up = FollowUp.new
@@ -59,13 +59,13 @@ class TicketsController < ApplicationController
       else
         @previous_staff = previous_staff.full_name
       end
-       updated_by = @ticket.ticket_statuses.first.versions.last.whodunnit
-       if updated_by.nil?
-          @updated_by = 'The System'
-        else
-          @updated_by = User.find(updated_by).employee.full_name
-        end
-       @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
+      updated_by = @ticket.ticket_statuses.first.versions.last.whodunnit
+      if updated_by.nil?
+        @updated_by = 'The System'
+      else
+        @updated_by = User.find(updated_by).employee.full_name
+      end
+      @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
     end
     respond_to do |format|
       format.html # show.html.erb
@@ -88,70 +88,82 @@ class TicketsController < ApplicationController
   def create
     @ticket = Ticket.new(params[:ticket])
     if @ticket.save
-      if @ticket.priority.priority_name == "#{TicketsController::HIGH}"
-        due = @ticket.create_at.to_date + 2.days
-        @ticket.update_attributes(due: due)
-      elsif @ticket.priority.priority_name == "#{TicketsController::NORMAL}"
-        due = @ticket.create_at.to_date + 7.days
-        @ticket.update_attributes(due: due)
-      elsif @ticket.priority.priority_name == "#{TicketsController::LOW}"
-        due = @ticket.create_at.to_date + 10.days
-        @ticket.update_attributes(due: due)
-      end
-      advisor = SubjectStaff.where(subject_id: @ticket.subject_id).first
-      TicketStatus.create(status_id: 1,ticket_id: @ticket.id, advisor_id: advisor.advisor_id )
-      redirect_to subjects_path(tab: 'enrolled')
-    else
-      redirect_to subjects_path(tab: 'enrolled')
+      if @ticket.category.category_name == "exam"
+       @ticket.update_attributes(priority_id: 1)
+     elsif @ticket.category.category_name == "subject_material"
+       @ticket.update_attributes(priority_id: 1)
+     elsif @ticket.category.category_name == "classroom"
+       @ticket.update_attributes(priority_id: 2)
+     elsif @ticket.category.category_name == "subject instructor"
+       @ticket.update_attributes(priority_id: 3)
+     end
+     if @ticket.priority.priority_name == "#{TicketsController::HIGH}"
+      due = @ticket.create_at.to_date + 2.days
+      @ticket.update_attributes(due: due)
+    elsif @ticket.priority.priority_name == "#{TicketsController::NORMAL}"
+      due = @ticket.create_at.to_date + 7.days
+      @ticket.update_attributes(due: due)
+    elsif @ticket.priority.priority_name == "#{TicketsController::LOW}"
+      due = @ticket.create_at.to_date + 10.days
+      @ticket.update_attributes(due: due)
     end
+    advisor = SubjectStaff.where(subject_id: @ticket.subject_id).first
+    TicketStatus.create(status_id: 1,ticket_id: @ticket.id, advisor_id: advisor.advisor_id )
+    @ticket.create_activity :create, owner: current_user, recipient: @ticket.student.user
+    redirect_to subjects_path(tab: 'enrolled')
+  else
+    redirect_to subjects_path(tab: 'enrolled')
   end
+end
 
-  def edit
-    @ticket = Ticket.find(params[:id])
+def edit
+  @ticket = Ticket.find(params[:id])
+end
+
+def update
+  @ticket = Ticket.find(params[:id])
+  if @ticket.update_attributes(params[:ticket])
+    activity = @ticket.create_activity :update, owner: current_user, recipient: @ticket.student.user
+    Notification.create!({ activity_id: activity.id, user_id: @ticket.student.user.id })
+    redirect_to ticket_path(@ticket)
+  else
+    render 'edit'
   end
+end
 
-  def update
-    @ticket = Ticket.find(params[:id])
-    if @ticket.update_attributes(params[:ticket])
-      redirect_to ticket_path(@ticket)
-    else
-      render 'edit'
-    end
+def destroy
+  @ticket = Ticket.find(params[:id])
+end
+
+def assign
+  @ticket = Ticket.find(params[:id])
+  @ticket.ticket_statuses.first.update_attributes(staff_id: current_user.employee.id)
+  redirect_to @ticket
+end
+
+private
+def set_subject
+  @title = Subject.find(params[:subject_id]).subject_title
+  @subject = Subject.find(params[:subject_id]).id
+end
+
+def set_user
+  if current_user.student
+    @student = current_user.student.id
+    @name  = Student.find(@student)
+    @batch = @name.batch
+    @section = @name.section
+    @today = Date.today
   end
+end
 
-  def destroy
-    @ticket = Ticket.find(params[:id])
-  end
-
-  def assign
-    @ticket = Ticket.find(params[:id])
-    @ticket.ticket_statuses.first.update_attributes(staff_id: current_user.employee.id)
-    redirect_to @ticket
-  end
-
-  private
-  def set_subject
-    @title = Subject.find(params[:subject_id]).subject_title
-    @subject = Subject.find(params[:subject_id]).id
-  end
-
-  def set_user
-    if current_user.student
-      @student = current_user.student.id
-      @name  = Student.find(@student)
-      @batch = @name.batch
-      @section = @name.section
-      @today = Date.today
-    end
-  end
-
-  def set_to_close
-    tickets = Ticket.overdue
-    tickets.each do |ticket|
-      if (ticket.statuses.first.ticket_status != "#{ApplicationController::SOLVED}") && (ticket.due < Date.today)
-        subject_id = ticket.subject_id
-        staff = SubjectStaff.where("subject_id = ?", subject_id).first
-        staff_id = staff.staff_id
+def set_to_close
+  tickets = Ticket.overdue
+  tickets.each do |ticket|
+    if (ticket.statuses.first.ticket_status != "#{ApplicationController::SOLVED}") && (ticket.due < Date.today)
+      subject_id = ticket.subject_id
+      staff = SubjectStaff.where("subject_id = ?", subject_id).first
+      staff_id = staff.staff_id
         #ticket.statuses.first.update_attributes(ticket_status: "#{ApplicationController::CLOSED}")
         ticket.ticket_statuses.first.update_attributes(staff_id: staff_id, advisor_id: nil)
       end

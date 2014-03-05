@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140209001425) do
+ActiveRecord::Schema.define(:version => 20140303224107) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -98,6 +98,14 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id",                        :null => false
+    t.integer  "activity_id",                    :null => false
+    t.boolean  "is_read",     :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
   create_table "priorities", :force => true do |t|
     t.string   "priority_name", :limit => 15
     t.string   "color",         :limit => 10
@@ -116,6 +124,14 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
     t.boolean  "required_question", :default => true
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+  end
+
+  create_table "replies", :force => true do |t|
+    t.string   "text"
+    t.integer  "suggestion_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "responses", :force => true do |t|
@@ -151,6 +167,12 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
 
   add_index "students", ["full_name"], :name => "index_students_on_full_name"
 
+  create_table "subject_fields", :force => true do |t|
+    t.string   "field_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "subject_staffs", :force => true do |t|
     t.integer  "staff_id"
     t.integer  "advisor_id"
@@ -179,6 +201,16 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
   end
 
   add_index "subjects", ["subject_title"], :name => "index_subjects_on_subject_title"
+
+  create_table "suggestions", :force => true do |t|
+    t.integer  "student_id"
+    t.integer  "subject_id"
+    t.integer  "subject_field_id"
+    t.string   "content"
+    t.string   "title"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "surveys", :force => true do |t|
     t.string   "survey_name"
@@ -242,5 +274,13 @@ ActiveRecord::Schema.define(:version => 20140209001425) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "votes", :force => true do |t|
+    t.integer  "suggestion_id"
+    t.integer  "user_id"
+    t.integer  "vote"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
 end

@@ -61,8 +61,8 @@ module SweComplaint
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
     
-    if Rails.env.development?
-        ActiveRecord::Base.logger = Logger.new('/dev/null')
-    end
+    # if Rails.env.development?
+    #     ActiveRecord::Base.logger = Logger.new('/dev/null')
+    # end
   end
 end

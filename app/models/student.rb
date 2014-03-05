@@ -31,5 +31,6 @@ class Student < ActiveRecord::Base
   has_many :subjects, :through => :attends
   has_many :tickets
   has_many :subject_surveys
+  has_many :suggestions
 
 end

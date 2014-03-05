@@ -37,4 +37,17 @@
   });
   </script>
 <% elsif params[:tab] == 'questions' %>
+<% q = 0 %>
+<% @subject.kbs.each do |kb|%>
+<% q += 1 %>
+<blockquote>
+          <span class="title">
+           <%= "#{q}- " %><%= kb.faq_question %>
+          </span>
+
+          <h6><%= kb.faq_answer %></h6>
+        </blockquote>
+
+
+<% end %>
 <% end%>

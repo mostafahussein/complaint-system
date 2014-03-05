@@ -5,6 +5,8 @@ class FollowUpsController < ApplicationController
     @follow_up = @ticket.follow_ups.build(params[:follow_up])
     @follow_up.user = current_user
     if @follow_up.save
+      activity = @follow_up.create_activity :create, owner: current_user, recipient: @follow_up.ticket.student.user
+      Notification.create!({ activity_id: activity.id, user_id: @follow_up.ticket.student.user.id })
       flash[:notice] = "Followup has been added."
       redirect_to @ticket
     else

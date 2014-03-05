@@ -1,0 +1,40 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget">
+			<div class="widget-header">
+				<div class="title">
+					Notifications
+				</div>
+			</div>
+			<div id="follow_ups" class="widget-body">
+				<% if !@notifications.empty? %>
+				<% @notifications.each do |notification| %>
+				<% act = notification.activity %>
+				<% if act.owner_type == "User" && act.owner_id != current_user.id%>
+				<blockquote>
+					<% if act.trackable_type == "FollowUp" %>
+					<span class="title" style= "color: #000000;">
+						<%= link_to act.owner.employee.full_name, user_url(act.owner) %> followed up your <%= link_to "Complaint ##{act.trackable.ticket.id}", ticket_url(act.trackable.ticket) %>
+					</span>
+
+					<% elsif act.trackable_type == "Ticket" %>
+					<span class="title" style= "color: #000000;">
+						<%= link_to act.owner.employee.full_name, user_url(act.owner) if act.owner%> made an update to your <%= link_to "Complaint ##{act.trackable.id}", ticket_url(act.trackable) %>
+					</span>
+					<% end %>
+					<small>at <%= act.created_at.strftime("%b %d, %Y") %></small>
+				</blockquote>
+				<% end %>
+
+				<% end %>
+				<% else %>
+				<blockquote>
+					<p>
+						You have no notifications.
+					</p>
+				</blockquote>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

@@ -253,4 +253,11 @@ Answer.create([
   {question_id:16 , content: 'Strongly Agree'}
   ])
 #----------------------------------------------------------------------------------------------------------------------#
+puts 'fields'
+SubjectField.create(field_name: 'Theoretical')
+SubjectField.create(field_name: 'Practical')
+SubjectField.create(field_name: 'Project')
+
+#Suggestion.create(subject_field_id:, content:, student_id:, subject_id:, title:)
+
 puts 'All Seeds Completed.'

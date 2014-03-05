@@ -44,7 +44,7 @@
 						Follow ups
 					</div>
 				</div>
-				<div class="widget-body">
+				<div id="follow_ups" class="widget-body">
 					<% if @ticket.follow_ups.exists? %>
 					<%= render @ticket.follow_ups.select(&:persisted?) %>
 					<% else %>
@@ -69,13 +69,13 @@
 					<ul class="nav nav-tabs no-margin myTabBeauty">
 						<li class="active">
 							<a data-toggle="tab" href="#post">
-								Post Follow up
+								Post Follow up to Complaint #<%= @ticket.id %>
 							</a>
 						</li>
 						<% unless current_user.student? %>
 						<li class="">
 							<a data-toggle="tab" href="#assign">
-								Assign Complaint
+								Assign Employee to Complaint #<%= @ticket.id %>
 							</a>
 						</li>
 						<% end %>
@@ -84,16 +84,17 @@
 						<div id="post" class="tab-pane fade active in">
 							<% unless current_user.student? %>
 							<form class="form-horizontal no-margin">
-							<div class="control-group">
-								<%= label_tag 'Canned Responses:',nil, class: "control-label" %>
-								<div class="controls">
-									<%= select_tag "canned_response", options_from_collection_for_select(@responses, "id", "canned_response") , prompt: 'Select a canned response'%>
+								<div class="control-group">
+									<%= label_tag 'Canned Responses:',nil, class: "control-label" %>
+									<div class="controls">
+										<%= select_tag "canned_response", options_from_collection_for_select(@responses, "id", "canned_response") , prompt: 'Select a canned response'%>
+									</div>
 								</div>
-							</div>
 							</form>
 							<% end %>
 							
 							<%= render 'follow_ups/form' %>
+
 						</div>
 						<div id="assign" class="tab-pane fade">
 							<p>
@@ -107,7 +108,12 @@
 								<%= e.input :staff_id, collection: Staff.all , label_method: :full_name,prompt: 'Select a Staff' %>
 								<% end %>
 								<% end %>
-								<button class="btn btn-primary" type="submit">Save</button>
+								<div class="form-actions no-margin">
+									<button class="btn btn-info pull-right" type="submit">Assign Employee</button>
+									<div class="clearfix">
+									</div>
+								</div>
+
 								<% end %>
 							</p>
 
@@ -131,4 +137,5 @@ canned_response.onchange = function () {
 		follow_up.value = '';
 	};
 };
+
 </script>

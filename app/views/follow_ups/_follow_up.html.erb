@@ -1,7 +1,7 @@
 <%= div_for follow_up do %>
 <blockquote>
 	<span class="title">
-		<%= follow_up.user.email %> says:
+		<%= follow_up.user.employee.full_name %> says:
 	</span>
 	<p>
 		<%= simple_format follow_up.text %>

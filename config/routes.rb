@@ -44,6 +44,7 @@ SweComplaint::Application.routes.draw do
   resources :kbs
   resources :subject_surveys
   resources :tickets
+  resources :suggestions
   collection do
    get :assign_advisors
    put :update_multiple
@@ -59,6 +60,9 @@ resources :surveys do
   resources :subjects
 end
 
+resources :suggestions
+
+get "notifications", to: "notifications#index", as: "notifications"
 get '/dashboard', to: 'dashboard#index', as: :dashboard
 get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
 get '/home', to: 'dashboard#home', as: :home

@@ -1,0 +1,4 @@
+$modal = $('.modal');
+$("#users_list").update("<%= escape_javascript( render "users_list") %>");
+$modal.modal('hide');
+toastr.success('User has been created.')

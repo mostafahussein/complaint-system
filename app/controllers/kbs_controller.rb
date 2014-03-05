@@ -3,7 +3,7 @@ class KbsController < ApplicationController
     if params[:tab] == 'categories'
       @subjects = Subject.order("id asc")
     elsif params[:tab] == 'questions'
-      @faqs = Kb.all
+      @subject = Subject.find(params[:subject_id])
     else
       render_404
     end

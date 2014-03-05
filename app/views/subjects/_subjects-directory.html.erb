@@ -87,7 +87,7 @@
 							<tr>
 								<td><%= subject.subject_code %></td>
 								<td><%= subject.subject_title %></td>
-								<td><a href="<%= new_subject_ticket_path(subject) %>" data-remote="true">Make a Complaint</a> | <a href="<%= new_subject_subject_survey_path(subject) %>" data-remote="true">Take a Survey</a></td>
+								<td><a href="<%= new_subject_ticket_path(subject) %>" data-remote="true">Make a Complaint</a> | <a href="<%= new_subject_subject_survey_path(subject) %>" data-remote="true">Take a Survey</a> | <a href="<%= new_subject_suggestion_path(subject) %>" data-remote="true">Submit a Suggestion</a></td>
 							</tr>
 							<% end %>
 						</tbody>

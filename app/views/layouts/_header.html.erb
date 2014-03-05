@@ -29,5 +29,19 @@
 			</li>
 		</ul>
 	</div>
+		<% if current_user.student? %>
+			<ul class="mini-nav" id="notifications">
+				<li>
+					<a href="<%= notifications_path %>">
+						<div class="fs1" aria-hidden="true" data-icon="&#xe04c;"></div>
+						<% if current_user.unread_notifications.count > 0 %>
+						<span class="info-label badge badge-info">
+							<%= current_user.unread_notifications.count %>
+						</span>
+						<% end %>
+					</a>
+				</li>
+			</ul>
+		<% end %>
 	<% end %>
 </header>

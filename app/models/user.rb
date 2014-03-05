@@ -46,6 +46,9 @@ class User < ActiveRecord::Base
   has_one :student
   has_one :employee
   has_many :follow_ups
+  has_many :notifications
+  has_many :votes
+  has_many :replies
 
   def admin?
     self.role == "#{User::ADMIN}"
@@ -65,6 +68,12 @@ class User < ActiveRecord::Base
   
   def student?
     self.role == "#{User::STUDENT}"
+  end
+
+  def unread_notifications
+    self.notifications.select do |n|
+      !n.is_read? && self.id != n.activity.owner_id
+    end
   end
 
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
     if params[:tab] == 'all'
-      @users = User.all
+      @users = User.order(:id)
     elsif params[:tab] == 'active'
       @users = User.where(active: true)
     elsif params[:tab] == 'inactive'
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
+ def create
     @user = User.new(params[:user])
     if @user.save
      #UserMailer.email_confirmation(@user).deliver
@@ -39,9 +39,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-    respond_to do |format|
+def edit
+  @user = User.find(params[:id])
+  respond_to do |format|
       format.html # edit.html.erb
       format.js # edit.js.erb
       format.json { render json: @user }
@@ -60,6 +60,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    @users = User.order(:id)
     if @user == current_user
       flash[:error] = "Admin suicide warning: Can't delete yourself."
       redirect_to :back
