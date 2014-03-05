@@ -2,12 +2,12 @@ namespace :db do
   desc 'Fill database with sample data'
   task update_sample: :environment do
     Faker::Config.locale = :en
-     #make_employees_and_students_as_users
-     #attended_subjects
-     #assigned_subjects
-     #make_complaints
-     #canned_responses
-     #faqs
+     make_employees_and_students_as_users
+     attended_subjects
+     assigned_subjects
+     make_complaints
+     canned_responses
+     faqs
     suggestions
   end
 end
