@@ -51,7 +51,7 @@ class EmployeesController < ApplicationController
   end
 
   def create_multiple
-    if @employees.nil?
+    if params[:employee_ids].nil?
       flash[:error] = 'Please select an employee or more'
       redirect_to :back
     else
@@ -72,6 +72,7 @@ class EmployeesController < ApplicationController
             end
             employee.update_attributes(user_id: User.last.id)
             redirect_to users_path(tab: 'all')
+            flash[:notice] = 'user created successfully'
           else
             flash[:error] = "employee#{employee.id}@swe.com already exists"
             redirect_to :back
@@ -103,9 +104,9 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find(params[:id]).destroy
     respond_to do |format|
-        format.html
+      format.html
         format.js # destroy.js.erb
         format.json { head :no_content }
       end
+    end
   end
-end
