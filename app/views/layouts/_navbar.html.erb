@@ -19,9 +19,9 @@
 		<% end %>
 		<% if current_user.admin? %>
 			<li>
-				<a href="<%= users_dashboard_path %>" >
+				<a href="<%= users_dashboard_path %>"  class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'users_dashboard' %>">
 					<div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
-					Home
+					Dashboard
 				</a>
 			</li>
 			<% end %>
