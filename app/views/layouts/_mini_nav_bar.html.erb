@@ -23,6 +23,13 @@
 			<% end %>
 			<% if current_user.admin? %>
 			<li>
+				<a href="#" data-original-title="">
+					Dashboard
+				</a>
+			</li>
+			<% end %>
+			<% if current_user.admin? %>
+			<li>
 				<a href="<%= users_path %>" data-original-title="">
 					Users
 				</a>
