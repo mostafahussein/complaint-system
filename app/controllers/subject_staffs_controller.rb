@@ -1,7 +1,7 @@
 class SubjectStaffsController < ApplicationController
   def new
     @subject_staff = SubjectStaff.new
-    @subject_list = Subject.find_by_sql("SELECT subject_title FROM subjects WHERE subjects.id NOT IN (SELECT DISTINCT(subject_id) subject_id FROM subject_staffs)")
+    @subject_list = Subject.find_by_sql("SELECT subject_title FROM subjects WHERE subjects.id NOT IN (SELECT id FROM subject_staffs)")
     respond_to do |format|
       format.html # new.html.erb
       format.js # new.js.erb
@@ -13,10 +13,10 @@ class SubjectStaffsController < ApplicationController
     @subject_staff = SubjectStaff.new(params[:subject_staff])
     if @subject_staff.save
       flash[:success] = 'employees have been assigned'
-      redirect_to @subjects_path
+      redirect_to subjects_path(tab: 'assigned_subjects')
     else
       flash[:error] = 'something went error.'
-      redirect_to subjects_path(tab: 'open')
+      redirect_to subjects_path(tab: 'not_assigned_subjects')
     end
   end
   
@@ -32,7 +32,7 @@ class SubjectStaffsController < ApplicationController
   def update
     @subject_staff = Subject.find(params[:id])
     if @subject_staff.update_attributes(params[:subject_staff])
-      redirect_to subjects_path(tab: 'open')
+      redirect_to subjects_path(tab: 'assigned_subjects')
     else
       render 'edit'
     end

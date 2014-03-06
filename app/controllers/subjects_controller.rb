@@ -5,9 +5,9 @@ class SubjectsController < ApplicationController
     if params[:tab] == "all"
       @subjects = Subject.order(:id)
     elsif params[:tab] == 'assigned_subjects'
-      @subjects = Subject.where("subjects.id in (select subject_staffs.subject_id from subject_staffs)")
+      @subjects = Subject.where("subjects.id in (select subject_staffs.id from subject_staffs)")
     elsif params[:tab] == 'not_assigned_subjects'
-      @subjects = Subject.where("subjects.id not in (select subject_staffs.subject_id from subject_staffs)")
+      @subjects = Subject.where("subjects.id not in (select subject_staffs.id from subject_staffs)")
     elsif params[:tab] == "assigned"
       if current_user.advisor?
         @subjects = current_user.employee.subjects
