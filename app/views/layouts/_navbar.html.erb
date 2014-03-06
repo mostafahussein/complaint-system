@@ -111,7 +111,7 @@
 		<% end %>
 		<% if !current_user.admin? %>
 		<li>
-			<a href="<%= suggestions_path %>" class="<%= 'selected' if params[:controller] == 'suggestions'%>">
+			<a href="<%= suggestions_path(tab: 'all_suggestions') %>" class="<%= 'selected' if params[:controller] == 'suggestions'%>">
 				<div class="fs1" aria-hidden="true" data-icon="&#xe06e;"></div>
 				Suggestions
 			</a>
