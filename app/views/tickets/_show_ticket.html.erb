@@ -59,7 +59,7 @@
 		</div>
 	</div>
 
-
+<% unless @ticket.statuses.first.ticket_status == "#{Ticket::SOLVED}" ||   @ticket.statuses.first.ticket_status == "#{Ticket::CLOSED}" then %>
 	<div class="row-fluid">
 		<div class="span11">
 			<div class="widget">
@@ -123,6 +123,8 @@
 			</div>
 		</div>
 	</div>
+	<% end %>
+
 </div>
 
 <script type="text/javascript">
