@@ -1,7 +1,7 @@
 class SubjectStaffsController < ApplicationController
   def new
     @subject_staff = SubjectStaff.new
-    @subject_list = Subject.find_by_sql("SELECT subject_title FROM subjects WHERE subjects.id NOT IN (SELECT id FROM subject_staffs)")
+    @subject_list = Subject.find_by_sql("SELECT id, subject_title FROM subjects WHERE subjects.id NOT IN (SELECT id FROM subject_staffs)")
     respond_to do |format|
       format.html # new.html.erb
       format.js # new.js.erb

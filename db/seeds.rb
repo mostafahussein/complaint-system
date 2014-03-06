@@ -37,7 +37,7 @@ EmployeePosition.create([
 
 puts 'Creating Employees'
 #head of department
-Staff.create([{full_name: 'Denny Kantner', gender: 'male', employee_department_id: 1, employee_position_id: 1}])
+Staff.create([{full_name: 'Denny Kantner', gender: 'males', employee_department_id: 1, employee_position_id: 1}])
 
 #----------------------------------------------------------------------------------------------------------------------#
 
