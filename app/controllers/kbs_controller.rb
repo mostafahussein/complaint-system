@@ -26,10 +26,10 @@ class KbsController < ApplicationController
      @faq = Kb.new(params[:kb])
       if @faq.save
         flash[:notice] = 'A new question created successfully.'
-        redirect_to kbs_path
+        redirect_to kbs_path(tab: 'categories')
       else
         flash[:error] = 'An error occurred please try again!'
-        redirect_to kbs_path
+        redirect_to kbs_path(tab: 'categories')
       end
   end
   
