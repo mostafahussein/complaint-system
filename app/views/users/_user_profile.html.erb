@@ -1,0 +1,52 @@
+<div class="widget-body">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span3">
+				<div class="thumbnail">
+					<img alt="300x200" src="/assets/img/profile.png">
+				</div>
+			</div>
+			<div class="span9">
+				<h5>
+					Personal Information
+				</h5>
+				<hr>
+				<% if @user.student %>
+				<h6>
+					Full Name: <%= @user.student.full_name %>
+					<hr>
+					Gender: <%= @user.student.gender.capitalize %>
+					<hr>
+					Batch: <%= @user.student.batch.batch_name.capitalize %>
+					<hr>
+					Section: <%= @user.student.section.section_name.capitalize %>
+					<hr>
+					Email: <%= @user.email.capitalize%>
+					<hr>
+					Role: <%= @user.role.capitalize %>
+				</h6>
+				<% elsif @user.employee %>
+				<h6>
+					Full Name: <%= @user.employee.full_name %>
+					<hr>
+					Gender: <%= @user.employee.gender.capitalize %>
+					<hr>
+					Department: <%= @user.employee.employee_department.department_name.capitalize %>
+					<hr>
+					Position: <%= @user.employee.employee_position.position_title.capitalize %>
+					<hr>
+					Email: <%= @user.email.capitalize%>
+					<hr>
+					Role: <%= @user.role.capitalize %>
+				</h6>
+				<% elsif @user.admin? %>
+				<h6>
+					Email: <%= @user.email.capitalize%>
+					<hr>
+					Role: <%= @user.role.capitalize %>
+				</h6>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
