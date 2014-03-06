@@ -25,6 +25,15 @@
 				</a>
 			</li>
 			<% end %>
+			<% if current_user.staff? || current_user.advisor? %>
+			<li>
+				<a href="<%= home_path %>"  class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'home' %>">
+					<div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
+					Home
+				</a>
+			</li>
+			<% end %>
+
 		<% if current_user.admin? %>
 		<li>
 			<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>">
