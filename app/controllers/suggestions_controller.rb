@@ -1,5 +1,5 @@
 class SuggestionsController < ApplicationController
-	before_filter :set_subject, only: [:new, :create]
+	before_filter :set_subject, only: [:new]
 	before_filter :set_user, only: [:new, :create]
 	
 	def index
