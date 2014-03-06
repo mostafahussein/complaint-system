@@ -5985,13 +5985,13 @@ header {
               background: #f9f9f9; }
           .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTable .sorting {
             cursor: pointer;
-            background: url(../img/sorting.png) no-repeat center right; }
+            background: url(/assets/img/sorting.png) no-repeat center right; }
           .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTable .sorting_asc {
             cursor: pointer;
-            background: url(../img/sorting_asc.png) no-repeat center right; }
+            background: url(/assets/img/sorting_asc.png) no-repeat center right; }
           .dashboard-wrapper .left-sidebar .widget .widget-body #dt_example .dataTable .sorting_desc {
             cursor: pointer;
-            background: url(../img/sorting_desc.png) no-repeat center right; }
+            background: url(/assets/img/sorting_desc.png) no-repeat center right; }
   .dashboard-wrapper .right-sidebar {
     width: 240px;
     margin-left: 20px;
@@ -8105,13 +8105,13 @@ footer {
               background: #f9f9f9; }
           .dashboard-wrapper .widget .widget-body #dt_example .dataTable .sorting {
             cursor: pointer;
-            background: url(../img/sorting.png) no-repeat center right; }
+            background: url(/assets/img/sorting.png) no-repeat center right; }
           .dashboard-wrapper .widget .widget-body #dt_example .dataTable .sorting_asc {
             cursor: pointer;
-            background: url(../img/sorting_asc.png) no-repeat center right; }
+            background: url(/assets/img/sorting_asc.png) no-repeat center right; }
           .dashboard-wrapper .widget .widget-body #dt_example .dataTable .sorting_desc {
             cursor: pointer;
-            background: url(../img/sorting_desc.png) no-repeat center right; }
+            background: url(/assets/img/sorting_desc.png) no-repeat center right; }
 
 
 .modal-backdrop {

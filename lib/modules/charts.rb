@@ -112,5 +112,10 @@ module Modules
       @staff_state = TicketStatus.staff_statuses(current_user)
       @advisor_state = TicketStatus.advisor_statuses(current_user)
     end
+
+
+    def users_charts
+      @most_active_users = User.order("sign_in_count desc")
+    end
   end
 end

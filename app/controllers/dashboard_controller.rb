@@ -17,6 +17,10 @@ class DashboardController < ApplicationController
     employee_state
   end
 
+  def users_dashboard
+    users_charts
+  end
+
   private
   def set_to_close
     tickets = Ticket.overdue

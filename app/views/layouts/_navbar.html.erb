@@ -19,9 +19,9 @@
 		<% end %>
 		<% if current_user.admin? %>
 			<li>
-				<a href="#" >
+				<a href="<%= users_dashboard_path %>" >
 					<div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
-					Dashboard
+					Home
 				</a>
 			</li>
 			<% end %>

@@ -67,6 +67,7 @@ get "notifications", to: "notifications#index", as: "notifications"
 get '/dashboard', to: 'dashboard#index', as: :dashboard
 get '/availabe_subjects', to: 'subjects#available_subjects', as: :available_subjects
 get '/home', to: 'dashboard#home', as: :home
+get '/users_dashboard', to: 'dashboard#users_dashboard', as: :users_dashboard
 devise_scope :user do
  root to: 'devise/sessions#new'
 end
