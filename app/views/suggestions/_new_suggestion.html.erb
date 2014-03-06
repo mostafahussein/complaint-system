@@ -2,7 +2,7 @@
 	<%= simple_form_for(@suggestion, :html => {:class => 'form-horizontal' }) do |f| %>
 	<%= f.input :student_id , as: :hidden,input_html:{value: @student} %>
 		<%= f.input :subject_id, as: :hidden ,input_html:{value: @subject} %>
-	<%= f.association :subject_field, label_method: :subject_field %>
+	<%= f.association :subject_field, label_method: :field_name, prompt: 'Select a field' %>
 	<%= f.input :title, placeholder: 'Type Suggestion Title' %>
 	<%= f.input :content, as: :text, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Suggestion Description:'  %>
 	<div class="form-actions no-margin">
