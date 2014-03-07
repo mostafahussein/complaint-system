@@ -1,7 +1,7 @@
 <%= div_for reply do %>
 <blockquote>
 	<span class="title">
-		<%= reply.user.employee.full_name %> says:
+		<%= reply.user.employee.full_name if reply.user.employee %><%= reply.user.student.full_name if reply.user.student %> says:
 	</span>
 	<p>
 		<%= simple_format reply.text %>
