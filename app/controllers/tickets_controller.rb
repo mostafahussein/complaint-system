@@ -90,29 +90,31 @@ class TicketsController < ApplicationController
     if @ticket.save
       if @ticket.category.category_name == "exam"
        @ticket.update_attributes(priority_id: 1)
+        due = @ticket.created_at.to_date + 2.days  
+        @ticket.update_attributes(due: due)
+
      elsif @ticket.category.category_name == "subject_material"
        @ticket.update_attributes(priority_id: 1)
+     
      elsif @ticket.category.category_name == "classroom"
        @ticket.update_attributes(priority_id: 2)
+       due = @ticket.created_at.to_date + 7.days
+      @ticket.update_attributes(due: due)
+     
      elsif @ticket.category.category_name == "subject instructor"
        @ticket.update_attributes(priority_id: 3)
+        due = @ticket.created_at.to_date + 10.days
+      @ticket.update_attributes(due: due)
+     
      end
-     if @ticket.priority.priority_name == "#{TicketsController::HIGH}"
-      due = @ticket.create_at.to_date + 2.days
-      @ticket.update_attributes(due: due)
-    elsif @ticket.priority.priority_name == "#{TicketsController::NORMAL}"
-      due = @ticket.create_at.to_date + 7.days
-      @ticket.update_attributes(due: due)
-    elsif @ticket.priority.priority_name == "#{TicketsController::LOW}"
-      due = @ticket.create_at.to_date + 10.days
-      @ticket.update_attributes(due: due)
-    end
     advisor = SubjectStaff.where(subject_id: @ticket.subject_id).first
     TicketStatus.create(status_id: 1,ticket_id: @ticket.id, advisor_id: advisor.advisor_id )
     @ticket.create_activity :create, owner: current_user, recipient: @ticket.student.user
     redirect_to subjects_path(tab: 'enrolled')
+    flash[:notice] = 'Complaint created'
   else
     redirect_to subjects_path(tab: 'enrolled')
+    flash[:error] = 'An error occurred please try again!'
   end
 end
 
@@ -127,7 +129,7 @@ def update
     Notification.create!({ activity_id: activity.id, user_id: @ticket.student.user.id })
     redirect_to ticket_path(@ticket)
   else
-    render 'edit'
+    render :back
   end
 end
 
