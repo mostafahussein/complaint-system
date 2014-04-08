@@ -38,6 +38,7 @@ group :development do
   gem 'annotate', ">=2.6.0"
   gem 'pry-rails'
   
+  
 end
 
 gem 'jquery-rails'
