@@ -1,20 +1,12 @@
 source 'https://rubygems.org'
 
-<<<<<<< HEAD
 ruby '2.1.1'
 gem 'rails', '3.2.17'
-=======
-ruby '1.9.3'
-gem 'rails', '3.2.14'
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 gem 'devise', '3.2'
 gem 'cancan', '1.6.10'
 gem 'simple_form', '2.1.0'
 gem 'public_activity', '1.4.1'
-<<<<<<< HEAD
 gem 'dynamic_form'
-=======
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -28,10 +20,7 @@ gem 'toastr-rails'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-<<<<<<< HEAD
-=======
   gem 'dynamic_form'
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
   gem 'jquery-ui-rails'
   gem 'therubyracer'
 
@@ -50,10 +39,6 @@ group :development do
   gem 'annotate', ">=2.6.0"
   gem 'pry-rails'
   
-<<<<<<< HEAD
-  
-=======
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 end
 
 gem 'jquery-rails'
