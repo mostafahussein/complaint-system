@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: votes
+#
+#  id            :integer          not null, primary key
+#  suggestion_id :integer
+#  user_id       :integer
+#  vote          :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  suggestion_id: 1
+  ,: MyString
+  user_id: 1
+  ,: MyString
+  vote: 1
+
+two:
+  suggestion_id: 1
+  ,: MyString
+  user_id: 1
+  ,: MyString
+  vote: 1

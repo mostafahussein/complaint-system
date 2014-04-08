@@ -1,0 +1,25 @@
+<div class="left-sidebar">    
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget">
+        <div class="widget-header">
+          <div class="title">
+            New Canned Response
+            <span class="mini-title">
+              Add new canned response
+            </span>
+          </div>
+        </div>
+        <div class="widget-body">
+          <%= simple_form_for(@response, :html => {:class => 'form-horizontal' }) do |f| %>
+            <%= f.input :canned_response, placeholder: 'Enter Canned Response' %>
+            <div class="form-actions no-margin">
+              <button type="submit" class="btn btn-info pull-right">Create Response</button>
+              <div class="clearfix"></div>
+            </div>
+          <% end %>
+      </div>      
+    </div>
+  </div>
+</div>
+</div>

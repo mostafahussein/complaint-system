@@ -1,0 +1,46 @@
+<div class="widget-body">
+	<%= simple_form_for(@student, :html => {:class => 'form-horizontal' }) do |f| %>
+	<%= f.input :full_name, placeholder: 'Enter Full Name' %>
+	<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender', required: true %>
+	<%= f.association :batch, collection: @batches, prompt: "Select Batch", label_method: :batch_name, input_html: { id: 'student_batch'}, required: true %>
+	<%= f.input :section_id, collection: @sections, label_method: :section_name, input_html: { id: 'student_section'}, required: true %>
+	<div class="form-actions no-margin">
+		<button type="submit" class="btn btn-info pull-right">
+			Create Student
+		</button>
+		<div class="clearfix">
+		</div>
+	</div>
+	<% end %>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.student_section_id').hide();
+	$('#student_batch').change(function() {
+		$.ajax({
+			url: "/students/available_sections",
+			data: {
+				batch_id : $('#student_batch').val()
+			},
+			dataType: "script",
+			success: function () {
+				if (+$('#student_batch').val() > 0)
+				{
+					$('.student_section_id').fadeIn();
+				}
+				else
+				{
+					$('.student_section_id').fadeOut();
+				}
+			} 
+		});
+	});
+});
+</script>
+<script type="text/javascript">
+var full_name = new LiveValidation('student_full_name',{ validMessage: ""});
+full_name.add( Validate.Presence );
+</script>
+<script type="text/javascript">
+$('#new_student').validate();
+</script>

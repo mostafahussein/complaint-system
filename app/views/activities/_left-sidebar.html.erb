@@ -1,0 +1,36 @@
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="widget">
+        <div class="widget-header">
+          <div class="title">
+            <%= 'System Activities' if current_user.head_of_department? && params[:tab] == 'system_activities' %>
+          </div>
+        </div>
+        <div class="widget-body">
+          <% if params[:tab] == 'system_activities'%>
+         <% @activities.each do |activity|%>
+
+         <blockquote>
+          <h5>
+            <% if activity.owner %>
+            <%= link_to activity.owner.email , activity.owner if activity.owner %>
+            <% else %>
+            <%= 'System'%>
+            <% end %>
+            <%= render_activity activity %>
+          </h5>
+        </blockquote>
+
+        <% end %>
+        <div class="digg_pagination">
+         <div class="page_info">
+           <%= page_entries_info @activities %>
+         </div>
+         <%= will_paginate @activities, :container => false %>
+       </div>
+
+       <% end %>
+     </div>
+   </div>
+ </div>
+</div>

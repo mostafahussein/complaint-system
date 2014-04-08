@@ -1,0 +1,2 @@
+module SubjectSurveysHelper
+end

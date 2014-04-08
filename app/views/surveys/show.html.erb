@@ -1,0 +1,40 @@
+<div class="left-sidebar">    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						<%= @survey.survey_name %>
+						<span class="mini-title">
+							Survey's Questions
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+					<% q = 0 %>
+					<% @survey.questions.each do |question| %>
+					<% q = q + 1%>
+					<div id="accordion<%=q%>" class="accordion no-margin">
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a href="#collapse<%=q%>" data-parent="#accordion<%=q%>" data-toggle="collapse" class="accordion-toggle">
+									Q<%= q %>- <%= question.content %>
+								</a>
+							</div>
+							<div class="accordion-body in collapse" id="collapse<%=q%>" style="height: auto;">
+								<% question.answers.each do |answer| %>
+								<div class="accordion-inner">
+
+									<%= answer.content %>
+								</div>
+								<% end %>
+							</div>
+						</div>
+						
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

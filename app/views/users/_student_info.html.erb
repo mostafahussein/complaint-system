@@ -1,0 +1,59 @@
+	<br />
+	<h5>
+		Personal Information
+	</h5>
+	<hr>
+<h6 style="font-style: italic">Full Name: <%= @user.student.full_name %>
+	<hr>
+	Gender: <%= @user.student.gender.capitalize %>
+	<hr>
+	Batch: <%= @user.student.batch_name %>
+	<hr>
+	Section: <%= @user.student.section_name %>
+	<hr>
+	Attended Subjects:
+	<% if @user.student.subjects.count > 0 %> 
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Subject Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @user.student.subjects.each do |s| %>
+			<tr>
+				<td><%= s.id %></td>
+				<td><%= s.subject_title.humanize %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</h6>
+
+<a href="#modal-1" role="button" class="btn btn-primary" data-toggle="modal">Modify Subjects</a>
+<% else %>
+<a href="#modal-1" role="button" class="btn btn-primary" data-toggle="modal">Add Subjects</a>
+<% end %>
+<div id="modal-1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Attended Subjects</h3>
+	</div>
+	<div class="modal-body">
+		<p><%= simple_form_for(Student.find(student.id)) do |f| %>
+			<% for subject in Subject.all %>
+			<label id=''><%= check_box_tag 'student[subject_ids][]', subject.id, @student.subjects.include?(subject) %>
+				&nbsp;&nbsp;<%= subject.subject_title %></label>
+				<% end %>
+				<%= hidden_field_tag 'student[subject_ids][]', '' %>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+			<%= f.button :submit, 'Save changes', :class => "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+
+</div>

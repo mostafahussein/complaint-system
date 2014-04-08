@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Academic Advising</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<%= render 'layouts/header'%>
+	<%= render 'layouts/flash_messages' if current_user %>
+	<div class="container-fluid">
+		<div class="dashboard-container">
+			<%= render 'layouts/navbar' if current_user %>
+			<div class="dashboard-wrapper">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+	<%= render "layouts/modal" %>
+	<%= render "layouts/modal2" %>
+	<%= render 'layouts/footer'%>
+
+</body>
+</html>

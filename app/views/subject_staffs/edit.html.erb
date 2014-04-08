@@ -1,0 +1,30 @@
+<div class="left-sidebar">    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Edit Assigned Employees to Subject
+						<span class="mini-title">
+							Assigned Staff and Advisor
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+					<%= simple_form_for(@subject_staff, :html => {:class => 'form-horizontal' }) do |f| %>
+					<%= f.association :advisor, prompt: 'Select an advisor', label_method: :full_name%>
+					<%= f.association :staff, prompt: 'Select a staff', label_method: :full_name%>
+					<div class="form-actions no-margin">
+						<button type="submit" class="btn btn-info pull-right">
+							Update Information
+						</button>
+						<div class="clearfix">
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%= render 'subjects/right-sidebar'%>

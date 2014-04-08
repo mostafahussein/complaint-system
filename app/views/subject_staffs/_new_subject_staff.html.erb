@@ -1,0 +1,17 @@
+<div class="widget-body">
+	<%= simple_form_for(@subject_staff, :html => {:class => 'form-horizontal' }) do |f| %>
+	<%= f.association :subject, collection: @subject_list ,prompt: 'Select a subject', value_method: :id, required: true %>
+	<%= f.association :advisor, prompt: 'Select an advisor', label_method: :full_name, required: true%>
+	<%= f.association :staff, prompt: 'Select a staff', label_method: :full_name, required: true%>
+	<div class="form-actions no-margin">
+		<button type="submit" class="btn btn-info pull-right">
+			Assign Employee
+		</button>
+		<div class="clearfix">
+		</div>
+	</div>
+	<% end %>
+</div>
+<script type="text/javascript">
+$('#new_subject_staff').validate();
+</script>

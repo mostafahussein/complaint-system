@@ -1,0 +1,71 @@
+<div class="left-sidebar">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Suggestions
+					</div>
+				</div>
+				<div class="widget-body">
+					<% @suggestions.each do |suggestion| %>
+					<blockquote>
+						<span class="title">
+							<%= link_to suggestion.title, suggestion_path(suggestion) %>
+						</span>
+						
+					</blockquote>
+					<% end %>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="right-sidebar">
+	<div class="wrapper">
+		<div id="scrollbar">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<div class="articles">
+							<a href="<%= suggestions_path(tab: 'all_suggestions') %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								All Suggestions
+							</a>
+							<a href="<%= suggestions_path(tab: 'theoretical') %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Theoretical
+							</a>
+							<a href="<%= suggestions_path(tab: 'practical') %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Practical
+							</a>
+							<a href="<%= suggestions_path(tab: 'projects') %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Projects
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

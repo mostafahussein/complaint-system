@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("New Employee");
+$modalBody.html("<%= escape_javascript(render @employee) %>");
+$modal.modal();

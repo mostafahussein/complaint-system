@@ -1,0 +1,12 @@
+<ul>
+	<li>
+		<a href="<%= surveys_path %>" class="<%= 'selected' if params[:controller] == 'surveys' && params[:action] == 'index' %>">
+			All Surveys
+		</a>
+	</li>
+	<li>
+		<a href="<%= new_survey_path%>" class="<%= 'selected' if params[:controller] == 'surveys' && params[:action] == 'new' %>">
+			New Survey
+		</a>
+	</li>
+</ul>

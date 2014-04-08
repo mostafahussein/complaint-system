@@ -1,0 +1,51 @@
+<div class="row-fluid">
+        <div class="span11">
+          <div class="widget">
+            <div class="widget-header">
+              <div class="title" id="complaints_per_employee">
+                Complaints per Advisor
+                <span class="mini-title">
+                  Employees Statistics 
+                </span>
+              </div>
+            </div>
+            <div class="widget-body">
+				 <div id="dt_example" class="example_alt_pagination">
+				  <table class="table table-bordered table-hover" id="advisors">
+				    <thead>
+					<tr>
+				      <th>Advisor Name</th>
+				      <th>Total Complaints</th>
+				      <th>Open</th>
+				      <th>In Progress</th>
+				      <th>Pending</th>
+				      <th>Closed</th>
+					  <th>Solved</th>
+					</tr>
+				    </thead>
+					<tbody>
+				    <% @advisors_complaints.each do |advisor| %>
+				    <tr>
+				      <td><%= advisor.advisor_name %></td>
+				      <td><%= advisor.total_complaints %></td>
+				      <td><%= advisor.opened_complaints %></td>
+				      <td><%= advisor.in_progress_complaints %></td>
+				      <td><%= advisor.pending_complaints %></td>
+				      <td><%= advisor.closed_complaints%></td>
+				      <td><%= advisor.solved_complaints %></td>
+				    </tr>
+				    <% end %>
+					</tbody>
+				  </table>
+					<div class="clearfix">
+					</div>
+				  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	<script>
+	$('#advisors').dataTable({
+		"sPaginationType": "full_numbers"
+	});
+	</script>

@@ -1,0 +1,29 @@
+<div class="widget-body">
+	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
+	<%= f.input :email, placeholder: 'Enter Email Address', readonly: true %>
+	<% if (@user == current_user) %>
+	<%= f.input :password, placeholder: '8 characters or more' %>
+	<%= f.input :password_confirmation, placeholder: 'Retype password' %>
+	<% end %>
+	<% if current_user.admin? %>
+	<% if @user.admin?%>
+	<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role', required: true%>
+	<% elsif @user.employee%>
+	<%= f.input :role , collection: [User::MANAGER,User::STAFF,User::ADVISOR] , prompt: 'Select a Role', required: true%>
+	<% elsif @user.student %>
+	<%= f.input :role , collection: [User::STUDENT] , prompt: 'Select a Role', required: true%>
+	<% end%>
+	<%= f.input :active, as: :boolean, boolean_style: :inline %>
+	<% end %>
+	<div class="form-actions no-margin">
+		<button type="submit" class="btn btn-info pull-right">
+			Update Account
+		</button>
+		<div class="clearfix">
+		</div>
+	</div>
+	<% end %>
+</div>
+<script type="text/javascript">
+$('#edit_user').validate();
+</script>

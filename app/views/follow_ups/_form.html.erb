@@ -1,0 +1,49 @@
+<%= simple_form_for([@ticket,@follow_up],:html => { id: 'post_follow_up',class: 'form-horizontal' }) do |f| %>
+<p><%= f.input :text, as: :text,input_html: {rows: 5, class: "input-xxlarge"}, required: false, label: 'Response:' %></p>
+<% end %>
+
+<% unless current_user.student? %>
+<%= simple_form_for(@ticket,:html => { id: 'change_status', class: 'form-horizontal' }) do |f| %>
+<%= f.simple_fields_for :ticket_statuses do |s| %>
+<%= s.association :status, as: :radio_buttons, label_method: :ticket_status, label: 'Ticket Status:',item_wrapper_class: 'inline', input_html: {class: 't_status'}%>
+<% end %>
+<% end %>
+<% end %>
+
+<div class="form-actions no-margin">
+	<button id="button_submit" class="btn btn-info pull-right">Post follow up</button>
+	<div class="clearfix"></div>
+</div>
+
+<script type="text/javascript">
+var actual_text1 = $("textarea#follow_up_text").val();
+var actual_radio1 = $('input:radio[name="ticket[ticket_statuses_attributes][0][status_id]"]:checked').val();
+$(document).ready(function() {
+	$("#button_submit").click(function() {
+		var actual_text2 = $("textarea#follow_up_text").val();
+		var actual_radio2 = $('input:radio[name="ticket[ticket_statuses_attributes][0][status_id]"]:checked').val();
+
+		if ((actual_text1 != actual_text2)) {
+			$.post($("#post_follow_up").attr("action"), $("#post_follow_up").serialize(),
+			toastr.success('Your Follow up has been posted.'));
+			 if (actual_radio1 != actual_radio2){
+			 	$.post($("#change_status").attr("action"), $("#change_status").serialize(),
+				toastr.success('Ticket Status has been changed.'));
+			 }
+		} else if (actual_radio1 != actual_radio2){
+			$.post($("#change_status").attr("action"), $("#change_status").serialize(),
+			toastr.success('Ticket Status has been changed.'));
+			 if (actual_text1 != actual_text2){
+			 	$.post($("#post_follow_up").attr("action"), $("#post_follow_up").serialize(),
+				toastr.success('Your Follow up has been posted.'));
+			 }
+		} else {
+			return false
+		};
+
+		
+
+		document.location.reload();
+	});
+});
+</script>

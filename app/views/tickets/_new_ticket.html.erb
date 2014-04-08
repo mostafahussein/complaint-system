@@ -1,0 +1,72 @@
+	<div class="row-fluid hidden-phone">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Student Complaint Lodgement Form
+						<span class="mini-title">
+							New Complaint about <%= @title.capitalize %>
+						</span>
+					</div>
+				</div>
+				<div class="widget-body">
+
+					<b>You can use this form to submit your complaint. Your written complaint should contain sufficient information for it to be investigated and all relevant information should be lodged at the time of submitting your complaint.</b>
+
+					<%= simple_form_for(@ticket,url: subject_tickets_path(@subject), html: { class: 'form-horizontal' }) do |f| %>
+						<fieldset  class="scheduler-border">
+							<legend>Your Details</legend>
+							<div class="control-group">
+								<%= label_tag 'name', 'Your Name:', class: 'control-label' %>
+								<div class="controls controls-row">
+									<%= text_field(:name, :full_name, size: 20, disabled: true) %>
+								</div>
+							</div>
+							<div class="control-group">
+								<%= label_tag 'name', 'Your Batch:', class: 'control-label' %>
+								<div class="controls controls-row">
+									<%= text_field(:batch, :batch_name, size: 20, disabled: true) %>
+								</div>
+							</div>
+							<div class="control-group">
+								<%= label_tag 'name', 'Your Section:', class: 'control-label' %>
+								<div class="controls controls-row">
+									<%= text_field(:section, :section_name, size: 20, disabled: true) %>
+								</div>
+							</div>
+
+						</fieldset>
+
+						<fieldset>
+							<legend>Complaint Details</legend>
+							
+							<%= f.input :student_id , as: :hidden,input_html:{value: @student} %>
+							<%= f.input :subject_id, as: :hidden ,input_html:{value: @subject} %>
+							<%= f.input :date_of_alleged_event,:as => :string, :input_html => { class: 'event'}, label: 'Date of Alleged Event:', hint: 'When did the alleged event occur which has given rise to your complaint? Procedure states that complaints lodged more than 12 months after the event giving rise to the complaint may not be investigated. If your complaint relates to an event greater than 12 months ago, <b>please provide the date and reason for the delay in submitting your complaint below:</b>' %>
+							<%= f.input :reason_of_delay, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Reason for delay:', hint: 'If date of event is greater than 12 months ago: Please provide the date and the reason for the delay in making your complaint.'%>
+							<%= f.input :category_id , collection: Ticket::CATEGORY, prompt: 'Select Category', label: 'Nature of Complaint:', hint: 'What does your complaint relate to?'%>
+							<%= f.input :description, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Written Statement:', hint: 'Please provide details of your complaint as a written statement.'  %>
+						</fieldset>
+						<fieldset>
+							<legend>Expectations</legend>
+							<b>Please provide a brief comment on what you would consider a satisfactory resolution of your complaint.</b>
+							<%= f.input :expectations, input_html: {class: 'input-xxlarge', rows: '6'}, label: false%>
+						</fieldset>
+						<div class="form-actions no-margin">
+							<button type="submit" class="btn btn-info pull-right">
+								Submit Complaint
+							</button>
+							<div class="clearfix">
+							</div>
+						</div>
+						<% end %>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+$(function() {
+	$( ".event" ).datepicker({ minDate: -365});
+});
+</script>

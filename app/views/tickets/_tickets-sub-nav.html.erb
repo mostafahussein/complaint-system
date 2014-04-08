@@ -1,0 +1,44 @@
+<ul>
+<% if current_user.head_of_department? %>
+  <li>
+    <a href="<%= tickets_path(tab: "open") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'open' %>">
+      Open Complaints
+    </a>
+  </li>
+<% end %>
+<% if current_user.head_of_department? %>
+  <li>
+    <a href="<%= tickets_path(tab: "solved") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'solved' %>">
+      Solved Complaints
+    </a>
+  </li>
+<% end %>
+<% if current_user.staff? || current_user.advisor? %>
+  <li>
+    <a href="<%= tickets_path(tab: "assigned") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'assigned' %>">
+      My Complaints
+    </a>
+  </li>
+<% end %>
+<% if current_user.head_of_department? %>
+  <li>
+    <a href="<%= tickets_path(tab: "overdue") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'overdue' %>">
+      Overdue Complaints
+    </a>
+  </li>
+<% end %>
+<% if current_user.head_of_department? %>
+  <li>
+    <a href="<%= tickets_path(tab: "closed") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'closed' %>">
+      Closed Complaints
+    </a>
+  </li>
+<% end %>
+<% if current_user.student? %>
+<li>
+    <a href="<%= tickets_path(tab: "complained") %>" class="<%= 'selected' if params[:controller] == 'tickets' && params[:tab] == 'complained' %>">
+      Complained Subjects
+    </a>
+  </li>
+<% end %>
+</ul>

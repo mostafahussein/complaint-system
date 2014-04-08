@@ -1,0 +1,133 @@
+<div class="top-nav">
+	<ul>
+		<% if current_user %>
+		<% if current_user.head_of_department? %>
+		<li>
+			<a href="<%= dashboard_path %>" class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'index' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
+				Dashboard
+			</a>
+		</li>
+		<% end %>
+		<% if current_user.head_of_department? %>
+		<li>
+			<a href="<%= activities_path(tab: 'system_activities') %>" class="<%= 'selected' if params[:controller] == 'activities' && params[:action] == 'index' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe01b;"></div>
+				System Activity
+			</a>
+		</li>
+		<% end %>
+		<% if current_user.admin? %>
+			<li>
+				<a href="<%= users_dashboard_path %>"  class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'users_dashboard' %>">
+					<div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
+					Dashboard
+				</a>
+			</li>
+			<% end %>
+			<% if current_user.staff? || current_user.advisor? %>
+			<li>
+				<a href="<%= home_path %>"  class="<%= 'selected' if params[:controller] == 'dashboard' && params[:action] == 'home' %>">
+					<div class="fs1" aria-hidden="true" data-icon="&#xe096;"></div>
+					Home
+				</a>
+			</li>
+			<% end %>
+
+		<% if current_user.admin? %>
+		<li>
+			<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe071;"></div>
+				Users
+			</a>
+		</li>
+		<% end %>
+		<% if current_user.admin? %>
+		<li>
+			<a href="<%= surveys_path %>" class="<%= 'selected' if params[:controller] == 'surveys'%>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe0b6;"></div>
+				Surveys
+			</a>
+		</li>
+		<% end %>
+		<% if current_user.admin? %>
+		<li>
+			<a href="<%= subjects_path(tab: "all")%>" class="<%= 'selected' if params[:controller] == 'subjects' || params[:controller] == 'subject_staffs'%>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe01f;"></div>
+				Subjects
+			</a>
+		</li>
+		<% elsif current_user.advisor? %>
+		<li>
+			<a href="<%= subjects_path(tab: "assigned")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
+								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
+				Subjects
+			</a>
+		</li>
+		<% elsif current_user.student? %>
+		<li>
+			<a href="<%= subjects_path(tab: "enrolled")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
+								<div class="fs1" aria-hidden="true" data-icon="&#xe074;"></div>
+				Subjects
+			</a>
+		</li>
+		<% elsif current_user.head_of_department? %>
+		<li>
+			<a href="<%= subjects_path(tab: "survey_results")%>" class="<%= 'selected' if params[:controller] == 'subjects' %>">
+								<div class="fs1" aria-hidden="true" data-icon="&#xe0b3;"></div>
+				Survey Results
+			</a>
+		</li>
+		<% end %>
+		<% if current_user.head_of_department? %>
+		<li>
+			<a href="<%= tickets_path(tab: "open") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
+				Complaints
+			</a>
+		</li>
+		<% elsif current_user.staff? || current_user.advisor? %>
+		<li>
+			<a href="<%= tickets_path(tab: "assigned") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
+				Complaints
+			</a>
+		</li>
+		<% elsif current_user.student? %>
+		<li>
+			<a href="<%= tickets_path(tab: "complained") %>" class="<%= 'selected' if params[:controller] == 'tickets' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe025;"></div>
+				Complaints
+			</a>
+		</li>
+		<% end %>
+		<% if !current_user.admin? %>
+		<li>
+			<a href="<%= kbs_path(tab: 'categories') %>" class="<%= 'selected' if params[:controller] == 'kbs' || params[:controller] == 'responses' %>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe0b8;"></div>
+				Knowledge Base
+			</a>
+		</li>
+		<% end %>
+		<% if !current_user.admin? %>
+		<li>
+			<a href="<%= suggestions_path(tab: 'all_suggestions') %>" class="<%= 'selected' if params[:controller] == 'suggestions'%>">
+				<div class="fs1" aria-hidden="true" data-icon="&#xe06e;"></div>
+				Suggestions
+			</a>
+		</li>
+		<% end %>
+		<% end %>
+	</ul>
+	<div class="clearfix">
+	</div>
+</div>
+<div class="sub-nav">
+	<%= render 'dashboard/dashboard-sub-nav' if params[:controller] == 'dashboard' && params[:action] == 'index'%>
+	<%= render 'users/users-sub-nav' if params[:controller] == 'users' || params[:controller] == 'employees' || params[:controller] == 'students'%>
+	<%= render 'surveys/surveys-sub-nav' if params[:controller] == 'surveys'%>
+	<%= render 'subjects/subjects-sub-nav' if params[:controller] == 'subjects' || params[:controller] == 'subject_staffs'%>
+	<%= render 'tickets/tickets-sub-nav' if params[:controller] == 'tickets'%>
+	<%= render 'activities/activities-sub-nav' if params[:controller] == 'activities'%>
+	<%= render 'kbs/kbs-sub-nav' if params[:controller] == 'kbs' || params[:controller] == 'responses'%>
+</div>

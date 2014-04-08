@@ -1,0 +1,143 @@
+<div class="left-sidebar">
+
+
+
+	<div class="row-fluid">
+		<div class="span11">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Complaint #<%= @ticket.id %>
+					</div>
+				</div>
+				<div class="widget-body">
+
+					<div class="hero-unit">
+						<p><b>Date Of Alleged Event: <%= @ticket.date_of_alleged_event%></b></p>
+						<% if @ticket.reason_of_delay.length > 0 %>
+						<p><b>Reason Of Delay:</b>
+							<%= @ticket.reason_of_delay%>
+						</p>
+						<% end %>
+					</div>
+					<div class="hero-unit">
+						<p><b>Written Statement:</b>
+							<%= @ticket.description%>
+						</p>
+					</div>
+
+					<div class="hero-unit">
+						<p><b>Expectations:</b>
+							<%= @ticket.expectations%>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span11">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						Follow ups
+					</div>
+				</div>
+				<div id="follow_ups" class="widget-body">
+					<% if @ticket.follow_ups.exists? %>
+					<%= render @ticket.follow_ups.select(&:persisted?) %>
+					<% else %>
+					<blockquote>
+						<p>
+							There are no follow ups yet.
+						</p>
+					</blockquote>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<% unless @ticket.statuses.first.ticket_status == "#{Ticket::SOLVED}" ||   @ticket.statuses.first.ticket_status == "#{Ticket::CLOSED}" then %>
+	<div class="row-fluid">
+		<div class="span11">
+			<div class="widget">
+				<div class="widget-header" style="display:none">
+				</div>
+				<div class="widget-body">
+					<ul class="nav nav-tabs no-margin myTabBeauty">
+						<li class="active">
+							<a data-toggle="tab" href="#post">
+								Post Follow up to Complaint #<%= @ticket.id %>
+							</a>
+						</li>
+						<% unless current_user.student? %>
+						<li class="">
+							<a data-toggle="tab" href="#assign">
+								Assign Employee to Complaint #<%= @ticket.id %>
+							</a>
+						</li>
+						<% end %>
+					</ul>
+					<div class="tab-content" id="myTabContent">
+						<div id="post" class="tab-pane fade active in">
+							<% unless current_user.student? %>
+							<form class="form-horizontal no-margin">
+								<div class="control-group">
+									<%= label_tag 'Canned Responses:',nil, class: "control-label" %>
+									<div class="controls">
+										<%= select_tag "canned_response", options_from_collection_for_select(@responses, "id", "canned_response") , prompt: 'Select a canned response'%>
+									</div>
+								</div>
+							</form>
+							<% end %>
+							
+							<%= render 'follow_ups/form' %>
+
+						</div>
+						<div id="assign" class="tab-pane fade">
+							<p>
+								<%= simple_form_for(@ticket,:html => { :class => 'form-horizontal' }) do |f| %>
+								<%= f.simple_fields_for :ticket_statuses do |e| %>
+								<% if current_user.advisor? %>
+								<%= e.input :staff_id, collection: Staff.where("employees.id IN (SELECT staff_id FROM subject_staffs WHERE subject_staffs.subject_id = ?)",@ticket.subject_id), label_method: :full_name,prompt: 'Select a Staff' %>
+								<% elsif current_user.staff? %>
+								<%= e.input :staff_id, collection: Advisor.where("employees.id IN (SELECT advisor_id FROM subject_staffs WHERE subject_staffs.subject_id = ?)",@ticket.subject_id), label_method: :full_name,prompt: 'Select an Advisor' %>
+								<% elsif current_user.head_of_department? %>
+								<%= e.input :staff_id, collection: Staff.all , label_method: :full_name,prompt: 'Select a Staff' %>
+								<% end %>
+								<% end %>
+								<div class="form-actions no-margin">
+									<button class="btn btn-info pull-right" type="submit">Assign Employee</button>
+									<div class="clearfix">
+									</div>
+								</div>
+
+								<% end %>
+							</p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+
+</div>
+
+<script type="text/javascript">
+var follow_up = document.getElementById('follow_up_text');
+var canned_response = document.getElementById('canned_response');
+
+canned_response.onchange = function () {
+	if (canned_response.options[this.selectedIndex].value > 0) {
+		follow_up.value = canned_response.options[this.selectedIndex].text;
+	}
+	else {
+		follow_up.value = '';
+	};
+};
+
+</script>

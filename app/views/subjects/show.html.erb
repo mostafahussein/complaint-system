@@ -1,0 +1,146 @@
+<div>    
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="widget">
+				<div class="widget-header">
+					<div class="title">
+						<%= "#{@survey.survey_name.titleize} for #{@subject.subject_title.titleize}" %>
+						<span class="mini-title" style= "display:none;">#</span>
+					</div>
+				</div>
+				<div class="widget-body">					
+						<% q = 0 %>
+						<% @questions.each do |question| %>
+							<% if question.question_type != "#{Question::GRID}" %>
+								<% q += 1%>
+								<% if question.question_type == "#{Question::LIST}" || question.question_type == "#{Question::RADIO}" %>
+									<% statistics = SubjectSurvey.question_statistics(@subject.survey_id,@subject.id,question.question_type,question.id) %>
+									<% total = SubjectSurvey.total_responses(@subject.survey_id,@subject.id,question.question_type,question.id) %>
+
+									<% instance_variable_set("@question_chart_#{q}", SubjectSurvey.chart_statistics(@subject.survey_id,@subject.id,question.question_type,question.id).as_json.first.collect {|k,v| [k.humanize.capitalize,v.to_i]}) unless SubjectSurvey.chart_statistics(@subject.survey_id,@subject.id,question.question_type,question.id).as_json.first.nil? %>
+									
+
+
+									
+									<div id='<%= "question_details#{q}" %>' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+									<script type="text/javascript" charset="utf-8">
+									$(function () {
+										$('<%= "#question_details#{q}" %>').highcharts({
+											chart: {
+												plotBackgroundColor: null,
+												plotBorderWidth: null,
+												plotShadow: false
+											},
+											title: {
+												text: '<%=raw escape_javascript("Q#{q}- #{question.content.capitalize}") %>'
+											},
+											tooltip: {
+												pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+											},
+											plotOptions: {
+												pie: {
+													allowPointSelect: true,
+													cursor: 'pointer',
+													dataLabels: {
+														enabled: true,
+														color: '#000000',
+														connectorColor: '#000000',
+														format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+													}
+												}
+											},
+											series: [{
+												type: 'pie',
+												name: 'percentage',
+												data: <%= raw instance_variable_get("@question_chart_#{q}") %>
+											}]
+										});
+									});
+									</script>
+
+									<table class="table table-condensed table-striped table-hover table-bordered">
+									<thead>
+									<tr>
+										<th><%= label_tag 'question', "Q#{q}- #{question.content.capitalize}" %><th>
+											<label style='text-align:center;'>Total Responses: <%= total.first.total_responses unless total.first.nil? %></label>
+									</tr>
+									<tr>
+										<th style='text-align:center;'>Answer(s)</th>
+										<th style='text-align:center;'>Count</th>
+										<th style='text-align:center;'>Percent</th>
+										
+									
+									</tr>
+									</thead>
+									<tbody>
+									
+									<% statistics.each do |result| %>
+										<tr>											
+											<td><%= result.answer_content.capitalize %></td>
+											
+												<td style='text-align:center;'><%= result.count %></td>
+												<td style='text-align:center;'><%= ((result.count.to_f/total.first.total_responses.to_f) * 100.00).round(2) %>%</td>
+										
+										</tr>
+									<% end %>
+									
+									</tbody>
+									</table>
+
+									<div class='clearfix'></div><div class='clearfix'></div>
+									<% if question.equal? @questions.last %>
+									<% if @questions_grid.equal? nil %>
+										<br>
+									<% else %>
+										<hr style="border-top: 1px solid #000000;">
+									<% end %>
+									<% else %>
+										<hr style="border-top: 1px solid #000000;">
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>
+
+						<% @questions_grid.keys.sort.each do |help_text| %>
+							<% q += 1%>
+							
+							<table class="table table-condensed table-striped table-hover table-bordered">
+								<thead>
+									<tr><%= label_tag 'question', "Q#{q}- #{help_text}" %></tr>
+									<tr>
+										<th style='text-align:center;'>Question(s)</th>
+										<% for question in @questions_grid[help_text] %>
+											<% question.answers.each do |answer| %>
+												<th style='text-align:center;'><%= label_tag 'answer', "#{answer.content.titleize}" %></th>
+											<% end %>
+											<th style='text-align:center;'>Total Responses</th>
+											<% break %>
+										<% end %>
+										<% grid_statistics = SubjectSurvey.question_statistics(@subject.survey_id,@subject.id,question.question_type,question.id,help_text) %>
+									</tr>
+								</thead>
+								<tbody>
+									<% grid_statistics.each do |result| %>
+										<tr>											
+											<td><%= label_tag 'question', "#{result.question_content.capitalize}" %></td>
+												<td style='text-align:center;'><%= result.answer_1 %><%= " (#{((result.answer_1.to_f/result.total_responses.to_f) * 100.00).round(2)}%)" if result.answer_1.to_i > 0 %></td>
+												<td style='text-align:center;'><%= result.answer_2 %><%= " (#{((result.answer_2.to_f/result.total_responses.to_f) * 100.00).round(2)}%)" if result.answer_2.to_i > 0 %></td></td>
+												<td style='text-align:center;'><%= result.answer_3 %><%= " (#{((result.answer_3.to_f/result.total_responses.to_f) * 100.00).round(2)}%)" if result.answer_3.to_i > 0 %></td></td>
+												<td style='text-align:center;'><%= result.answer_4 %><%= " (#{((result.answer_4.to_f/result.total_responses.to_f) * 100.00).round(2)}%)" if result.answer_4.to_i > 0 %></td></td>
+												<td style='text-align:center;'><%= result.answer_5 %><%= " (#{((result.answer_5.to_f/result.total_responses.to_f) * 100.00).round(2)}%)" if result.answer_5.to_i > 0 %></td></td>
+												<td style='text-align:center;'><%= result.total_responses %></td>
+										</tr>
+									<% end %>	
+								</tbody>
+							</table>
+							<% if help_text.equal? @questions_grid.keys.sort.last %>
+								<br>
+							<% else %>
+								<hr style="border-top: 1px solid #000000;">
+							<% end %>
+						<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

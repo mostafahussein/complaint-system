@@ -1,0 +1,119 @@
+<div class="widget-body">
+	<%= simple_form_for(@sv_sub,url: subject_subject_surveys_path(@subject), html: { class: 'form-horizontal' }) do %>					
+	<% q = 0 %>
+	<% @questions.each do |question| %>
+		<%= hidden_field_tag 'subject_survey[student_id]', "#{@student}" %>
+		<%= hidden_field_tag 'subject_survey[subject_id]', "#{@subject.id}" %>
+		<%= hidden_field_tag 'subject_survey[survey_id]', "#{@survey.id}" %>
+		<% if question.question_type != "#{Question::GRID}" %>
+			<% q += 1%>
+			<%= label_tag 'question', "Q#{q}- #{question.content.capitalize}" %>
+			<div class='clearfix'></div><div class='clearfix'></div>
+			<% if question.question_type == "#{Question::CHECK}" %>
+				<% question.answers.each do |answer| %>
+					<%= content_tag_for(:div, answer) do %>
+						<%= check_box_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %>
+						<%= label_tag 'answer', "#{answer.content.capitalize}", style: 'display:inline' %>
+						<div class='clearfix'></div>
+					<% end %>
+				<% end %>
+			<% elsif question.question_type == "#{Question::RADIO}" %>
+				<% question.answers.each do |answer| %>
+					<%= content_tag_for(:div, answer) do %>
+						<%= radio_button_tag "subject_survey[questions][#{question.id}]", "#{answer.id}"%>
+						<%= label_tag 'answer', "#{answer.content.capitalize}", style: 'display:inline' %>
+						<div class='clearfix'></div>
+					<% end %>
+				<% end %>
+			<% elsif question.question_type == "#{Question::LIST}" %>
+	
+				<%= select_tag "subject_survey[questions][#{question.id}]", options_from_collection_for_select(question.answers, "id", "answer_for_select"), prompt: "Select A Reason", required: true%>
+			<% end %>
+			<% if question.equal? @questions.last %>
+				<% if @questions_grid.equal? nil %>
+					<br>
+				<% else %>
+					<hr style="border-top: 1px solid #000000;">
+				<% end %>
+			<% else %>
+				<hr style="border-top: 1px solid #000000;">
+			<% end %>
+		<% end %>
+	<% end %>
+
+
+	<% @questions_grid.keys.sort.each do |help_text| %>
+		<%= hidden_field_tag 'subject_survey[student_id]', "#{@student}" %>
+		<%= hidden_field_tag 'subject_survey[subject_id]', "#{@subject.id}" %>
+		<%= hidden_field_tag 'subject_survey[survey_id]', "#{@survey.id}" %>
+		<% q += 1%>
+		<table class="table table-condensed table-striped table-hover table-bordered">
+			<thead>
+				<tr><%= label_tag 'question', "Q#{q}- #{help_text}" %></tr>
+				<tr>
+					<th></th>
+					<% for question in @questions_grid[help_text] %>
+					<% question.answers.each do |answer| %>
+					<th style='text-align:center;'><%= label_tag 'answer', "#{answer.content.titleize}" %></th>
+					<% end %>
+					<% break %>
+					<% end %>
+				</tr>
+			</thead>
+			<tbody>
+				<% for question in @questions_grid[help_text] %>
+				<tr>											
+					<td><%= label_tag 'question', "#{question.content.capitalize}" %></td>
+					<% question.answers.each do |answer| %>
+					<td style='text-align:center;'><%= radio_button_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %></td>
+					<% end %>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% if help_text.equal? @questions_grid.keys.sort.last %>
+			<% if @questions_free.nil? %>
+				<br>
+			<% else %>
+				<hr style="border-top: 1px solid #000000;">
+			<% end %>
+		<% else %>
+			<hr style="border-top: 1px solid #000000;">
+		<% end %>
+	<% end %>
+
+
+	<% @questions_free.each do |question| %>
+		<%= hidden_field_tag 'subject_survey[student_id]', "#{@student}" %>
+		<%= hidden_field_tag 'subject_survey[subject_id]', "#{@subject.id}" %>
+		<%= hidden_field_tag 'subject_survey[survey_id]', "#{@survey.id}" %>
+		<% if question.question_type != "#{Question::GRID}" %>
+			<% q += 1%>
+			<%= label_tag 'question', "Q#{q}- #{question.content.capitalize}" %>
+			<div class='clearfix'></div><div class='clearfix'></div>
+			<% if question.question_type == "#{Question::BOX}" %>
+				<!-- in progress -->
+			<% elsif question.question_type == "#{Question::AREA}" %>
+				<%= text_area_tag "subject_survey[free_answer]", @sv_sub.free_answer,  rows: 5, class: 'input-xxlarge' %>
+			<% end %>
+			<% if question.equal? @questions_free.last %>
+				<br><br>
+			<% else %>
+				<hr style="border-top: 1px solid #000000;">
+			<% end %>
+		<% end %>
+	<% end %>
+	<div class='clearfix'></div>
+	<div class="form-actions no-margin">
+		<%= submit_tag "Submit", class: "btn btn-info pull-right" %>
+		<div class='clearfix'></div>
+	</div>
+	<% end %>
+</div>
+<script>
+$("#new_subject_survey").validate();
+</script>
+<script>
+var free_answer = new LiveValidation('subject_survey_free_answer');
+free_answer.add(Validate.Presence);
+</script>

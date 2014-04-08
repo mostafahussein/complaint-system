@@ -1,0 +1,289 @@
+<div class="right-sidebar2">
+	<div class="wrapper">
+		<ul class="stats">
+			<li>
+				<div class="left">
+					<h4>
+						<%= @n_total%>
+					</h4>
+					<p>
+						<%= @total.humanize %>
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= @overdue %>
+					</h4>
+					<p>
+						Overdue Complaints
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= @n_high %>
+					</h4>
+					<p>
+						<%= @high.humanize%>
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= @n_normal %>
+					</h4>
+					<p>
+						<%= @normal.humanize %>
+					</p>
+				</div>
+			</li>
+			<li>
+				<div class="left">
+					<h4>
+						<%= @n_low %>
+					</h4>
+					<p>
+						<%= @low.humanize %>
+					</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div id="category_details" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<script type="text/javascript" charset="utf-8">
+		$(function () {
+		    var chart;
+
+		    $(document).ready(function () {
+
+		    	// Build the chart
+		        $('#category_details').highcharts({
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false
+		            },
+		            title: {
+		                text: 'Complaints Category Details'
+		            },
+		            tooltip: {
+		        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+					chart: {
+						backgroundColor: null
+					},
+		            plotOptions: {
+		                pie: {
+		                    allowPointSelect: true,
+		                    cursor: 'pointer',
+		                    dataLabels: {
+		                        enabled: false
+		                    },
+		                    showInLegend: true
+		                }
+		            },
+		            series: [{
+		                type: 'pie',
+		                name: 'Total Complaint by Percentage',
+		                data: <%= raw @pie0 %>
+		            }]
+		        });
+		    });
+
+		});
+	</script>
+	<div id="status_details" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<script type="text/javascript" charset="utf-8">
+		$(function () {
+		    var chart;
+
+		    $(document).ready(function () {
+
+		    	// Build the chart
+		        $('#status_details').highcharts({
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false
+		            },
+		            title: {
+		                text: 'Complaints Status Details'
+		            },
+		            tooltip: {
+		        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+					chart: {
+						backgroundColor: null
+					},
+		            plotOptions: {
+		                pie: {
+		                    allowPointSelect: true,
+		                    cursor: 'pointer',
+		                    dataLabels: {
+		                        enabled: false
+		                    },
+		                    showInLegend: true
+		                }
+		            },
+		            series: [{
+		                type: 'pie',
+		                name: 'Total Complaint by Percentage',
+		                data: <%= raw @pie1 %>
+		            }]
+		        });
+		    });
+
+		});
+	</script>
+	
+	<div id="priority_details" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<script type="text/javascript" charset="utf-8">
+		$(function () {
+		    var chart;
+
+		    $(document).ready(function () {
+
+		    	// Build the chart
+		        $('#priority_details').highcharts({
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: null,
+		                plotShadow: false
+		            },
+		            title: {
+		                text: 'Complaints Priority Details'
+		            },
+		            tooltip: {
+		        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+					chart: {
+						backgroundColor: null
+					},
+		            plotOptions: {
+		                pie: {
+		                    allowPointSelect: true,
+		                    cursor: 'pointer',
+		                    dataLabels: {
+		                        enabled: false
+		                    },
+		                    showInLegend: true
+		                }
+		            },
+		            series: [{
+		                type: 'pie',
+		                name: 'Total Complaint by Percentage',
+		                data: <%= raw @pie2 %>
+		            }]
+		        });
+		    });
+
+		});
+	</script>
+
+	<hr class="hr-stylish-1">
+
+	<div class="wrapper">
+		<div id="scrollbar-two">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Recent Complaints
+						</h5>
+						<div class="articles">
+							<% @recent_tickets.each do |recent| %>
+							<a href="<%= ticket_path(recent) %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Complaint #<%= recent.id %>
+							</a>
+							<% end %>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr class="hr-stylish-1">
+		<div class="wrapper">
+		<div id="scrollbar">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Today's Complaints
+						</h5>
+						<div class="articles">
+							<% @today_tickets.each do |today| %>
+							<a href="<%= ticket_path(today) %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Complaint #<%= today.id %>
+							</a>
+							<% end %>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr class= 'hr-stylish-1'>
+	<div class="wrapper">
+		<div id="scrollbar-three">
+			<div class="scrollbar">
+				<div class="track">
+					<div class="thumb">
+						<div class="end">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="viewport">
+				<div class="overview">
+					<div class="featured-articles-container">
+						<h5 class="heading-blue">
+							Overdue Complaints
+						</h5>
+						<div class="articles">
+							<% @overdue_tickets.each do |recent| %>
+							<a href="<%= ticket_path(recent) %>">
+								<span class="label-bullet-blue">
+									&nbsp;
+								</span>
+								Complaint #<%= recent.id %>
+							</a>
+							<% end %>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>

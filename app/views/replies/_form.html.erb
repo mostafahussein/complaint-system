@@ -1,0 +1,11 @@
+<%= simple_form_for([@suggestion,@reply],:html => { class: 'form-horizontal' }) do |f| %>
+<p><%= f.input :text, as: :text,input_html: {rows: 5, class: "input-xxlarge"}, required: false, label: 'Reply:' %></p>
+
+<div class="form-actions no-margin">
+	<button id="button_submit" class="btn btn-info pull-right">Post reply</button>
+	<div class="clearfix"></div>
+<% end %>
+<script type="text/javascript">
+var reply = new LiveValidation('reply_text');
+reply.add( Validate.Presence );
+</script>

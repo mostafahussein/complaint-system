@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: suggestions
+#
+#  id               :integer          not null, primary key
+#  student_id       :integer
+#  subject_id       :integer
+#  subject_field_id :integer
+#  content          :string(255)
+#  title            :string(255)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  student_id: 1
+  ,: MyString
+  subject_id: 1
+  ,: MyString
+  category_id: 1
+  ,: MyString
+  content: MyString
+  ,: MyString
+  title: MyString
+
+two:
+  student_id: 1
+  ,: MyString
+  subject_id: 1
+  ,: MyString
+  category_id: 1
+  ,: MyString
+  content: MyString
+  ,: MyString
+  title: MyString

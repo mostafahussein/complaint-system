@@ -1,0 +1,52 @@
+<div class="row-fluid">
+        <div class="span11">
+          <div class="widget">
+            <div class="widget-header">
+              <div class="title" id="department_complaints">
+                Most active users
+                <span class="mini-title" style="display:none;">
+                  #
+                </span>
+              </div>
+            </div>
+            <div class="widget-body">
+            	
+
+
+				 <div id="dt_example" class="example_alt_pagination">
+				  <table class="table table-bordered table-hover" id="users">
+				    <thead>
+					<tr>
+				      <th>User ID</th>
+				      <th>Full Name</th>
+				      <th>Email</th>
+				      <th>Role</th>
+				      <th>Total Visits</th>
+				      <th>Last Sign in</th>
+					</tr>
+				    </thead>
+					<tbody>
+				    <% @most_active_users.each do |user| %>
+				    <tr>
+				      <td><%= user.id %></td>
+				      <td><% if user.employee %><%= user.employee.full_name %><% elsif user.student %><%= user.student.full_name %><% end %></td>
+				      <td><%= user.email %></td>
+				      <td><%= user.role %></td>
+				      <td><%= user.sign_in_count %></td>
+				      <td><%= user.last_sign_in_at.in_time_zone("Cairo") if user.last_sign_in_at %></td>
+				    </tr>
+				    <% end %>
+					</tbody>
+				  </table>
+					<div class="clearfix">
+					</div>
+				  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	<script>
+	$('#users').dataTable({
+		"sPaginationType": "full_numbers"
+	});
+	</script>

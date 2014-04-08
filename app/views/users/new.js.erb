@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("New Admin Account");
+$modalBody.html("<%= escape_javascript(render @user) %>");
+$modal.modal();

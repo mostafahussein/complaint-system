@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-heading');
+$modalHeading.html("Complaint #<%= @ticket.id %> overview");
+$modalBody.html("<%= escape_javascript(render 'mini_ticket_info') %>");
+$modal.modal();

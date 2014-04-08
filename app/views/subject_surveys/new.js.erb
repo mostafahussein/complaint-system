@@ -1,0 +1,10 @@
+<% if @survey.nil? %>
+toastr.error('No surveys available for this subject in the meantime.')
+<% else %>
+	$modal = $('.modal2'),
+	$modalBody = $('.modal2 .modal-body'),
+	$modalHeading = $('.modal2 .modal-heading');
+	$modalHeading.html('<%= "#{@survey.survey_name.titleize} for #{@subject.subject_title.titleize}" %>');
+	$modalBody.html("<%= escape_javascript(render 'new_subject_survey') %>");
+	$modal.modal();
+<% end %>

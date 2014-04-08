@@ -1,0 +1,24 @@
+<% if current_user.admin? %>
+<ul>
+	<li>
+		<a href="<%= users_path(tab: 'all') %>" class="<%= 'selected' if params[:controller] == 'users' && params[:tab] == 'all' %>">
+			All Users
+		</a>
+	</li>
+	<li>
+		<a href="<%= employees_path(tab: "all_staff")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'all_staff' %>">
+			Staff Directory
+		</a>
+	</li>
+	<li>
+		<a href="<%= employees_path(tab: "all_advisors")%>" class="<%= 'selected' if params[:controller] == 'employees' && params[:tab] == 'all_advisors' %>">
+			Advisors Directory
+		</a>
+	</li>
+	<li>
+	    <a href="<%= students_path(tab: 'all_students') %>" class="<%= 'selected' if params[:controller] == 'students' && params[:tab] == 'all_students' %>">
+	      Students Directory
+	    </a>
+	  </li>
+</ul>
+<% end %>
