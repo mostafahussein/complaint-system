@@ -1,8 +1,14 @@
 <div class="widget-body">
 	<%= simple_form_for(@subject_staff, :html => {:class => 'form-horizontal' }) do |f| %>
+<<<<<<< HEAD
 	<%= f.association :subject, collection: @subject_list ,prompt: 'Select a subject', value_method: :id, required: true %>
 	<%= f.association :advisor, prompt: 'Select an advisor', label_method: :full_name, required: true%>
 	<%= f.association :staff, prompt: 'Select a staff', label_method: :full_name, required: true%>
+=======
+	<%= f.association :subject, collection: @subject_list ,prompt: 'Select a subject', value_method: :id%>
+	<%= f.association :advisor, prompt: 'Select an advisor', label_method: :full_name%>
+	<%= f.association :staff, prompt: 'Select a staff', label_method: :full_name%>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
 			Assign Employee
@@ -11,7 +17,11 @@
 		</div>
 	</div>
 	<% end %>
+<<<<<<< HEAD
 </div>
 <script type="text/javascript">
 $('#new_subject_staff').validate();
 </script>
+=======
+</div>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81

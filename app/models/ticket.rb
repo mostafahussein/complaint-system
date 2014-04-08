@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: tickets
@@ -18,6 +19,33 @@
 # Indexes
 #
 #  index_tickets_on_id  (id)
+=======
+# ## Schema Information
+#
+# Table name: `tickets`
+#
+# ### Columns
+#
+# Name                         | Type               | Attributes
+# ---------------------------- | ------------------ | ---------------------------
+# **`id`**                     | `integer`          | `not null, primary key`
+# **`description`**            | `text`             |
+# **`student_id`**             | `integer`          |
+# **`subject_id`**             | `integer`          |
+# **`priority_id`**            | `integer`          |
+# **`due`**                    | `date`             |
+# **`category_id`**            | `integer`          |
+# **`date_of_alleged_event`**  | `date`             |
+# **`reason_of_delay`**        | `text`             |
+# **`expectations`**           | `text`             |
+# **`created_at`**             | `datetime`         | `not null`
+# **`updated_at`**             | `datetime`         | `not null`
+#
+# ### Indexes
+#
+# * `index_tickets_on_id`:
+#     * **`id`**
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 #
 
 class Ticket < ActiveRecord::Base

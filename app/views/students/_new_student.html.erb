@@ -1,9 +1,15 @@
 <div class="widget-body">
 	<%= simple_form_for(@student, :html => {:class => 'form-horizontal' }) do |f| %>
 	<%= f.input :full_name, placeholder: 'Enter Full Name' %>
+<<<<<<< HEAD
 	<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender', required: true %>
 	<%= f.association :batch, collection: @batches, prompt: "Select Batch", label_method: :batch_name, input_html: { id: 'student_batch'}, required: true %>
 	<%= f.input :section_id, collection: @sections, label_method: :section_name, input_html: { id: 'student_section'}, required: true %>
+=======
+	<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender' %>
+	<%= f.association :batch, collection: @batches, prompt: "Select Batch", label_method: :batch_name, input_html: { id: 'student_batch'} %>
+	<%= f.input :section_id, collection: @sections, label_method: :section_name, input_html: { id: 'student_section'} %>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
 			Create Student
@@ -36,6 +42,7 @@ $(document).ready(function() {
 		});
 	});
 });
+<<<<<<< HEAD
 </script>
 <script type="text/javascript">
 var full_name = new LiveValidation('student_full_name',{ validMessage: ""});
@@ -43,4 +50,6 @@ full_name.add( Validate.Presence );
 </script>
 <script type="text/javascript">
 $('#new_student').validate();
+=======
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 </script>

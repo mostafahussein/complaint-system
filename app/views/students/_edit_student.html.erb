@@ -1,9 +1,15 @@
 <div class="widget-body">
 	<%= simple_form_for(@student, :html => {:class => 'form-horizontal' }) do |f| %>
 	<%= f.input :full_name, placeholder: 'Enter Full Name' %>
+<<<<<<< HEAD
 	<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender', required: true %>
 	<%= f.association :batch, label_method: :batch_name, prompt: 'Select Batch', required: true  %>
 	<%= f.association :section, label_method: :section_name , prompt: 'Select Section', required: true %>
+=======
+	<%= f.input :gender, collection: Student::GENDER, prompt: 'Select Gender' %>
+	<%= f.association :batch, label_method: :batch_name, prompt: 'Select Batch'  %>
+	<%= f.association :section, label_method: :section_name , prompt: 'Select Section' %>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
 			Update Student
@@ -12,6 +18,7 @@
 		</div>
 	</div>
 	<% end %>
+<<<<<<< HEAD
 </div>
 <script type="text/javascript">
 var full_name = new LiveValidation('student_full_name');
@@ -20,3 +27,6 @@ full_name.add( Validate.Presence );
 <script type="text/javascript">
 $('#edit_student').validate();
 </script>
+=======
+</div>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81

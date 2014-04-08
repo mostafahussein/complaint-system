@@ -3,7 +3,10 @@ class ApplicationController < ActionController::Base
   include Modules::DefaultValues
   protect_from_forgery
   #before_filter :set_start_time
+<<<<<<< HEAD
   before_filter :authenticate_user! 
+=======
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
   before_filter :find_priority
   #before_filter :set_to_close
 

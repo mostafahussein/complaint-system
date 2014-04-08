@@ -1,9 +1,15 @@
 <div class="widget-body">
 	<%= simple_form_for(@employee, :html => {:class => 'form-horizontal' }) do |f| %>
 	<%= f.input :full_name, placeholder: 'Enter Full Name' %>
+<<<<<<< HEAD
 	<%= f.input :gender, collection: Employee::GENDER, prompt: 'Select Gender', required: true %>
 	<%= f.association :employee_department, label_method: :department_name,prompt: 'Select Department'. required: true %>
 	<%= f.association :employee_position, label_method: :position_title,prompt: 'Select Position', required: true %>
+=======
+	<%= f.input :gender, collection: Employee::GENDER, prompt: 'Select Gender' %>
+	<%= f.association :employee_department, label_method: :department_name,prompt: 'Select Department' %>
+	<%= f.association :employee_position, label_method: :position_title,prompt: 'Select Position' %>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
 			Update Employee
@@ -12,6 +18,7 @@
 		</div>
 	</div>
 	<% end %>
+<<<<<<< HEAD
 </div>
 <script type="text/javascript">
 $('#edit_employee').validate();
@@ -20,3 +27,6 @@ $('#edit_employee').validate();
 var full_name = new LiveValidation('employee_full_name');
 full_name.add( Validate.Presence );
 </script>
+=======
+</div>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81

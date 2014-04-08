@@ -2,9 +2,15 @@
 	<%= simple_form_for(@suggestion, :html => {:class => 'form-horizontal' }) do |f| %>
 	<%= f.input :student_id , as: :hidden,input_html:{value: @student} %>
 		<%= f.input :subject_id, as: :hidden ,input_html:{value: @subject} %>
+<<<<<<< HEAD
 	<%= f.association :subject_field, label_method: :field_name, prompt: 'Select a field', required: true %>
 	<%= f.input :title, placeholder: 'Type Suggestion Title', required: true %>
 	<%= f.input :content, as: :text, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Suggestion Description:'  , required: true%>
+=======
+	<%= f.association :subject_field, label_method: :field_name, prompt: 'Select a field' %>
+	<%= f.input :title, placeholder: 'Type Suggestion Title' %>
+	<%= f.input :content, as: :text, input_html: {class: 'input-xxlarge', rows: '6'}, label: 'Suggestion Description:'  %>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
 			Submit a Suggest
@@ -12,7 +18,11 @@
 		</div>
 	</div>
 	<% end %>
+<<<<<<< HEAD
 </div>
 <script type="text/javascript">
 $('#new_suggestion').validate();
 </script>
+=======
+</div>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81

@@ -20,14 +20,22 @@
 			<% elsif question.question_type == "#{Question::RADIO}" %>
 				<% question.answers.each do |answer| %>
 					<%= content_tag_for(:div, answer) do %>
+<<<<<<< HEAD
 						<%= radio_button_tag "subject_survey[questions][#{question.id}]", "#{answer.id}"%>
+=======
+						<%= radio_button_tag "subject_survey[questions][#{question.id}]", "#{answer.id}" %>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 						<%= label_tag 'answer', "#{answer.content.capitalize}", style: 'display:inline' %>
 						<div class='clearfix'></div>
 					<% end %>
 				<% end %>
 			<% elsif question.question_type == "#{Question::LIST}" %>
+<<<<<<< HEAD
 	
 				<%= select_tag "subject_survey[questions][#{question.id}]", options_from_collection_for_select(question.answers, "id", "answer_for_select"), prompt: "Select A Reason", required: true%>
+=======
+				<%= select_tag "subject_survey[questions][#{question.id}]", options_from_collection_for_select(question.answers, "id", "answer_for_select"), prompt: "Select A Reason"%>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 			<% end %>
 			<% if question.equal? @questions.last %>
 				<% if @questions_grid.equal? nil %>
@@ -109,6 +117,7 @@
 		<div class='clearfix'></div>
 	</div>
 	<% end %>
+<<<<<<< HEAD
 </div>
 <script>
 $("#new_subject_survey").validate();
@@ -117,3 +126,6 @@ $("#new_subject_survey").validate();
 var free_answer = new LiveValidation('subject_survey_free_answer');
 free_answer.add(Validate.Presence);
 </script>
+=======
+</div>
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81

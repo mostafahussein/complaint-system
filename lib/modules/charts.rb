@@ -115,7 +115,11 @@ module Modules
 
 
     def users_charts
+<<<<<<< HEAD
       @most_active_users = User.most_active
+=======
+      @most_active_users = User.order("sign_in_count desc")
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
     end
   end
 end

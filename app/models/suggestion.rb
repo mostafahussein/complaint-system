@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: suggestions
@@ -12,6 +13,8 @@
 #  updated_at       :datetime         not null
 #
 
+=======
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 class Suggestion < ActiveRecord::Base
 	scope :theoretical, joins(:subject_field).where("field_name = ?", 'Theoretical')
 	scope :practical , joins(:subject_field).where("field_name = ?", 'Practical')

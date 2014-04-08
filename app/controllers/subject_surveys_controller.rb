@@ -1,9 +1,15 @@
 class SubjectSurveysController < ApplicationController
 	before_filter :set_subject, only: [:new, :create]
+<<<<<<< HEAD
   before_filter :set_user, only: [:new, :create]
   before_filter :set_survey, only: [:new, :create]
 	
   def index
+=======
+  	before_filter :set_user, only: [:new, :create]
+  	before_filter :set_survey, only: [:new, :create]
+	def index
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 		@sv_subs = SubjectSurvey.all
 	end
 
@@ -69,9 +75,17 @@ class SubjectSurveysController < ApplicationController
       end
   	end
 
+<<<<<<< HEAD
     def set_user
       if current_user.student
         @student = current_user.student.id
       end
     end
+=======
+  def set_user
+    if current_user.student
+      @student = current_user.student.id
+    end
+  end
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 end

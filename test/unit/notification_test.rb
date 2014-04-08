@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: notifications
@@ -10,6 +11,8 @@
 #  updated_at  :datetime         not null
 #
 
+=======
+>>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 require 'test_helper'
 
 class NotificationTest < ActiveSupport::TestCase
