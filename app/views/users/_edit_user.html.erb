@@ -7,19 +7,11 @@
 	<% end %>
 	<% if current_user.admin? %>
 	<% if @user.admin?%>
-<<<<<<< HEAD
 	<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role', required: true%>
 	<% elsif @user.employee%>
 	<%= f.input :role , collection: [User::MANAGER,User::STAFF,User::ADVISOR] , prompt: 'Select a Role', required: true%>
 	<% elsif @user.student %>
 	<%= f.input :role , collection: [User::STUDENT] , prompt: 'Select a Role', required: true%>
-=======
-	<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role'%>
-	<% elsif @user.employee%>
-	<%= f.input :role , collection: [User::MANAGER,User::STAFF,User::ADVISOR] , prompt: 'Select a Role'%>
-	<% elsif @user.student %>
-	<%= f.input :role , collection: [User::STUDENT] , prompt: 'Select a Role'%>
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<% end%>
 	<%= f.input :active, as: :boolean, boolean_style: :inline %>
 	<% end %>
@@ -31,11 +23,7 @@
 		</div>
 	</div>
 	<% end %>
-<<<<<<< HEAD
 </div>
 <script type="text/javascript">
 $('#edit_user').validate();
 </script>
-=======
-</div>
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81

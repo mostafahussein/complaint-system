@@ -1,16 +1,9 @@
 <div class="widget-body">
 	<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
-<<<<<<< HEAD
 	<%= f.input :email, placeholder: 'Enter Email Address', required: true %>
 	<%= f.input :password, placeholder: '8 characters or more' %>
 	<%= f.input :password_confirmation, placeholder: 'Retype password' %>
 	<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role', required: true%>
-=======
-	<%= f.input :email, placeholder: 'Enter Email Address' %>
-	<%= f.input :password, placeholder: '8 characters or more' %>
-	<%= f.input :password_confirmation, placeholder: 'Retype password' %>
-	<%= f.input :role , collection: [User::ADMIN] , prompt: 'Select a Role'%>
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 	<%= f.input :active, as: :boolean, boolean_style: :inline %>
 	<div class="form-actions no-margin">
 		<button type="submit" class="btn btn-info pull-right">
@@ -19,11 +12,7 @@
 		</div>
 	</div>
 	<% end %>
-<<<<<<< HEAD
 </div>
 <script type="text/javascript">
 $('#new_user').validate();
 </script>
-=======
-</div>
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
