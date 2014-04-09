@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: notifications
@@ -11,8 +10,6 @@
 #  updated_at  :datetime         not null
 #
 
-=======
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 class Notification < ActiveRecord::Base
    	attr_accessible :user_id, :activity_id, :is_read
    	alias_attribute :is_read?, :is_read

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: students
@@ -15,29 +14,6 @@
 # Indexes
 #
 #  index_students_on_full_name  (full_name)
-=======
-# ## Schema Information
-#
-# Table name: `students`
-#
-# ### Columns
-#
-# Name              | Type               | Attributes
-# ----------------- | ------------------ | ---------------------------
-# **`id`**          | `integer`          | `not null, primary key`
-# **`full_name`**   | `string(30)`       |
-# **`gender`**      | `string(6)`        |
-# **`user_id`**     | `integer`          |
-# **`batch_id`**    | `integer`          |
-# **`section_id`**  | `integer`          |
-# **`created_at`**  | `datetime`         | `not null`
-# **`updated_at`**  | `datetime`         | `not null`
-#
-# ### Indexes
-#
-# * `index_students_on_full_name`:
-#     * **`full_name`**
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 #
 
 class Student < ActiveRecord::Base

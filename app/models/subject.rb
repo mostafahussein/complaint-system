@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: subjects
@@ -13,27 +12,6 @@
 # Indexes
 #
 #  index_subjects_on_subject_title  (subject_title)
-=======
-# ## Schema Information
-#
-# Table name: `subjects`
-#
-# ### Columns
-#
-# Name                 | Type               | Attributes
-# -------------------- | ------------------ | ---------------------------
-# **`id`**             | `integer`          | `not null, primary key`
-# **`subject_title`**  | `string(255)`      |
-# **`subject_code`**   | `string(10)`       |
-# **`created_at`**     | `datetime`         | `not null`
-# **`updated_at`**     | `datetime`         | `not null`
-# **`survey_id`**      | `integer`          |
-#
-# ### Indexes
-#
-# * `index_subjects_on_subject_title`:
-#     * **`subject_title`**
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 #
 
 class Subject < ActiveRecord::Base
