@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: replies
@@ -11,8 +10,6 @@
 #  updated_at    :datetime         not null
 #
 
-=======
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
