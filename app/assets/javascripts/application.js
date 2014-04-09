@@ -24,10 +24,7 @@
 //= require js/tiny-scrollbar
 //= require js/jquery.bootstrap.wizard
 //= require js/jquery.cookie
-<<<<<<< HEAD
 //= require js/livevalidation_standalone
 //= require js/jquery.validate
-=======
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
 //= require toastr
 //= require_tree .
