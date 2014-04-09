@@ -46,11 +46,7 @@ class EmployeesController < ApplicationController
       end
     else
       flash[:error] = 'An error occurred please try again!'
-<<<<<<< HEAD
       redirect_to employees_path(tab: "all_staff")
-=======
-      redirect_to employees_path(tab: "staff")
->>>>>>> ccede0020a94bfc95d0b555b99297784cd882d81
     end
   end
 
