@@ -14,21 +14,19 @@
 										<p>Fill out the form below to login.</p>
 									</div>
 								</div>
-
 							</div>
 							<div class="content">
 								<div class="row-fluid">
 									<div class="span12">
-										<input class="input span12 email" id="user_email" name="user[email]" placeholder="Email" required="required" type="email" value="">
+										<%= f.input :email, input_html: { class: 'input span12 email', required: 'required'}, placeholder: 'Email', label: false %>
 									</div>
 								</div>
 								<div class="row-fluid">
 									<div class="span12">
-										<input class="input span12 password" id="user_password" name="user[password]" placeholder="Password" required="required" type="password">
+										<%= f.input :password, input_html: { class: 'input span12 password', required: 'required'}, placeholder: 'Password', label: false %>
 									</div>
 								</div>
 							</div>
-
 							<div class="actions">
 								<input class="btn btn-primary" name="Login" type="submit" value="Login" >
 								<div class="clearfix"></div>
@@ -42,6 +40,4 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-

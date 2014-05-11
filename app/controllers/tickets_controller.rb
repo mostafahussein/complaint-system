@@ -63,7 +63,7 @@ class TicketsController < ApplicationController
       if updated_by.nil?
         @updated_by = 'The System'
       else
-        @updated_by = User.find(updated_by).employee.full_name
+        @updated_by = User.find(updated_by).employee.full_name if User.find(updated_by).employee
       end
       @update_date = @ticket.ticket_statuses.first.versions.last.created_at.strftime("%d/%m/%Y %I:%M%p")
     end

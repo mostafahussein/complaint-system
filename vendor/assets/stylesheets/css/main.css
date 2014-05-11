@@ -1100,6 +1100,9 @@ label {
   display: block;
   margin-bottom: 5px; }
 
+label.error {
+  color: #FF0000; }
+
 select, textarea {
   display: inline-block;
   height: 20px;
